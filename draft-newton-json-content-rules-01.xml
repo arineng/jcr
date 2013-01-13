@@ -41,7 +41,8 @@
         <date/>
         <abstract>
             <t>
-                This document describes a language useful for documenting the expected content of JSON structures.
+                This document describes a language useful for documenting the expected content of JSON structures
+                found in specifications using JSON.
             </t>
         </abstract>
     </front>
@@ -59,7 +60,8 @@
             <t>
                 Unlike JSON Schema, this language is not JSON though the syntax described here
                 is "JSON-like" (a comparison with JSON Schema can be found in <xref target="json-schema-comparison"></xref>
-                and a "real world" example can be found in <xref target="real-world-example"></xref>). A specialized syntax is used to reduce the tedium in reading and
+                and a "real world" example can be found in <xref target="real-world-example"></xref>). 
+                A specialized syntax is used to reduce the tedium in reading and
                 writing rules as the complexity describing allowable content is often more involved
                 than most of the actual content.
                 <xref target="rfc4627-example-2-rules"></xref> is an example of
@@ -110,7 +112,7 @@ root [
                 </artwork>
             </figure>
             <t>
-                The content rules are of five types:
+                The JSON Content Rules are of five types:
                 <list style="symbols">
                     <t>value rules</t>
                     <t>member rules</t>
@@ -144,7 +146,7 @@ root [
             <t>
                 Object rules are composed of member rules, since JSON objects are composed of members.
                 Object rules can specify members that are mandatory, optional, and even choices between
-                members. In this example, the rule 'o1' defines a an object that must contain a member
+                members. In this example, the rule 'o1' defines an object that must contain a member
                 as defined by member rule 'm1' and optionally a member defined by the rule 'm2':
                 <list style="empty"><t>o1 { m1, ?m2 }</t></list>
             </t>
@@ -255,6 +257,9 @@ root {
                         rules may be composed of value rules, object rules, and array rules.
                     </t>
                 </list>
+            </t>
+            <t>
+                A fifth rule type, group rules, exist to help reference a collection of rules.
             </t>
             <t>
                 Rule names must start with an alphabetic character (a-z,A-Z) and must contain only
@@ -439,7 +444,7 @@ root {
             </t>
             <t>
                 Unlike object rules, order is implied by the array rule definition. That is,
-                the first rule reference or defined within an array rule specifies that the first
+                the first rule referenced or defined within an array rule specifies that the first
                 element of the array will match that rule, the second rule given with the array rule
                 specifies that the second element of the array will match that rule, and so on.
             </t>
@@ -476,7 +481,7 @@ root {
                 </list>
                 Both the lower bound and the upper bound are optional. If lower bound is not
                 given then it is assumed to be zero. If the upper bound is not given then it
-                is assumed to infinity. The following example defines an array with an
+                is assumed to be infinity. The following example defines an array with an
                 infinite number of child_value defined strings:
                 <list style="empty"><t>children [ * child_value ]</t></list>
             </t>
@@ -541,11 +546,12 @@ root {
             <t>
                 Specifying any object member name in a member rule with the any member rule
                 is done by pre-pending
-                a carat character ('^') to an empty member name. This has the following
+                a carat character ('^') to an empty member name (that is, ^"" signifies
+                any member name). This has the following
                 form:
                 <list style="empty"><t>rule_name ^"" target_rule_name</t></list>
                 As an example, the following defines an object member with any name
-                that is a string:
+                that has a value that is a string:
                 <list style="empty"><t>user_data ^"" : string</t></list>
                 Usage of the any member rule must still satisfy the criteria that all
                 member names of an object be unique.
@@ -569,6 +575,17 @@ root {
                 all member names of an object be unique.
             </t>
         </section>
+            <section title="A Root Rule">
+                <t>
+                    In some contexts it is necessary that there be a rule that defines
+                    the outer most JSON object or array, or if thought of as an inverted object tree
+                    the structure at very top. If in a collection of rules there is no rule
+                    explicitly specified for this purpose and a rule named "root" is given, it
+                    can be assumed to be the outer most JSON structure or the root of an
+                    object/array tree. If a rule is explicitly specified other than "root" and
+                    there exists a rule named "root", that rule name holds no special meaning.
+                </t>
+            </section>
         </section>
         <section title="Directives">
             <t>
@@ -588,15 +605,15 @@ root {
                 <t>
                     This directive specifies that every member name of every object,
                     either explicitly defined or specified via an any member rule or
-                    the ignore-unknown-members must be a name compatible with programming
+                    the ignore-unknown-members directive must be a name compatible with programming
                     languages. The intent is to specify object member names that may
-                    be used promoted to first-order object attributes or methods in
+                    be promoted to first-order object attributes or methods in
                     an API. The following ABNF describes the restrictions upon the
                     member names:
                 </t>
                 <figure anchor="json_name_abnf">
                     <preamble>
-                        ABNF for JSON names
+                        ABNF for programming language compatible JSON names
                     </preamble>
                     <artwork xml:space="preserve">
                         
@@ -1075,6 +1092,15 @@ common (
                 RelaxNG compact syntax does for XML. The syntax itself hopefully
                 has a JSON-ness or a JSON feel to it. And a good bit of
                 inspiration came from ABNF.</t>
+            </section>
+            <section title="Changelog">
+                <t>From -00 to -01
+                    <list style="numbers">
+                        <t>Added ABNF. Thanks Byron Ellacott.</t>
+                        <t>Added section about root rules.</t>
+                        <t>Other minor edits.</t>
+                    </list>
+                </t>
             </section>
         </section>
     </back>
