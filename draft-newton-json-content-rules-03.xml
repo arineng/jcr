@@ -17,6 +17,8 @@
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5322.xml'>
   <!ENTITY RFC5952 PUBLIC ''
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5952.xml'>
+  <!ENTITY RFC6570 PUBLIC ''
+   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6570.xml'>
 ]>
 <?rfc toc="true"?>
 <rfc category="std" docName="draft-newton-json-content-rules-03" ipr="trust200902">
@@ -107,6 +109,27 @@ root [
         "Country" : string
     }
 ]
+                </artwork>
+            </figure>
+            <t>
+                Depending on need and desired style, an alternate mapping can be used
+                where certain symbols are substituted for words.
+            </t>
+            <figure anchor="rfc4627-example-alt-rules">
+                <preamble>Rules describing <xref target="rfc4627-example-2"></xref> with an alternate syntax</preamble>
+                <artwork xml:space="preserve">
+root ARRAY
+    2*2 OBJECT
+            MEMBER "precision" VALUE string AND
+            MEMBER "Latitude" VALUE float AND
+            MEMBER "Longitude" VALUE float AND
+            MEMBER "Address" VALUE string AND
+            MEMBER "City" VALUE string AND
+            MEMBER "State" VALUE string AND
+            MEMBER "Zip" VALUE string AND
+            MEMBER "Country" VALUE string
+    END_OBJECT
+END_ARRAY
                 </artwork>
             </figure>
             <t>
@@ -217,7 +240,29 @@ root {
 }
                 </artwork>
             </figure>
-            
+            <t>
+                For completeness, <xref target="rfc4627-example-1-compact-alt-rules"></xref>
+                demonstrates the same rules as <xref target="rfc4627-example-1-compact-rules"></xref>
+                using the alternate syntax.
+            </t>
+            <figure anchor="rfc4627-example-1-compact-alt-rules">
+                <preamble>Compact, alternative rules describing <xref target="rfc4627-example-1"></xref></preamble>
+                <artwork xml:space="preserve">
+width MEMBER "width" VALUE integer 0..1280
+height MEMBER "height" VALUE integer 0..1024
+
+root OBJECT 
+    MEMBER "Image" OBJECT
+        width AND height AND 
+        MEMBER "Title" VALUE string AND
+        MEMBER "thumbnail" OBJECT
+          width, height, MEMBER "Url" VALUE uri 
+        END_OBJECT AND
+        MEMBER "IDs" ARRAY *VALUE integer END_ARRAY 
+    END_OBJECT
+END_OBJECT
+                </artwork>
+            </figure>
         </section>
         <section title="Lines and Comments">
             <t>
@@ -303,14 +348,16 @@ root {
                         by giving the regular expression after the string literal:
                         <list style="empty"><t>rule_name : string /regex/</t></list>
                     </t>
-                    <t hangText="URIs: ">
+                    <t hangText="URIs and URI templates: ">
                         A rule can state that a string must be a <xref target="RFC3986">URI</xref>:
                         <list style="empty"><t>rule_name : uri</t></list>
-                        URIs may be further scoped to a specific URI scheme by prepending
-                        the scheme name:
-                        <list style="empty"><t>rule_name : uri http</t></list>
-                        URIs not scoped to a specific scheme may be relative URIs.
-                        URIs scoped to a specific scheme must be a full URI.
+                        URIs may be further scoped to a specific URI pattern by prepending
+                        a <xref target="RFC6570">URI template</xref>:
+                        <list style="empty"><t>rule_name : uri http://{stuff}</t></list>
+                        <list style="empty"><t>rule_name : uri http://{authority}/{thing1}?q={thing2}</t></list>
+                        When using URI templates, the variable names are ignored for pattern matching,
+                        but the should be provided for construction of a valid URI template. Providing
+                        the variable names also aids in the description of what is to be matched.
                     </t>
                     <t hangText="IP Addresses: ">
                         Narrowing the content of strings down to IP addresses can
@@ -359,7 +406,7 @@ root {
                 </list>
             </t>
             </section>
-            <section title="Enumeratons" anchor="enumerations">
+            <section title="Enumerations" anchor="enumerations">
                 <t>
                     Enumerations allow a value to be one of the items in an enumerated list of possible values.
                     They take the following form:
@@ -528,6 +575,20 @@ root {
                 and here the object can have second_two_children only if first_two_children are given:
                 <list style="empty"><t>the_children { first_two_children &amp; second_two_children }</t></list>
             </t>
+            <t>
+                Group rules can be used to create object mixins. In the example in <xref target="group_mixin_example"></xref>,
+                both obj1 and obj2 have a members "foo" and "fob" with obj1 having the additional member "bar"
+                and obj2 having the additional member "baz".
+            </t>
+            <figure anchor="group_mixin_example">
+                <artwork xml:space="preserve">
+mixin_group ( "foo" : integer, "fob" : uri )
+
+obj1 { mixin_group, "bar" : string }
+
+obj2 { mixin_group, "baz" : string }
+                </artwork>
+            </figure>
         </section>
         <section title="Any Value and Any Member">
             <t>
@@ -638,24 +699,93 @@ name = ALPHA *( ALPHA / DIGIT / "_" )
                 <t>
                     This directive specifies that another collection of rules should
                     be evaluated before the rules following this directive. This directive
-                    must qualified with a quoted string describing the collection of
-                    rules to evalute.
+                    must be qualified with a quoted string describing the collection of
+                    rules to evaluate.
                     <list style="empty"><t># include "Section 3 of RFC XXXX"</t></list>
                     The quoted string may be optionally followed by a URI:
                     <list style="empty"><t># include "Section 3 of RFC XXXX" http://example.com/rfcXXXX</t></list>
                 </t>
             </section>
         </section>
-        
+        <section title="Alternate Syntax">
+            <t>
+                The syntax given in the sections above does require specific knowledge of JSON content
+                rules and may not be appropriate for describing simpler JSON structures or may not be
+                desired for describing JSON to audiences unfamiliar with JSON content rules. In other
+                words, choice of syntax is a matter of style and taste and can vary depending on
+                conditions.
+            </t>
+            <t>
+                Therefore this section describes a syntax mapping where symbols are substituted for
+                words, thus providing a more readable rule set to some audiences. Because it is a
+                simple mapping between symbols and words, the structure of the rules does not change
+                and the syntaxes may be interchanged.
+            </t>
+            <t>
+                The syntax map is as follows:
+                <list style="empty">
+                    <t>: (colon) maps to the word VALUE</t>
+                    <t>{ (left curly bracket) maps to OBJECT</t>
+                    <t>} (right curly bracket) maps to END_OBJECT</t>
+                    <t>, (comma) maps to AND</t>
+                    <t>/ (forward slash) maps to OR</t>
+                    <t>&amp; (ampersand) maps to DEPENDS</t>
+                    <t>[ (left square bracket) maps to ARRAY</t>
+                    <t>] (right square bracket) maps to END_ARRAY</t>
+                    <t>( (left parenthesis) maps to GROUP</t>
+                    <t>) (right parenthesis) maps to END_GROUP</t>
+                    <t>&lt; (less than symbol) maps to ENUM</t>
+                    <t>&gt; (greater than symbol) maps to END_ENUM</t>
+                </list>
+                Because member names in member rules must be quoted strings, there is
+                no need to map the quotation marks. However the word MEMBER can precede the
+                quoted string in member rules.
+            </t>
+            <t>
+                The carat symbol used in any rules and the asterisk symbol used for
+                specifying cardinality do not have a mapping as there are probably no
+                good words to describe their usage. Additionally, directives do not
+                have mappings as they are descriptive.
+            </t>
+            <t>
+                The following are examples of the symbolic syntax and the alternate word
+                syntax:
+                <list style="hanging">
+                    <t hangText="Value Rules">
+                        <list><t>birthdate : date-time</t></list>
+                        <list><t>birthdate VALUE date-time</t></list>
+                        <list><t>valid_widths_rule : &lt; 640 960 1024 &gt;</t></list>
+                        <list><t>valid_widths_rule VALUE ENUM 640 960 1024 END_ENUM</t></list>
+                    </t>
+                    <t hangText="Member Rules with Values">
+                        <list><t>width_rule "width" : integer 0..1280</t></list>
+                        <list><t>width_rule MEMBER "width" VALUE integer 0..1280</t></list>
+                    </t>
+                    <t hangText="Array Rules with Values">
+                        <list><t>person_array [ : string, : integer ]</t></list>
+                        <list><t>person_array ARRAY VALUE string AND VALUE integer END_ARRAY</t></list>
+                    </t>
+                    <t hangText="Object Rules with Members and Values">
+                        <list><t>response { "locationUri" : uri, "statusCode" : integer }</t></list>
+                        <list><t>response OBJECT MEMBER "locationUri" VALUE uri AND MEMBER "statusCode" VALUE integer END_OBJECT</t></list>
+                    </t>
+                    <t hangText="Group Rules">
+                        <list><t>first_two_children ( child_1, child_2 )</t></list>
+                        <list><t>first_two_children GROUP child_1 AND child_2 END_GROUP</t></list>
+                    </t>
+                </list>
+            </t>
+        </section>
+        <!--
         <section title="Acknowledgements">
             <t>Many thanks to Byron Ellacott for providing the ABNF in Section 5.</t>
         </section>
+        -->
     </middle>
     <back>
         <references title="Normative References">
             
             &RFC1166;
-           
             &RFC3339;
             &RFC3986;
             &RFC4234;
@@ -663,6 +793,7 @@ name = ALPHA *( ALPHA / DIGIT / "_" )
             &RFC4648;
             &RFC5322;
             &RFC5952;
+            &RFC6570;
             
         </references>
         <section title="Comparison with JSON Schema" anchor="json-schema-comparison">
@@ -719,24 +850,24 @@ root [
                     <preamble>JSON Schema</preamble>
                     <artwork xml:space="preserve">
 {
-    "type": "array",
-    "items": [
-        {
-            "type": "object",
-            "properties": {
-                "precision": { "type": "string", "required": "true" },
-                "Latitude": { "type": "number", "required": "true" },
-                "Longitude": { "type": "number", "required": "true" },
-                "Address" : { "type": "string", "required": "true" },
-                "City" : { "type": "string", "required": "true" },
-                "State" : { "type" : "string", "required": "true" },
-                "Zip" : { "type" : "string", "required": "true" },
-                "Country" : { "type" : "string", "required": "true" }
-            }
-        }
-    ],
-    "minItems" : 2,
-    "maxItems" : 2
+   "type": "array",
+   "items": [
+       {
+           "type": "object",
+           "properties": {
+               "precision": { "type": "string", "required": "true" },
+               "Latitude": { "type": "number", "required": "true" },
+               "Longitude": { "type": "number", "required": "true" },
+               "Address" : { "type": "string", "required": "true" },
+               "City" : { "type": "string", "required": "true" },
+               "State" : { "type" : "string", "required": "true" },
+               "Zip" : { "type" : "string", "required": "true" },
+               "Country" : { "type" : "string", "required": "true" }
+           }
+       }
+   ],
+   "minItems" : 2,
+   "maxItems" : 2
 }
                     </artwork>
                 </figure>
@@ -1016,12 +1147,15 @@ common (
                     <list style="numbers">
                         <t>Removed formal syntax (ABNF) until such time as the features are nailed down.
                         It will appear in a future draft.</t>
-                        <t>Took out the option for mulitple email conformance levels as everything
+                        <t>Took out the option for multiple email conformance levels as everything
                         should be conformant to RFC 5322.</t>
-                        <t>Changed URI conformance so that full URIs are specified by giving a scheme name.
-                        There is no full/partial keyword anymore.</t>
+                        <t>URIs conformance can now either be just 'uri' or match a URI template
+                            (suggestion from Andrew Biggs).</t>
                         <t>Added enumerated values based on a suggestion from Paul Jones.</t>
                         <t>Added a directive for including other collections of rules.</t>
+                        <t>Added an example of object mixins using groups thanks to a discussion
+                        with Andrew Biggs.</t>
+                        <t>Added an alternate syntax mapping.</t>
                     </list>
                 </t>
             </section>
