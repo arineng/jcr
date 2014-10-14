@@ -657,7 +657,8 @@ obj2 { mixin_group, "baz" : string }
                 Directives change the interpretation of a collection of rules. They begin with a hash character ('#')
                 and are terminated by the end of a line. They take the following form:
                 <list style="empty"><t># directive_name</t></list>
-                Directives may have other qualifiers after the directive name.
+                Directives may have other qualifiers after the directive name. They may appear intermixed with rules
+                but cannot appear in a rule definition.
             </t>
             <section title="ignore-unknown-members">
                 <t>

@@ -4,8 +4,8 @@
 
 Network Working Group                                          A. Newton
 Internet-Draft                                                      ARIN
-Intended status: Standards Track                         October 3, 2014
-Expires: April 6, 2015
+Intended status: Standards Track                        October 14, 2014
+Expires: April 17, 2015
 
 
               A Language for Rules Describing JSON Content
@@ -32,7 +32,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 6, 2015.
+   This Internet-Draft will expire on April 17, 2015.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Newton                    Expires April 6, 2015                 [Page 1]
+Newton                   Expires April 17, 2015                 [Page 1]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -109,7 +109,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                 [Page 2]
+Newton                   Expires April 17, 2015                 [Page 2]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -165,7 +165,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                 [Page 3]
+Newton                   Expires April 17, 2015                 [Page 3]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -221,7 +221,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                 [Page 4]
+Newton                   Expires April 17, 2015                 [Page 4]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -277,7 +277,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                 [Page 5]
+Newton                   Expires April 17, 2015                 [Page 5]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -333,7 +333,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                 [Page 6]
+Newton                   Expires April 17, 2015                 [Page 6]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -389,7 +389,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                 [Page 7]
+Newton                   Expires April 17, 2015                 [Page 7]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -445,7 +445,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                 [Page 8]
+Newton                   Expires April 17, 2015                 [Page 8]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -501,7 +501,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                 [Page 9]
+Newton                   Expires April 17, 2015                 [Page 9]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -557,7 +557,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                [Page 10]
+Newton                   Expires April 17, 2015                [Page 10]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -613,7 +613,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                [Page 11]
+Newton                   Expires April 17, 2015                [Page 11]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -669,7 +669,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                [Page 12]
+Newton                   Expires April 17, 2015                [Page 12]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -725,7 +725,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                [Page 13]
+Newton                   Expires April 17, 2015                [Page 13]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -781,7 +781,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                [Page 14]
+Newton                   Expires April 17, 2015                [Page 14]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -837,14 +837,16 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                [Page 15]
+Newton                   Expires April 17, 2015                [Page 15]
 
 Internet-Draft             JSON Content Rules               October 2014
 
 
       # directive_name
 
-   Directives may have other qualifiers after the directive name.
+   Directives may have other qualifiers after the directive name.  They
+   may appear intermixed with rules but cannot appear in a rule
+   definition.
 
 4.1.  ignore-unknown-members
 
@@ -888,15 +890,15 @@ Internet-Draft             JSON Content Rules               October 2014
 
    The quoted string may be optionally followed by a URI:
 
-      # include "Section 3 of RFC XXXX" http://example.com/rfcXXXX
 
 
 
-
-Newton                    Expires April 6, 2015                [Page 16]
+Newton                   Expires April 17, 2015                [Page 16]
 
 Internet-Draft             JSON Content Rules               October 2014
 
+
+      # include "Section 3 of RFC XXXX" http://example.com/rfcXXXX
 
 5.  Alternate Syntax
 
@@ -943,17 +945,17 @@ Internet-Draft             JSON Content Rules               October 2014
    no need to map the quotation marks.  However the word MEMBER can
    precede the quoted string in member rules.
 
-   The carat symbol used in any rules and the asterisk symbol used for
-   specifying cardinality do not have a mapping as there are probably no
 
 
 
 
-Newton                    Expires April 6, 2015                [Page 17]
+Newton                   Expires April 17, 2015                [Page 17]
 
 Internet-Draft             JSON Content Rules               October 2014
 
 
+   The carat symbol used in any rules and the asterisk symbol used for
+   specifying cardinality do not have a mapping as there are probably no
    good words to describe their usage.  Additionally, directives do not
    have mappings as they are descriptive.
 
@@ -1000,15 +1002,16 @@ Internet-Draft             JSON Content Rules               October 2014
    [RFC1166]  Kirkpatrick, S., Stahl, M., and M. Recker, "Internet
               numbers", RFC 1166, July 1990.
 
-   [RFC3339]  Klyne, G., Ed. and C. Newman, "Date and Time on the
-              Internet: Timestamps", RFC 3339, July 2002.
 
 
 
-Newton                    Expires April 6, 2015                [Page 18]
+Newton                   Expires April 17, 2015                [Page 18]
 
 Internet-Draft             JSON Content Rules               October 2014
 
+
+   [RFC3339]  Klyne, G., Ed. and C. Newman, "Date and Time on the
+              Internet: Timestamps", RFC 3339, July 2002.
 
    [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66, RFC
@@ -1058,10 +1061,7 @@ A.1.  Example 1 from RFC 4627
 
 
 
-
-
-
-Newton                    Expires April 6, 2015                [Page 19]
+Newton                   Expires April 17, 2015                [Page 19]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -1117,7 +1117,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                [Page 20]
+Newton                   Expires April 17, 2015                [Page 20]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -1173,7 +1173,7 @@ A.2.  Example 2 from RFC 4627
 
 
 
-Newton                    Expires April 6, 2015                [Page 21]
+Newton                   Expires April 17, 2015                [Page 21]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -1229,7 +1229,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                [Page 22]
+Newton                   Expires April 17, 2015                [Page 22]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -1285,7 +1285,7 @@ Appendix B.  A "Real World" Exmaple
 
 
 
-Newton                    Expires April 6, 2015                [Page 23]
+Newton                   Expires April 17, 2015                [Page 23]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -1341,7 +1341,7 @@ Internet-Draft             JSON Content Rules               October 2014
 
 
 
-Newton                    Expires April 6, 2015                [Page 24]
+Newton                   Expires April 17, 2015                [Page 24]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -1397,7 +1397,7 @@ C.1.  Member Uniqueness
 
 
 
-Newton                    Expires April 6, 2015                [Page 25]
+Newton                   Expires April 17, 2015                [Page 25]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -1453,7 +1453,7 @@ C.5.  Changelog
 
 
 
-Newton                    Expires April 6, 2015                [Page 26]
+Newton                   Expires April 17, 2015                [Page 26]
 
 Internet-Draft             JSON Content Rules               October 2014
 
@@ -1509,4 +1509,4 @@ Author's Address
 
 
 
-Newton                    Expires April 6, 2015                [Page 27]
+Newton                   Expires April 17, 2015                [Page 27]
