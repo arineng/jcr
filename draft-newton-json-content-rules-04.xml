@@ -41,7 +41,7 @@
         <date/>
         <abstract>
             <t>
-                This document describes a language useful for documenting the expected content of JSON structures
+                This document describes a language useful for describing the expected content of JSON structures
                 found in JSON-using protocols.
             </t>
         </abstract>
@@ -52,7 +52,7 @@
                 The goal of this document is to provide a way to specify the expected content
                 of data expressed in <xref target="RFC4627">JSON</xref> format. That is, the primary
                 purpose of this document is to specify a means for one person to communicate with
-                another person the expected nature of a JSON data structure in a method more concise
+                another person the expected nature of a JSON data structure in a method more concise and unambiguous
                 than prose. The programmatic validation of a JSON data structure against content rules
                 is a lesser goal of this document, though such a practice is useful in both the
                 writing of specifications and the communications of programs.
@@ -137,7 +137,7 @@ root [
             </t>
             <t>
                 Member rules specify JSON object members. The following example member rule states that
-                the rules name is 'm1' with a value defined by the 'v1' value rule:
+                the rule's name is 'm1' with a value defined by the 'v1' value rule:
                 <list style="empty"><t>m1 "m1name" v1</t></list>
                 Since rule names can be substituted by rule definitions, this member rule can also
                 be written as follows (to define a member rule named m1 for JSON member "m1name" that
@@ -152,11 +152,14 @@ root [
                 <list style="empty"><t>o1 { m1, ?m2 }</t></list>
             </t>
             <t>
-                Finally, array rules are composed of value, object, and other array rules. Like object rules, array rules
+                Array rules are composed of value, object, and other array rules. Like object rules, array rules
                 can specify the cardinality of the contents of an array. The following array rule
                 defines an array that must contain value rule 'v1' and zero or more objects as defined
                 by rule 'o1':
                 <list style="empty"><t>a1 [ v1, *o1 ]</t></list>
+            </t>
+            <t>
+                Finally, group rules designate a collection of rules.
             </t>
             <t>
                 Putting it all together, <xref target="rfc4627-example-1-rules"></xref>
@@ -186,10 +189,10 @@ root [
 width_v : integer 0..1280
 height_v : integer 0..1024
 
-width "width" width_v
-height "height" height_v
+width "Width" width_v
+height "Height" height_v
 
-thumbnail "thumbnail" {
+thumbnail "Thumbnail" {
     width, height, "Url" : uri 
 }
 
@@ -208,13 +211,13 @@ root { image }
             <figure anchor="rfc4627-example-1-compact-rules">
                 <preamble>Compact rules describing <xref target="rfc4627-example-1"></xref></preamble>
                 <artwork xml:space="preserve">
-width "width" : integer 0..1280
-height "height" : integer 0..1024
+width "Width" : integer 0..1280
+height "Height" : integer 0..1024
 
 root { 
     "Image" {
         width, height, "Title" :string,
-        "thumbnail" { width, height, "Url" :uri }, 
+        "Thumbnail" { width, height, "Url" :uri }, 
         "IDs" [ *:integer ] 
     }
 }
@@ -234,11 +237,18 @@ root {
         </section>
         <section title="Rules">
             <t>
-                Rules are composed of two parts, a rule name and a rule definition. Rule names allow
-                a rule definition to be referenced easily by a name. With the exception of value rules,
-                rule definitions refer to other rules using the rule names of other appropriate types
-                of rules. Because of this, it is also possible to use a rule definition of the appropriate
-                type where a rule name of that type would be appropriate.
+                Rules are composed of two parts, a rule name and a rule definition:
+                <list><t>&lt;rule name&gt; &lt;rule definition&gt;</t></list>
+                Rule names allow
+                a rule to be referenced easily by a name. A rule definition describes the validity
+                upon which the content is to be judged. With the exception of value rules,
+                rule definitions refer to other rules using the rule names of other rules of appropriate type.
+            </t>
+            <t>
+                A rule definition may embed another rule definition where a rule name is allowed. In other
+                words, some rules are named and some are anonymous. Named rules start with a rule name and
+                have a rule definition. Anonymous rules are rule definitions embedded in the definitions
+                of other rules.
             </t>
             <t>
                 The type of rule to use in a rule definition, either directly or by reference of a name,
@@ -267,7 +277,8 @@ root {
             <t>
                 Rule names must start with an alphabetic character (a-z,A-Z) and must contain only
                 alphabetic characters, numeric characters, the hyphen character ('-') and the
-                underscore character ('_'). Rule names must not be used more than once.
+                underscore character ('_'). Rule names must not be used more than once and are
+                case sensitive.
             </t>
         <section title="Value Rules">
             <t>
@@ -380,7 +391,7 @@ root {
         </section>
         <section title="Member Rules">
             <t>
-                Member rules are the simplest of the rules and define members of JSON objects.
+                Member rules have the simplest syntax of all the rules and define members of JSON objects.
                 Member rules follow the format:
                 <list style="empty"><t>rule_name "member_name" target_rule_name</t></list>
                 where rule_name is the name of the rule being defined, member_name (in quotes) is
@@ -388,7 +399,7 @@ root {
                 rule, array rule, or object rule specifying the allowable content of the JSON object member.
             </t>
             <t>
-                Since rule names in rule definitions may be substituted for rule definitions,
+                Since rule names in rule definitions may be replaced by rule definitions,
                 member rules may also be written in this form:
                 <list><t>rule_name "member_rule" target_rule_definition</t></list>
                 The following is an example:
@@ -668,11 +679,162 @@ name = ALPHA *( ALPHA / DIGIT / "_" )
                 </t>
             </section>
         </section>
-        <!--
+        <section title="ABNF Syntax">
+            <figure title="JSON Content Rules ABNF">
+                <preamble>
+                    The following ABNF describes the syntax for JSON Content Rules.
+                </preamble>
+                <artwork xml:space="preserve">
+grammar         = 1*(rule / directive) *c-wsp
+
+rule            = rulename definition
+definition      = *c-wsp ( value-rule /
+                           member-rule / 
+                           array-rule / 
+                           object-rule / 
+                           group-rule )
+
+; rulenames must be unique, and may not be a reserved word
+; rulenames are case sensitive
+rulename        = *c-wsp ALPHA *(ALPHA / DIGIT / "-" / "_")
+
+; Adapted from the ABNF for JSON, RFC 4627 s 2.4
+float           = [ "-" ] int [ frac ] [ exp ]
+integer         = [ "-" ] int [ exp ]
+exp             = ( "e" / "E" ) [ "+" / "-" ] 1*DIGIT
+frac            = "." 1*DIGIT
+int             = "0" / ( %x31-39 *DIGIT )
+
+; The regex-char rule allows for any sequence of characters, including
+; whitespace and newlines, with backslash only allowed before either
+; a forward or a backslash.
+regex-char      = %x21-2E / %x30-5D / %x5E-7E / WSP /
+                  CR / LF / "\/" / "\\"
+                  
+; The defintion of a JSON string, from RFC 4627 s 2
+q-string        = %x20-21 / %x23-5B / %x5D-10FFFF / "\" (
+                    %x22 /      ; "  u+0022
+                    %x5C /      ; \  u+005C
+                    %x2F /      ; /  u+002F
+                    %x62 /      ; BS u+0008
+                    %x66 /      ; FF u+000C
+                    %x6E /      ; LF u+000A
+                    %x72 /      ; CR u+000D
+                    %x74 /      ; HT u+0009
+                    ( %x75 4HEXDIG ) ) ; uXXXX u+XXXX                  
+                  
+enum-items      = float / integer / 
+                  "1" / "0" / "true" / "false" / 
+                  "null" /
+                  q-string
+
+boolean-type    = "boolean"
+null-type       = "null"
+integer-type    = "integer" [ 1*c-wsp integer ".." integer ]
+float-type      = "float"   [ 1*c-wsp float   ".." float   ]
+string-type     = "string"  [ *c-wsp "/" *regex-char "/" ]
+uri-type        = "uri"     [ URI ] ; URI is defined in RFC 3986
+ip-type         = "ip4" / "ip6"
+dns-type        = "fqdn" / "idn"
+date-type       = "date-time" / "full-date" / "full-time"
+email-type      = "email"
+phone-type      = "phone"
+base64-type     = "base64"
+enum-type       = "&lt;" 1*( 1*c-wsp enum-items) 1*c-wsp "&gt;"
+any-type        = "any"
+
+value-rule      = ":" *c-wsp type-rule
+type-rule       = boolean-type /
+                  null-type /
+                  integer-type /
+                  float-type /
+                  string-type /
+                  uri-type /
+                  ip-type /
+                  dns-type / 
+                  date-type /
+                  email-type /
+                  phone-type /
+                  base64-type /
+                  enum-type /
+                  any-type
+
+inline-rule     = *c-wsp ( rulename / definition )
+
+member-rule     = ( 
+                    ( "^" %x22.22 ) / 
+                    ( %x22 *q-string %x22 ) 
+                  ) inline-rule
+
+and-or          = ( "," / "/" )
+object-rule     = "{" object-member *( 
+                                       *c-wsp 
+                                       and-or 
+                                       object-member 
+                                     ) *c-wsp "}"
+
+object-items    = ( rulename / member-rule / group-rule )
+object-member   = *c-wsp ["?"] *c-wsp object-items
+
+array-rule      = "[" array-member *( 
+                                      *c-wsp 
+                                      and-or 
+                                      array-member 
+                                    ) *c-wsp "]"
+
+array-count     = *c-wsp [ 
+                           [int] 
+                           *c-wsp 
+                           "*" 
+                           *c-wsp 
+                           [int] 
+                           *c-wsp 
+                         ]
+array-member    = array-count ( 
+                                rulename / 
+                                value-rule / 
+                                object-rule / 
+                                group-rule )
+                  [ *c-wsp "/" array-member ]
+
+group-rule      = "(" group-member *( 
+                                       1*c-wsp 
+                                       and-or 
+                                       group-member
+                                    ) *c-wsp ")"
+
+group-member    = *c-wsp [ ("?" / array-count ] inline-rule
+
+directive       = *c-wsp "#" *( VCHAR / WSP / %x7F-10FFFF ) EOL
+
+; Taken from the ABNF for ABNF (RFC 4627 section 4) and slightly adapted
+; newlines in a c-wsp do not need whitespace at the start of a newline
+; to form a valid continuation line, and EOL might not be a full CRLF
+c-wsp           = WSP / c-nl
+c-nl            = comment / EOL
+comment         =  ";" *(WSP / VCHAR) EOL
+EOL             = 1*( CR / LF )
+
+; core rules
+ALPHA          =  %x41-5A / %x61-7A   ; A-Z / a-z
+CR             =  %x0D
+DIGIT          =  %x30-39
+HEXDIG         =  DIGIT / "A" / "B" / "C" / "D" / "E" / "F"
+LF             =  %x0A
+VCHAR          =  %x21-7E
+WSP            =  SP / HTAB
+SP             =  %x20
+HTAB           =  %x09
+                </artwork>
+            </figure>
+        </section>        
         <section title="Acknowledgements">
-            <t>Many thanks to Byron Ellacott for providing the ABNF in Section 5.</t>
+            <t>
+                Byron Ellacott provided the original ABNF, from which the current ABNF is
+                derived. Andrew Biggs and Paul Jones provided feedback and suggestions
+                which led to many changes in the syntax.
+            </t>
         </section>
-        -->
     </middle>
     <back>
         <references title="Normative References">
@@ -1058,6 +1220,7 @@ common (
                         <t>Removed the depends operator.</t>
                         <t>Added syntax for optional members of groups in object rules.</t>
                         <t>Added syntax for repetition for elements of groups in array rules.</t>
+                        <t>ABNF added back.</t>
                     </list>
                 </t>
             </section>
