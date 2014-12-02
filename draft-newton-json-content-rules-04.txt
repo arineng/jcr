@@ -4,8 +4,8 @@
 
 Network Working Group                                          A. Newton
 Internet-Draft                                                      ARIN
-Intended status: Standards Track                       November 25, 2014
-Expires: May 29, 2015
+Intended status: Standards Track                        December 2, 2014
+Expires: June 5, 2015
 
 
               A Language for Rules Describing JSON Content
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 29, 2015.
+   This Internet-Draft will expire on June 5, 2015.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Newton                    Expires May 29, 2015                  [Page 1]
+Newton                    Expires June 5, 2015                  [Page 1]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
 1.  Introduction
@@ -109,9 +109,9 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-Newton                    Expires May 29, 2015                  [Page 2]
+Newton                    Expires June 5, 2015                  [Page 2]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
    Rules describing Figure 1
@@ -165,9 +165,9 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-Newton                    Expires May 29, 2015                  [Page 3]
+Newton                    Expires June 5, 2015                  [Page 3]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
       m1 "m1name" v1
@@ -221,9 +221,9 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-Newton                    Expires May 29, 2015                  [Page 4]
+Newton                    Expires June 5, 2015                  [Page 4]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
    Rules describing Figure 3
@@ -277,9 +277,9 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-Newton                    Expires May 29, 2015                  [Page 5]
+Newton                    Expires June 5, 2015                  [Page 5]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
 3.  Rules
@@ -333,9 +333,9 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-Newton                    Expires May 29, 2015                  [Page 6]
+Newton                    Expires June 5, 2015                  [Page 6]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
 3.1.1.  Numbers, Booleans and Null
@@ -389,9 +389,9 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-Newton                    Expires May 29, 2015                  [Page 7]
+Newton                    Expires June 5, 2015                  [Page 7]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
          rule_name : uri http://{authority}/{thing1}?q={thing2}
@@ -445,9 +445,9 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-Newton                    Expires May 29, 2015                  [Page 8]
+Newton                    Expires June 5, 2015                  [Page 8]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
 3.1.3.  Enumerations
@@ -501,9 +501,9 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-Newton                    Expires May 29, 2015                  [Page 9]
+Newton                    Expires June 5, 2015                  [Page 9]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
    Given that where a rule name is found a rule definition of the
@@ -557,9 +557,9 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-Newton                    Expires May 29, 2015                 [Page 10]
+Newton                    Expires June 5, 2015                 [Page 10]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
    Unlike object rules, order is implied by the array rule definition.
@@ -613,9 +613,9 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-Newton                    Expires May 29, 2015                 [Page 11]
+Newton                    Expires June 5, 2015                 [Page 11]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
    Both the lower bound and the upper bound are optional.  If lower
@@ -669,9 +669,9 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-Newton                    Expires May 29, 2015                 [Page 12]
+Newton                    Expires June 5, 2015                 [Page 12]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
       the_children { first_two_children / second_two_children }
@@ -725,9 +725,9 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-Newton                    Expires May 29, 2015                 [Page 13]
+Newton                    Expires June 5, 2015                 [Page 13]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
    However, unlike other value rules which define primitive data types,
@@ -781,9 +781,9 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-Newton                    Expires May 29, 2015                 [Page 14]
+Newton                    Expires June 5, 2015                 [Page 14]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
 3.7.  A Root Rule
@@ -837,9 +837,9 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-Newton                    Expires May 29, 2015                 [Page 15]
+Newton                    Expires June 5, 2015                 [Page 15]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
 4.3.  include
@@ -860,163 +860,171 @@ Internet-Draft             JSON Content Rules              November 2014
 
    The following ABNF describes the syntax for JSON Content Rules.
 
-grammar         = 1*(rule / directive) *c-wsp
+   grammar         = 1*(rule / directive) *c-wsp
 
-rule            = rulename definition
-definition      = *c-wsp ( value-rule /
-                           member-rule /
-                           array-rule /
-                           object-rule /
-                           group-rule )
+   rule            = rulename definition
+   definition      = *c-wsp ( value-rule /
+                              member-rule /
+                              array-rule /
+                              object-rule /
+                              group-rule )
 
-; rulenames must be unique, and may not be a reserved word
-; rulenames are case sensitive
-rulename        = *c-wsp ALPHA *(ALPHA / DIGIT / "-" / "_")
+   ; rulenames must be unique, and may not be a reserved word
+   ; rulenames are case sensitive
+   rulename        = *c-wsp ALPHA *(ALPHA / DIGIT / "-" / "_")
 
-; Adapted from the ABNF for JSON, RFC 4627 s 2.4
-float           = [ "-" ] int [ frac ] [ exp ]
-integer         = [ "-" ] int [ exp ]
-exp             = ( "e" / "E" ) [ "+" / "-" ] 1*DIGIT
-frac            = "." 1*DIGIT
-int             = "0" / ( %x31-39 *DIGIT )
+   ; Adapted from the ABNF for JSON, RFC 4627 s 2.4
+   float           = [ "-" ] int [ frac ] [ exp ]
+   integer         = [ "-" ] int [ exp ]
+   exp             = ( "e" / "E" ) [ "+" / "-" ] 1*DIGIT
+   frac            = "." 1*DIGIT
+   int             = "0" / ( %x31-39 *DIGIT )
 
-; The regex-char rule allows for any sequence of characters, including
-; whitespace and newlines, with backslash only allowed before either
-; a forward or a backslash.
-regex-char      = %x21-2E / %x30-5D / %x5E-7E / WSP /
-                  CR / LF / "\/" / "\\"
+   ; The regex-char rule allows for any sequence of characters,
+   ; including whitespace and newlines, with backslash only
+   ; allowed before either a forward or a backslash.
+   regex-char      = %x21-2E / %x30-5D / %x5E-7E / WSP /
+                     CR / LF / "\/" / "\\"
 
-; The defintion of a JSON string, from RFC 4627 s 2
-q-string        = %x20-21 / %x23-5B / %x5D-10FFFF / "\" (
-                    %x22 /      ; "  u+0022
-                    %x5C /      ; \  u+005C
+   ; The defintion of a JSON string, from RFC 4627 s 2
+   q-string        = %x20-21 / %x23-5B / %x5D-10FFFF / "\" (
+                       %x22 /      ; "  u+0022
+                       %x5C /      ; \  u+005C
 
 
 
-Newton                    Expires May 29, 2015                 [Page 16]
+Newton                    Expires June 5, 2015                 [Page 16]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
-                    %x2F /      ; /  u+002F
-                    %x62 /      ; BS u+0008
-                    %x66 /      ; FF u+000C
-                    %x6E /      ; LF u+000A
-                    %x72 /      ; CR u+000D
-                    %x74 /      ; HT u+0009
-                    ( %x75 4HEXDIG ) ) ; uXXXX u+XXXX
+                       %x2F /      ; /  u+002F
+                       %x62 /      ; BS u+0008
+                       %x66 /      ; FF u+000C
+                       %x6E /      ; LF u+000A
+                       %x72 /      ; CR u+000D
+                       %x74 /      ; HT u+0009
+                       ( %x75 4HEXDIG ) ) ; uXXXX u+XXXX
 
-enum-items      = float / integer /
-                  "1" / "0" / "true" / "false" /
-                  "null" /
-                  q-string
+   enum-items      = float / integer /
+                     "1" / "0" / "true" / "false" /
+                     "null" /
+                     q-string
 
-boolean-type    = "boolean"
-null-type       = "null"
-integer-type    = "integer" [ 1*c-wsp integer ".." integer ]
-float-type      = "float"   [ 1*c-wsp float   ".." float   ]
-string-type     = "string"  [ *c-wsp "/" *regex-char "/" ]
-uri-type        = "uri"     [ URI ] ; URI is defined in RFC 3986
-ip-type         = "ip4" / "ip6"
-dns-type        = "fqdn" / "idn"
-date-type       = "date-time" / "full-date" / "full-time"
-email-type      = "email"
-phone-type      = "phone"
-base64-type     = "base64"
-enum-type       = "<" 1*( 1*c-wsp enum-items) 1*c-wsp ">"
-any-type        = "any"
+   boolean-type    = "boolean"
+   null-type       = "null"
+   integer-type    = "integer" [ 1*c-wsp integer ".." integer ]
+   float-type      = "float"   [ 1*c-wsp float   ".." float   ]
+   string-type     = "string"  [ *c-wsp "/" *regex-char "/" ]
+   uri-type        = "uri"     [ URI ] ; URI defined in RFC 3986
+   ip-type         = "ip4" / "ip6"
+   dns-type        = "fqdn" / "idn"
+   date-type       = "date-time" / "full-date" / "full-time"
+   email-type      = "email"
+   phone-type      = "phone"
+   base64-type     = "base64"
+   enum-type       = "<" 1*( 1*c-wsp enum-items) 1*c-wsp ">"
+   any-type        = "any"
 
-value-rule      = ":" *c-wsp type-rule
-type-rule       = boolean-type /
-                  null-type /
-                  integer-type /
-                  float-type /
-                  string-type /
-                  uri-type /
-                  ip-type /
-                  dns-type /
-                  date-type /
-                  email-type /
-                  phone-type /
-                  base64-type /
-                  enum-type /
-                  any-type
+   value-rule      = ":" *c-wsp type-rule
+   type-rule       = boolean-type /
+                     null-type /
+                     integer-type /
+                     float-type /
+                     string-type /
+                     uri-type /
+                     ip-type /
+                     dns-type /
+                     date-type /
+                     email-type /
+                     phone-type /
+                     base64-type /
+                     enum-type /
+                     any-type
 
-inline-rule     = *c-wsp ( rulename / definition )
+   inline-rule     = *c-wsp ( rulename / definition )
 
-member-rule     = (
-                    ( "^" %x22.22 ) /
+   member-rule     = (
+                       ( "^" %x22.22 ) /
 
 
 
-Newton                    Expires May 29, 2015                 [Page 17]
+Newton                    Expires June 5, 2015                 [Page 17]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
-                    ( %x22 *q-string %x22 )
-                  ) inline-rule
+                       ( %x22 *q-string %x22 )
+                     ) inline-rule
 
-and-or          = ( "," / "/" )
-object-rule     = "{" object-member *(
-                                       *c-wsp
-                                       and-or
-                                       object-member
-                                     ) *c-wsp "}"
+   and-or          = ( "," / "/" )
+   object-rule     = "{" object-member *(
+                                          *c-wsp
+                                          and-or
+                                          object-member
+                                        ) *c-wsp "}"
 
-object-items    = ( rulename / member-rule / group-rule )
-object-member   = *c-wsp ["?"] *c-wsp object-items
+   object-items    = ( rulename / member-rule / group-rule )
+   object-member   = *c-wsp ["?"] *c-wsp object-items
 
-array-rule      = "[" array-member *(
-                                      *c-wsp
-                                      and-or
-                                      array-member
-                                    ) *c-wsp "]"
+   array-rule      = "[" array-member *(
+                                         *c-wsp
+                                         and-or
+                                         array-member
+                                       ) *c-wsp "]"
 
-array-count     = *c-wsp [ [int] *c-wsp "*" *c-wsp [int] *c-wsp ]
-array-member    = array-count (
-                                rulename /
-                                value-rule /
-                                object-rule /
-                                group-rule )
-                  [ *c-wsp "/" array-member ]
+   array-count     = *c-wsp [
+                              [int]
+                              *c-wsp
+                              "*"
+                              *c-wsp
+                              [int]
+                              *c-wsp
+                            ]
+   array-member    = array-count (
+                                   rulename /
+                                   value-rule /
+                                   object-rule /
+                                   group-rule )
+                     [ *c-wsp "/" array-member ]
 
-group-rule      = "(" group-member *(
-                                       1*c-wsp
-                                       and-or
-                                       group-member
-                                    ) *c-wsp ")"
+   group-rule      = "(" group-member *(
+                                          1*c-wsp
+                                          and-or
+                                          group-member
+                                       ) *c-wsp ")"
 
-group-member    = *c-wsp [ ("?" / array-count ] inline-rule
+   group-member    = *c-wsp [ ("?" / array-count ] inline-rule
 
-directive       = *c-wsp "#" *( VCHAR / WSP / %x7F-10FFFF ) EOL
+   directive       = *c-wsp "#" *( VCHAR / WSP / %x7F-10FFFF ) EOL
 
-; Taken from the ABNF for ABNF (RFC 4627 section 4) and slightly adapted
-; newlines in a c-wsp do not need whitespace at the start of a newline
-; to form a valid continuation line, and EOL might not be a full CRLF
-c-wsp           = WSP / c-nl
-c-nl            = comment / EOL
-comment         =  ";" *(WSP / VCHAR) EOL
-EOL             = 1*( CR / LF )
-
-; core rules
-ALPHA          =  %x41-5A / %x61-7A   ; A-Z / a-z
-CR             =  %x0D
+   ; Taken from the ABNF for ABNF (RFC 4627 section 4) and slightly
+   ; adapted newlines in a c-wsp do not need whitespace at the
+   ; start of a newline to form a valid continuation line, and
+   ; EOL might not be a full CRLF
 
 
 
-Newton                    Expires May 29, 2015                 [Page 18]
+Newton                    Expires June 5, 2015                 [Page 18]
 
-Internet-Draft             JSON Content Rules              November 2014
+Internet-Draft             JSON Content Rules              December 2014
 
 
-DIGIT          =  %x30-39
-HEXDIG         =  DIGIT / "A" / "B" / "C" / "D" / "E" / "F"
-LF             =  %x0A
-VCHAR          =  %x21-7E
-WSP            =  SP / HTAB
-SP             =  %x20
-HTAB           =  %x09
+   c-wsp           = WSP / c-nl
+   c-nl            = comment / EOL
+   comment         =  ";" *(WSP / VCHAR) EOL
+   EOL             = 1*( CR / LF )
+
+   ; core rules
+   ALPHA          =  %x41-5A / %x61-7A   ; A-Z / a-z
+   CR             =  %x0D
+   DIGIT          =  %x30-39
+   HEXDIG         =  DIGIT / "A" / "B" / "C" / "D" / "E" / "F"
+   LF             =  %x0A
+   VCHAR          =  %x21-7E
+   WSP            =  SP / HTAB
+   SP             =  %x20
+   HTAB           =  %x09
 
                           JSON Content Rules ABNF
 
@@ -1050,21 +1058,19 @@ HTAB           =  %x09
    [RFC5322]  Resnick, P., Ed., "Internet Message Format", RFC 5322,
               October 2008.
 
+
+
+
+Newton                    Expires June 5, 2015                 [Page 19]
+
+Internet-Draft             JSON Content Rules              December 2014
+
+
    [RFC5952]  Kawamura, S. and M. Kawashima, "A Recommendation for IPv6
               Address Text Representation", RFC 5952, August 2010.
 
    [RFC6570]  Gregorio, J., Fielding, R., Hadley, M., Nottingham, M.,
               and D. Orchard, "URI Template", RFC 6570, March 2012.
-
-
-
-
-
-
-Newton                    Expires May 29, 2015                 [Page 19]
-
-Internet-Draft             JSON Content Rules              November 2014
-
 
 Appendix A.  Comparison with JSON Schema
 
@@ -1098,6 +1104,24 @@ A.1.  Example 1 from RFC 4627
        }
    ]
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Newton                    Expires June 5, 2015                 [Page 20]
+
+Internet-Draft             JSON Content Rules              December 2014
+
+
    JSON Content Rules
 
    root [
@@ -1112,15 +1136,6 @@ A.1.  Example 1 from RFC 4627
            "Country" : string
        }
    ]
-
-
-
-
-
-Newton                    Expires May 29, 2015                 [Page 20]
-
-Internet-Draft             JSON Content Rules              November 2014
-
 
    JSON Schema
 
@@ -1147,6 +1162,22 @@ Internet-Draft             JSON Content Rules              November 2014
 
 A.2.  Example 2 from RFC 4627
 
+
+
+
+
+
+
+
+
+
+
+
+Newton                    Expires June 5, 2015                 [Page 21]
+
+Internet-Draft             JSON Content Rules              December 2014
+
+
    Example JSON shamelessly lifted from RFC 4627
 
    {
@@ -1162,21 +1193,6 @@ A.2.  Example 2 from RFC 4627
          "IDs": [116, 943, 234, 38793]
       }
    }
-
-
-
-
-
-
-
-
-
-
-
-Newton                    Expires May 29, 2015                 [Page 21]
-
-Internet-Draft             JSON Content Rules              November 2014
-
 
    JSON Content Rules
 
@@ -1210,6 +1226,14 @@ Internet-Draft             JSON Content Rules              November 2014
                        "minimum" : 0,
                        "maximum" : 1024,
                        "required" : "true"
+
+
+
+Newton                    Expires June 5, 2015                 [Page 22]
+
+Internet-Draft             JSON Content Rules              December 2014
+
+
                    }
                    "Title" : { "type": "string" },
                    "Thumbnail" : {
@@ -1226,14 +1250,6 @@ Internet-Draft             JSON Content Rules              November 2014
                                "maximum" : 1280,
                                "required" : "true"
                            },
-
-
-
-Newton                    Expires May 29, 2015                 [Page 22]
-
-Internet-Draft             JSON Content Rules              November 2014
-
-
                            "Height" : {
                                "type" : "integer",
                                "minimum" : 0,
@@ -1266,6 +1282,14 @@ Appendix B.  A "Real World" Exmaple
 
    ; the nameserver object
    ; models nameserver host information
+
+
+
+Newton                    Expires June 5, 2015                 [Page 23]
+
+Internet-Draft             JSON Content Rules              December 2014
+
+
    ; this often referred to as 'host' object too
    nameserver {
 
@@ -1282,14 +1306,6 @@ Appendix B.  A "Real World" Exmaple
    ; This object object represents the information of organizations,
    ; corporations, governments, non-profits, clubs, individual persons,
    ; and informal groups of people.
-
-
-
-Newton                    Expires May 29, 2015                 [Page 23]
-
-Internet-Draft             JSON Content Rules              November 2014
-
-
    entity {
 
      ; the names by which the entity is commonly known
@@ -1322,6 +1338,14 @@ Internet-Draft             JSON Content Rules              November 2014
    ; "lastChangedDate", and "lastChangedBy" are used in many objects
    common (
 
+
+
+
+Newton                    Expires June 5, 2015                 [Page 24]
+
+Internet-Draft             JSON Content Rules              December 2014
+
+
      ; a registry-unique identifier
      "handle" : string,
 
@@ -1337,14 +1361,6 @@ Internet-Draft             JSON Content Rules              November 2014
      "uris" [
        *{ "type" : string, "uri" : uri }
      ],
-
-
-
-
-Newton                    Expires May 29, 2015                 [Page 24]
-
-Internet-Draft             JSON Content Rules              November 2014
-
 
      ; a string containing the fully-qualified host name of the
      ; WHOIS [RFC3912] server where the object instance may be found
@@ -1375,6 +1391,17 @@ Internet-Draft             JSON Content Rules              November 2014
    )
 
 
+
+
+
+
+
+
+Newton                    Expires June 5, 2015                 [Page 25]
+
+Internet-Draft             JSON Content Rules              December 2014
+
+
 Appendix C.  Design Notes
 
 C.1.  Member Uniqueness
@@ -1391,16 +1418,6 @@ C.1.  Member Uniqueness
    Therefore, allowing non-unique object member names would be bad
    practice.  For this reason, this specification does not accommodate
    the need for non-unique object member names.
-
-
-
-
-
-
-Newton                    Expires May 29, 2015                 [Page 25]
-
-Internet-Draft             JSON Content Rules              November 2014
-
 
 C.2.  Member Order
 
@@ -1432,6 +1449,15 @@ C.4.  Inspiration
    syntax does for XML.  The syntax itself hopefully has a JSON-ness or
    a JSON feel to it.  And a good bit of inspiration came from ABNF.
 
+
+
+
+
+Newton                    Expires June 5, 2015                 [Page 26]
+
+Internet-Draft             JSON Content Rules              December 2014
+
+
 C.5.  Changelog
 
    From -00 to -01
@@ -1449,14 +1475,6 @@ C.5.  Changelog
    2.  Added the Possible Future Changes section.
 
    3.  Mostly a keep-alive version.
-
-
-
-
-Newton                    Expires May 29, 2015                 [Page 26]
-
-Internet-Draft             JSON Content Rules              November 2014
-
 
    From -02 to -03
 
@@ -1488,6 +1506,14 @@ Internet-Draft             JSON Content Rules              November 2014
 
    4.  pedantic directive was added.
 
+
+
+
+Newton                    Expires June 5, 2015                 [Page 27]
+
+Internet-Draft             JSON Content Rules              December 2014
+
+
    5.  Modified the include directive syntax.
 
    6.  Removed the depends operator.
@@ -1500,19 +1526,6 @@ Internet-Draft             JSON Content Rules              November 2014
    9.  ABNF added back.
 
 Author's Address
-
-
-
-
-
-
-
-
-
-Newton                    Expires May 29, 2015                 [Page 27]
-
-Internet-Draft             JSON Content Rules              November 2014
-
 
    Andrew Lee Newton
    American Registry for Internet Numbers
@@ -1552,17 +1565,4 @@ Internet-Draft             JSON Content Rules              November 2014
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-Newton                    Expires May 29, 2015                 [Page 28]
+Newton                    Expires June 5, 2015                 [Page 28]
