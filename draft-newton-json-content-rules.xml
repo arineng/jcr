@@ -19,6 +19,8 @@
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5952.xml'>
   <!ENTITY RFC6570 PUBLIC ''
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6570.xml'>
+  <!ENTITY RFC7159 PUBLIC ''
+   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7159.xml'>
 ]>
 <?rfc toc="true"?>
 <rfc category="std" docName="draft-newton-json-content-rules-05" ipr="trust200902">
@@ -41,76 +43,111 @@
         <date/>
         <abstract>
             <t>
-                This document describes a language useful for describing the expected content of JSON structures
-                found in JSON-using protocols.
+                This document describes a language for describing and testing the expected content of JSON structures
+                found in JSON-using protocols, software, and processes.
             </t>
         </abstract>
     </front>
     <middle>
         <section title="Introduction">
             <t>
-                The goal of this document is to provide a way to specify the expected content
-                of data expressed in <xref target="RFC4627">JSON</xref> format. That is, the primary
-                purpose of this document is to specify a means for one person to communicate with
-                another person the expected nature of a JSON data structure in a method more concise and unambiguous
-                than prose. The programmatic validation of a JSON data structure against content rules
-                is a lesser goal of this document, though such a practice is useful in both the
-                writing of specifications and the communications of programs.
+                This document describes a language, JSON Content Rules (JCR),
+                for describing and testing the interchange of data
+                in <xref target="RFC7159">JSON</xref> format used by computer protocols and processes.
+                The syntax of JCR is not JSON but is "JSON-like", possessing the conciseness and
+                utility that has made JSON popular.
             </t>
-            <t>
-                Unlike JSON Schema, this language is not JSON though the syntax described here
-                is "JSON-like" (a comparison with JSON Schema can be found in <xref target="json-schema-comparison"></xref>
-                and a "real world" example can be found in <xref target="real-world-example"></xref>). 
-                A specialized syntax is used to reduce the tedium in reading and
-                writing rules as the complexity describing allowable content is often more involved
-                than most of the actual content.
-                <xref target="rfc4627-example-2-rules"></xref> is an example of
-                this language describing the JSON of <xref target="rfc4627-example-2"></xref>.
-            </t>
-            <figure anchor="rfc4627-example-2">
-                <preamble>Example JSON lifted from RFC 4627</preamble>
-                <artwork xml:space="preserve">
-[
-    {
-       "precision": "zip",
-       "Latitude":  37.7668,
-       "Longitude": -122.3959,
-       "Address":   "",
-       "City":      "SAN FRANCISCO",
-       "State":     "CA",
-       "Zip":       "94107",
-       "Country":   "US"
-    },
-    {
-       "precision": "zip",
-       "Latitude":  37.371991,
-       "Longitude": -122.026020,
-       "Address":   "",
-       "City":      "SUNNYVALE",
-       "State":     "CA",
-       "Zip":       "94085",
-       "Country":   "US"
-    }
-]                    
+            <section title="A First Example: Specifying Content">
+                <t>
+                    The following JSON data describes a JSON object with two members, "line-count" and
+                    "word-count", each containing an integer.
+                    <list style="empty">
+                        <t>{ "line-count" : 3426, "word-count" : 27886 }</t>
+                    </list>
+                </t>
+                <t>
+                    This is also JCR that describes a JSON object with a member named "line-count" that is
+                    an integer that is exactly 3426 and a member named "word-count" that is an integer that
+                    is exactly 27886.
+                </t>
+                <t>
+                    For a protocol specification, it is probably more useful to specify that each member
+                    is any integer and not a specific, exact integers:
+                    <list style="empty">
+                        <t>{ "line-count" : integer, "word-count" : integer }</t>
+                    </list>
+                </t>
+                <t>
+                    Since line counts and word counts should be either zero or a positive integer,
+                    the specification may be further narrowed:
+                    <list style="empty">
+                        <t>{ "line-count" : 0.. , "word-count" : 0.. }</t>
+                    </list>
+                </t>                
+            </section>
+            <section title="A Second Example: Testing Content">
+                <t>
+                    Building on the first example, this second example describes the same object
+                    but with the addition of another member, "file-name".
+                </t>
+                <figure>
+                    <artwork xml:space="preserve">
+{
+  "file-name"  : "rfc7159.txt",
+  "line-count" : 3426,
+  "word-count" : 27886
+}                    
                 </artwork>
-            </figure>
-            <figure anchor="rfc4627-example-2-rules">
-                <preamble>Rules describing <xref target="rfc4627-example-2"></xref></preamble>
-                <artwork xml:space="preserve">
-root [
-    2*2{
-        "precision" : string,
-        "Latitude" : float,
-        "Longitude" : float,
-        "Address" : string,
-        "City" : string,
-        "State" : string,
-        "Zip" : string,
-        "Country" : string
-    }
-]
+                </figure>                
+                <t>
+                    The following JCR describes objects like it.
+                </t>
+                <figure>
+                    <artwork xml:space="preserve">
+{
+  "file-name"  : string,
+  "line-count" : 0..,
+  "word-count" : 0..
+}                    
                 </artwork>
-            </figure>
+                </figure>                
+                <t>
+                    For the purposes of writing a protcol specification, JCR may be broken down into
+                    named rules to reduce complexity and to enable re-use. The following example takes
+                    the JCR from above and rewrites the members as named rules.
+                </t>
+                <figure>
+                    <artwork xml:space="preserve">
+{
+  fn,
+  lc,
+  wc
+}
+
+fn "file-name"  : string
+lc "line-count" : 0..
+wc "word-count" : 0..
+                </artwork>
+                </figure>                
+                <t>
+                    With each member specified as a named rule, software testers can override them locally
+                    for specific test cases. In the following example, the named rules are locally overriden
+                    for the test case where the file name is "rfc4627.txt".
+                </t>                
+                <figure>
+                    <artwork xml:space="preserve">
+fn "file-name"  : "rfc4627.txt"
+lc "line-count" : 2102
+wc "word-count" : 16714
+                </artwork>
+                </figure>      
+                <t>
+                    In this example, the protocol specification describes the JSON object in a general and
+                    an implementation overrides the rules for testing specific cases.
+                </t>
+            </section>
+        </section>
+        <section title="Components of the Language">
             <t>
                 The JSON Content Rules are of five types:
                 <list style="symbols">
@@ -223,7 +260,9 @@ root {
 }
                 </artwork>
             </figure>
+            
         </section>
+        
         <section title="Lines and Comments">
             <t>
                 There is no statement terminator and therefore no need for a line continuation syntax.
@@ -845,11 +884,11 @@ HTAB           =  %x09
             &RFC3339;
             &RFC3986;
             &RFC4234;
-            &RFC4627;
             &RFC4648;
             &RFC5322;
             &RFC5952;
             &RFC6570;
+            &RFC7159;
             
         </references>
         <section title="Comparison with JSON Schema" anchor="json-schema-comparison">
