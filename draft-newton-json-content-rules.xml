@@ -1305,27 +1305,85 @@ WSP              = SP / HTAB    ; white space
                 </figure> 
             </section>
         </section>
-        <section title="JCR-using Specification Updates">
+        <section title="Combining Multiple Rulesets (Experimental)">
+            <t><list><t>This section is experimental and subject to further development.</t></list></t>
             <t>
-                Specifications undergo updates periodically, often by parallel efforts. For example,
-                consider that a base specification defines the rule:
-                <list style="empty">
-                    <t>person_info { "first name" : string, "last name" : string }</t>
+                Many work items within the IETF are defined by a core specification which is 
+                later enhanced by extension specifications.  JCR supports this pattern of working
+                by using the (@augments) annotation.
+            </t>
+            <t>
+                The parameters of the @(augments) annotation are a list of one or more target-rule-names
+                that identify rules to be augmented.  The augmentation process consists of logically adding
+                a reference to the rule name of the rule that contains the @(augments) annotation into each of the rules
+                identified by the target-rule-names in the @(augments) annotation.
+            </t>
+            <t>
+                As an example, assume we have a core specification that contains the following JCR:
+                <figure>
+                    <artwork xml:space="preserve">
+    #ruleset-id com.example.core
+    core { core-item1, core-item2 }
+    more { core-item3, core-item4 }
+    ...
+                    </artwork>
+                </figure>
+            </t>
+            <t>
+                And a subsequently defined extension with the following JCR:
+                <figure>
+                    <artwork xml:space="preserve">
+    #ruleset-id com.example.extension
+    #import com.example.core as core
+    extension @(augments core.core core.more) ext-item1
+                    </artwork>
+                </figure>
+            </t>
+            <t>
+                The resultant core specification is treated as:
+                <figure>
+                    <artwork xml:space="preserve">
+    #ruleset-id com.example.core
+    core { core-item1, core-item2, __alias1.extension }
+    more { core-item3, core-item4, __alias1.extension }
+    ...
+                    </artwork>
+                </figure>
+                where '__alias1' is conceptually an automatically created alias that 
+                aliases 'com.example.extension'.
+            </t>
+            <t>
+                Because multiple @(augments) annotations may specify the same target-rule-name,
+                there can be no control over the order the augmentations are given
+                in the target rule.  Hence the specified target-rule-names are only allowed to
+                correspond to (unordered) objects, unordered arrays, and value choices.
+            </t>
+            <t>
+                If the non-nested rules in the target rule are all combined using the choice combiner,
+                then the augmenting rule is also combined using the choice combiner.  If the non-nested
+                rules in the target rule are all combined using the sequence combiner,
+                then the augmenting rule is also combined using the sequence combiner.  If the non-nested
+                rules in the target rule use a combination of the choice combiner and sequence
+                combiner, then the existing rules within the target group are logically nested within a group
+                and the augmenting rule is combined using the sequence combiner.  For example, a
+                target rule initially containing the following definition:
+                <list>
+                    <t>core { core-item1, core-item2 | core-item3 }</t>
+                </list>
+                would be treated as follows after being augmented:
+                <list>
+                    <t>core { (core-item1, core-item2 | core-item3), __alias1.extension }</t>
                 </list>
             </t>
             <t>
-                Now consider that working group A and working group B are both concurrently modifying
-                the base specification by adding a member to the object. If each group were to completely
-                rewrite the rule then the result could be incompatible specifications.
-            </t>
-            <t>
-                To avoid this situation, an annotation could be created to instruct the JCR processors
-                to combine the rules:
-                <list style="empty">
-                    <t>person_info_wga @(updates rfcXXXX.person_info) { age : integer }</t>
+                If it is desired to add more than one rule to a target rule then the augmenting
+                rule can specify a group, for example:
+                <list>
+                    <t>extension @(augments core.core core.more) (ext-item1, ext-item2)</t>
                 </list>
             </t>
         </section>
+        
         <section title="JCR Implementations">
             <t>
                 The following implementations, <xref target="ARIN_JCR_VALIDATOR"></xref> and
