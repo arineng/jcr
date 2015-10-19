@@ -45,9 +45,9 @@
             <address>
                 <postal>
                     <street>PO Box 30</street>
-                    <city>Ipswitch</city>
+                    <city>Ipswich</city>
                     <country>UK</country>
-                    <code>IPX 2WY</code>
+                    <code>IP5 2WY</code>
                 </postal>
                 <email>pete.cordell@codalogic.com</email>
                 <uri>http://www.codalogic.com</uri>
@@ -64,7 +64,7 @@
     <middle>
         <section title="Introduction">
             <t>
-                This document describes a language, JSON Content Rules (JCR),
+                This document describes JSON Content Rules (JCR), a language 
                 for describing and testing the interchange of data
                 in <xref target="RFC7159">JSON</xref> format used by computer protocols and processes.
                 The syntax of JCR is not JSON but is "JSON-like", possessing the conciseness and
@@ -160,7 +160,7 @@
                 </t>
             </section>
         </section>
-        <section title="Components of the Language">
+        <section title="Overview of the Language">
             <t>
                 JCR is composed of rules (as the name suggests). A collection of rules that is processed
                 together is a ruleset. There are five types of rules: value rules, member rules, array rules,
@@ -171,15 +171,7 @@
                 <list style="empty">
                     <t>&lt;rule name&gt; &lt;rule definition&gt;</t>
                 </list>
-                Rule definitions may reference other rules by their rule name:
-                <list style="empty">
-                    <t>&lt;rule name&gt; &lt;rule definition &lt;rule name&gt; &gt;</t>
-                </list>
-                Where rule definitions may reference another rule by a rule name, a rule
-                definition may be given as an anonymous (or nameless) rule.
-                <list style="empty">
-                    <t>&lt;rule name&gt; &lt;rule definition &lt;rule definition&gt; &gt;</t>
-                </list>
+                Rule definitions may in turn contain child rule definitions or reference other rules by their rule name.
             </t>
             <t>
                 This is an example of a value rule:
@@ -193,10 +185,10 @@
             </t>
             <t>
                 Member rules specify JSON object members. The following example member rule states that
-                the rule's name is 'm1' with a value defined by the 'v1' value rule:
+                the rule's name is 'm1' with a value defined by the rule named 'v1':
                 <list style="empty"><t>m1 "m1name" v1</t></list>
                 Since rule names can be substituted by rule definitions, this member rule can also
-                be written as follows (to define a member rule named m1 for JSON member "m1name" that
+                be written as follows (to define a member rule named m1 for JSON member named "m1name" that
                 has a value that is an integer between 0 and 3):
                 <list style="empty"><t>m1 "m1name" : 0..3</t></list>
             </t>
@@ -296,9 +288,9 @@
                 Rules are composed of two parts, a rule name and a rule definition:
                 <list><t>&lt;rule name&gt; &lt;rule definition&gt;</t></list>
                 Rule names allow
-                a rule to be referenced easily by a name. A rule definition describes the validity
-                upon which the content is to be judged. And
-                rule definitions refer to other rules using the rule names of other rules of appropriate type.
+                a rule to be identified by a name. A rule definition describes the constraints
+                upon which the content is to be assessed.
+                Rule definitions can use rule names to refer to other rules.
             </t>
             <section title="Rule Names">
                 <t>
@@ -307,7 +299,8 @@
                     underscore character ('_').
                 </t>
                 <t>
-                    Rule names are case sensitive. Rule names must not be used more than once in a ruleset.
+                    Rule names are case sensitive. Rule names identifying rule definitions must be unique
+                    within a ruleset.
                 </t>
             </section>
             <section title="Rule Definitions">
@@ -322,15 +315,13 @@
                     </list>
                 </t>
                 <t>
-                    A rule definition may embed another rule definition where a rule name is allowed. In other
-                    words, some rules are named and some are anonymous. Named rules start with a rule name and
-                    have a rule definition. Anonymous rules are rule definitions embedded in the definitions
-                    of other rules.
+                    A rule definition may embed other rule definitions, either explicitly or by referencing a 
+                    rule name that identifies a rule definition.
                 </t>
             </section>
             <section title="Annotations">
                 <t>
-                    Rule definitions may optionally start with an annotation or set of annotations. Each annotation begins with the
+                    Rule definitions may start with zero or more annotations. Each annotation begins with the
                     character sequence "@(" and ends with ")". The following is an example of a rule definition
                     with the root annotation (explained in the next section):
                     <list style="empty">
@@ -342,7 +333,7 @@
                 <t>
                     Careful readers will have noticed that although rules have been defined as having rule names
                     and rule definitions, examples from the introduction have one rule without a rule name. Within each
-                    ruleset, a name on the first rule is optional. And when the first rule is defined without a name,
+                    ruleset, a name on the first rule is optional. When the first rule is defined without a name,
                     it is considered a root rule.
                 </t>
                 <t>
@@ -388,6 +379,8 @@
                     <t>rule_name : n.f..</t>
                 </list>
                 When specifying a minimum and a maximum, both must either be an integer or a floating point number.
+                Thus to specify a floating point number between zero and ten a definition of the following form is used:
+					<list style="empty"><t>: 0.0..10.0</t></list>
             </t>
             </section>
             <section title="Strings">
@@ -396,7 +389,7 @@
                 <list style="empty"><t>rule_name : string</t></list>
                 However, the content of strings can be narrowed in the following ways:
                 <list style="hanging">
-                    <t hangText="A quoted string" >
+                    <t hangText="A quoted string: " >
                         A rule can specify that the value must be a specific string:
                         <list style="empty"><t>rule_name : "a constant string"</t></list>
                     </t>
@@ -486,17 +479,15 @@
                 rule, array rule, or object rule specifying the allowable content of the JSON object member.
             </t>
             <t>
-                Member names may be specified either as a quoted string:
+                Member names may be specified either explicitly as a quoted string:
                 <list style="empty"><t>some_member_rule "some_member_name" some_member_target</t></list>
-                or as a regular expression:
-                <list style="empty"><t>some_member_rule /some.member.names/ some_member_target</t></list>
+                or a family of member names may be specified as a regular expression:
+                <list style="empty"><t>some_member_rule /some\.[a-z]+\.names/ some_member_target</t></list>
             </t>
             <t>
-                Since rule names in rule definitions may be replaced by rule definitions,
-                member rules may also be written in this form:
-                <list><t>rule_name "member_rule" target_rule_definition</t></list>
                 The following are examples:
                 <list>
+					<t>rule_name "member_rule" target_rule_name</t>
                     <t>location_uri "locationURI" : uri</t>
                     <t>iface_mappings /eth[0-9]/ :ip4</t>
                 </list>
@@ -505,15 +496,14 @@
         <section title="Object Rules">
             <t>
                 Object rules define the allowable members of a JSON object, and their rule definitions
-                are contain the member rules of the object. They take the following form:
+                contain the member rules of the object. They take the following form:
                 <list style="empty"><t>rule_name { member_rule_1, member_rule_2 }</t></list>
                 The following rule example defines an object composed of two member rules:
                 <list style="empty"><t>response { location_uri, status_code }</t></list>
             </t>
             <t>
-                Given that where a rule name is found a rule definition
-                of the appropriate type may be used, the above example might also be
-                written:
+                The above example might also be
+                written as:
                 <list style="empty"><t>response { "locationUri" : uri, "statusCode" : integer }</t></list>
             </t>
             <t>
@@ -526,8 +516,14 @@
             </t>
             <t>
                 Each member rule of an object rule is evaluated in the order in which they appear in the
-                object rule. And each member of the object be evaluated must match one and only one member
-                rule of the object rule.
+                object rule. Thus where there is potential conflict between rule names defined using 
+                regular expressions, the rules with the most constrained name should be defined first.
+                Otherwise, for example, a rule definition of:
+                <list style="empty"><t>{ /p\d+/ : int, "p0" : string }</t></list>
+                would fail to match the JSON object:
+                <list style="empty"><t>{ "p1" : 12, "p0" : "Fred" }</t></list>
+                because the "p0" member name would match the regular expression despite the presence
+                of the subsequently defined "p0" member rule.
             </t>
         </section>
         <section title="Array Rules">
@@ -541,7 +537,7 @@
                 <list style="empty"><t>size [ width_value, height_value ]</t></list>
             </t>
             <t>
-                Unlike object rules, order is implied by the array rule definition. That is,
+                By default, unlike object rules, order is implied by the array rule definition. That is,
                 the first rule referenced or defined within an array rule specifies that the first
                 element of the array will match that rule, the second rule given with the array rule
                 specifies that the second element of the array will match that rule, and so on.
@@ -558,13 +554,12 @@
                 Finally, if an array has more elements than can be matched from the array rule,
                 the array does not match the array rule. Or stated differently, an array with unmatched
                 elements does not validate. Using the example array rule above, the following
-                array does not match because the element of the array does not match any rule contained
+                array does not match because the last element of the array does not match any rule contained
                 in the array rule:
                 <list style="empty">
                     <t>[ "Bob Smurd", 24, "http://example.com/bob-smurd" ]</t>
                 </list>
             </t>
-        </section>
             <section title="Unordered Array Rules">
                 <t>
                     Array rules can be made to behave in a similar fashion to object rules
@@ -592,6 +587,7 @@
                     matched, the array rule does not match the array.
                 </t>
             </section>
+        </section>
         <section title="Group Rules">
             <t>
                 Unlike the other types of rules, group rules have no direct tie with JSON syntax.
@@ -639,6 +635,9 @@
                     <list style="empty">
                         <t>[ this, that | the_other ]</t>
                     </list>
+                    {Question: Does the above correspond to [ (this,that) | other ] or [ this, (that | other) ].
+                    Or perhaps more tellingly, does [ this | that, other ] correspond to [ (this | that), other ]
+                    or [ this | (that, other) ]? }
                 </t>
             </section>
             <section title="Repetition in Array, Object, and Group Rules">
@@ -713,11 +712,11 @@
                 <t>
                     The following is correct:
                     <list style="empty">
-                        <t>[ * @(unordered) [ foo ]</t>
+                        <t>[ * @(unordered) [ foo ] ]</t>
                     </list>
                     The following is not:
                     <list style="empty">
-                        <t>[ @(unordered) * [ foo ]</t>
+                        <t>[ @(unordered) * [ foo ] ]</t>
                     </list>
                 </t>
                 <t>
@@ -734,7 +733,7 @@
                 Directives modify the processing of a ruleset. They appear on their own line in a ruleset, begin
                 with a hash character ('#') and are terminated by the end of the line.
                 They take the following form:
-                <list style="empty"><t># directive_name</t></list>
+                <list style="empty"><t># directive_name optional_directive_parameters</t></list>
                 Directives may have other qualifiers after the directive name.
             </t>
             <section title="jcr-version">
@@ -764,6 +763,12 @@
                         <t># ruleset-id identifier</t>
                     </list>
                 </t>
+                <t>
+					An identifier can be a URL (e.g. http://example.com/foo), an inverted domain name
+					(e.g. com.example.foo) or any other form that conforms to the JCR ABNF syntax that
+					a ruleset author deems appropriate.  To a JCR processor the identifier is treated as
+					an opague, case-sensitive string.
+				</t>
             </section>            
             <section title="import">
                 <t>
@@ -771,8 +776,8 @@
                     evaluated in addition to the ruleset where the directive appears.
                 </t>
                 <t>
-                    This directive as the following form:
-                    <list style="empty"><t># import uri as alias</t></list>
+                    This directive has the following form:
+                    <list style="empty"><t># import identifier as alias</t></list>
                     The following is an example:
                     <list style="empty"><t># import http://example.com/rfc9999 as rfc9999</t></list>
                 </t>
@@ -780,7 +785,7 @@
                     The rule names of the ruleset to be imported may be referenced by prepending
                     the alias followed by a period character ('.') followed by the rule name
                     (i.e. "alias.name"). To continue the example above, if the ruleset at http://example.com/rfc9999
-                    were to have a rule named 'encoding', rules in the ruleset importing it code
+                    were to have a rule named 'encoding', rules in the ruleset importing it can
                     refer to that rule as 'rfc9999.encoding'.
                 </t>
             </section>
@@ -846,14 +851,14 @@
                     </list>
                 </t>
             </section>
-            <section title="Groups in Values">
+            <section title="Groups of Values">
                 <t>
                     In addition to specific primitive data types, value rules may
-                    contain a group rule. The group rule, and any subordinate rule
+                    contain a value choice rule. The value choice rule, and any subordinate rule
                     within it, must evaluate to a single primitive data type.
                 </t>
                 <t>
-                    The following is an example of a group rule embedded in a value
+                    The following is an example of a value choice rule embedded in a value
                     rule:
                     <list style="empty">
                         <t>address : ( :ip4 | :ip6 )</t>
@@ -966,21 +971,25 @@ obj2 { mixin_group, "baz" : string }
                     The following ABNF describes the syntax for JSON Content Rules.
                 </preamble>
                 <artwork xml:space="preserve">
-jcr              = *( spc-cmnt / directive ) [ root-rule ] *( spc-cmnt / directive / rule )
+jcr              = *( sp-cmt / directive ) [ root-rule ]
+                   *( sp-cmt / directive / rule )
 
-spc-cmnt         = spaces / comment
+sp-cmt           = spaces / comment
 spaces           = 1*( WSP / CR / LF )
 comment          = ";" *( "\;" / comment-char ) comment-end-char
-comment-char     = HTAB / %x20-3A / %x3C-10FFFF    ; Any char other than ";" / CR / LF
+comment-char     = HTAB / %x20-3A / %x3C-10FFFF
+                   ; Any char other than ";" / CR / LF
 comment-end-char = CR / LF / ";"
 
 directive        = "#" [ spaces ] directive-def eol
-directive-def    = jcr-version-d / ruleset-id-d / import-d / tbd-directive-d
+directive-def    = jcr-version-d / ruleset-id-d / import-d /
+                   tbd-directive-d
 jcr-version-d    = jcr-version-kw spaces major-version "." minor-version
 major-version    = integer
 minor-version    = integer
 ruleset-id-d     = ruleset-id-kw spaces ruleset-id
-import-d         = import-kw spaces ruleset-id [ spaces as-kw ruleset-id-alias ]
+import-d         = import-kw spaces ruleset-id
+                   [ spaces as-kw ruleset-id-alias ]
 ruleset-id       = ALPHA *not-space
 not-space        = %x21-10FFFF
 ruleset-id-alias = name
@@ -991,43 +1000,51 @@ not-eol          = HTAB / %x20-10FFFF
 eol              = CR / LF
 
 root-rule        = value-rule / array-rule / object-rule /
-member-rule / group-rule
+                   member-rule / group-rule
 
-rule             = rule-name *spc-cmnt rule-def
+rule             = rule-name *sp-cmt rule-def
 
 rule-name        = name
 target-rule-name = [ ruleset-id-alias "." ] rule-name
 name             = ALPHA *( ALPHA / DIGIT / "-" / "-" )
 
 rule-def         = type-rule / member-rule / group-rule
-type-rule        = value-rule / array-rule / object-rule / target-rule-name
-member-rule      = annotations member-name-spec *spc-cmnt (type-rule / type-choice)
+type-rule        = value-rule / array-rule / object-rule /
+                   target-rule-name
+member-rule      = annotations
+                   member-name-spec *sp-cmt (type-rule / type-choice)
 member-name-spec = regex / q-string
-type-choice      = "(" type-choice-items *( choice-combiner type-choice-items ) ")"
-type-choice-items = *spc-cmnt ( type-choice / type-rule ) *spc-cmnt
+type-choice      = "(" type-choice-items 
+                   *( choice-combiner type-choice-items ) ")"
+type-choice-items = *sp-cmt ( type-choice / type-rule ) *sp-cmt
 
-annotations      = *( "@(" *spc-cmnt annotation-set *spc-cmnt ")" *spc-cmnt )
-annotation-set   = reject-annotation / unordered-annotation / root-annotation / tbd-annotation
+annotations      = *( "@(" *sp-cmt annotation-set *sp-cmt ")" *sp-cmt )
+annotation-set   = reject-annotation / unordered-annotation /
+                   root-annotation / tbd-annotation
 reject-annotation = reject-kw
 unordered-annotation = unordered-kw
 root-annotation  = root-kw
 tbd-annotation   = annotation-name [ spaces annotation-parameters ]
 annotation-name  = name
-annotation-parameters = *( spaces / %x21-28 / %x2A-10FFFF )    ; Not close bracket - ")"
+annotation-parameters = *( spaces / %x21-28 / %x2A-10FFFF )
+                   ; Not close bracket - ")"
 
-value-rule       = annotations ":" *spc-cmnt ( value-choice / value-def )
-value-choice     = annotations "(" *spc-cmnt value-choice-items *spc-cmnt ")"
-value-choice-items = value-choice-item *( *spc-cmnt choice-combiner *spc-cmnt value-choice-item )
-value-choice-item = ":" *spc-cmnt value-def / value-choice / target-rule-name
+value-rule       = annotations ":" *sp-cmt ( value-choice / value-def )
+value-choice     = annotations 
+                   "(" *sp-cmt value-choice-items *sp-cmt ")"
+value-choice-items = value-choice-item
+                   *( choice-combiner value-choice-item )
+value-choice-item = ":" *sp-cmt
+                   value-def / value-choice / target-rule-name
 
 value-def        = null-type / boolean-type / true-value / false-value /
-string-type / string-range / string-value / 
-float-type / float-range / float-value /
-integer-type / integer-range / integer-value / 
-ip4-type / ip6-type / fqdn-type / idn-type /
-uri-type / uri-range / phone-type / email-type / 
-full-date-type / full-time-type / date-time-type /
-base64-type / any
+                   string-type / string-range / string-value / 
+                   float-type / float-range / float-value /
+                   integer-type / integer-range / integer-value / 
+                   ip4-type / ip6-type / fqdn-type / idn-type /
+                   uri-type / uri-range / phone-type / email-type / 
+                   full-date-type / full-time-type / date-time-type /
+                   base64-type / any
 null-type        = null-kw
 boolean-type     = boolean-kw
 true-value       = true-kw
@@ -1059,36 +1076,37 @@ date-time-type   = date-time-kw
 base64-type      = base64-kw
 any              = any-kw
 
-object-rule      = annotations "{" *spc-cmnt [ object-items *spc-cmnt ] "}"
-object-items     = object-item *( *spc-cmnt sequence-or-choice *spc-cmnt object-item )
-object-item      = [ repetition *spc-cmnt ] object-item-types
+object-rule      = annotations "{" *sp-cmt [ object-items *sp-cmt ] "}"
+object-items     = object-item *( sequence-or-choice object-item )
+object-item      = [ repetition *sp-cmt ] object-item-types
 object-item-types = member-rule / target-rule-name / object-group
-object-group     = "(" *spc-cmnt [ object-items *spc-cmnt ] ")"
+object-group     = "(" *sp-cmt [ object-items *sp-cmt ] ")"
 
-array-rule       = annotations "[" *spc-cmnt [ array-items *spc-cmnt ] "]"
-array-items      = array-item *( *spc-cmnt sequence-or-choice *spc-cmnt array-item )
-array-item       = [ repetition ] *spc-cmnt array-item-types
+array-rule       = annotations "[" *sp-cmt [ array-items *sp-cmt ] "]"
+array-items      = array-item *( sequence-or-choice array-item )
+array-item       = [ repetition ] *sp-cmt array-item-types
 array-item-types = type-rule / array-group
-array-group      = "(" *spc-cmnt [ array-items *spc-cmnt ] ")"
+array-group      = "(" *sp-cmt [ array-items *sp-cmt ] ")"
 
-group-rule       = annotations "(" *spc-cmnt [ group-items *spc-cmnt ] ")"
-group-items      = group-item *( *spc-cmnt sequence-or-choice *spc-cmnt group-item )
-group-item       = [ repetition ] *spc-cmnt group-item-types
+group-rule       = annotations "(" *sp-cmt [ group-items *sp-cmt ] ")"
+group-items      = group-item *( sequence-or-choice group-item )
+group-item       = [ repetition ] *sp-cmt group-item-types
 group-item-types = type-rule / member-rule / group-group
 group-group      = group-rule
 
 sequence-or-choice = sequence-combiner / choice-combiner
-sequence-combiner = ","
-choice-combiner  = "|"
+sequence-combiner = *sp-cmt "," *sp-cmt
+choice-combiner  = *sp-cmt "|" *sp-cmt
 
-repetition       = optional / one-or-more / min-max-repetition / min-repetition /
-max-repetition / zero-or-more / specific-repetition
+repetition       = optional / one-or-more / min-max-repetition /
+                   min-repetition / max-repetition /
+                   zero-or-more / specific-repetition
 optional         = "?"
 one-or-more      = "+"
 zero-or-more     = "*"
-min-max-repetition = min-repeat *spc-cmnt "*" *spc-cmnt max-repeat
-min-repetition   = min-repeat *spc-cmnt "*"
-max-repetition   = "*" *spc-cmnt max-repeat
+min-max-repetition = min-repeat *sp-cmt "*" *sp-cmt max-repeat
+min-repetition   = min-repeat *sp-cmt "*"
+max-repetition   = "*" *sp-cmt max-repeat
 min-repeat       = p-integer
 max-repeat       = p-integer
 specific-repetition = p-integer
@@ -1096,7 +1114,8 @@ specific-repetition = p-integer
 integer          = ["-"] 1*DIGIT
 p-integer        = 1*DIGIT
 
-float            = [ minus ] int frac [ exp ]    ; From RFC 7159 except 'frac' required
+float            = [ minus ] int frac [ exp ]
+                   ; From RFC 7159 except 'frac' required
 minus            = %x2D                          ; -
 plus             = %x2B                          ; +
 int              = zero / ( digit1-9 *DIGIT )
@@ -1107,27 +1126,29 @@ exp              = e [ minus / plus ] 1*DIGIT
 e                = %x65 / %x45                   ; e E
 zero             = %x30                          ; 0
 
-q-string         = quotation-mark *char quotation-mark    ; From RFC 7159
+q-string         = quotation-mark *char quotation-mark 
+                   ; From RFC 7159
 char             = unescaped /
-escape (
-%x22 /          ; "    quotation mark  U+0022
-%x5C /          ; \    reverse solidus U+005C
-%x2F /          ; /    solidus         U+002F
-%x62 /          ; b    backspace       U+0008
-%x66 /          ; f    form feed       U+000C
-%x6E /          ; n    line feed       U+000A
-%x72 /          ; r    carriage return U+000D
-%x74 /          ; t    tab             U+0009
-%x75 4HEXDIG )  ; uXXXX                U+XXXX
+                   escape (
+                   %x22 /          ; "    quotation mark  U+0022
+                   %x5C /          ; \    reverse solidus U+005C
+                   %x2F /          ; /    solidus         U+002F
+                   %x62 /          ; b    backspace       U+0008
+                   %x66 /          ; f    form feed       U+000C
+                   %x6E /          ; n    line feed       U+000A
+                   %x72 /          ; r    carriage return U+000D
+                   %x74 /          ; t    tab             U+0009
+                   %x75 4HEXDIG )  ; uXXXX                U+XXXX
 escape           = %x5C              ; \
 quotation-mark   = %x22      ; "
 unescaped        = %x20-21 / %x23-5B / %x5D-10FFFF
 
 regex            = "/" *( escape "/" / not-slash ) "/"
-not-slash        = HTAB / CR / LF / %x20-2E / %x30-10FFFF    ; Any char except ";"
+not-slash        = HTAB / CR / LF / %x20-2E / %x30-10FFFF
+                   ; Any char except ";"
 uri-template     = 1*ALPHA ":" not-space
 
-; Keywords
+;; Keywords
 any-kw           = %x61.6E.79                      ; "any"
 as-kw            = %x61.73                         ; "as"
 base64-kw        = %x62.61.73.65.36.34             ; "base64"
@@ -1155,7 +1176,7 @@ true-kw          = %x74.72.75.65                   ; "true"
 unordered-kw     = %x75.6E.6F.72.64.65.72.65.64    ; "unordered"
 uri-kw           = %x75.72.69                      ; "uri"
 
-; Referenced RFC 5234 Core Rules
+;; Referenced RFC 5234 Core Rules
 ALPHA            = %x41-5A / %x61-7A   ; A-Z / a-z
 CR               = %x0D         ; carriage return
 DIGIT            = %x30-39      ; 0-9
