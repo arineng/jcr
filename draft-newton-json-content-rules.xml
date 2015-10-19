@@ -64,10 +64,8 @@
     <middle>
         <section title="Introduction">
             <t>
-                This document describes a language, JSON Content Rules (JCR),
+                This document describes JSON Content Rules (JCR), a language
                 for specifying and testing the interchange of data
-                This document describes JSON Content Rules (JCR), a language 
-                for describing and testing the interchange of data
                 in <xref target="RFC7159">JSON</xref> format used by computer protocols and processes.
                 The syntax of JCR is not JSON but is "JSON-like", possessing the conciseness and
                 utility that has made JSON popular.
@@ -308,13 +306,6 @@
             <section title="Rule Definitions">
                 <t>
                     The syntax of each type of rule definition varies depending on the type:
-                    <list style="empty">
-                        <t>: string ; value rules start with a colon</t>
-                        <t>"member_name" target_rule_name ; member rules start by defining the member name</t>
-                        <t>{ mem1, mem2 } ; object rules start and end with "curly braces", like JSON objects</t>
-                        <t>[ item1, item2 ] ; array rules start and end with square brackets, like JSON arrays</t>
-                        <t>( rule1, rule2 ) ; group rules start and end with parenthesis</t>
-                    </list>
                 </t>
                 <figure>
                     <artwork xml:space="preserve">
@@ -409,7 +400,7 @@
                 <list style="empty"><t>rule_name : string</t></list>
                 However, the content of strings can be narrowed in the following ways:
                 <list style="hanging">
-                    <t hangText="A quoted string: " >
+                   
                     <t hangText="A quoted string:" >
                         A rule can specify that the value must be a specific string:
                         <list style="empty"><t>rule_name : "a constant string"</t></list>
@@ -527,8 +518,6 @@
             <t>
                 Given that where a rule name is found a rule definition
                 of an appropriate type may be used, the above example might also be
-                written:
-                The above example might also be
                 written as:
                 <list style="empty"><t>response { "locationUri" : uri, "statusCode" : integer }</t></list>
             </t>
@@ -661,9 +650,6 @@
                     <list style="empty">
                         <t>[ this, that | the_other ]</t>
                     </list>
-                    {Question: Does the above correspond to [ (this,that) | other ] or [ this, (that | other) ].
-                    Or perhaps more tellingly, does [ this | that, other ] correspond to [ (this | that), other ]
-                    or [ this | (that, other) ]? }
                 </t>
             </section>
             <section title="Repetition in Array, Object, and Group Rules">
@@ -997,7 +983,8 @@ obj2 { mixin_group, "baz" : string }
                     The following ABNF describes the syntax for JSON Content Rules.
                 </preamble>
                 <artwork xml:space="preserve">
-jcr              = *( spc-cmnt / directive ) [ root-rule ] *( spc-cmnt / directive / rule )
+jcr              = *( sp-cmt / directive ) [ root-rule ]
+                   *( sp-cmt / directive / rule )
 
 sp-cmt           = spaces / comment
 spaces           = 1*( WSP / CR / LF )
