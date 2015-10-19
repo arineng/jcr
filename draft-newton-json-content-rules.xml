@@ -56,7 +56,7 @@
         <date/>
         <abstract>
             <t>
-                This document describes a language for describing and testing the expected content of JSON structures
+                This document describes a language for specifying and testing the expected content of JSON structures
                 found in JSON-using protocols, software, and processes.
             </t>
         </abstract>
@@ -65,7 +65,7 @@
         <section title="Introduction">
             <t>
                 This document describes a language, JSON Content Rules (JCR),
-                for describing and testing the interchange of data
+                for specifying and testing the interchange of data
                 in <xref target="RFC7159">JSON</xref> format used by computer protocols and processes.
                 The syntax of JCR is not JSON but is "JSON-like", possessing the conciseness and
                 utility that has made JSON popular.
@@ -321,6 +321,24 @@
                         <t>( rule1, rule2 ) ; group rules start and end with parenthesis</t>
                     </list>
                 </t>
+                <figure>
+                    <artwork xml:space="preserve">
+    : string 
+    ; value rules start with a colon        
+    
+    "member_name" target_rule_name 
+    ; member rules start by defining the member name
+    
+    { mem1, mem2 } 
+    ; object rules start and end with "curly braces", like JSON objects
+    
+    [ item1, item2 ] 
+    ; array rules start and end with square brackets, like JSON arrays
+    
+    ( rule1, rule2 ) 
+    ; group rules start and end with parenthesis
+                    </artwork>
+                </figure>
                 <t>
                     A rule definition may embed another rule definition where a rule name is allowed. In other
                     words, some rules are named and some are anonymous. Named rules start with a rule name and
@@ -351,7 +369,7 @@
                 </t>
                 <t>
                     Rules may also be declared a root rule with the @(root) annotation. A ruleset may have more than one
-                    root rule, in which case the root rule to use for validating JSON must be explicitly specified locally.
+                    root rule, in which case the root rule to use for validating JSON should be explicitly specified locally.
                 </t>
             </section>
             <section title="Value Rules">
@@ -396,7 +414,7 @@
                 <list style="empty"><t>rule_name : string</t></list>
                 However, the content of strings can be narrowed in the following ways:
                 <list style="hanging">
-                    <t hangText="A quoted string" >
+                    <t hangText="A quoted string:" >
                         A rule can specify that the value must be a specific string:
                         <list style="empty"><t>rule_name : "a constant string"</t></list>
                     </t>
@@ -505,14 +523,14 @@
         <section title="Object Rules">
             <t>
                 Object rules define the allowable members of a JSON object, and their rule definitions
-                are contain the member rules of the object. They take the following form:
+                contain the member rules of the object. They take the following form:
                 <list style="empty"><t>rule_name { member_rule_1, member_rule_2 }</t></list>
                 The following rule example defines an object composed of two member rules:
                 <list style="empty"><t>response { location_uri, status_code }</t></list>
             </t>
             <t>
                 Given that where a rule name is found a rule definition
-                of the appropriate type may be used, the above example might also be
+                of an appropriate type may be used, the above example might also be
                 written:
                 <list style="empty"><t>response { "locationUri" : uri, "statusCode" : integer }</t></list>
             </t>
@@ -771,7 +789,7 @@
                     evaluated in addition to the ruleset where the directive appears.
                 </t>
                 <t>
-                    This directive as the following form:
+                    This directive has the following form:
                     <list style="empty"><t># import uri as alias</t></list>
                     The following is an example:
                     <list style="empty"><t># import http://example.com/rfc9999 as rfc9999</t></list>
@@ -932,7 +950,7 @@
                     Group rules can be used to create object mixins, a pattern for writing data
                     models similar in style to object derivation in some programming languages.
                     In the example in <xref target="group_mixin_example"></xref>,
-                    both obj1 and obj2 have a members "foo" and "fob" with obj1 having the additional member "bar"
+                    both obj1 and obj2 have the members "foo" and "fob" with obj1 having the additional member "bar"
                     and obj2 having the additional member "baz".
                 </t>
                 <figure anchor="group_mixin_example">
@@ -966,21 +984,25 @@ obj2 { mixin_group, "baz" : string }
                     The following ABNF describes the syntax for JSON Content Rules.
                 </preamble>
                 <artwork xml:space="preserve">
-jcr              = *( spc-cmnt / directive ) [ root-rule ] *( spc-cmnt / directive / rule )
+jcr              = *( sp-cmt / directive ) [ root-rule ]
+                   *( sp-cmt / directive / rule )
 
-spc-cmnt         = spaces / comment
+sp-cmt           = spaces / comment
 spaces           = 1*( WSP / CR / LF )
 comment          = ";" *( "\;" / comment-char ) comment-end-char
-comment-char     = HTAB / %x20-3A / %x3C-10FFFF    ; Any char other than ";" / CR / LF
+comment-char     = HTAB / %x20-3A / %x3C-10FFFF
+                   ; Any char other than ";" / CR / LF
 comment-end-char = CR / LF / ";"
 
 directive        = "#" [ spaces ] directive-def eol
-directive-def    = jcr-version-d / ruleset-id-d / import-d / tbd-directive-d
+directive-def    = jcr-version-d / ruleset-id-d / import-d /
+                   tbd-directive-d
 jcr-version-d    = jcr-version-kw spaces major-version "." minor-version
 major-version    = integer
 minor-version    = integer
 ruleset-id-d     = ruleset-id-kw spaces ruleset-id
-import-d         = import-kw spaces ruleset-id [ spaces as-kw ruleset-id-alias ]
+import-d         = import-kw spaces ruleset-id
+                   [ spaces as-kw ruleset-id-alias ]
 ruleset-id       = ALPHA *not-space
 not-space        = %x21-10FFFF
 ruleset-id-alias = name
@@ -991,43 +1013,51 @@ not-eol          = HTAB / %x20-10FFFF
 eol              = CR / LF
 
 root-rule        = value-rule / array-rule / object-rule /
-member-rule / group-rule
+                   member-rule / group-rule
 
-rule             = rule-name *spc-cmnt rule-def
+rule             = rule-name *sp-cmt rule-def
 
 rule-name        = name
 target-rule-name = [ ruleset-id-alias "." ] rule-name
 name             = ALPHA *( ALPHA / DIGIT / "-" / "-" )
 
 rule-def         = type-rule / member-rule / group-rule
-type-rule        = value-rule / array-rule / object-rule / target-rule-name
-member-rule      = annotations member-name-spec *spc-cmnt (type-rule / type-choice)
+type-rule        = value-rule / array-rule / object-rule /
+                   target-rule-name
+member-rule      = annotations
+                   member-name-spec *sp-cmt (type-rule / type-choice)
 member-name-spec = regex / q-string
-type-choice      = "(" type-choice-items *( choice-combiner type-choice-items ) ")"
-type-choice-items = *spc-cmnt ( type-choice / type-rule ) *spc-cmnt
+type-choice      = "(" type-choice-items 
+                   *( choice-combiner type-choice-items ) ")"
+type-choice-items = *sp-cmt ( type-choice / type-rule ) *sp-cmt
 
-annotations      = *( "@(" *spc-cmnt annotation-set *spc-cmnt ")" *spc-cmnt )
-annotation-set   = reject-annotation / unordered-annotation / root-annotation / tbd-annotation
+annotations      = *( "@(" *sp-cmt annotation-set *sp-cmt ")" *sp-cmt )
+annotation-set   = reject-annotation / unordered-annotation /
+                   root-annotation / tbd-annotation
 reject-annotation = reject-kw
 unordered-annotation = unordered-kw
 root-annotation  = root-kw
 tbd-annotation   = annotation-name [ spaces annotation-parameters ]
 annotation-name  = name
-annotation-parameters = *( spaces / %x21-28 / %x2A-10FFFF )    ; Not close bracket - ")"
+annotation-parameters = *( spaces / %x21-28 / %x2A-10FFFF )
+                   ; Not close bracket - ")"
 
-value-rule       = annotations ":" *spc-cmnt ( value-choice / value-def )
-value-choice     = annotations "(" *spc-cmnt value-choice-items *spc-cmnt ")"
-value-choice-items = value-choice-item *( *spc-cmnt choice-combiner *spc-cmnt value-choice-item )
-value-choice-item = ":" *spc-cmnt value-def / value-choice / target-rule-name
+value-rule       = annotations ":" *sp-cmt ( value-choice / value-def )
+value-choice     = annotations 
+                   "(" *sp-cmt value-choice-items *sp-cmt ")"
+value-choice-items = value-choice-item
+                   *( choice-combiner value-choice-item )
+value-choice-item = ":" *sp-cmt
+                   value-def / value-choice / target-rule-name
 
 value-def        = null-type / boolean-type / true-value / false-value /
-string-type / string-range / string-value / 
-float-type / float-range / float-value /
-integer-type / integer-range / integer-value / 
-ip4-type / ip6-type / fqdn-type / idn-type /
-uri-type / uri-range / phone-type / email-type / 
-full-date-type / full-time-type / date-time-type /
-base64-type / any
+                   string-type / string-range / string-value / 
+                   float-type / float-range / float-value /
+                   integer-type / integer-range / integer-value / 
+                   ip4-type / ip6-type / fqdn-type / idn-type /
+                   uri-type / uri-range / phone-type / email-type / 
+                   full-date-type / full-time-type / date-time-type /
+                   base64-type / any
 null-type        = null-kw
 boolean-type     = boolean-kw
 true-value       = true-kw
@@ -1059,36 +1089,37 @@ date-time-type   = date-time-kw
 base64-type      = base64-kw
 any              = any-kw
 
-object-rule      = annotations "{" *spc-cmnt [ object-items *spc-cmnt ] "}"
-object-items     = object-item *( *spc-cmnt sequence-or-choice *spc-cmnt object-item )
-object-item      = [ repetition *spc-cmnt ] object-item-types
+object-rule      = annotations "{" *sp-cmt [ object-items *sp-cmt ] "}"
+object-items     = object-item *( sequence-or-choice object-item )
+object-item      = [ repetition *sp-cmt ] object-item-types
 object-item-types = member-rule / target-rule-name / object-group
-object-group     = "(" *spc-cmnt [ object-items *spc-cmnt ] ")"
+object-group     = "(" *sp-cmt [ object-items *sp-cmt ] ")"
 
-array-rule       = annotations "[" *spc-cmnt [ array-items *spc-cmnt ] "]"
-array-items      = array-item *( *spc-cmnt sequence-or-choice *spc-cmnt array-item )
-array-item       = [ repetition ] *spc-cmnt array-item-types
+array-rule       = annotations "[" *sp-cmt [ array-items *sp-cmt ] "]"
+array-items      = array-item *( sequence-or-choice array-item )
+array-item       = [ repetition ] *sp-cmt array-item-types
 array-item-types = type-rule / array-group
-array-group      = "(" *spc-cmnt [ array-items *spc-cmnt ] ")"
+array-group      = "(" *sp-cmt [ array-items *sp-cmt ] ")"
 
-group-rule       = annotations "(" *spc-cmnt [ group-items *spc-cmnt ] ")"
-group-items      = group-item *( *spc-cmnt sequence-or-choice *spc-cmnt group-item )
-group-item       = [ repetition ] *spc-cmnt group-item-types
+group-rule       = annotations "(" *sp-cmt [ group-items *sp-cmt ] ")"
+group-items      = group-item *( sequence-or-choice group-item )
+group-item       = [ repetition ] *sp-cmt group-item-types
 group-item-types = type-rule / member-rule / group-group
 group-group      = group-rule
 
 sequence-or-choice = sequence-combiner / choice-combiner
-sequence-combiner = ","
-choice-combiner  = "|"
+sequence-combiner = *sp-cmt "," *sp-cmt
+choice-combiner  = *sp-cmt "|" *sp-cmt
 
-repetition       = optional / one-or-more / min-max-repetition / min-repetition /
-max-repetition / zero-or-more / specific-repetition
+repetition       = optional / one-or-more / min-max-repetition /
+                   min-repetition / max-repetition /
+                   zero-or-more / specific-repetition
 optional         = "?"
 one-or-more      = "+"
 zero-or-more     = "*"
-min-max-repetition = min-repeat *spc-cmnt "*" *spc-cmnt max-repeat
-min-repetition   = min-repeat *spc-cmnt "*"
-max-repetition   = "*" *spc-cmnt max-repeat
+min-max-repetition = min-repeat *sp-cmt "*" *sp-cmt max-repeat
+min-repetition   = min-repeat *sp-cmt "*"
+max-repetition   = "*" *sp-cmt max-repeat
 min-repeat       = p-integer
 max-repeat       = p-integer
 specific-repetition = p-integer
@@ -1096,7 +1127,8 @@ specific-repetition = p-integer
 integer          = ["-"] 1*DIGIT
 p-integer        = 1*DIGIT
 
-float            = [ minus ] int frac [ exp ]    ; From RFC 7159 except 'frac' required
+float            = [ minus ] int frac [ exp ]
+                   ; From RFC 7159 except 'frac' required
 minus            = %x2D                          ; -
 plus             = %x2B                          ; +
 int              = zero / ( digit1-9 *DIGIT )
@@ -1107,27 +1139,29 @@ exp              = e [ minus / plus ] 1*DIGIT
 e                = %x65 / %x45                   ; e E
 zero             = %x30                          ; 0
 
-q-string         = quotation-mark *char quotation-mark    ; From RFC 7159
+q-string         = quotation-mark *char quotation-mark 
+                   ; From RFC 7159
 char             = unescaped /
-escape (
-%x22 /          ; "    quotation mark  U+0022
-%x5C /          ; \    reverse solidus U+005C
-%x2F /          ; /    solidus         U+002F
-%x62 /          ; b    backspace       U+0008
-%x66 /          ; f    form feed       U+000C
-%x6E /          ; n    line feed       U+000A
-%x72 /          ; r    carriage return U+000D
-%x74 /          ; t    tab             U+0009
-%x75 4HEXDIG )  ; uXXXX                U+XXXX
+                   escape (
+                   %x22 /          ; "    quotation mark  U+0022
+                   %x5C /          ; \    reverse solidus U+005C
+                   %x2F /          ; /    solidus         U+002F
+                   %x62 /          ; b    backspace       U+0008
+                   %x66 /          ; f    form feed       U+000C
+                   %x6E /          ; n    line feed       U+000A
+                   %x72 /          ; r    carriage return U+000D
+                   %x74 /          ; t    tab             U+0009
+                   %x75 4HEXDIG )  ; uXXXX                U+XXXX
 escape           = %x5C              ; \
 quotation-mark   = %x22      ; "
 unescaped        = %x20-21 / %x23-5B / %x5D-10FFFF
 
 regex            = "/" *( escape "/" / not-slash ) "/"
-not-slash        = HTAB / CR / LF / %x20-2E / %x30-10FFFF    ; Any char except ";"
+not-slash        = HTAB / CR / LF / %x20-2E / %x30-10FFFF
+                   ; Any char except ";"
 uri-template     = 1*ALPHA ":" not-space
 
-; Keywords
+;; Keywords
 any-kw           = %x61.6E.79                      ; "any"
 as-kw            = %x61.73                         ; "as"
 base64-kw        = %x62.61.73.65.36.34             ; "base64"
@@ -1155,7 +1189,7 @@ true-kw          = %x74.72.75.65                   ; "true"
 unordered-kw     = %x75.6E.6F.72.64.65.72.65.64    ; "unordered"
 uri-kw           = %x75.72.69                      ; "uri"
 
-; Referenced RFC 5234 Core Rules
+;; Referenced RFC 5234 Core Rules
 ALPHA            = %x41-5A / %x61-7A   ; A-Z / a-z
 CR               = %x0D         ; carriage return
 DIGIT            = %x30-39      ; 0-9
@@ -1271,6 +1305,27 @@ WSP              = SP / HTAB    ; white space
                 </artwork>
                 </figure> 
             </section>
+        </section>
+        <section title="JCR-using Specification Updates">
+            <t>
+                Specifications undergo updates periodically, often by parallel efforts. For example,
+                consider that a base specification defines the rule:
+                <list style="empty">
+                    <t>person_info { "first name" : string, "last name" : string }</t>
+                </list>
+            </t>
+            <t>
+                Now consider that working group A and working group B are both concurrently modifying
+                the base specification by adding a member to the object. If each group were to completely
+                rewrite the rule then the result could be incompatible specifications.
+            </t>
+            <t>
+                To avoid this situation, an annotation could be created to instruct the JCR processors
+                to combine the rules:
+                <list style="empty">
+                    <t>person_info_wga @(updates rfcXXXX.person_info) { age : integer }</t>
+                </list>
+            </t>
         </section>
         <section title="JCR Implementations">
             <t>
