@@ -23,7 +23,7 @@
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7159.xml'>
 ]>
 <?rfc toc="true"?>
-<rfc category="std" docName="draft-newton-json-content-rules-05" ipr="trust200902">
+<rfc category="std" docName="draft-newton-json-content-rules-06" ipr="trust200902">
     <front>
         <title abbrev="JSON Content Rules">A Language for Rules Describing JSON Content</title>
         <author fullname="Andrew Lee Newton" initials="A.L." surname="Newton">
