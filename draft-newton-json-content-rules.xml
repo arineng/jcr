@@ -237,12 +237,11 @@
     { image }
     
     image "Image" {
-        width, height, "Title" : string,
-        thumbnail, "IDs" [ *: integer ] 
-    }
-    
-    thumbnail "Thumbnail" {
-        width, height, "Url" : uri 
+        width, 
+        height, 
+        "Title" : string,
+        thumbnail, 
+        "IDs" [ *: integer ] 
     }
     
     width "Width" width_v
@@ -250,6 +249,10 @@
     
     width_v : 0..1280
     height_v : 0..1024
+    
+    thumbnail "Thumbnail" {
+        width, height, "Url" : uri 
+    }
                 </artwork>
             </figure>
             <t>
@@ -261,8 +264,12 @@
                 <artwork xml:space="preserve">
     { 
         "Image" {
-            width, height, "Title" :string,
-            "Thumbnail" { width, height, "Url" :uri }, 
+            width, 
+            height, 
+            "Title" :string,
+            "Thumbnail" { 
+                width, height, "Url" :uri 
+            }, 
             "IDs" [ *:integer ] 
         }
     }
@@ -333,14 +340,18 @@
             <section title="Annotations">
                 <t>
                     Rule definitions may start with zero or more annotations. Each annotation begins with the
-                    character sequence "@(" and ends with ")". The following is an example of a rule definition
+                    character sequence "@{" and ends with "}". The following is an example of a rule definition
                     with the root annotation (explained in the next section):
                     <list style="empty">
-                        <t>@(root) [ nuts, bolts ]</t>
+                        <t>@{root} [ nuts, bolts ]</t>
                     </list>
                 </t>
+                <t>
+                    This specification defines the annotations "root", "reject", and "unordered", but
+                    other annotations may be defined.
+                </t>
             </section>
-            <section title="Starting Points and Root Rules">
+            <section title="Starting Points and Root Rules" anchor="starting-points">
                 <t>
                     Careful readers will have noticed that although rules have been defined as having rule names
                     and rule definitions, examples from the introduction have one rule without a rule name. Within each
@@ -352,7 +363,7 @@
                     a root rule is the first rule processed.
                 </t>
                 <t>
-                    Rules may also be declared a root rule with the @(root) annotation. A ruleset may have more than one
+                    Rules may also be declared a root rule with the @{root} annotation. A ruleset may have more than one
                     root rule, in which case the root rule to use for validating JSON should be explicitly specified locally.
                 </t>
             </section>
@@ -506,6 +517,9 @@
                     <t>iface_mappings /eth[0-9]/ :ip4</t>
                 </list>
             </t>
+            <t>
+                Member rules cannot be used as a root rule.
+            </t>
         </section>
         <section title="Object Rules">
             <t>
@@ -575,12 +589,12 @@
                     <t>[ "Bob Smurd", 24, "http://example.com/bob-smurd" ]</t>
                 </list>
             </t>
-            <section title="Unordered Array Rules">
+            <section title="Unordered Array Rules" anchor="unordered_array_rules">
                 <t>
                     Array rules can be made to behave in a similar fashion to object rules
-                    with regard to the order of matching with the @(unordered) annotation:
+                    with regard to the order of matching with the @{unordered} annotation:
                     <list style="empty">
-                        <t>person @(unordered) [ :string, :integer ]</t>
+                        <t>person @{unordered} [ :string, :integer ]</t>
                     </list>
                 </t>
                 <t>
@@ -603,7 +617,7 @@
                 </t>
             </section>
         </section>
-        <section title="Group Rules">
+        <section title="Group Rules" anchor="group_rules">
             <t>
                 Unlike the other types of rules, group rules have no direct tie with JSON syntax.
                 Group rules simply group together other rules. They take the form:
@@ -631,6 +645,20 @@
                 a group rule are evaluated in the order they appear.
             </t>
         </section>
+            <section title="Ordered and Unordered Groups in Arrays">
+                <t>
+                    <xref target="unordered_array_rules"></xref> specifies that arrays can be evaluated
+                    by the order of the items in the array or can be evaluated without order.
+                    <xref target="group_rules"></xref> specifies that arrays may have group rules
+                    as subordinates.
+                </t>
+                <t>
+                    The evaluation of a group rule inside an array rule inherits the ordering property
+                    of the array rule. If the array rule is unordered, then the items of the group rule
+                    are also considered to be unordered. And if the array rule is ordered, then the items
+                    of the group rule are also considered to be ordered.
+                </t>
+            </section>
             <section title="Sequence and Choice Combinations in Array, Object, and Group Rules">
                 <t>
                     Combinations of subordinate rules in array, object, and group rules can be specified as either
@@ -645,12 +673,23 @@
                     </list>
                 </t>
                 <t>
-                    Sequence and choice combinations maybe mixed, with evaluation occurring in the order
-                    the rules are specified (i.e. right to left).
-                    <list style="empty">
-                        <t>[ this, that | the_other ]</t>
-                    </list>
+                    Sequence and choice combinations cannot be mixed, and group rules must be used to
+                    explicitly declare precedence between a sequence and a choice. Therefore, the following
+                    is illegal:
                 </t>
+                <figure>
+                    <artwork xml:space="preserve">
+    [ this, that | the_other ]                    
+                    </artwork>
+                </figure>
+                <t>
+                    The example above should be expressed as:
+                </t>
+                <figure>
+                    <artwork xml:space="preserve">
+    [ this, ( that | the_other ) ]                    
+                    </artwork>
+                </figure>
             </section>
             <section title="Repetition in Array, Object, and Group Rules">
                 <t>
@@ -697,14 +736,14 @@
             </section>
             <section title="Rejecting Rules">
                 <t>
-                    The evaluation of a rule can be changed with the @(reject) annotation. With this annotation,
+                    The evaluation of a rule can be changed with the @{reject} annotation. With this annotation,
                     a rule that would otherwise match does not, and a rule that would not have matched does.
                     <figure>
                         <artwork xml:space="preserve">
-    not_two @(reject) : 2 
+    not_two @{reject} : 2 
     ; match anything that isn't the integer 2
     
-    @(reject) @(unordered) [ :"fail", *:string ] 
+    @{reject} @{unordered} [ :"fail", *:string ] 
     ; error if one of the status values is "fail"
                 </artwork>
                     </figure>         
@@ -724,29 +763,51 @@
                 <t>
                     The following is correct:
                     <list style="empty">
-                        <t>[ * @(unordered) [ foo ] ]</t>
+                        <t>[ * @{unordered} [ foo ] ]</t>
                     </list>
                     The following is not:
                     <list style="empty">
-                        <t>[ @(unordered) * [ foo ] ]</t>
+                        <t>[ @{unordered} * [ foo ] ]</t>
                     </list>
                 </t>
                 <t>
                     Additionally, annotations may not decorate references to rules (target rule names).
                     The following is not correct:
                     <list style="empty">
-                        <t>[ * @(unordered) bar ]</t>
+                        <t>[ * @{unordered} bar ]</t>
                     </list>
                 </t>
             </section>
         </section>
         <section title="Directives">
             <t>
-                Directives modify the processing of a ruleset. They appear on their own line in a ruleset, begin
+                Directives modify the processing of a ruleset. There are two forms of the directive, the 
+                single line directive and the multi-line directive.
+            </t>
+            <t>
+                Single line directives appear on their own line in a ruleset, begin
                 with a hash character ('#') and are terminated by the end of the line.
                 They take the following form:
                 <list style="empty"><t># directive_name optional_directive_parameters</t></list>
                 Directives may have other qualifiers after the directive name.
+            </t>
+            <t>
+                Multi-line directives also appear on their own lines, but may span multiple lines.
+                The being with the character sequence "@{" and ends with "}". The take the
+                following form:
+            </t>
+            <figure>
+                <artwork xml:space="preserve">
+    #{ directive_name
+         directive_parameter_1 directive_paramter_2
+         directive_parameter_3
+         ...
+    }
+                </artwork>
+            </figure>
+            <t>
+                This specification defines the directives "jcr-version", "ruleset-id",
+                and "import", but other directives may be defined.
             </t>
             <section title="jcr-version">
                 <t>
@@ -754,11 +815,11 @@
                     standard. The version is expressed as a major integer followed by a period followed
                     by a minor integer.
                     <list style="empty">
-                        <t># jcr-version 0.5</t>
+                        <t># jcr-version 0.6</t>
                     </list>
                 </t>
                 <t>
-                    The major.minor number signifying compliance with this document is "0.5". Upon publication
+                    The major.minor number signifying compliance with this document is "0.6". Upon publication
                     of this specification as an IETF proposed standard, it will be "1.0".
                     <list style="empty">
                         <t># jcr-version 1.0</t>
@@ -829,17 +890,17 @@
                 <t>
                     However, some specifications may need to restrict the members of a JSON
                     object to a known set. To construct an object rule specifying that no
-                    extra members are expected, the @(reject) annotation may be used with
+                    extra members are expected, the @{reject} annotation may be used with
                     a regular expression as the last subordinate rule of the object rule.
                     <list style="empty">
-                        <t>{ member1, member2, + @(reject) /.*/ : any }</t>
+                        <t>{ member1, member2, + @{reject} /.*/ : any }</t>
                     </list>
                 </t>
                 <t>
                     This works because subordinate rules are evaluated in the order they
                     appear in the object rule, and the last rule accepts any member with
                     any type but fails to validate if one ore more of those rules are found
-                    due to the @(reject) annotation.
+                    due to the @{reject} annotation.
                 </t>
             </section>
             <section title="Unrestricting Arrays">
@@ -976,6 +1037,65 @@ obj2 { mixin_group, "baz" : string }
                     <list style="empty"><t>response { ?( location_uri, ?referrer_uri ) }</t></list>
                 </t>
             </section>
+            <section title="Multiple Root Styles">
+                <t>
+                    As stated in <xref target="starting-points"></xref>, the first rule in a ruleset
+                    is a root rule when it is unnamed. Group rules can be used as the root rule, such
+                    as in the following example:
+                </t>
+                <figure>
+                    <artwork xml:space="preserve">
+    ( { "foo" : string } | { "bar" : string } )
+                    </artwork>
+                </figure>
+                <t>
+                    This is the equivalent of the following:
+                </t>
+                <figure>
+                    <artwork xml:space="preserve">
+    foo @{root} { "foo" : string }
+    bar @{root} { "bar" : string }
+                    </artwork>
+                </figure>
+                <t>
+                    Either style is valid. However, explicitly naming root rules has the advantage
+                    of explicitly validating a JSON message against a specific rule.
+                </t>
+            </section>
+            <section title="JSON-like Object and Array Definitions">
+                <t>
+                    JCR allows an optional colon character (":") to precede object and array rule
+                    definitions to give these definitions more of a JSON-like appearance.
+                    Consider the following example.
+                </t>
+                <figure>
+                    <artwork xml:space="preserve">
+    { 
+        "foo" { 
+            "fuzz" : string 
+         }, 
+         "bar" [ 
+             "baz" 
+         ] 
+     }
+                    </artwork>
+                </figure> 
+                <t>
+                    To appear more JSON-like, this may also be given as follows:
+                </t>
+                <figure>
+                    <artwork xml:space="preserve">
+    { 
+        "foo" : { 
+            "fuzz" : string 
+         }, 
+         "bar" : [ 
+             "baz" 
+         ] 
+     }
+                    </artwork>
+                </figure> 
+            </section>
         </section>
         <section title="ABNF Syntax">
             <figure title="JSON Content Rules ABNF">
@@ -993,44 +1113,54 @@ comment-char     = HTAB / %x20-3A / %x3C-10FFFF
                    ; Any char other than ";" / CR / LF
 comment-end-char = CR / LF / ";"
 
-directive        = "#" [ spaces ] directive-def eol
-directive-def    = jcr-version-d / ruleset-id-d / import-d /
-                   tbd-directive-d
+directive        = "#" (one-line-directive / multi-line-directive)
+one-line-directive = [ spaces ] 
+                   (directive-def / one-line-tbd-directive-d) *WSP eol
+multi-line-directive = "{" *sp-cmt
+                   (directive-def / multi-line-tbd-directive-d) *sp-cmt "}"
+directive-def    = jcr-version-d / ruleset-id-d / import-d
 jcr-version-d    = jcr-version-kw spaces major-version "." minor-version
-major-version    = integer
-minor-version    = integer
+major-version    = p-integer
+minor-version    = p-integer
 ruleset-id-d     = ruleset-id-kw spaces ruleset-id
 import-d         = import-kw spaces ruleset-id
-                   [ spaces as-kw ruleset-id-alias ]
+                   [ spaces as-kw spaces ruleset-id-alias ]
 ruleset-id       = ALPHA *not-space
 not-space        = %x21-10FFFF
 ruleset-id-alias = name
-tbd-directive-d  = directive-name [ spaces directive-parameters ]
+one-line-tbd-directive-d = directive-name [ WSP one-line-directive-parameters ]
 directive-name   = name
-directive-parameters = not-eol
+one-line-directive-parameters = *not-eol
 not-eol          = HTAB / %x20-10FFFF
 eol              = CR / LF
+multi-line-tbd-directive-d = directive-name
+                   [ spaces multi-line-directive-parameters ]
+multi-line-directive-parameters = multi-line-parameters
+multi-line-parameters = *(comment / q-string / regex /
+                   not-multi-line-special)
+not-multi-line-special = spaces / %x21 / %x23-2E / %x30-3A / %x3C-7C /
+                   %x7E-10FFFF ; not ", /, ; or }
 
-root-rule        = value-rule / array-rule / object-rule /
-                   member-rule / group-rule
+root-rule        = value-rule / group-rule
 
 rule             = rule-name *sp-cmt rule-def
 
 rule-name        = name
-target-rule-name = [ ruleset-id-alias "." ] rule-name
+target-rule-name = annotations [ ruleset-id-alias "." ] rule-name
 name             = ALPHA *( ALPHA / DIGIT / "-" / "-" )
 
 rule-def         = type-rule / member-rule / group-rule
-type-rule        = value-rule / array-rule / object-rule /
-                   target-rule-name
+type-rule        = value-rule / type-choice-rule / target-rule-name
+value-rule       = primitive-rule / array-rule / object-rule
 member-rule      = annotations
-                   member-name-spec *sp-cmt (type-rule / type-choice)
+                   member-name-spec *sp-cmt type-rule
 member-name-spec = regex / q-string
-type-choice      = "(" type-choice-items 
+type-choice-rule = ":" *sp-cmt type-choice
+type-choice      = annotations "(" type-choice-items
                    *( choice-combiner type-choice-items ) ")"
 type-choice-items = *sp-cmt ( type-choice / type-rule ) *sp-cmt
 
-annotations      = *( "@(" *sp-cmt annotation-set *sp-cmt ")" *sp-cmt )
+annotations      = *( "@{" *sp-cmt annotation-set *sp-cmt "}" *sp-cmt )
 annotation-set   = reject-annotation / unordered-annotation /
                    root-annotation / tbd-annotation
 reject-annotation = reject-kw
@@ -1038,23 +1168,15 @@ unordered-annotation = unordered-kw
 root-annotation  = root-kw
 tbd-annotation   = annotation-name [ spaces annotation-parameters ]
 annotation-name  = name
-annotation-parameters = *( spaces / %x21-28 / %x2A-10FFFF )
-                   ; Not close bracket - ")"
+annotation-parameters = multi-line-parameters
 
-value-rule       = annotations ":" *sp-cmt ( value-choice / value-def )
-value-choice     = annotations 
-                   "(" *sp-cmt value-choice-items *sp-cmt ")"
-value-choice-items = value-choice-item
-                   *( choice-combiner value-choice-item )
-value-choice-item = ":" *sp-cmt
-                   value-def / value-choice / target-rule-name
-
-value-def        = null-type / boolean-type / true-value / false-value /
+primitive-rule   = annotations ":" *sp-cmt primimitive-def
+primimitive-def  = null-type / boolean-type / true-value / false-value /
                    string-type / string-range / string-value / 
                    float-type / float-range / float-value /
                    integer-type / integer-range / integer-value / 
                    ip4-type / ip6-type / fqdn-type / idn-type /
-                   uri-type / uri-range / phone-type / email-type / 
+                   uri-range / uri-type / phone-type / email-type /
                    full-date-type / full-time-type / date-time-type /
                    base64-type / any
 null-type        = null-kw
@@ -1078,8 +1200,8 @@ ip4-type         = ip4-kw
 ip6-type         = ip6-kw
 fqdn-type        = fqdn-kw
 idn-type         = idn-kw
+uri-range        = uri-dotdot-kw uri-template
 uri-type         = uri-kw
-uri-range        = uri-template
 phone-type       = phone-kw
 email-type       = email-kw
 full-date-type   = full-date-kw
@@ -1088,25 +1210,27 @@ date-time-type   = date-time-kw
 base64-type      = base64-kw
 any              = any-kw
 
-object-rule      = annotations "{" *sp-cmt [ object-items *sp-cmt ] "}"
-object-items     = object-item *( sequence-or-choice object-item )
+object-rule      = annotations [ ":" *sp-cmt ] "{" *sp-cmt [ object-items *sp-cmt ] "}"
+object-items     = object-item (*( sequence-combiner object-item ) /
+                   *( choice-combiner object-item ) )
 object-item      = [ repetition *sp-cmt ] object-item-types
 object-item-types = member-rule / target-rule-name / object-group
 object-group     = "(" *sp-cmt [ object-items *sp-cmt ] ")"
 
-array-rule       = annotations "[" *sp-cmt [ array-items *sp-cmt ] "]"
-array-items      = array-item *( sequence-or-choice array-item )
+array-rule       = annotations [ ":" *sp-cmt ] "[" *sp-cmt [ array-items *sp-cmt ] "]"
+array-items      = array-item (*( sequence-combiner array-item ) /
+                   *( choice-combiner array-item ) )
 array-item       = [ repetition ] *sp-cmt array-item-types
 array-item-types = type-rule / array-group
 array-group      = "(" *sp-cmt [ array-items *sp-cmt ] ")"
 
 group-rule       = annotations "(" *sp-cmt [ group-items *sp-cmt ] ")"
-group-items      = group-item *( sequence-or-choice group-item )
+group-items      = group-item (*( sequence-combiner group-item ) /
+                   *( choice-combiner group-item ) )
 group-item       = [ repetition ] *sp-cmt group-item-types
 group-item-types = type-rule / member-rule / group-group
 group-group      = group-rule
 
-sequence-or-choice = sequence-combiner / choice-combiner
 sequence-combiner = *sp-cmt "," *sp-cmt
 choice-combiner  = *sp-cmt "|" *sp-cmt
 
@@ -1155,10 +1279,12 @@ escape           = %x5C              ; \
 quotation-mark   = %x22      ; "
 unescaped        = %x20-21 / %x23-5B / %x5D-10FFFF
 
-regex            = "/" *( escape "/" / not-slash ) "/"
+regex            = "/" *( escape "/" / not-slash ) "/" [ regex-modifiers ]
 not-slash        = HTAB / CR / LF / %x20-2E / %x30-10FFFF
-                   ; Any char except ";"
-uri-template     = 1*ALPHA ":" not-space
+                   ; Any char except "/"
+regex-modifiers  = *( "i" / "s" / "x" )
+
+uri-template     = 1*ALPHA ":" 1*not-space
 
 ;; Keywords
 any-kw           = %x61.6E.79                      ; "any"
@@ -1186,6 +1312,7 @@ ruleset-id-kw    = %x72.75.6C.65.73.65.74.2D.69.64 ; "ruleset-id"
 string-kw        = %x73.74.72.69.6E.67             ; "string"
 true-kw          = %x74.72.75.65                   ; "true"
 unordered-kw     = %x75.6E.6F.72.64.65.72.65.64    ; "unordered"
+uri-dotdot-kw    = %x75.72.69.2E.2E                ; "uri.."
 uri-kw           = %x75.72.69                      ; "uri"
 
 ;; Referenced RFC 5234 Core Rules
@@ -1197,6 +1324,7 @@ HTAB             = %x09         ; horizontal tab
 LF               = %x0A         ; linefeed
 SP               = %x20         ; space
 WSP              = SP / HTAB    ; white space
+
                 </artwork>
             </figure>
         </section>        
@@ -1241,6 +1369,16 @@ WSP              = SP / HTAB    ; white space
                 </front>
             </reference>
         </references>
+        <section title="Co-Constraints">
+            <t>
+                This specification defines a small set of annotations and directives for JCR, yet
+                the syntax is extensible allowing for other annotations and directives.
+                draft-cordell-jcr-co-constraints ("Co-Constraints for JCR") defines further
+                annotations and directives which define more detailed constraints on JSON
+                messages, including co-constraints (constraining parts of JSON message based
+                on another part of a JSON message).
+            </t>
+        </section>
         <section title="Testing Against JSON Content Rules">
             <t>
                 One aspect of JCR that differentiates it from other format schema languages are
@@ -1264,14 +1402,14 @@ WSP              = SP / HTAB    ; white space
                     array must at least contain the status "accepted", the rules from the specification
                     could be used and the statuses rule could be explicitly overridden locally as:
                     <list style="empty">
-                        <t>statuses @(unordered) [ :"accepted", * :string ]</t>
+                        <t>statuses @{unordered} [ :"accepted", * :string ]</t>
                     </list>
                 </t>
                 <t>
                     Alternatively, the developer may need to ensure that the status "denied" should
                     not be present in the array:
                     <list style="empty">
-                        <t>statuses @(unordered) [ ? @(reject) :"denied", * :string ]</t>
+                        <t>statuses @{unordered} [ ? @{reject} :"denied", * :string ]</t>
                     </list>
                 </t>
             </section>
@@ -1288,22 +1426,6 @@ WSP              = SP / HTAB    ; white space
                     return to the processor the result of evaluating the data in the function.
                 </t>
             </section>
-            <section title="Ruleset Checks">
-                <t>
-                    Another method still under evaluation by the authors maybe to annotate rules
-                    with references to code directly embedded in a ruleset.
-                </t>
-                <figure>
-                    <artwork xml:space="preserve">
-    odd_int @(check-code my_code) : integer
-    
-    # code my_code(ruby-2.0)
-    ## def my_def data
-    ##   return data % 2
-    ## end
-                </artwork>
-                </figure> 
-            </section>
         </section>
         <section title="Combining Multiple Rulesets (Experimental)">
             <t><list><t>This section is experimental and subject to further development.</t></list></t>
@@ -1313,10 +1435,10 @@ WSP              = SP / HTAB    ; white space
                 by using the (@augments) annotation.
             </t>
             <t>
-                The parameters of the @(augments) annotation are a list of one or more target-rule-names
+                The parameters of the @{augments} annotation are a list of one or more target-rule-names
                 that identify rules to be augmented.  The augmentation process consists of logically adding
-                a reference to the rule name of the rule that contains the @(augments) annotation into each of the rules
-                identified by the target-rule-names in the @(augments) annotation.
+                a reference to the rule name of the rule that contains the @{augments} annotation into each of the rules
+                identified by the target-rule-names in the @{augments} annotation.
             </t>
             <t>
                 As an example, assume we have a core specification that contains the following JCR:
@@ -1335,7 +1457,7 @@ WSP              = SP / HTAB    ; white space
                     <artwork xml:space="preserve">
     #ruleset-id com.example.extension
     #import com.example.core as core
-    extension @(augments core.core core.more) ext-item1
+    extension @{augments core.core core.more} ext-item1
                     </artwork>
                 </figure>
             </t>
@@ -1353,7 +1475,7 @@ WSP              = SP / HTAB    ; white space
                 aliases 'com.example.extension'.
             </t>
             <t>
-                Because multiple @(augments) annotations may specify the same target-rule-name,
+                Because multiple @{augments} annotations may specify the same target-rule-name,
                 there can be no control over the order the augmentations are given
                 in the target rule.  Hence the specified target-rule-names are only allowed to
                 correspond to (unordered) objects, unordered arrays, and value choices.
@@ -1379,7 +1501,7 @@ WSP              = SP / HTAB    ; white space
                 If it is desired to add more than one rule to a target rule then the augmenting
                 rule can specify a group, for example:
                 <list>
-                    <t>extension @(augments core.core core.more) (ext-item1, ext-item2)</t>
+                    <t>extension @{augments core.core core.more} (ext-item1, ext-item2)</t>
                 </list>
             </t>
         </section>
