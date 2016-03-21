@@ -169,7 +169,7 @@
                 object rules, and group rules. The first four types describe corresponding aspects of JSON, respectively.
             </t>
             <t>
-                Each rule has two components, a rule name and a rule definition:
+                Except for an optional root rule, each rule has two components, a rule name and a rule definition:
                 <list style="empty">
                     <t>&lt;rule name&gt; &lt;rule definition&gt;</t>
                 </list>
@@ -189,7 +189,7 @@
                 Member rules specify JSON object members. The following example member rule states that
                 the rule's name is 'm1' with a value defined by the rule named 'v1':
                 <list style="empty"><t>m1 "m1name" v1</t></list>
-                Since rule names can be substituted by rule definitions, this member rule can also
+                Since rule names are substituted by rule definitions, this member rule can also
                 be written as follows (to define a member rule named m1 for JSON member named "m1name" that
                 has a value that is an integer between 0 and 3):
                 <list style="empty"><t>m1 "m1name" : 0..3</t></list>
@@ -428,8 +428,8 @@
                         <list style="empty"><t>rule_name : uri</t></list>
                         URIs may be further scoped to a specific URI pattern by using
                         a <xref target="RFC6570">URI template</xref>:
-                        <list style="empty"><t>rule_name : http://{stuff}</t></list>
-                        <list style="empty"><t>rule_name : http://{authority}/{thing1}?q={thing2}</t></list>
+                        <list style="empty"><t>rule_name : uri..http://{stuff}</t></list>
+                        <list style="empty"><t>rule_name : uri..http://{authority}/{thing1}?q={thing2}</t></list>
                         When using URI templates, the variable names are ignored for pattern matching,
                         but they should be provided for construction of a valid URI template. Providing
                         the variable names also aids in the description of what is to be matched.
@@ -484,7 +484,7 @@
                 <section title="Any Value">
                     <t>
                         It is possible to specify that a value can be of any type allowable
-                        by JSON using the any value rule. This is done with the 'any' literal in
+                        by JSON using the 'any' value rule. This is done with the 'any' literal in
                         a value rule:
                         <list style="empty"><t>rule_name : any</t></list>
                         However, unlike other value rules which define primitive data types,
@@ -498,9 +498,10 @@
             <t>
                 Member rules define members of JSON objects.
                 Member rules follow the format:
-                <list style="empty"><t>rule_name member_name target_rule_name</t></list>
+                <list style="empty"><t>rule_name member_name type</t></list>
                 where rule_name is the name of the rule being defined, member_name is
-                the name of the JSON object member, and target_rule_name is a reference to a value
+                the name of the JSON object member, and type is a value rule, array rule, or object rule or a
+                reference to a value
                 rule, array rule, or object rule specifying the allowable content of the JSON object member.
             </t>
             <t>
@@ -510,8 +511,7 @@
                 <list style="empty"><t>some_member_rule /some\.[a-z]+\.names/ some_member_target</t></list>
             </t>
             <t>
-                Since rule names in rule definitions may be replaced by rule definitions,
-                member rules may also be written in this form:
+                Member rules may also be written in this form:
                 <list><t>rule_name "member_rule" target_rule_definition</t></list>
                 The following are examples:
                 <list>
@@ -562,7 +562,7 @@
                 Array rules define the allowable content of JSON arrays. Their rule definitions
                 are composed of the other rule types with the exception of member rules and have the following
                 form:
-                <list style="empty"><t>rulename [ target_rule_name_1, target_rule_name_2 ]</t></list>
+                <list style="empty"><t>rulename [ rule_1, rule_2 ]</t></list>
                 The following example defines an array where the first element is defined by the width_value rule
                 and the second element is defined by the height_value rule:
                 <list style="empty"><t>size [ width_value, height_value ]</t></list>
@@ -772,13 +772,6 @@
                         <t>[ @{unordered} * [ foo ] ]</t>
                     </list>
                 </t>
-                <t>
-                    Additionally, annotations may not decorate references to rules (target rule names).
-                    The following is not correct:
-                    <list style="empty">
-                        <t>[ * @{unordered} bar ]</t>
-                    </list>
-                </t>
             </section>
         </section>
         <section title="Directives">
@@ -795,7 +788,7 @@
             </t>
             <t>
                 Multi-line directives also appear on their own lines, but may span multiple lines.
-                The being with the character sequence "@{" and ends with "}". The take the
+                The being with the character sequence "#{" and ends with "}". The take the
                 following form:
             </t>
             <figure>
