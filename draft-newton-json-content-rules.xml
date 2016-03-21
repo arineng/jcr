@@ -21,6 +21,8 @@
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6570.xml'>
   <!ENTITY RFC7159 PUBLIC ''
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7159.xml'>
+  <!ENTITY I-D.cordell-jcr-co-constraints PUBLIC ''
+   'http://xml.resource.org/public/rfc/bibxml3/reference.I-D.cordell-jcr-co-constraints.xml'>
 ]>
 <?rfc toc="true"?>
 <rfc category="std" docName="draft-newton-json-content-rules-06" ipr="trust200902">
@@ -1350,6 +1352,9 @@ WSP              = SP / HTAB    ; white space
             
         </references>
         <references title="Infomative References">
+            
+            &I-D.cordell-jcr-co-constraints;
+            
             <reference anchor="ARIN_JCR_VALIDATOR" target="https://github.com/arineng/jcrvalidator">
                 <front>
                     <title>JSON Content Rules Validator (Work In Progress)</title>
@@ -1373,7 +1378,7 @@ WSP              = SP / HTAB    ; white space
             <t>
                 This specification defines a small set of annotations and directives for JCR, yet
                 the syntax is extensible allowing for other annotations and directives.
-                draft-cordell-jcr-co-constraints ("Co-Constraints for JCR") defines further
+                <xref target="I-D.cordell-jcr-co-constraints"></xref> ("Co-Constraints for JCR") defines further
                 annotations and directives which define more detailed constraints on JSON
                 messages, including co-constraints (constraining parts of JSON message based
                 on another part of a JSON message).
