@@ -24,8 +24,8 @@
   <!ENTITY I-D.cordell-jcr-co-constraints PUBLIC ''
    'http://xml.resource.org/public/rfc/bibxml3/reference.I-D.cordell-jcr-co-constraints.xml'>
 ]>
-<?rfc toc="true"?>
-<rfc category="std" docName="draft-newton-json-content-rules-06" ipr="trust200902">
+<?rfc toc="yes"?>
+<rfc category="std" docName="draft-newton-json-content-rules-07" ipr="trust200902">
     <front>
         <title abbrev="JSON Content Rules">A Language for Rules Describing JSON Content</title>
         <author fullname="Andrew Lee Newton" initials="A.L." surname="Newton">
