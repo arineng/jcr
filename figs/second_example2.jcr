@@ -1,0 +1,9 @@
+{
+  $fn,
+  $lc,
+  $wc
+}
+
+$fn = "file-name"  : string
+$lc = "line-count" : 0..
+$wc = "word-count" : 0..

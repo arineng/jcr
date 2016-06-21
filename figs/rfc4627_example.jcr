@@ -1,0 +1,19 @@
+{ $image }
+    
+$image = "Image" : {
+  $width, 
+  $height, 
+  "Title" : string,
+  $thumbnail, 
+  "IDs" : [ integer @* ] 
+}
+    
+$width = "Width" : $width_v
+$height = "Height" : $height_v
+    
+$width_v =: 0..1280
+$height_v =: 0..1024
+    
+$thumbnail = "Thumbnail" : {
+  $width, $height, "Url" : uri 
+}

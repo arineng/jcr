@@ -1,0 +1,5 @@
+{
+  "file-name"  : string,
+  "line-count" : 0..,
+  "word-count" : 0..
+}
