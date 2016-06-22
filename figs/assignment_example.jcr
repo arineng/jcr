@@ -1,0 +1,10 @@
+;rule name assignments for primitive types
+$foo         =: "foo"
+$some_string =: string
+
+;rule name assignments for arrays
+$bar = [ integer, integer, integer ]
+
+;rule name assignement for objects
+$bob = { "bar" : $bar, "foo" : $foo }
+

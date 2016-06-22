@@ -46,6 +46,10 @@
     'figs/rfc4627_example.jcr'>   
   <!ENTITY rfc4627_example2.jcr PUBLIC ''
     'figs/rfc4627_example2.jcr'>   
+  <!ENTITY rule_name_ruleset_id.jcr PUBLIC ''
+    'figs/rule_name_ruleset_id.jcr'>
+  <!ENTITY assignment_example.jcr PUBLIC ''
+    'figs/assignment_example.jcr'>   
 
 ]>
 <?rfc toc="yes"?>
@@ -102,7 +106,7 @@
                     "word-count", each containing an integer.                    
                 </t>
                 <figure>
-                    <artwork xml:space="preserve">&first_example.json;</artwork>
+                    <artwork xml:space="preserve" align="center">&first_example.json;</artwork>
                 </figure>
                 <t>
                     This is also JCR that describes a JSON object with a member named "line-count" that is
@@ -114,14 +118,14 @@
                     is any integer and not specific, exact integers:
                 </t>
                 <figure>
-                    <artwork xml:space="preserve">&first_example.jcr;</artwork>
+                    <artwork xml:space="preserve" align="center">&first_example.jcr;</artwork>
                 </figure>
                 <t>
                     Since line counts and word counts should be either zero or a positive integer,
                     the specification may be further narrowed:
                 </t>                
                 <figure>
-                    <artwork xml:space="preserve">&first_example2.jcr;</artwork>
+                    <artwork xml:space="preserve" align="center">&first_example2.jcr;</artwork>
                 </figure>
             </section>
             <section title="A Second Example: Testing Content">
@@ -130,13 +134,13 @@
                     but with the addition of another member, "file-name".
                 </t>
                 <figure>
-                    <artwork xml:space="preserve">&second_example.json;</artwork>
+                    <artwork xml:space="preserve" align="center">&second_example.json;</artwork>
                 </figure>                
                 <t>
                     The following JCR describes objects like it.
                 </t>
                 <figure>
-                    <artwork xml:space="preserve">&second_example.jcr;</artwork>
+                    <artwork xml:space="preserve" align="center">&second_example.jcr;</artwork>
                 </figure>                
                 <t>
                     For the purposes of writing a protocol specification, JCR may be broken down into
@@ -144,7 +148,7 @@
                     the JCR from above and rewrites the members as named rules.
                 </t>
                 <figure>
-                    <artwork xml:space="preserve">&second_example2.jcr;</artwork>
+                    <artwork xml:space="preserve" align="center">&second_example2.jcr;</artwork>
                 </figure>                
                 <t>
                     With each member specified as a named rule, software testers can override them locally
@@ -152,7 +156,7 @@
                     for the test case where the file name is "rfc4627.txt".
                 </t>                
                 <figure>
-                    <artwork xml:space="preserve">&second_example_override.jcr;</artwork>
+                    <artwork xml:space="preserve" align="center">&second_example_override.jcr;</artwork>
                 </figure>      
                 <t>
                     In this example, the protocol specification describes the JSON object in general and
@@ -163,72 +167,36 @@
         <section title="Overview of the Language">
             <t>
                 JCR is composed of rules (as the name suggests). A collection of rules that is processed
-                together is a ruleset. There are five types of rules: value rules, member rules, array rules,
-                object rules, and group rules. The first four types describe corresponding aspects of JSON, respectively.
+                together is a ruleset. Rulesets may also contain comments, blank lines, and directives
+                that apply to the processing of a ruleset.
             </t>
             <t>
-                Except for an optional root rule, each rule has two components, a rule name and a rule definition:
-                <list style="empty">
-                    <t>&lt;rule name&gt; &lt;rule definition&gt;</t>
-                </list>
-                Rule definitions may in turn contain child rule definitions or reference other rules by their rule name.
+                Rules are composed of two parts, an optional rule name assignment and a type specification.
+                Rules may be defined across line boundaries and there is no line continuation syntax. The
+                type specification component of rules are a superset of JSON.
             </t>
             <t>
-                This is an example of a value rule:
-                <list style="empty"><t>v1 : 0..3</t></list>
-                It specifies a rule named "v1" that has a definition of ": 0..3" (value rule definitions
-                begin with a ':' character). This defines
-                values of type "v1" to be integers in the range 0 to 3 (minimum value of 0, maximum value of 3).
-                Value rules can define the limits of JSON values, such as stating that numbers must fall
-                into a certain range or that strings must be formatted according to certain patterns or standards
-                (i.e. URIs, IP addresses, etc...).
+                Rules with rule name assignments may be referenced in the type specifications of other rules.
+                And type specifications, depending on their type, may be composed of other type specifications.
+                Type specifications define arrays, objects, members of objects, primitive types, and groups
+                of types.
             </t>
             <t>
-                Member rules specify JSON object members. The following example member rule states that
-                the rule's name is 'm1' with a value defined by the rule named 'v1':
-                <list style="empty"><t>m1 "m1name" v1</t></list>
-                Since rule names are substituted by rule definitions, this member rule can also
-                be written as follows (to define a member rule named m1 for JSON member named "m1name" that
-                has a value that is an integer between 0 and 3):
-                <list style="empty"><t>m1 "m1name" : 0..3</t></list>
+                Any rule consisting only of a type specification is considered a root rule. Unless otherwise
+                specified, all the root rules of a ruleset are evaluated against a JSON instance or document.
             </t>
             <t>
-                Object rules are composed of member rules, since JSON objects are composed of members.
-                Object rules can specify members that are mandatory, optional, and even choices between
-                members. In this example, the rule 'o1' defines an object that must contain a member
-                as defined by member rule 'm1' and optionally a member defined by the rule 'm2':
-                <list style="empty"><t>o1 { m1, ?m2 }</t></list>
-            </t>
-            <t>
-                Array rules are composed of value, object, and other array rules. Like object rules, array rules
-                can specify the cardinality of the contents of an array. The following array rule
-                defines an array that must contain value rule 'v1' and zero or more objects as defined
-                by rule 'o1':
-                <list style="empty"><t>a1 [ v1, *o1 ]</t></list>
-            </t>
-            <t>
-                Finally, group rules designate a collection of rules.
-            </t>
-            <t>
-                Putting it all together, <xref target="rfc4627-example-1-rules"></xref>
+                Putting it all together, <xref target="rfc4627-example-1-compact-rules"></xref>
                 describes the JSON in <xref target="rfc4627-example-1"></xref>.
             </t>
             <figure anchor="rfc4627-example-1">
                 <preamble>Example JSON shamelessly lifted from RFC 4627</preamble>
-                <artwork xml:space="preserve">&rfc4627_example.json;</artwork>
+                <artwork xml:space="preserve" align="center">&rfc4627_example.json;</artwork>
             </figure>
-            <figure anchor="rfc4627-example-1-rules">
-                <preamble>Rules describing <xref target="rfc4627-example-1"></xref></preamble>
-                <artwork xml:space="preserve">&rfc4627_example.jcr;</artwork>
-            </figure>
-            <t>
-                The rules from <xref target="rfc4627-example-1-rules"></xref> can be
-                written more compactly (see <xref target="rfc4627-example-1-compact-rules"></xref>).
-            </t>
             <figure anchor="rfc4627-example-1-compact-rules">
-                <preamble>Compact rules describing <xref target="rfc4627-example-1"></xref></preamble>
-                <artwork xml:space="preserve">&rfc4627_example2.jcr;</artwork>
-            </figure>            
+                <preamble>Rules describing <xref target="rfc4627-example-1"></xref></preamble>
+                <artwork xml:space="preserve" align="center">&rfc4627_example2.jcr;</artwork>
+            </figure>
         </section> 
         <section title="Lines and Comments">
             <t>
@@ -243,22 +211,52 @@
         </section>
         <section title="Rules">
             <t>
-                Rules are composed of two parts, a rule name and a rule definition:
-                <list><t>&lt;rule name&gt; &lt;rule definition&gt;</t></list>
-                Rule names allow
-                a rule to be identified by a name. A rule definition describes the constraints
-                upon which the content is to be assessed.
-                Rule definitions can use rule names to refer to other rules.
+                Rules have two main components, an optional rule name assignment and a type specification.
+                Type specifications define arrays, objects, etc... of JSON and may reference other rules
+                using rule names. Most type specifications can be defined with repetitions for specifying
+                the frequency of the type being defined. In addition to the type specifications describing
+                JSON types, there is an additional group specification for grouping types.
             </t>
-            <section title="Rule Names">
+            <t>
+                Rules may also contain annotations which may affect the evaluation of all or part of a rule.
+                Rules without a rule name assignment are considered root rules, though rules with a rule
+                name assignment can be considered a root rule with the appropriate annotation.
+            </t>
+            <section title="Rule Names and Assignments">
                 <t>
-                    Rule names must start with an alphabetic character (a-z,A-Z) and must contain only
-                    alphabetic characters, numeric characters, the hyphen character ('-') and the
-                    underscore character ('_').
+                    Rule names are signified with the dollar character ('$'), which is not part of the
+                    rule name itself. Rule names have two components, an optional ruleset identifier and a local
+                    rule name.
                 </t>
                 <t>
-                    Rule names are case sensitive. Rule names identifying rule definitions must be unique
-                    within a ruleset.
+                    Local rule names must start with an alphabetic character (a-z,A-Z) and must contain only
+                    alphabetic characters, numeric characters, the hyphen character ('-') and the
+                    underscore character ('_'). Local rule names are case sensitive, and must be unique
+                    within a ruleset (that is, no two rule name assignements may use the same local rule name).
+                </t>
+                <t>
+                    Ruleset identifiers reference rules from another ruleset. They are not allowed in rule
+                    name assignments, and only found in the directive specifying the ruleset identifier for
+                    a ruleset and rule names referenced by other rules. Ruleset identifiers must start with
+                    an alphabetic character and contain no whitespace. Ruleset identifiers are case sensitive.
+                    Simple use cases of JCR will most likely not use ruleset identifiers.
+                </t>
+                <figure>
+                    <artwork align="center" xml:space="preserve">&rule_name_ruleset_id.jcr;</artwork>
+                </figure>
+                <t>
+                    There are two forms of rule name assignments, assignements of primitive types and assignments
+                    of all other types. Rule name assignments to primitive type specifications separate the rule
+                    name from the type specification with the character sequence '=:', whereas rule name assignments
+                    for all other type specifications only require the separation using the '=' character.
+                </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&assignment_example.jcr;</artwork>
+                </figure>
+                <t>
+                    This is the one little "gotcha" in JCR. This syntax is necessary so that JCR parsers may
+                    distinguish between rules name assignments involving primitives and object member type
+                    specifications involving primitives.
                 </t>
             </section>
             <section title="Rule Definitions">
