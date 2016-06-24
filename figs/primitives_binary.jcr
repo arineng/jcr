@@ -1,0 +1,14 @@
+; RFC 4648 base16
+hex
+
+; RFC 4648 base32
+base32
+
+; RFC 4648 base32hex
+base32hex
+
+; RFC 4648 base64
+base64
+
+; RFC 4648 base64url
+base64url

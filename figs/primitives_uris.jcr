@@ -1,0 +1,8 @@
+; any URI
+uri
+
+;a URI template for an HTTPS uri
+uri..https://{stuff}
+
+;a more specific URI template
+uri..https://{authority}/{thing1}?q={thing2}

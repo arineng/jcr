@@ -1,0 +1,8 @@
+; any string
+string
+
+; a string literal
+"she sells sea shells"
+
+; a regular expression
+/she sells .*/

@@ -49,7 +49,23 @@
   <!ENTITY rule_name_ruleset_id.jcr PUBLIC ''
     'figs/rule_name_ruleset_id.jcr'>
   <!ENTITY assignment_example.jcr PUBLIC ''
-    'figs/assignment_example.jcr'>   
+    'figs/assignment_example.jcr'>
+  <!ENTITY primitives_overview.jcr PUBLIC ''
+    'figs/primitives_overview.jcr'>
+  <!ENTITY primitives_boolean_and_null.jcr PUBLIC ''
+    'figs/primitives_boolean_and_null.jcr'>
+  <!ENTITY primitives_integer_and_float.jcr PUBLIC ''
+    'figs/primitives_integer_and_float.jcr'>
+  <!ENTITY primitives_float_range.jcr PUBLIC ''
+    'figs/primitives_float_range.jcr'>
+  <!ENTITY primitives_strings.jcr PUBLIC ''
+    'figs/primitives_strings.jcr'>
+  <!ENTITY primitives_uris.jcr PUBLIC ''
+    'figs/primitives_uris.jcr'>
+  <!ENTITY primitives_misc.jcr PUBLIC ''
+    'figs/primitives_misc.jcr'>
+  <!ENTITY primitives_binary.jcr PUBLIC ''
+    'figs/primitives_binary.jcr'>
 
 ]>
 <?rfc toc="yes"?>
@@ -259,188 +275,149 @@
                     specifications involving primitives.
                 </t>
             </section>
-            <section title="Rule Definitions">
-                <t>
-                    The syntax of each type of rule definition varies depending on the type:
-                </t>
-                <figure>
-                    <artwork xml:space="preserve">
-    : string 
-    ; value rules start with a colon        
-    
-    "member_name" target_rule_name 
-    ; member rules start by defining the member name
-    
-    { mem1, mem2 } 
-    ; object rules start and end with "curly braces", like JSON objects
-    
-    [ item1, item2 ] 
-    ; array rules start and end with square brackets, like JSON arrays
-    
-    ( rule1, rule2 ) 
-    ; group rules start and end with parenthesis
-                    </artwork>
-                </figure>
-                <t>
-                    A rule definition may embed other rule definitions, either explicitly or by referencing a 
-                    rule name that identifies a rule definition.
-                </t>
-            </section>
             <section title="Annotations">
                 <t>
-                    Rule definitions may start with zero or more annotations. Each annotation begins with the
-                    character sequence "@{" and ends with "}". The following is an example of a rule definition
-                    with the root annotation (explained in the next section):
+                    Annotations may appear before a rule name assignment, before a type specification, or
+                    before a rule name contained within a type specification. In each place, there may be
+                    zero or more annotations.
+                    Each annotation begins with the
+                    character sequence "@{" and ends with "}". The following is an example of a type specification
+                    with the not annotation (explained in <xref target="not_annotation"></xref>):
                     <list style="empty">
-                        <t>@{root} [ nuts, bolts ]</t>
+                        <t>@{not} [ $fruit, $vegatable ]</t>
                     </list>
                 </t>
                 <t>
-                    This specification defines the annotations "root", "reject", and "unordered", but
-                    other annotations may be defined.
+                    This specification defines the annotations "root", "not", and "unordered", but
+                    other annotations may be defined for other purposes.
                 </t>
             </section>
             <section title="Starting Points and Root Rules" anchor="starting-points">
                 <t>
-                    Careful readers will have noticed that although rules have been defined as having rule names
-                    and rule definitions, examples from the introduction have one rule without a rule name. Within each
-                    ruleset, a name on the first rule is optional. When the first rule is defined without a name,
-                    it is considered a root rule.
+                    Evaluation of a JSON instance or document against a ruleset begins with the evaluation of
+                    a root rule or set of root rules. If no root rule (or rules) is specified locally at
+                    runtime, the set of root rules specified in the ruleset are evaluated. The order of
+                    evaluation is undefined.
                 </t>
                 <t>
-                    Root rules are a starting point for the evaluation of JSON against a ruleset. Or in other words,
-                    a root rule is the first rule processed.
+                    The set of root rules specified in a ruleset is composed of all rules without a rule
+                    name assignment and all rules annotated with the "@{root}" annotation.
                 </t>
                 <t>
-                    Rules may also be declared a root rule with the @{root} annotation. A ruleset may have more than one
-                    root rule, in which case the root rule to use for validating JSON should be explicitly specified locally.
+                    The "@{root}" annotation may either appear before a rule name assignment or before
+                    a type definition. It is ignored if present before referenced rule name inside of a
+                    type specification.
                 </t>
             </section>
-            <section title="Value Rules">
+            <section title="Type Specifications">
+                <t>
+                    The syntax of each type of type specifications varies depending on the type:
+                </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&primitives_overview.jcr;</artwork>
+                </figure>
+            </section>
+            <section title="Primitive Type Specifications">
             <t>
-                Value rules define content for JSON values. JSON allows values to be objects, arrays,
-                numbers, booleans, strings, and null. Arrays and objects are handled by the array and object
-                rules, and the value rules define the rest.
+                Primitive type specifications define content for JSON numbers, booleans, strings, and null.
             </t>
             <section title="Numbers, Booleans and Null">
             <t>
                 The rules for booleans and null are the simplest and take the following forms:
-                <list style="empty">
-                    <t>rule_name : true</t>
-                    <t>rule_name : false</t>
-                    <t>rule_name : boolean</t>
-                    <t>rule_name : null</t>
-                </list>
             </t>
-            <t>
+            <figure>
+                <artwork xml:space="preserve" align="center">&primitives_boolean_and_null.jcr;</artwork>
+            </figure>
+                <t>
                 Rules for numbers can specify the number be either an integer or floating point number:
-                <list style="empty">
-                    <t>rule_name : integer</t>
-                    <t>rule_name : float</t>
-                </list>
+                </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&primitives_integer_and_float.jcr;</artwork>
+                </figure>
+                <t>
                 Numbers may also be specified as an absolute value or a range of possible values, where a range
                 may be specified using a minimum, maximum, or both:
-                <list style="empty">
-                    <t>rule_name : n</t>
-                    <t>rule_name : n..m</t>
-                    <t>rule_name : ..m</t>
-                    <t>rule_name : n..</t>
-                    <t>rule_name : n.f..m.f</t>
-                    <t>rule_name : ..m.f</t>
-                    <t>rule_name : n.f..</t>
-                </list>
+                </t>
+                <figure>
+                    <artwork align="center" xml:space="preserve">
+  n
+  n..m
+   ..m
+  n..
+n.f
+n.f..m.f
+   ..m.f
+n.f..
+                    </artwork>
+                </figure>
+                <t>
                 When specifying a minimum and a maximum, both must either be an integer or a floating point number.
                 Thus to specify a floating point number between zero and ten a definition of the following form is used:
-					<list style="empty"><t>: 0.0..10.0</t></list>
             </t>
+            <figure>
+                <artwork xml:space="preserve" align="center">&primitives_float_range.jcr;</artwork>
+            </figure>  
             </section>
             <section title="Strings">
-            <t>
-                String values may be specified generically as:
-                <list style="empty"><t>rule_name : string</t></list>
-                However, the content of strings can be narrowed in the following ways:
-                <list style="hanging">
-                   
-                    <t hangText="A quoted string:" >
-                        A rule can specify that the value must be a specific string:
-                        <list style="empty"><t>rule_name : "a constant string"</t></list>
-                    </t>
-                    <t hangText="Regular Expression: ">
-                        A rule can state that a string must match a regular expression
-                        by giving the regular expression:
-                        <list style="empty"><t>rule_name : /regex/</t></list>
-                    </t>
-                    <t hangText="URIs and URI templates: ">
-                        A rule can state that a string must be a <xref target="RFC3986">URI</xref>:
-                        <list style="empty"><t>rule_name : uri</t></list>
-                        URIs may be further scoped to a specific URI pattern by using
-                        a <xref target="RFC6570">URI template</xref>:
-                        <list style="empty"><t>rule_name : uri..http://{stuff}</t></list>
-                        <list style="empty"><t>rule_name : uri..http://{authority}/{thing1}?q={thing2}</t></list>
-                        When using URI templates, the variable names are ignored for pattern matching,
-                        but they should be provided for construction of a valid URI template. Providing
-                        the variable names also aids in the description of what is to be matched.
-                    </t>
-                    <t hangText="IP Addresses: ">
-                        Narrowing the content of strings down to IP addresses can
-                        be done with either the 'ip4' (see <xref target="RFC1166"></xref>)
-                        or 'ip6' (see <xref target="RFC5952"></xref>) literals:
-                        <list style="empty">
-                            <t>rule_name : ip4</t>
-                            <t>rule_name : ip6</t>
-                        </list>
-                    </t>
-                    <t hangText="Domain Names: ">
-                        Fully qualified A-label and U-label domain names can be
-                        specified with the 'fqdn' and 'idn' literals:
-                        <list style="empty">
-                            <t>rule_name : fqdn</t>
-                            <t>rule_name : idn</t>
-                        </list>
-                    </t>
-                    <t hangText="Dates and Times: ">
-                        Dates and times are specified using the ABNF rules from <xref target="RFC3339">RFC 3339</xref>
-                        as literals:
-                        <list style="empty">
-                            <t>rule_name : date-time</t>
-                            <t>rule_name : full-date</t>
-                            <t>rule_name : full-time</t>
-                        </list>
-                    </t>
-                    <t hangText="Email Addresses: ">
-                        A string can be scoped to the syntax of email addresses using the
-                        literal 'email':
-                        <list style="empty">
-                            <t>rule_name : email</t>
-                        </list>
-                        Email addresses must conform to the syntax of <xref target="RFC5322">RFC 5322</xref>.
-                    </t>
-                    <t hangText="Phone Numbers: ">
-                        Strings conforming to E.123 phone number format can be specified
-                        as follows:
-                        <list style="empty"><t>rule_name : phone</t></list>
-                    </t>
-                    <t hangText="Base 64: ">
-                        Strings containing base 64 data, as described by <xref target="RFC4648">RFC 4648</xref>, can be
-                        specified as follows:
-                        <list style="empty"><t>rule_name : base64</t></list>
-                    </t>
-                </list>
-            </t>
+                <t>
+                    JCR provides a large number of data types to define the contents of JSON strings.
+                    Generically, a string may be specified using the word 'string'. String literals
+                    may be specified using a double quote character followed by the literal content
+                    followed by another double quote. And regular expressions may be specified by
+                    enclosing a regular expression in the forward slash ('/') character.
+                </t>
+                <figure>
+                    <artwork align="center" xml:space="preserve">&primitives_strings.jcr;</artwork>
+                </figure>
+                <t>
+                    A string can be specified as a <xref target="RFC3986">URI</xref> using the
+                    word 'uri', but also may be more narrowly specified using a <xref target="RFC6570">URI template</xref>.
+                    URI templates are specified with the word 'uri' followed by two period characters
+                    ('..') followed by the URI template.
+                    When using URI templates, the variable names are ignored for pattern matching,
+                    but they should be provided for construction of a valid URI template. Providing
+                    the variable names also aids in the description of what is to be matched.
+                </t>
+                <figure>
+                    <artwork align="center" xml:space="preserve">&primitives_uris.jcr;</artwork>
+                </figure>
+                <t>
+                    IP addresses may be specified with either the word 'ipv4' for
+                    <xref target="RFC1166">IPv4 addresses</xref> or the word 'ipv6' for
+                    <xref target="RFC5952">IPv6 addresses</xref>. Fully qualified A-label and
+                    U-label domain names may be specified with the words 'fqdn' and 'idn'.
+                </t>
+                <t>
+                    Dates and time can be specified as formats found in <xref target="RFC3339">RFC 3339</xref>.
+                    The word 'date' corresponds to the full-date ABNF rule, the word 'time' corresponds to the
+                    full-time ABNF rule, and the word 'datetime' corresponds to the 'date-time' ABNF rule.
+                </t>
+                <t>
+                    Email addresses formatted according to <xref target="RFC5322">RFC 5322</xref> may
+                    be specified using the 'email' word, and E.123 phone number may be specified using the
+                    word 'phone'.
+                </t>
+                <figure>
+                    <artwork align="center" xml:space="preserve">&primitives_misc.jcr;</artwork>
+                </figure>
+                <t>
+                    Binary date can be specified in string form using the encodings specified in
+                    <xref target="RFC4648">RFC 4648</xref>. The word 'hex' corresponds to base16, while
+                    'base32', 'base32hex', 'base64', and 'base64url' accordingly.
+                </t>
+                <figure>
+                    <artwork align="center" xml:space="preserve">&primitives_binary.jcr;</artwork>
+                </figure>
             </section>
-                <section title="Any Value">
-                    <t>
-                        It is possible to specify that a value can be of any type allowable
-                        by JSON using the 'any' value rule. This is done with the 'any' literal in
-                        a value rule:
-                        <list style="empty"><t>rule_name : any</t></list>
-                        However, unlike other value rules which define primitive data types,
-                        this rule defines a value of any kind, either primitive (null, boolean,
-                        number,  and string), object, or array.
-                    </t>
-                </section>
+
         </section>
-            
+            <section title="Any Type">
+                <t>
+                    It is possible to specify that a value can be of any type allowable
+                    by JSON using the word 'any'. The 'any' type specifies any primitive
+                    type, array, or object.
+                </t>
+            </section>            
         <section title="Member Rules">
             <t>
                 Member rules define members of JSON objects.
@@ -683,7 +660,7 @@
                     </list>
                 </t>
             </section>
-            <section title="Rejecting Rules">
+            <section title="Rejecting Rules" anchor="not_annotation">
                 <t>
                     The evaluation of a rule can be changed with the @{reject} annotation. With this annotation,
                     a rule that would otherwise match does not, and a rule that would not have matched does.
@@ -1149,85 +1126,6 @@ obj2 { mixin_group, "baz" : string }
                 </t>
             </section>
         </section>
-        <section title="Combining Multiple Rulesets (Experimental)">
-            <t><list><t>This section is experimental and subject to further development.</t></list></t>
-            <t>
-                Many work items within the IETF are defined by a core specification which is 
-                later enhanced by extension specifications.  JCR supports this pattern of working
-                by using the (@augments) annotation.
-            </t>
-            <t>
-                The parameters of the @{augments} annotation are a list of one or more target-rule-names
-                that identify rules to be augmented.  The augmentation process consists of logically adding
-                a reference to the rule name of the rule that contains the @{augments} annotation into each of the rules
-                identified by the target-rule-names in the @{augments} annotation.
-            </t>
-            <t>
-                As an example, assume we have a core specification that contains the following JCR:
-                <figure>
-                    <artwork xml:space="preserve">
-    #ruleset-id com.example.core
-    core { core-item1, core-item2 }
-    more { core-item3, core-item4 }
-    ...
-                    </artwork>
-                </figure>
-            </t>
-            <t>
-                And a subsequently defined extension with the following JCR:
-                <figure>
-                    <artwork xml:space="preserve">
-    #ruleset-id com.example.extension
-    #import com.example.core as core
-    extension @{augments core.core core.more} ext-item1
-                    </artwork>
-                </figure>
-            </t>
-            <t>
-                The resultant core specification is treated as:
-                <figure>
-                    <artwork xml:space="preserve">
-    #ruleset-id com.example.core
-    core { core-item1, core-item2, __alias1.extension }
-    more { core-item3, core-item4, __alias1.extension }
-    ...
-                    </artwork>
-                </figure>
-                where '__alias1' is conceptually an automatically created alias that 
-                aliases 'com.example.extension'.
-            </t>
-            <t>
-                Because multiple @{augments} annotations may specify the same target-rule-name,
-                there can be no control over the order the augmentations are given
-                in the target rule.  Hence the specified target-rule-names are only allowed to
-                correspond to (unordered) objects, unordered arrays, and value choices.
-            </t>
-            <t>
-                If the non-nested rules in the target rule are all combined using the choice combiner,
-                then the augmenting rule is also combined using the choice combiner.  If the non-nested
-                rules in the target rule are all combined using the sequence combiner,
-                then the augmenting rule is also combined using the sequence combiner.  If the non-nested
-                rules in the target rule use a combination of the choice combiner and sequence
-                combiner, then the existing rules within the target group are logically nested within a group
-                and the augmenting rule is combined using the sequence combiner.  For example, a
-                target rule initially containing the following definition:
-                <list>
-                    <t>core { core-item1, core-item2 | core-item3 }</t>
-                </list>
-                would be treated as follows after being augmented:
-                <list>
-                    <t>core { (core-item1, core-item2 | core-item3), __alias1.extension }</t>
-                </list>
-            </t>
-            <t>
-                If it is desired to add more than one rule to a target rule then the augmenting
-                rule can specify a group, for example:
-                <list>
-                    <t>extension @{augments core.core core.more} (ext-item1, ext-item2)</t>
-                </list>
-            </t>
-        </section>
-        
         <section title="JCR Implementations">
             <t>
                 The following implementations, <xref target="ARIN_JCR_VALIDATOR"></xref> and

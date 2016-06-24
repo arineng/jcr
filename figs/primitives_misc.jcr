@@ -1,0 +1,20 @@
+;IP addresses
+ipv4
+ipv6
+
+;domain names
+fqdn
+idn
+
+; RFC 3339 full-date
+date
+; RFC 3339 full-time
+time
+; RFC 3339 date-time
+datetime
+
+; RFC 5322 email address
+email
+
+; phone number
+phone
