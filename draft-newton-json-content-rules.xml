@@ -58,6 +58,8 @@
     'figs/primitives_integer_and_float.jcr'>
   <!ENTITY primitives_float_range.jcr PUBLIC ''
     'figs/primitives_float_range.jcr'>
+  <!ENTITY primitives_bit_integers.jcr PUBLIC ''
+    'figs/primitives_bit_integers.jcr'>
   <!ENTITY primitives_strings.jcr PUBLIC ''
     'figs/primitives_strings.jcr'>
   <!ENTITY primitives_uris.jcr PUBLIC ''
@@ -66,6 +68,8 @@
     'figs/primitives_misc.jcr'>
   <!ENTITY primitives_binary.jcr PUBLIC ''
     'figs/primitives_binary.jcr'>
+  <!ENTITY member_specifications.jcr PUBLIC ''
+    'figs/member_specifications.jcr'>
 
 ]>
 <?rfc toc="yes"?>
@@ -317,7 +321,7 @@
                     <artwork xml:space="preserve" align="center">&primitives_overview.jcr;</artwork>
                 </figure>
             </section>
-            <section title="Primitive Type Specifications">
+            <section title="Primitive Specifications">
             <t>
                 Primitive type specifications define content for JSON numbers, booleans, strings, and null.
             </t>
@@ -357,6 +361,14 @@ n.f..
             <figure>
                 <artwork xml:space="preserve" align="center">&primitives_float_range.jcr;</artwork>
             </figure>  
+                <t>
+                    Integers may also be specified as ranges using bit lengths preceded by the 'int' or 'uint'
+                    words (i.e. 'int8', 'uint16'). The 'int' word specifies the integer as being signed whereas
+                    the 'uint' word specifies the integer as being unsigned.
+                </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&primitives_bit_integers.jcr;</artwork>
+                </figure>  
             </section>
             <section title="Strings">
                 <t>
@@ -418,34 +430,22 @@ n.f..
                     type, array, or object.
                 </t>
             </section>            
-        <section title="Member Rules">
+        <section title="Member Specifications">
             <t>
-                Member rules define members of JSON objects.
-                Member rules follow the format:
-                <list style="empty"><t>rule_name member_name type</t></list>
-                where rule_name is the name of the rule being defined, member_name is
-                the name of the JSON object member, and type is a value rule, array rule, or object rule or a
-                reference to a value
-                rule, array rule, or object rule specifying the allowable content of the JSON object member.
+                Member specifications define members of JSON objects. Unlike other type specfications,
+                member specifications cannot be root rules and must be part of an object specification
+                or preceded by a rule name assignment.
             </t>
             <t>
-                Member names may be specified either explicitly as a quoted string:
-                <list style="empty"><t>some_member_rule "some_member_name" some_member_target</t></list>
-                or a family of member names may be specified as a regular expression:
-                <list style="empty"><t>some_member_rule /some\.[a-z]+\.names/ some_member_target</t></list>
+                Member specifications consist of a member name specification followed by a colon character (':')
+                followed by either a
+                rule name or a primitive, object, array, or group specification. Member name specifications
+                can be given either as a quated string using double quotes or as a regular expression
+                using forward slash ('/') characters.
             </t>
-            <t>
-                Member rules may also be written in this form:
-                <list><t>rule_name "member_rule" target_rule_definition</t></list>
-                The following are examples:
-                <list>
-                    <t>location_uri "locationURI" : uri</t>
-                    <t>iface_mappings /eth[0-9]/ :ip4</t>
-                </list>
-            </t>
-            <t>
-                Member rules cannot be used as a root rule.
-            </t>
+            <figure>
+                <artwork xml:space="preserve" align="center">&member_specifications.jcr;</artwork>
+            </figure>
         </section>
         <section title="Object Rules">
             <t>

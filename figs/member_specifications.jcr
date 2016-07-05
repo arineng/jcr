@@ -1,0 +1,5 @@
+;member name will exactly match "locationURI"
+$location_uri = "locationURI" : uri
+
+;member name will match "eth0", "eth1", ... "eth9"
+$iface_mappings = /eth[0-9]/  : ipv4

@@ -1,4 +1,6 @@
-; primitive types can be string or number literals or number ranges
+; primitive types can be string
+; or number literals
+; or number ranges
 "foo"
 2
 1..10
@@ -7,24 +9,28 @@
 string
 integer
         
-; member specifications consist of a member name followed by a colon
-; and then followed by another type specification or a rule name
+; member specifications consist of a member name 
+; followed by a colon and then followed by another 
+; type specification or a rule name
 ; (example shown with a rule name assignment)
 $mem1 = "bar" : "baz" 
     
-; member names may either be quoted strings or regular expressions
-/dev[0-9]/ : 0..4096
+; member names may either be quoted strings 
+; or regular expressions
+; (example shown with a rule name assignment)
+$mem2 = /dev[0-9]/ : 0..4096
     
 ; object specifications start and end with "curly braces"
-; object specifications contain zero or more member specifications 
+; object specifications contain zero 
+; or more member specifications 
 ; or rule names which reference a member specification
 { $mem1, "foo" : "fuzz" } 
     
 ; array specifications start and end with square brackets
-; array specifications contain zero or more non-member 
-; type specifications
+; array specifications contain zero 
+; or more non-member type specifications
 [ 1, 2, 3, $item1 ] 
-$item =: 4
+$item1 =: 4
 
 ; finally, group specifications start and end with parenthesis
 ; groups contain other type specifications
