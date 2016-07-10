@@ -1,0 +1,12 @@
+[ $name_servers @1..12%2 ]
+$name_servers =: fqdn
+
+{ /eth.*/ : $mac_addr @..100%2 }
+$mac_addr =: hex
+
+[ $octet @4..%2 ]
+$octet =: int8
+
+$error_set = ( string @*%4 )
+
+[ integer @+%10 ]

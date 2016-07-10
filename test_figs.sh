@@ -37,6 +37,9 @@ assert_raises "jcr --test-jcr -r figs/group_example.jcr" 0
 assert_raises "jcr --test-jcr -r figs/and_or_example.jcr" 0
 assert_raises "jcr --test-jcr -r figs/mixed_and_or_bad.jcr" 1
 assert_raises "jcr --test-jcr -r figs/mixed_and_or_good.jcr" 0
+assert_raises "jcr --test-jcr -r figs/repetition_min_max.jcr" 0
+assert_raises "jcr --test-jcr -r figs/repetition_kleene.jcr" 0
+assert_raises "jcr --test-jcr -r figs/repetition_step.jcr" 0
 
 assert_end figs
 

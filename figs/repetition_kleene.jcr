@@ -1,0 +1,8 @@
+; age is optional
+{ "name" : string, "age" : integer @? }
+
+; zero or more errors
+$error_set = ( string @* )
+
+; 1 or more integer values
+[ integer @+ ]
