@@ -1,0 +1,7 @@
+; the first element of the array is to be a string
+; the second element of the array is to be an integer
+$a1 = [ string, integer ]
+
+; the first element of the array is to be an integer
+; the second element of the array is to be a string
+$a2 = [ integer, string ]

@@ -50,6 +50,8 @@
     'figs/rule_name_ruleset_id.jcr'>
   <!ENTITY assignment_example.jcr PUBLIC ''
     'figs/assignment_example.jcr'>
+  <!ENTITY annotation_example.jcr PUBLIC ''
+    'figs/annotation_example.jcr'>
   <!ENTITY primitives_overview.jcr PUBLIC ''
     'figs/primitives_overview.jcr'>
   <!ENTITY primitives_boolean_and_null.jcr PUBLIC ''
@@ -70,6 +72,34 @@
     'figs/primitives_binary.jcr'>
   <!ENTITY member_specifications.jcr PUBLIC ''
     'figs/member_specifications.jcr'>
+  <!ENTITY object_example.jcr PUBLIC ''
+    'figs/object_example.jcr'>
+  <!ENTITY object_example1.json PUBLIC ''
+    'figs/object_example1.json'>
+  <!ENTITY object_example2.json PUBLIC ''
+    'figs/object_example2.json'>
+  <!ENTITY object_order_eval.json PUBLIC ''
+    'figs/object_order_eval.json'>
+  <!ENTITY object_order_eval.jcr PUBLIC ''
+    'figs/object_order_eval.jcr'>
+  <!ENTITY array_example.jcr PUBLIC ''
+    'figs/array_example.jcr'>
+  <!ENTITY array_order_eval.jcr PUBLIC ''
+    'figs/array_order_eval.jcr'>
+  <!ENTITY array_order_eval.json PUBLIC ''
+    'figs/array_order_eval.json'>
+  <!ENTITY array_order_eval2.json PUBLIC ''
+    'figs/array_order_eval2.json'>
+  <!ENTITY array_unordered_eval.jcr PUBLIC ''
+    'figs/array_unordered_eval.jcr'>
+  <!ENTITY group_example.jcr PUBLIC ''
+    'figs/group_example.jcr'>
+  <!ENTITY and_or_example.jcr PUBLIC ''
+    'figs/and_or_example.jcr'>
+  <!ENTITY mixed_and_or_bad.jcr PUBLIC ''
+    'figs/mixed_and_or_bad.jcr'>
+  <!ENTITY mixed_and_or_good.jcr PUBLIC ''
+    'figs/mixed_and_or_good.jcr'>
 
 ]>
 <?rfc toc="yes"?>
@@ -242,6 +272,13 @@
                 Rules without a rule name assignment are considered root rules, though rules with a rule
                 name assignment can be considered a root rule with the appropriate annotation.
             </t>
+            <t>
+                Type specifications, depending on their type, can contain zero or more other type
+                specifications or rule names. For example, an object specification might contain multiple
+                member specifications or rules names that resolve to member specifications or a mixture
+                of member specifications and rule names. For the purposes of this document, type specifications
+                and rule names composing other type specifications are called subordinate components.
+            </t>
             <section title="Rule Names and Assignments">
                 <t>
                     Rule names are signified with the dollar character ('$'), which is not part of the
@@ -265,7 +302,7 @@
                     <artwork align="center" xml:space="preserve">&rule_name_ruleset_id.jcr;</artwork>
                 </figure>
                 <t>
-                    There are two forms of rule name assignments, assignements of primitive types and assignments
+                    There are two forms of rule name assignments: assignements of primitive types and assignments
                     of all other types. Rule name assignments to primitive type specifications separate the rule
                     name from the type specification with the character sequence '=:', whereas rule name assignments
                     for all other type specifications only require the separation using the '=' character.
@@ -287,10 +324,10 @@
                     Each annotation begins with the
                     character sequence "@{" and ends with "}". The following is an example of a type specification
                     with the not annotation (explained in <xref target="not_annotation"></xref>):
-                    <list style="empty">
-                        <t>@{not} [ $fruit, $vegatable ]</t>
-                    </list>
                 </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&annotation_example.jcr;</artwork>
+                </figure>
                 <t>
                     This specification defines the annotations "root", "not", and "unordered", but
                     other annotations may be defined for other purposes.
@@ -415,7 +452,8 @@ n.f..
                 <t>
                     Binary date can be specified in string form using the encodings specified in
                     <xref target="RFC4648">RFC 4648</xref>. The word 'hex' corresponds to base16, while
-                    'base32', 'base32hex', 'base64', and 'base64url' accordingly.
+                    'base32', 'base32hex', 'base64', and 'base64url' correspond with their
+                    RFC 4648 counterparts accordingly.
                 </t>
                 <figure>
                     <artwork align="center" xml:space="preserve">&primitives_binary.jcr;</artwork>
@@ -438,7 +476,7 @@ n.f..
             </t>
             <t>
                 Member specifications consist of a member name specification followed by a colon character (':')
-                followed by either a
+                followed by either a subordinate component, which is either a
                 rule name or a primitive, object, array, or group specification. Member name specifications
                 can be given either as a quated string using double quotes or as a regular expression
                 using forward slash ('/') characters.
@@ -447,177 +485,188 @@ n.f..
                 <artwork xml:space="preserve" align="center">&member_specifications.jcr;</artwork>
             </figure>
         </section>
-        <section title="Object Rules">
+        <section title="Object Specifications">
             <t>
-                Object rules define the allowable members of a JSON object, and their rule definitions
-                contain the member rules of the object. They take the following form:
-                <list style="empty"><t>rule_name { member_rule_1, member_rule_2 }</t></list>
-                The following rule example defines an object composed of two member rules:
-                <list style="empty"><t>response { location_uri, status_code }</t></list>
+                Object specifications define JSON objects and are composed of zero or more
+                subordinate components, each of which can be either a
+                rule name, member specification, or group specification. The subordinate components
+                are enclosed
+                at the start with a left curly brace character ('{') and at the end with a right curly
+                brace character ('}').
+            </t>
+            <figure>
+                <artwork align="center" xml:space="preserve">&object_example.jcr;</artwork>
+            </figure>
+            <t>
+                The subordinate components of an object specification do not imply
+                order. Given the example above, both JSON examples are valid:
+            </t>
+            <figure>
+                <artwork align="center" xml:space="preserve">&object_example1.json;</artwork>
+            </figure>
+            <figure>
+                <artwork align="center" xml:space="preserve">&object_example2.json;</artwork>
+            </figure>
+            <t>
+                Subordinate components of an object specification are evaluated in the order in which
+                they appear.
             </t>
             <t>
-                Given that where a rule name is found a rule definition
-                of an appropriate type may be used, the above example might also be
-                written as:
-                <list style="empty"><t>response { "locationUri" : uri, "statusCode" : integer }</t></list>
+                Take for example the following ruleset:
+            </t>
+            <figure>
+                <artwork align="center" xml:space="preserve">&object_order_eval.jcr;</artwork>
+            </figure>
+            <t>
+                It defines two rules, o1 and o2. o1 first specifies that an object can have
+                zero or more (that is the meaning of "@*", see <xref target="repetition"></xref>)
+                members where the member name is the letter 'p' followed by a number
+                (e.g. "p0", "p1", "p2") and then a member with the exact member name "p1". o2
+                has the exact same member specifications but in the opposite order.
             </t>
             <t>
-                Rules given in the rule definition of an object rule do not imply order. Given the example
-                object rule above both
-                <list style="empty"><t>{ "locationUri" : "http://example.com", "statusCode" : 200 }</t></list>
-                and
-                <list style="empty"><t>{ "statusCode" : 200, "locationUri" : "http://example.com" }</t></list>
-                are JSON objects that match the rule.
+                The following JSON will not match o1 but will match o2 because of the order
+                of the member specifications.
             </t>
-            <t>
-                Each member rule of an object rule is evaluated in the order in which they appear in the
-                object rule. Thus where there is potential conflict between rule names defined using 
-                regular expressions, the rules with the most constrained name should be defined first.
-                Otherwise, for example, a rule definition of:
-                <list style="empty"><t>{ /p\d+/ : int, "p0" : string }</t></list>
-                would fail to match the JSON object:
-                <list style="empty"><t>{ "p1" : 12, "p0" : "Fred" }</t></list>
-                because the "p0" member name would match the regular expression despite the presence
-                of the subsequently defined "p0" member rule.
-            </t>
+            <figure>
+                <artwork align="center" xml:space="preserve">&object_order_eval.json;</artwork>
+            </figure>
         </section>
-        <section title="Array Rules">
+        <section title="Array Specifications">
             <t>
-                Array rules define the allowable content of JSON arrays. Their rule definitions
-                are composed of the other rule types with the exception of member rules and have the following
-                form:
-                <list style="empty"><t>rulename [ rule_1, rule_2 ]</t></list>
-                The following example defines an array where the first element is defined by the width_value rule
-                and the second element is defined by the height_value rule:
-                <list style="empty"><t>size [ width_value, height_value ]</t></list>
+                Array specifications define JSON arrays and are composed of zero or more subordinate
+                components, each of which can either be a rule name or a primitive, array, object or
+                group specification. The subordinate components are enclosed at the start with a left
+                square brace character ('[') and at the end with a right square brace character (']').
+            </t>
+            <figure>
+                <artwork align="center" xml:space="preserve">&array_example.jcr;</artwork>
+            </figure>
+            <t>
+                Unlike object specifications, order is implied in array specifications by default.
+                That is, the first subordinate component will match the first element of the array, 
+                the second subordinate component will match the second element of the array, and so on.
             </t>
             <t>
-                By default, unlike object rules, order is implied by the array rule definition. That is,
-                the first rule referenced or defined within an array rule specifies that the first
-                element of the array will match that rule, the second rule given with the array rule
-                specifies that the second element of the array will match that rule, and so on.
+                Take for example the following ruleset:
             </t>
+            <figure>
+                <artwork align="center" xml:space="preserve">&array_order_eval.jcr;</artwork>
+            </figure>
             <t>
-                Take for example the following array rule definition:
-                <list style="empty"><t>person [ : string, : integer ]</t></list>
-                This JSON array matches the above rule:
-                <list style="empty"><t>[ "Bob Smurd", 24 ]</t></list>
-                while this one does not:
-                <list style="empty"><t>[ 24, "Bob Smurd" ]</t></list>
+                It defines two rules, a1 and a2. The array in the following JSON will not match a1, but
+                will match a2.
             </t>
+            <figure>
+                <artwork align="center" xml:space="preserve">&array_order_eval.json;</artwork>
+            </figure>
             <t>
-                Finally, if an array has more elements than can be matched from the array rule,
-                the array does not match the array rule. Or stated differently, an array with unmatched
-                elements does not validate. Using the example array rule above, the following
-                array does not match because the last element of the array does not match any rule contained
-                in the array rule:
-                <list style="empty">
-                    <t>[ "Bob Smurd", 24, "http://example.com/bob-smurd" ]</t>
-                </list>
+                Finally, if an array has more elements than can be matched from the array specification,
+                the array does not match the array specification. Or stated differently, an array with unmatched
+                elements does not validate. Using the example array rule a2 from above, the following
+                array does not match because the last element of the array does not match any subordinate
+                component:
             </t>
-            <section title="Unordered Array Rules" anchor="unordered_array_rules">
+            <figure>
+                <artwork align="center" xml:space="preserve">&array_order_eval2.json;</artwork>
+            </figure>
+            <section title="Unordered Array Specifications" anchor="unordered_array_specifications">
                 <t>
-                    Array rules can be made to behave in a similar fashion to object rules
-                    with regard to the order of matching with the @{unordered} annotation:
-                    <list style="empty">
-                        <t>person @{unordered} [ :string, :integer ]</t>
-                    </list>
+                    Array specifications can be made to behave in a similar fashion to object specifications
+                    with regard to the order of matching with the @{unordered} annotation.
                 </t>
                 <t>
-                    This rule matches both of theses JSON arrays.
-                    <list style="empty">
-                        <t>[ "Bob Smurd", 24 ]</t>
-                        <t>[ 24, "Bob Smurd" ]</t>
-                    </list>
+                    In the ruleset below, a1 and a2 have the same subordinate components given in the
+                    same order. a2 is annotated with the @{unordered} annotation.
                 </t>
+                <figure>
+                    <artwork align="center" xml:space="preserve">&array_unordered_eval.jcr;</artwork>
+                </figure>
                 <t>
-                    Like ordered array rules, the rules contained in an unordered array rule
+                    The JSON array below does not match a1 but does match a2.
+                </t>
+                <figure>
+                    <artwork align="center" xml:space="preserve">&array_order_eval.json;</artwork>
+                </figure>
+                <t>
+                    Like ordered array specifications, the subordinate components in an unordered array specification
                     are evaluated in the order they are specified. The difference is that they
                     need not match an element of the array in the same position as given in the
-                    array rule.
+                    array specification.
                 </t>
                 <t>
-                    Like ordered array rules, unordered array rules also require that all elements of the array be
-                    matched by a subordinate rule. If the array has more elements than can be
-                    matched, the array rule does not match the array.
+                    Finally, like ordered array specifications, unordered array specifications also require that all elements of the array be
+                    matched by a subordinate component. If the array has more elements than can be
+                    matched, the array does not match the array specification.
                 </t>
             </section>
         </section>
-        <section title="Group Rules" anchor="group_rules">
+        <section title="Group Specifications" anchor="group_specifications">
             <t>
-                Unlike the other types of rules, group rules have no direct tie with JSON syntax.
-                Group rules simply group together other rules. They take the form:
-                <list style="empty"><t>rule_name ( target_rule_1, target_rule_2 )</t></list>
+                Unlike the other type specifications, group specifications have no direct tie with JSON syntax.
+                Group specifications simply group together their subordinate components. Group specfications
+                enclose one or more suborindate components with the parenthesis characters.
             </t>
             <t>
-                Group rule definitions and any nesting of group rule definitions, must conform
-                to the allowable set of rules of the rule containing them. A group rule referenced
-                inside of an array rule may not contain a member rule since member rules are not
-                allowed in array rules directly. Likewise, a group rule referenced inside an object
-                rule must only contain member rules.
+                Group specifications and any nesting of group specifications, must conform
+                to the allowable set of type specifications of the type specifications in which
+                they are contained. For example, a group specification
+                inside of an array specification may not contain a member specification since member specifications are not
+                allowed as direct subordinates of array specifications (arrays contain values, not object members in JSON). 
+                Likewise, a group specification referenced inside an object
+                specification must only contain member specifictions (JSON objects may only contain object members).
             </t>
             <t>
-                The following is an example of a group rule:
+                The following is an example of a group specification:
             </t>
             <figure>
-                <artwork xml:space="preserve">
-    the_bradys [ parents, children ]
-    children ( :"Greg", :"Marsha", :"Bobby", :"Jan" )
-    parents ( :"Mike", :"Carol" )
-                </artwork>
+                <artwork xml:space="preserve" align="center">&group_example.jcr;</artwork>
             </figure>    
             <t>
-                Like the subordinate rules of array and object rules, the subordinate rules of
-                a group rule are evaluated in the order they appear.
+                Like the subordinate components of array and object specifications, the subordinate components of
+                a group specification are evaluated in the order they appear.
             </t>
         </section>
             <section title="Ordered and Unordered Groups in Arrays">
                 <t>
-                    <xref target="unordered_array_rules"></xref> specifies that arrays can be evaluated
+                    <xref target="unordered_array_specifications"></xref> specifies that arrays can be evaluated
                     by the order of the items in the array or can be evaluated without order.
-                    <xref target="group_rules"></xref> specifies that arrays may have group rules
-                    as subordinates.
+                    <xref target="group_specifications"></xref> specifies that arrays may have group rules
+                    as subordinate components.
                 </t>
                 <t>
-                    The evaluation of a group rule inside an array rule inherits the ordering property
-                    of the array rule. If the array rule is unordered, then the items of the group rule
-                    are also considered to be unordered. And if the array rule is ordered, then the items
-                    of the group rule are also considered to be ordered.
+                    The evaluation of a group specification inside an array specification inherits the ordering property
+                    of the array specification. If the array specification is unordered, then the items of the group specification
+                    are also considered to be unordered. And if the array specification is ordered, then the items
+                    of the group specification are also considered to be ordered.
                 </t>
             </section>
-            <section title="Sequence and Choice Combinations in Array, Object, and Group Rules">
+            <section title="Sequence and Choice Combinations in Array, Object, and Group Specifications">
                 <t>
-                    Combinations of subordinate rules in array, object, and group rules can be specified as either
-                    a sequence ("and") or a choice ("or"). A sequence is a rule followed by the comma character
-                    (',') followed by another rule.
-                    <list style="empty">
-                        <t>[ this, that ]</t>
-                    </list>
-                    A choice is a rule followed by a pipe character ('|') followed by another rule.
-                    <list style="empty">
-                        <t>[ this | that ]</t>
-                    </list>
+                    Combinations of subordinate components in array, object, and group specifications can be specified as either
+                    a sequence ("and") or a choice ("or"). A sequence is a subordinate component followed by the comma character
+                    (',') followed by another subordinate component.
+                    A choice is a subordinate component followed by a pipe character ('|') followed by another subordinate component.
                 </t>
+                <figure>
+                    <artwork align="center" xml:space="preserve">&and_or_example.jcr;</artwork>
+                </figure>
                 <t>
-                    Sequence and choice combinations cannot be mixed, and group rules must be used to
+                    Sequence and choice combinations cannot be mixed, and group specifications must be used to
                     explicitly declare precedence between a sequence and a choice. Therefore, the following
                     is illegal:
                 </t>
                 <figure>
-                    <artwork xml:space="preserve">
-    [ this, that | the_other ]                    
-                    </artwork>
+                    <artwork xml:space="preserve" align="center">&mixed_and_or_bad.jcr;</artwork>
                 </figure>
                 <t>
                     The example above should be expressed as:
                 </t>
                 <figure>
-                    <artwork xml:space="preserve">
-    [ this, ( that | the_other ) ]                    
-                    </artwork>
+                    <artwork xml:space="preserve" align="center">&mixed_and_or_good.jcr;</artwork>
                 </figure>
             </section>
-            <section title="Repetition in Array, Object, and Group Rules">
+            <section title="Repetition in Array, Object, and Group Rules" anchor="repetition">
                 <t>
                     Evaluation of subordinate rules in array, object, and group rules may be preceded by
                     a repetition expression denoting how many times the subordinate rule should be

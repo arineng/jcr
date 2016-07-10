@@ -1,0 +1,5 @@
+; sequence ("and")
+[ "this" , "that" ]
+
+; choice ("or")
+[ "this" | "that" ]

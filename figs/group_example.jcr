@@ -1,0 +1,5 @@
+$the_bradys = [ $parents, $children ]
+
+$children = ( "Greg", "Marsha", "Bobby", "Jan" )
+
+$parents = ( "Mike", "Carol" )
