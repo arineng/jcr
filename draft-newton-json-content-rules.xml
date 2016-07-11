@@ -104,8 +104,10 @@
     'figs/repetition_min_max.jcr'>
   <!ENTITY repetition_kleene.jcr PUBLIC ''
     'figs/repetition_kleene.jcr'>
-    <!ENTITY repetition_step.jcr PUBLIC ''
+  <!ENTITY repetition_step.jcr PUBLIC ''
     'figs/repetition_step.jcr'>
+  <!ENTITY not_annotation.jcr PUBLIC ''
+    'figs/not_annotation.jcr'>
 
 
 ]>
@@ -712,41 +714,13 @@ n.f..
                     <artwork xml:space="preserve" align="center">&repetition_step.jcr;</artwork>
                 </figure>
             </section>
-            <section title="Rejecting Rules" anchor="not_annotation">
+            <section title="Negating Evaluation" anchor="not_annotation">
                 <t>
-                    The evaluation of a rule can be changed with the @{reject} annotation. With this annotation,
+                    The evaluation of a rule can be changed with the @{not} annotation. With this annotation,
                     a rule that would otherwise match does not, and a rule that would not have matched does.
                     <figure>
-                        <artwork xml:space="preserve">
-    not_two @{reject} : 2 
-    ; match anything that isn't the integer 2
-    
-    @{reject} @{unordered} [ :"fail", *:string ] 
-    ; error if one of the status values is "fail"
-                </artwork>
+                        <artwork xml:space="preserve" align="center">&not_annotation.jcr;</artwork>
                     </figure>         
-                </t>
-            </section>
-            <section title="Repetitions, Annotations, and Target Rules">
-                <t>
-                    With regard to syntax, repetition expressions are part of the syntax of array, object, and group
-                    rules with respect to the embedding of subordinate rules, whereas annotations are a component of
-                    every type of rule definition. Every type of rule definition may begin with a series of
-                    annotations.
-                </t>
-                <t>
-                    The significance is the placement of repetition expressions with respect to annotations:
-                    repetition expressions precede annotations.
-                </t>
-                <t>
-                    The following is correct:
-                    <list style="empty">
-                        <t>[ * @{unordered} [ foo ] ]</t>
-                    </list>
-                    The following is not:
-                    <list style="empty">
-                        <t>[ @{unordered} * [ foo ] ]</t>
-                    </list>
                 </t>
             </section>
         </section>
@@ -759,21 +733,24 @@ n.f..
                 Single line directives appear on their own line in a ruleset, begin
                 with a hash character ('#') and are terminated by the end of the line.
                 They take the following form:
-                <list style="empty"><t># directive_name optional_directive_parameters</t></list>
-                Directives may have other qualifiers after the directive name.
             </t>
+            <figure>
+                <artwork xml:space="preserve" align="center">
+# directive_name parameter_1 parameter_2 ...
+                </artwork>
+            </figure>      
             <t>
                 Multi-line directives also appear on their own lines, but may span multiple lines.
-                The being with the character sequence "#{" and ends with "}". The take the
+                They begin with the character sequence "#{" and end with "}". The take the
                 following form:
             </t>
             <figure>
-                <artwork xml:space="preserve">
-    #{ directive_name
-         directive_parameter_1 directive_paramter_2
-         directive_parameter_3
-         ...
-    }
+                <artwork xml:space="preserve" align="center">
+#{ directive_name
+    parameter_1 paramter_2
+    parameter_3
+    ...
+}
                 </artwork>
             </figure>
             <t>
@@ -785,17 +762,21 @@ n.f..
                     This directive declares that the ruleset complies with a specific version of this
                     standard. The version is expressed as a major integer followed by a period followed
                     by a minor integer.
-                    <list style="empty">
-                        <t># jcr-version 0.6</t>
-                    </list>
-                </t>
+                </t>            
+                <figure>
+                    <artwork xml:space="preserve" align="center">
+# jcr-version 0.7
+                </artwork>
+                </figure>
                 <t>
                     The major.minor number signifying compliance with this document is "0.6". Upon publication
                     of this specification as an IETF proposed standard, it will be "1.0".
-                    <list style="empty">
-                        <t># jcr-version 1.0</t>
-                    </list>
-                </t>
+                </t>                
+                <figure>
+                    <artwork xml:space="preserve" align="center">
+# jcr-version 1.0
+                </artwork>
+                </figure>
                 <t>
                     Ruleset authors are advised to place this directive as the first line of a ruleset.
                 </t>
@@ -803,10 +784,12 @@ n.f..
             <section title="ruleset-id">
                 <t>
                     This directive identifies a ruleset to rule processors. It takes the form:
-                    <list style="empty">
-                        <t># ruleset-id identifier</t>
-                    </list>
                 </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">
+# ruleset-id identifier
+                </artwork>
+                </figure>
                 <t>
 					An identifier can be a URL (e.g. http://example.com/foo), an inverted domain name
 					(e.g. com.example.foo) or any other form that conforms to the JCR ABNF syntax that
@@ -821,10 +804,20 @@ n.f..
                 </t>
                 <t>
                     This directive has the following form:
-                    <list style="empty"><t># import identifier as alias</t></list>
-                    The following is an example:
-                    <list style="empty"><t># import http://example.com/rfc9999 as rfc9999</t></list>
                 </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">
+# import identifier as alias
+                </artwork>
+                </figure>
+                <t>
+                    The following is an example:
+                </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">
+# import http://example.com/rfc9999 as rfc9999
+                </artwork>
+                </figure>
                 <t>
                     The rule names of the ruleset to be imported may be referenced by prepending
                     the alias followed by a period character ('.') followed by the rule name
@@ -838,17 +831,24 @@ n.f..
             <section title="Any Member with Any Value">                
                 <t>
                     Because member names may be specified with regular expressions, it is
-                    possible to construct a member rule that matches any member name:
-                    <list style="empty"><t>rule_name /.*/ target_rule_name</t></list>
+                    possible to construct a member rule that matches any member name.
                     As an example, the following defines an object member with any name
                     that has a value that is a string:
-                    <list style="empty"><t>user_data /.*/ : string</t></list>
                 </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">
+$user_data = /.*/ : string
+                </artwork>
+                </figure>
                 <t>
                     Constructing an object member of any name with any type would therefore
                     take the form:
-                    <list style="empty"><t>rule_name /.*/ : any</t></list>
                 </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">
+$rule_name = /.*/ : any
+                </artwork>
+                </figure>
             </section>
             <section title="Restricting Objects">   
                 <t>
@@ -860,24 +860,26 @@ n.f..
                 </t>
                 <t>
                     However, some specifications may need to restrict the members of a JSON
-                    object to a known set. To construct an object rule specifying that no
-                    extra members are expected, the @{reject} annotation may be used with
-                    a regular expression as the last subordinate rule of the object rule.
-                    <list style="empty">
-                        <t>{ member1, member2, + @{reject} /.*/ : any }</t>
-                    </list>
+                    object to a known set. To construct a rule specifying that no
+                    extra members are expected, the @{not} annotation may be used with
+                    a regular expression as the last subordinate component of the object specification.
                 </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">
+{ "foo" : 1, "bar" : 2, @{not} /.*/ : any @+ }
+                </artwork>
+                </figure>
                 <t>
-                    This works because subordinate rules are evaluated in the order they
-                    appear in the object rule, and the last rule accepts any member with
-                    any type but fails to validate if one ore more of those rules are found
-                    due to the @{reject} annotation.
+                    This works because subordinate components are evaluated in the order they
+                    appear in the object rule, and the last component accepts any member with
+                    any type but fails to validate if one ore more of those components are found
+                    due to the @{not} annotation.
                 </t>
             </section>
             <section title="Unrestricting Arrays">
                 <t>
-                    Unlike object validation, array rules will not validate items of an
-                    array that do not match a subordinate rule of the array rule. This
+                    Unlike object validation, array specifications will not validate items of an
+                    array that do not match a subordinate component of the array specification. This
                     processing model is due to the nature of the typical access pattern of
                     JSON arrays in many programming languages, which is to iterate over the
                     array. Processes iterating over an array would need to take special
@@ -885,29 +887,38 @@ n.f..
                     if the items were of a different type than those that are expected.
                 </t>
                 <t>
-                    Like object rules, the subordinate rules of an array rule are
+                    Like object rules, the subordinate components of an array specification are
                     evaluated in the order they appear. To allow an array to contain
                     any value after guaranteeing that it contains the necessary items,
-                    the last subordinate rule of the array rule should accept any
+                    the last subordinate component of the array specification should accept any
                     item:
-                    <list style="empty">
-                        <t>[ item1, item2, * :any ]</t>
-                    </list>
                 </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">
+[ "item1", "item2", any @* ]
+                </artwork>
+                </figure>
             </section>
-            <section title="Groups of Values">
+            <section title="Lists of Values">
                 <t>
-                    In addition to specific primitive data types, value rules may
-                    contain a value choice rule. The value choice rule, and any subordinate rule
-                    within it, must evaluate to a single primitive data type.
+                    Group specifications may be used to create enumerated lists of strings
+                    and other primitive data types, because primitive specifications may
+                    contain a group specification, which may have multiple primitive specifications.
+                    Because a primitive specification must resolve to a single data type,
+                    the group specification must only contain choice combinations.
                 </t>
                 <t>
-                    The following is an example of a value choice rule embedded in a value
-                    rule:
-                    <list style="empty">
-                        <t>address : ( :ip4 | :ip6 )</t>
-                    </list>
+                    Consider the following examples:
                 </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">
+; either an IPv4 or IPv6 adress
+$address =: ( ipv4 | ipv6 )
+
+; allowable fruits
+$fruits =: ( "apple" | "banana" | "pear" )
+                </artwork>
+                </figure>
             </section>
             <section title="Groups in Arrays"> 
                 <t>
@@ -1007,65 +1018,6 @@ obj2 { mixin_group, "baz" : string }
                     location_uri member is present.
                     <list style="empty"><t>response { ?( location_uri, ?referrer_uri ) }</t></list>
                 </t>
-            </section>
-            <section title="Multiple Root Styles">
-                <t>
-                    As stated in <xref target="starting-points"></xref>, the first rule in a ruleset
-                    is a root rule when it is unnamed. Group rules can be used as the root rule, such
-                    as in the following example:
-                </t>
-                <figure>
-                    <artwork xml:space="preserve">
-    ( { "foo" : string } | { "bar" : string } )
-                    </artwork>
-                </figure>
-                <t>
-                    This is the equivalent of the following:
-                </t>
-                <figure>
-                    <artwork xml:space="preserve">
-    foo @{root} { "foo" : string }
-    bar @{root} { "bar" : string }
-                    </artwork>
-                </figure>
-                <t>
-                    Either style is valid. However, explicitly naming root rules has the advantage
-                    of explicitly validating a JSON message against a specific rule.
-                </t>
-            </section>
-            <section title="JSON-like Object and Array Definitions">
-                <t>
-                    JCR allows an optional colon character (":") to precede object and array rule
-                    definitions to give these definitions more of a JSON-like appearance.
-                    Consider the following example.
-                </t>
-                <figure>
-                    <artwork xml:space="preserve">
-    { 
-        "foo" { 
-            "fuzz" : string 
-         }, 
-         "bar" [ 
-             "baz" 
-         ] 
-     }
-                    </artwork>
-                </figure> 
-                <t>
-                    To appear more JSON-like, this may also be given as follows:
-                </t>
-                <figure>
-                    <artwork xml:space="preserve">
-    { 
-        "foo" : { 
-            "fuzz" : string 
-         }, 
-         "bar" : [ 
-             "baz" 
-         ] 
-     }
-                    </artwork>
-                </figure> 
             </section>
         </section>
         <section title="ABNF Syntax">

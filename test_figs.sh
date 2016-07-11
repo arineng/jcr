@@ -40,6 +40,10 @@ assert_raises "jcr --test-jcr -r figs/mixed_and_or_good.jcr" 0
 assert_raises "jcr --test-jcr -r figs/repetition_min_max.jcr" 0
 assert_raises "jcr --test-jcr -r figs/repetition_kleene.jcr" 0
 assert_raises "jcr --test-jcr -r figs/repetition_step.jcr" 0
+assert_raises "jcr -S "not_two" -r figs/not_annotation.jcr figs/not_annotation1.json" 0
+assert_raises "jcr -S "not_two" -r figs/not_annotation.jcr figs/not_annotation2.json" 1
+assert_raises "jcr -S "status" -r figs/not_annotation.jcr figs/not_annotation3.json" 0
+assert_raises "jcr -S "status" -r figs/not_annotation.jcr figs/not_annotation4.json" 1
 
 assert_end figs
 

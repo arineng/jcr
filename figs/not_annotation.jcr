@@ -1,0 +1,5 @@
+; match anything that isn't the integer 2
+$not_two = [ @{not} 2 ]
+    
+; error if one of the status values is "fail"
+$status = @{not} @{unordered} [ "fail", string @* ] 
