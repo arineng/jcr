@@ -1598,8 +1598,8 @@ WSP              = SP / HTAB    ; white space
 
 8.  Acknowledgements
 
-   John Cowan, Andrew Biggs and Paul Jones provided feedback and
-   suggestions which led to many changes in the syntax.
+   John Cowan, Andrew Biggs, Paul Kyzivat and Paul Jones provided
+   feedback and suggestions which led to many changes in the syntax.
 
 9.  References
 

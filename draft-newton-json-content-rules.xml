@@ -1055,7 +1055,7 @@ n.f..
         </section>        
         <section title="Acknowledgements">
             <t>
-                John Cowan, Andrew Biggs and Paul Jones provided feedback and suggestions
+                John Cowan, Andrew Biggs, Paul Kyzivat and Paul Jones provided feedback and suggestions
                 which led to many changes in the syntax.
             </t>
         </section>
