@@ -17,8 +17,6 @@
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5322.xml'>
   <!ENTITY RFC5952 PUBLIC ''
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5952.xml'>
-  <!ENTITY RFC6570 PUBLIC ''
-   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.6570.xml'>
   <!ENTITY RFC7159 PUBLIC ''
    'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7159.xml'>
   <!ENTITY I-D.cordell-jcr-co-constraints PUBLIC ''
@@ -108,8 +106,52 @@
     'figs/repetition_step.jcr'>
   <!ENTITY not_annotation.jcr PUBLIC ''
     'figs/not_annotation.jcr'>
-
-
+  <!ENTITY single_line_directive_example.jcr PUBLIC ''
+    'figs/single_line_directive_example.jcr'>
+  <!ENTITY multi_line_directive_example.jcr PUBLIC ''
+    'figs/multi_line_directive_example.jcr'>
+  <!ENTITY jcr_version_current.jcr PUBLIC ''
+    'figs/jcr_version_current.jcr'>
+  <!ENTITY ruleset_id.jcr PUBLIC ''
+    'figs/ruleset_id.jcr'>
+  <!ENTITY any_member.jcr PUBLIC ''
+    'figs/any_member.jcr'>
+  <!ENTITY any_member1.json PUBLIC ''
+    'figs/any_member1.json'>
+  <!ENTITY any_member2.json PUBLIC ''
+    'figs/any_member2.json'>
+  <!ENTITY any_member_any_type.jcr PUBLIC ''
+    'figs/any_member_any_type.jcr'>
+  <!ENTITY any_member_any_type2.json PUBLIC ''
+    'figs/any_member_any_type2.json'>
+  <!ENTITY restrict_objects.jcr PUBLIC ''
+    'figs/restrict_objects.jcr'>
+  <!ENTITY restrict_objects1.json PUBLIC ''
+    'figs/restrict_objects1.json'>
+  <!ENTITY restrict_objects2.json PUBLIC ''
+    'figs/restrict_objects2.json'>
+  <!ENTITY unrestricted_arrays.jcr PUBLIC ''
+    'figs/unrestricted_arrays.jcr'>
+  <!ENTITY lists_of_values.jcr PUBLIC ''
+    'figs/lists_of_values.jcr'>
+  <!ENTITY groups_in_arrays.jcr PUBLIC ''
+    'figs/groups_in_arrays.jcr'>
+  <!ENTITY groups_in_arrays2.jcr PUBLIC ''
+    'figs/groups_in_arrays2.jcr'>
+  <!ENTITY groups_in_objects.jcr PUBLIC ''
+    'figs/groups_in_objects.jcr'>
+  <!ENTITY macro.jcr PUBLIC ''
+    'figs/macro.jcr'>
+  <!ENTITY object_mixin.jcr PUBLIC ''
+    'figs/object_mixin.jcr'>
+  <!ENTITY subordinate_dependents.jcr PUBLIC ''
+    'figs/subordinate_dependents.jcr'>
+  <!ENTITY override1.jcr PUBLIC ''
+    'figs/override1.jcr'>
+  <!ENTITY override2.jcr PUBLIC ''
+    'figs/override2.jcr'>
+  <!ENTITY override3.jcr PUBLIC ''
+    'figs/override3.jcr'>
 ]>
 <?rfc toc="yes"?>
 <rfc category="std" docName="draft-newton-json-content-rules-07" ipr="trust200902">
@@ -265,7 +307,7 @@
             </t>
             <t>
                 Comments are very similar to comments in <xref target="RFC4234">ABNF</xref>. They start with a semi-colon (';') and
-                continue to the end of the line or another semi-colon.
+                continue to the end of the line.
             </t>
         </section>
         <section title="Rules">
@@ -428,13 +470,14 @@ n.f..
                     <artwork align="center" xml:space="preserve">&primitives_strings.jcr;</artwork>
                 </figure>
                 <t>
+                    Regular expressions are not implicitly anchored and therefore must be explicitly
+                    anchored if necessary.
+                </t>
+                <t>
                     A string can be specified as a <xref target="RFC3986">URI</xref> using the
-                    word 'uri', but also may be more narrowly specified using a <xref target="RFC6570">URI template</xref>.
-                    URI templates are specified with the word 'uri' followed by two period characters
-                    ('..') followed by the URI template.
-                    When using URI templates, the variable names are ignored for pattern matching,
-                    but they should be provided for construction of a valid URI template. Providing
-                    the variable names also aids in the description of what is to be matched.
+                    word 'uri', but also may be more narrowly scoped to a URI of a specific scheme.
+                    Specific URI schemes are specified with the word 'uri' followed by two period characters
+                    ('..') followed by the URI scheme.
                 </t>
                 <figure>
                     <artwork align="center" xml:space="preserve">&primitives_uris.jcr;</artwork>
@@ -488,7 +531,8 @@ n.f..
                 followed by either a subordinate component, which is either a
                 rule name or a primitive, object, array, or group specification. Member name specifications
                 can be given either as a quated string using double quotes or as a regular expression
-                using forward slash ('/') characters.
+                using forward slash ('/') characters. Regular expressions are not implicitly anchored
+                and therefore must have explicit anchors if needed.
             </t>
             <figure>
                 <artwork xml:space="preserve" align="center">&member_specifications.jcr;</artwork>
@@ -735,9 +779,7 @@ n.f..
                 They take the following form:
             </t>
             <figure>
-                <artwork xml:space="preserve" align="center">
-# directive_name parameter_1 parameter_2 ...
-                </artwork>
+                <artwork xml:space="preserve" align="center">&single_line_directive_example.jcr;</artwork>
             </figure>      
             <t>
                 Multi-line directives also appear on their own lines, but may span multiple lines.
@@ -745,33 +787,32 @@ n.f..
                 following form:
             </t>
             <figure>
-                <artwork xml:space="preserve" align="center">
-#{ directive_name
-    parameter_1 paramter_2
-    parameter_3
-    ...
-}
-                </artwork>
+                <artwork xml:space="preserve" align="center">&multi_line_directive_example.jcr;</artwork>
             </figure>
             <t>
                 This specification defines the directives "jcr-version", "ruleset-id",
                 and "import", but other directives may be defined.
             </t>
             <section title="jcr-version">
+                <!-- We'll obviously have to revisit this section upon publication.-->
                 <t>
                     This directive declares that the ruleset complies with a specific version of this
                     standard. The version is expressed as a major integer followed by a period followed
                     by a minor integer.
                 </t>            
                 <figure>
-                    <artwork xml:space="preserve" align="center">
-# jcr-version 0.7
-                </artwork>
+                    <artwork xml:space="preserve" align="center">&jcr_version_current.jcr;</artwork>
                 </figure>
                 <t>
-                    The major.minor number signifying compliance with this document is "0.6". Upon publication
+                    The major.minor number signifying compliance with this document is "0.7". Upon publication
                     of this specification as an IETF proposed standard, it will be "1.0".
-                </t>                
+                    
+                    <cref>
+                        This will be removed in the final version.
+                    </cref>
+                </t>
+                <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
+                 the working version number. -->
                 <figure>
                     <artwork xml:space="preserve" align="center">
 # jcr-version 1.0
@@ -780,15 +821,25 @@ n.f..
                 <t>
                     Ruleset authors are advised to place this directive as the first line of a ruleset.
                 </t>
+                <t>
+                    This directive may have optional extension identifiers following the version number.
+                    Each extension identifier is separated by whitespace. Extension identifiers are encouraged
+                    to contain embedded version numbers.
+                </t>
+                <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
+                 the working version number. -->
+                <figure>
+                    <artwork xml:space="preserve" align="center">
+# jcr-version 1.0 co-constraints-1.2 jcr-doc-1.0
+                </artwork>
+                </figure>
             </section>
             <section title="ruleset-id">
                 <t>
                     This directive identifies a ruleset to rule processors. It takes the form:
                 </t>
                 <figure>
-                    <artwork xml:space="preserve" align="center">
-# ruleset-id identifier
-                </artwork>
+                    <artwork xml:space="preserve" align="center">&ruleset_id.jcr;</artwork>
                 </figure>
                 <t>
 					An identifier can be a URL (e.g. http://example.com/foo), an inverted domain name
@@ -803,16 +854,9 @@ n.f..
                     evaluated in addition to the ruleset where the directive appears.
                 </t>
                 <t>
-                    This directive has the following form:
-                </t>
-                <figure>
-                    <artwork xml:space="preserve" align="center">
-# import identifier as alias
-                </artwork>
-                </figure>
-                <t>
                     The following is an example:
                 </t>
+                <!-- We don't have control of example.com, so this can't be put in as a test.-->
                 <figure>
                     <artwork xml:space="preserve" align="center">
 # import http://example.com/rfc9999 as rfc9999
@@ -832,22 +876,36 @@ n.f..
                 <t>
                     Because member names may be specified with regular expressions, it is
                     possible to construct a member rule that matches any member name.
-                    As an example, the following defines an object member with any name
+                    As an example, the following defines an object with a member with any name
                     that has a value that is a string:
                 </t>
                 <figure>
-                    <artwork xml:space="preserve" align="center">
-$user_data = /.*/ : string
-                </artwork>
+                    <artwork xml:space="preserve" align="center">&any_member.jcr;</artwork>
                 </figure>
                 <t>
-                    Constructing an object member of any name with any type would therefore
+                    The JSON below matches the above rule.
+                </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&any_member1.json;</artwork>
+                </figure>
+                <t>
+                    Likewise, the JSON below also matches the same rule.
+                </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&any_member2.json;</artwork>
+                </figure>
+                <t>
+                    Constructing an object with a member of any name with any type would therefore
                     take the form:
                 </t>
                 <figure>
-                    <artwork xml:space="preserve" align="center">
-$rule_name = /.*/ : any
-                </artwork>
+                    <artwork xml:space="preserve" align="center">&any_member_any_type.jcr;</artwork>
+                </figure>
+                <t>
+                    The above rule matches not only the two JSON objects above, but the JSON object below.
+                </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&any_member_any_type2.json;</artwork>
                 </figure>
             </section>
             <section title="Restricting Objects">   
@@ -865,9 +923,19 @@ $rule_name = /.*/ : any
                     a regular expression as the last subordinate component of the object specification.
                 </t>
                 <figure>
-                    <artwork xml:space="preserve" align="center">
-{ "foo" : 1, "bar" : 2, @{not} /.*/ : any @+ }
-                </artwork>
+                    <artwork xml:space="preserve" align="center">&restrict_objects.jcr;</artwork>
+                </figure>
+                <t>
+                    The following JSON object will validate against the above rule.
+                </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&restrict_objects1.json;</artwork>
+                </figure>
+                <t>
+                    However, the following JSON object will not validate against the above rule.
+                </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&restrict_objects2.json;</artwork>
                 </figure>
                 <t>
                     This works because subordinate components are evaluated in the order they
@@ -894,9 +962,7 @@ $rule_name = /.*/ : any
                     item:
                 </t>
                 <figure>
-                    <artwork xml:space="preserve" align="center">
-[ "item1", "item2", any @* ]
-                </artwork>
+                    <artwork xml:space="preserve" align="center">&unrestricted_arrays.jcr;</artwork>
                 </figure>
             </section>
             <section title="Lists of Values">
@@ -911,113 +977,72 @@ $rule_name = /.*/ : any
                     Consider the following examples:
                 </t>
                 <figure>
-                    <artwork xml:space="preserve" align="center">
-; either an IPv4 or IPv6 adress
-$address =: ( ipv4 | ipv6 )
-
-; allowable fruits
-$fruits =: ( "apple" | "banana" | "pear" )
-                </artwork>
+                    <artwork xml:space="preserve" align="center">&lists_of_values.jcr;</artwork>
                 </figure>
             </section>
             <section title="Groups in Arrays"> 
                 <t>
-                    Groups may also be a subordinate rule of array rules:
-                    <list style="empty">
-                        <t>[ ( :ip4 | :ip6 ), :integer ]</t>
-                    </list>
+                    Groups may be a subordinate component of array specifications:
                 </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&groups_in_arrays.jcr;</artwork>
+                </figure>
                 <t>
-                    Unlike value rules, subordinate group rules in array rules
-                    may have sequence combinations and contain any rule type
-                    with the exception of member rules.
-                    <list style="empty">
-                        <t>[ ( first_name, ? middle_name, last_name ), age ]</t>
-                    </list>
-                    Of course, the above is better written as:
-                    <list style="empty">
-                        <t>[ name, age ]</t>
-                        <t>name ( first_name, ? middle_name, last_name )</t>
-                    </list>
+                    Unlike primitive specifications, subordinate group specifications in array specifications
+                    may have sequence combinations and contain any type specification
+                    with the exception of member specifications.
                 </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&groups_in_arrays2.jcr;</artwork>
+                </figure>
             </section>
             <section title="Groups in Objects">
                 <t>
-                    Groups may also be a subordinate rule of object rules:
-                    <list style="empty">
-                        <t>{ ( title, date, author ), + paragraph }</t>
-                    </list>
-                    Subordinate group rules in object rules may have sequence
-                    combinations but must only contain member rules.
+                    Groups may be a subordinate component of object specifications:
+                    Subordinate group specifications in object specifications may have sequence
+                    combinations but must only contain member specifications.
                 </t>
                 <figure>
-                    <artwork xml:space="preserve">
-    { front_matter, + paragraph }
-    front_matter ( title, date, author )
-    title "title" :string
-    date "date" : full-date
-    author "author" [ *:string ]
-    paragraph /p[0-9]*/ :string
-                </artwork>
+                    <artwork xml:space="preserve" align="center">&groups_in_objects.jcr;</artwork>
                 </figure> 
             </section>
             <section title="Group Rules as Macros">
                 <t>
-                    The syntax for group rules accommodates one ore more subordinate rules and
+                    The syntax for group specifications accommodates one ore more subordinate components and
                     a repetition expression for each. Other than grouping multiple rules, a
-                    group rule can be used as a macro definition for a single rule.
-                    <list style="empty">
-                        <t>paragraphs ( + /p[0-9]*/ : string )</t>
-                    </list>
+                    group specification can be used as a macro definition for a single rule.
                 </t>
-            </section>
-            <section title="Comment Separated Rules">
-                <t>
-                    Rules may be placed on the same line, but because they have no termination
-                    syntax this style of writing rules can be confusing to some readers:
-                    <list style="empty">
-                        <t>first_name "first name" :string last_name "last name" :string</t>
-                    </list>
-                </t>
-                <t>
-                    An empty comment can serve as a visual cue to denote the separation of the
-                    two rules:
-                    <list style="empty">
-                        <t>first_name "first name" :string ;; last_name "last name" :string</t>
-                    </list>
-                </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&macro.jcr;</artwork>
+                </figure> 
             </section>
             <section title="Object Mixins">
                 <t>
                     Group rules can be used to create object mixins, a pattern for writing data
                     models similar in style to object derivation in some programming languages.
-                    In the example in <xref target="group_mixin_example"></xref>,
+                    In the example in below,
                     both obj1 and obj2 have a members "foo" and "fob" with obj1 having the additional member "bar"
                     and obj2 having the additional member "baz".
                 </t>
-                <figure anchor="group_mixin_example">
-                    <artwork xml:space="preserve">
-mixin_group ( "foo" : integer, "fob" : uri )
-
-obj1 { mixin_group, "bar" : string }
-
-obj2 { mixin_group, "baz" : string }
-                </artwork>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&object_mixin.jcr;</artwork>
                 </figure>
             </section>
-            <section title="Subordinate Rule Dependencies">
+            <section title="Subordinate Dependencies">
                 <t>
-                    In object and array rules, there may be situations in which it is necessary to
-                    condition the existence of a subordinate rule on the existence of a sibling subordinate
-                    rule. In other words, example_rule_two should only be evaluated if example_rule_one
+                    In object and array specifications, there may be situations in which it is necessary to
+                    condition the existence of a subordinate component on the existence of a sibling subordinate
+                    component. In other words, example_two should only be evaluated if example_one
                     evaluates positively. Or put another way, a member of an object or an item of an
-                    array may be present only on the condition that another member of item is present.
+                    array may be present only on the condition that another member or item is present.
                 </t>
                 <t>
                     In the following example, the referrer_uri member can only be present if the
                     location_uri member is present.
-                    <list style="empty"><t>response { ?( location_uri, ?referrer_uri ) }</t></list>
                 </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&subordinate_dependents.jcr;</artwork>
+                </figure>
             </section>
         </section>
         <section title="ABNF Syntax">
@@ -1030,7 +1055,7 @@ obj2 { mixin_group, "baz" : string }
         </section>        
         <section title="Acknowledgements">
             <t>
-                Andrew Biggs and Paul Jones provided feedback and suggestions
+                John Cowan, Andrew Biggs and Paul Jones provided feedback and suggestions
                 which led to many changes in the syntax.
             </t>
         </section>
@@ -1045,7 +1070,6 @@ obj2 { mixin_group, "baz" : string }
             &RFC4648;
             &RFC5322;
             &RFC5952;
-            &RFC6570;
             &RFC7159;
             
         </references>
@@ -1094,9 +1118,11 @@ obj2 { mixin_group, "baz" : string }
                     As mentioned in the introduction, one tool for testing would be the
                     ability to locally override named rules. As an example, consider the
                     following rule which defines an array of strings.
-                    <list style="empty">
-                        <t>statuses [ * :string ]</t>
-                    </list>
+                </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&override1.jcr;</artwork>
+                </figure>
+                <t>
                     Consider the specification where this rule is found does not define the
                     values but references an IANA registry for extensibility purposes.
                 </t>
@@ -1104,17 +1130,17 @@ obj2 { mixin_group, "baz" : string }
                     If a software developer desired to test a specific situation in which the
                     array must at least contain the status "accepted", the rules from the specification
                     could be used and the statuses rule could be explicitly overridden locally as:
-                    <list style="empty">
-                        <t>statuses @{unordered} [ :"accepted", * :string ]</t>
-                    </list>
                 </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&override2.jcr;</artwork>
+                </figure>
                 <t>
                     Alternatively, the developer may need to ensure that the status "denied" should
                     not be present in the array:
-                    <list style="empty">
-                        <t>statuses @{unordered} [ ? @{reject} :"denied", * :string ]</t>
-                    </list>
                 </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&override3.jcr;</artwork>
+                </figure>
             </section>
             <section title="Rule Callbacks">
                 <t>
@@ -1135,6 +1161,27 @@ obj2 { mixin_group, "baz" : string }
                 The following implementations, <xref target="ARIN_JCR_VALIDATOR"></xref> and
                 <xref target="CODALOGIC_JCR_VALIDATOR"></xref> have influenced the development
                 of this document.
+            </t>
+        </section>
+        <section title="Syntax Changes from -06" anchor="syntax_changes">
+            <t>
+                The syntax described in this document is changed significantly, and in a non-backwards
+                compatible manner, from the syntax described in the -06 version of this specification.
+                The vast majority of these changes have occured to meet the goals of the syntax being
+                a superset of JSON and easy to comprehend by a casual reader unfamiliar with JCR but
+                familiar with JSON.
+            </t>
+            <t>
+                The latter of those two goals is subjective, and therefore a series of focus group
+                sessions were convened where participants, all professional software developers with
+                familiarity with JSON but not JCR, were asked to read and interpret various rulesets
+                and allowed to offer suggested improvements. Outcomes of these sessions resulted in
+                many changes, such as the use of '$' characters to note rule names and the change of
+                the repetition syntax.
+            </t>
+            <t>
+                Other changes came from feedback given directly to the authors via email and on
+                the IETF JSON Working Group mailing list.
             </t>
         </section>
     </back>

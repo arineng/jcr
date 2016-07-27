@@ -1,7 +1,7 @@
 [ $name_servers @1..12%2 ]
 $name_servers =: fqdn
 
-{ /eth.*/ : $mac_addr @..100%2 }
+{ /^eth.*/ : $mac_addr @..100%2 }
 $mac_addr =: hex
 
 [ $octet @4..%2 ]

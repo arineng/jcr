@@ -1,0 +1,6 @@
+; $referrer_uri can only be present if
+; $location_uri is present
+{ ( $location_uri, $referrer_uri@? )@? }
+
+$location_uri = "locationURI" : uri
+$referrer_uri = "referrerURI" : uri

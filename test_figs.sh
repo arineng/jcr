@@ -1,6 +1,6 @@
 # wget https://raw.github.com/lehmannro/assert.sh/v1.1/assert.sh
 
-. assert.sh
+. assert.sh -v
 
 assert_raises "jcr -r figs/first_example.jcr figs/first_example.json" 0
 assert_raises "jcr -r figs/first_example2.jcr figs/first_example.json" 0
@@ -44,6 +44,28 @@ assert_raises "jcr -S "not_two" -r figs/not_annotation.jcr figs/not_annotation1.
 assert_raises "jcr -S "not_two" -r figs/not_annotation.jcr figs/not_annotation2.json" 1
 assert_raises "jcr -S "status" -r figs/not_annotation.jcr figs/not_annotation3.json" 0
 assert_raises "jcr -S "status" -r figs/not_annotation.jcr figs/not_annotation4.json" 1
+assert_raises "jcr --test-jcr -r figs/single_line_directive_example.jcr" 0
+assert_raises "jcr --test-jcr -r figs/multi_line_directive_example.jcr" 0
+assert_raises "jcr --test-jcr -r figs/jcr_version_current.jcr" 0
+assert_raises "jcr --test-jcr -r figs/ruleset_id.jcr" 0
+assert_raises "jcr -r figs/any_member.jcr figs/any_member1.json" 0
+assert_raises "jcr -r figs/any_member.jcr figs/any_member2.json" 0
+assert_raises "jcr -r figs/any_member_any_type.jcr figs/any_member1.json" 0
+assert_raises "jcr -r figs/any_member_any_type.jcr figs/any_member2.json" 0
+assert_raises "jcr -r figs/any_member_any_type.jcr figs/any_member_any_type2.json" 0
+assert_raises "jcr -r figs/restrict_objects.jcr figs/restrict_objects1.json" 0
+assert_raises "jcr -r figs/restrict_objects.jcr figs/restrict_objects2.json" 1
+assert_raises "jcr -r figs/unrestricted_arrays.jcr figs/unrestricted_arrays.json" 0
+assert_raises "jcr --test-jcr -r figs/lists_of_values.jcr" 0
+assert_raises "jcr --test-jcr -r figs/groups_in_arrays.jcr" 0
+assert_raises "jcr --test-jcr -r figs/groups_in_arrays2.jcr" 0
+assert_raises "jcr --test-jcr -r figs/groups_in_objects.jcr" 0
+assert_raises "jcr --test-jcr -r figs/macro.jcr" 0
+assert_raises "jcr --test-jcr -r figs/object_mixin.jcr" 0
+assert_raises "jcr --test-jcr -r figs/subordinate_dependents.jcr" 0
+assert_raises "jcr --test-jcr -r figs/override1.jcr" 0
+assert_raises "jcr --test-jcr -r figs/override2.jcr" 0
+assert_raises "jcr --test-jcr -r figs/override3.jcr" 0
 
 assert_end figs
 

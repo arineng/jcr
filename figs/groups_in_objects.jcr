@@ -1,0 +1,11 @@
+; a group in an object
+{ ( $title, $date, $author ), $paragraph @+ }
+
+; a group referenced from an object
+{ $front_matter, $paragraph @+ }
+$front_matter = ( $title, $date, $author )
+
+$title = "title" : string
+$date = "date" : date
+$author = "author" : [ string @* ]
+$paragraph = /p[0-9]*/ : string

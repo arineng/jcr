@@ -5,4 +5,4 @@ string
 "she sells sea shells"
 
 ; a regular expression
-/she sells .*/
+/^she sells .*/

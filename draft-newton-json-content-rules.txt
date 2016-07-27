@@ -5,8 +5,8 @@
 Network Working Group                                          A. Newton
 Internet-Draft                                                      ARIN
 Intended status: Standards Track                              P. Cordell
-Expires: January 12, 2017                                      Codalogic
-                                                           July 11, 2016
+Expires: January 28, 2017                                      Codalogic
+                                                           July 27, 2016
 
 
               A Language for Rules Describing JSON Content
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 12, 2017.
+   This Internet-Draft will expire on January 28, 2017.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Newton & Cordell        Expires January 12, 2017                [Page 1]
+Newton & Cordell        Expires January 28, 2017                [Page 1]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -89,16 +89,15 @@ Table of Contents
      5.2.  ruleset-id  . . . . . . . . . . . . . . . . . . . . . . .  20
      5.3.  import  . . . . . . . . . . . . . . . . . . . . . . . . .  20
    6.  Tips and Tricks . . . . . . . . . . . . . . . . . . . . . . .  20
-     6.1.  Any Member with Any Value . . . . . . . . . . . . . . . .  20
+     6.1.  Any Member with Any Value . . . . . . . . . . . . . . . .  21
      6.2.  Restricting Objects . . . . . . . . . . . . . . . . . . .  21
-     6.3.  Unrestricting Arrays  . . . . . . . . . . . . . . . . . .  21
+     6.3.  Unrestricting Arrays  . . . . . . . . . . . . . . . . . .  22
      6.4.  Lists of Values . . . . . . . . . . . . . . . . . . . . .  22
-     6.5.  Groups in Arrays  . . . . . . . . . . . . . . . . . . . .  22
-     6.6.  Groups in Objects . . . . . . . . . . . . . . . . . . . .  22
+     6.5.  Groups in Arrays  . . . . . . . . . . . . . . . . . . . .  23
+     6.6.  Groups in Objects . . . . . . . . . . . . . . . . . . . .  23
      6.7.  Group Rules as Macros . . . . . . . . . . . . . . . . . .  23
-     6.8.  Comment Separated Rules . . . . . . . . . . . . . . . . .  23
-     6.9.  Object Mixins . . . . . . . . . . . . . . . . . . . . . .  23
-     6.10. Subordinate Rule Dependencies . . . . . . . . . . . . . .  24
+     6.8.  Object Mixins . . . . . . . . . . . . . . . . . . . . . .  24
+     6.9.  Subordinate Dependencies  . . . . . . . . . . . . . . . .  24
    7.  ABNF Syntax . . . . . . . . . . . . . . . . . . . . . . . . .  24
    8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  29
    9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .  29
@@ -106,18 +105,19 @@ Table of Contents
      9.2.  Infomative References . . . . . . . . . . . . . . . . . .  30
    Appendix A.  Co-Constraints . . . . . . . . . . . . . . . . . . .  30
    Appendix B.  Testing Against JSON Content Rules . . . . . . . . .  30
+     B.1.  Locally Overriding Rules  . . . . . . . . . . . . . . . .  31
 
 
 
-Newton & Cordell        Expires January 12, 2017                [Page 2]
+Newton & Cordell        Expires January 28, 2017                [Page 2]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
 
-     B.1.  Locally Overriding Rules  . . . . . . . . . . . . . . . .  30
      B.2.  Rule Callbacks  . . . . . . . . . . . . . . . . . . . . .  31
    Appendix C.  JCR Implementations  . . . . . . . . . . . . . . . .  31
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  31
+   Appendix D.  Syntax Changes from -06  . . . . . . . . . . . . . .  31
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  32
 
 1.  Introduction
 
@@ -165,7 +165,7 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 
 
-Newton & Cordell        Expires January 12, 2017                [Page 3]
+Newton & Cordell        Expires January 28, 2017                [Page 3]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -221,7 +221,7 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 
 
-Newton & Cordell        Expires January 12, 2017                [Page 4]
+Newton & Cordell        Expires January 28, 2017                [Page 4]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -277,7 +277,7 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 
 
-Newton & Cordell        Expires January 12, 2017                [Page 5]
+Newton & Cordell        Expires January 28, 2017                [Page 5]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -327,13 +327,13 @@ Internet-Draft             JSON Content Rules                  July 2016
    Blank lines are allowed.
 
    Comments are very similar to comments in ABNF [RFC4234].  They start
-   with a semi-colon (';') and continue to the end of the line or
-   another semi-colon.
+   with a semi-colon (';') and continue to the end of the line.
 
 
 
 
-Newton & Cordell        Expires January 12, 2017                [Page 6]
+
+Newton & Cordell        Expires January 28, 2017                [Page 6]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -389,7 +389,7 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 
 
-Newton & Cordell        Expires January 12, 2017                [Page 7]
+Newton & Cordell        Expires January 28, 2017                [Page 7]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -445,7 +445,7 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 
 
-Newton & Cordell        Expires January 12, 2017                [Page 8]
+Newton & Cordell        Expires January 28, 2017                [Page 8]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -479,7 +479,7 @@ Internet-Draft             JSON Content Rules                  July 2016
       ; member names may either be quoted strings
       ; or regular expressions
       ; (example shown with a rule name assignment)
-      $mem2 = /dev[0-9]/ : 0..4096
+      $mem2 = /^dev[0-9]$/ : 0..4096
 
       ; object specifications start and end with "curly braces"
       ; object specifications contain zero
@@ -501,7 +501,7 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 
 
-Newton & Cordell        Expires January 12, 2017                [Page 9]
+Newton & Cordell        Expires January 28, 2017                [Page 9]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -557,7 +557,7 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 
 
-Newton & Cordell        Expires January 12, 2017               [Page 10]
+Newton & Cordell        Expires January 28, 2017               [Page 10]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -593,39 +593,30 @@ Internet-Draft             JSON Content Rules                  July 2016
                           "she sells sea shells"
 
                           ; a regular expression
-                          /she sells .*/
+                          /^she sells .*/
+
+   Regular expressions are not implicitly anchored and therefore must be
+   explicitly anchored if necessary.
 
    A string can be specified as a URI [RFC3986] using the word 'uri',
-   but also may be more narrowly specified using a URI template
-   [RFC6570].  URI templates are specified with the word 'uri' followed
-   by two period characters ('..') followed by the URI template.  When
-   using URI templates, the variable names are ignored for pattern
-   matching, but they should be provided for construction of a valid URI
-   template.  Providing the variable names also aids in the description
-   of what is to be matched.
+   but also may be more narrowly scoped to a URI of a specific scheme.
+   Specific URI schemes are specified with the word 'uri' followed by
+   two period characters ('..') followed by the URI scheme.
+
+                     ; any URI
+                     uri
+
+                     ;a URI narrowed for an HTTPS uri
+                     uri..https
 
 
 
 
 
-
-
-
-
-
-Newton & Cordell        Expires January 12, 2017               [Page 11]
+Newton & Cordell        Expires January 28, 2017               [Page 11]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
-
-               ; any URI
-               uri
-
-               ;a URI template for an HTTPS uri
-               uri..https://{stuff}
-
-               ;a more specific URI template
-               uri..https://{authority}/{thing1}?q={thing2}
 
    IP addresses may be specified with either the word 'ipv4' for IPv4
    addresses [RFC1166] or the word 'ipv6' for IPv6 addresses [RFC5952].
@@ -669,7 +660,16 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 
 
-Newton & Cordell        Expires January 12, 2017               [Page 12]
+
+
+
+
+
+
+
+
+
+Newton & Cordell        Expires January 28, 2017               [Page 12]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -707,29 +707,30 @@ Internet-Draft             JSON Content Rules                  July 2016
    component, which is either a rule name or a primitive, object, array,
    or group specification.  Member name specifications can be given
    either as a quated string using double quotes or as a regular
-   expression using forward slash ('/') characters.
+   expression using forward slash ('/') characters.  Regular expressions
+   are not implicitly anchored and therefore must have explicit anchors
+   if needed.
 
             ;member name will exactly match "locationURI"
             $location_uri = "locationURI" : uri
 
             ;member name will match "eth0", "eth1", ... "eth9"
-            $iface_mappings = /eth[0-9]/  : ipv4
+            $iface_mappings = /^eth[0-9]$/  : ipv4
 
 4.8.  Object Specifications
 
    Object specifications define JSON objects and are composed of zero or
    more subordinate components, each of which can be either a rule name,
    member specification, or group specification.  The subordinate
-   components are enclosed at the start with a left curly brace
 
 
 
-
-Newton & Cordell        Expires January 12, 2017               [Page 13]
+Newton & Cordell        Expires January 28, 2017               [Page 13]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
 
+   components are enclosed at the start with a left curly brace
    character ('{') and at the end with a right curly brace character
    ('}').
 
@@ -749,11 +750,11 @@ Internet-Draft             JSON Content Rules                  July 2016
 
              ; zero or more members that match "p0", "p1", etc
              ; and a member that matches "p1"
-             $o1 = { /p\d+/ : integer @*, "p1" : integer }
+             $o1 = { /^p\d+$/ : integer @*, "p1" : integer }
 
              ; a member that matches "p1" and
              ; zero or more members that match "p0", "p1", etc
-             $o2 = { "p1" : integer, /p\d+/ : integer @* }
+             $o2 = { "p1" : integer, /^p\d+$/ : integer @* }
 
    It defines two rules, o1 and o2. o1 first specifies that an object
    can have zero or more (that is the meaning of "@*", see Section 4.13)
@@ -780,8 +781,7 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 
 
-
-Newton & Cordell        Expires January 12, 2017               [Page 14]
+Newton & Cordell        Expires January 28, 2017               [Page 14]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -837,7 +837,7 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 
 
-Newton & Cordell        Expires January 12, 2017               [Page 15]
+Newton & Cordell        Expires January 28, 2017               [Page 15]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -893,7 +893,7 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 
 
-Newton & Cordell        Expires January 12, 2017               [Page 16]
+Newton & Cordell        Expires January 28, 2017               [Page 16]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -949,25 +949,25 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 
 
-Newton & Cordell        Expires January 12, 2017               [Page 17]
+Newton & Cordell        Expires January 28, 2017               [Page 17]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
 
-                       ; exactly 2 octets
-                       $word = [ $octet @2 ]
-                       $octet =: int8
+                      ; exactly 2 octets
+                      $word = [ $octet @2 ]
+                      $octet =: int8
 
-                       ; 1 to 13 name servers
-                       [ $name_servers @1..13 ]
-                       $name_servers =: fqdn
+                      ; 1 to 13 name servers
+                      [ $name_servers @1..13 ]
+                      $name_servers =: fqdn
 
-                       ; 0 to 99 ethernet addresses
-                       { /eth.*/ : $mac_addr @..99 }
-                       $mac_addr =: hex
+                      ; 0 to 99 ethernet addresses
+                      { /^eth.*/ : $mac_addr @..99 }
+                      $mac_addr =: hex
 
-                       ; four or more bytes
-                       [ $octet @4.. ]
+                      ; four or more bytes
+                      [ $octet @4.. ]
 
    The allowable Kleene operators are the question mark character ('?')
    which specifies zero or one (i.e. optional), the plus character ('+')
@@ -993,7 +993,7 @@ Internet-Draft             JSON Content Rules                  July 2016
                      [ $name_servers @1..12%2 ]
                      $name_servers =: fqdn
 
-                     { /eth.*/ : $mac_addr @..100%2 }
+                     { /^eth.*/ : $mac_addr @..100%2 }
                      $mac_addr =: hex
 
                      [ $octet @4..%2 ]
@@ -1005,7 +1005,7 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 
 
-Newton & Cordell        Expires January 12, 2017               [Page 18]
+Newton & Cordell        Expires January 28, 2017               [Page 18]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -1056,12 +1056,12 @@ Internet-Draft             JSON Content Rules                  July 2016
                              # jcr-version 0.7
 
    The major.minor number signifying compliance with this document is
-   "0.6".  Upon publication of this specification as an IETF proposed
+   "0.7".  Upon publication of this specification as an IETF proposed
    standard, it will be "1.0".
 
 
 
-Newton & Cordell        Expires January 12, 2017               [Page 19]
+Newton & Cordell        Expires January 28, 2017               [Page 19]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
@@ -1070,6 +1070,13 @@ Internet-Draft             JSON Content Rules                  July 2016
 
    Ruleset authors are advised to place this directive as the first line
    of a ruleset.
+
+   This directive may have optional extension identifiers following the
+   version number.  Each extension identifier is separated by
+   whitespace.  Extension identifiers are encouraged to contain embedded
+   version numbers.
+
+             # jcr-version 1.0 co-constraints-1.2 jcr-doc-1.0
 
 5.2.  ruleset-id
 
@@ -1090,10 +1097,6 @@ Internet-Draft             JSON Content Rules                  July 2016
    rules evaluated in addition to the ruleset where the directive
    appears.
 
-   This directive has the following form:
-
-                       # import identifier as alias
-
    The following is an example:
 
               # import http://example.com/rfc9999 as rfc9999
@@ -1107,27 +1110,44 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 6.  Tips and Tricks
 
-6.1.  Any Member with Any Value
-
-   Because member names may be specified with regular expressions, it is
-   possible to construct a member rule that matches any member name.  As
-   an example, the following defines an object member with any name that
-   has a value that is a string:
 
 
 
 
-Newton & Cordell        Expires January 12, 2017               [Page 20]
+
+
+
+Newton & Cordell        Expires January 28, 2017               [Page 20]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
 
-                        $user_data = /.*/ : string
+6.1.  Any Member with Any Value
 
-   Constructing an object member of any name with any type would
+   Because member names may be specified with regular expressions, it is
+   possible to construct a member rule that matches any member name.  As
+   an example, the following defines an object with a member with any
+   name that has a value that is a string:
+
+                              { // : string }
+
+   The JSON below matches the above rule.
+
+                             { "foo" : "bar" }
+
+   Likewise, the JSON below also matches the same rule.
+
+                            { "fuzz" : "bazz" }
+
+   Constructing an object with a member of any name with any type would
    therefore take the form:
 
-                          $rule_name = /.*/ : any
+                               { // : any }
+
+   The above rule matches not only the two JSON objects above, but the
+   JSON object below.
+
+                             { "fuzz" : 1234 }
 
 6.2.  Restricting Objects
 
@@ -1143,7 +1163,25 @@ Internet-Draft             JSON Content Rules                  July 2016
    regular expression as the last subordinate component of the object
    specification.
 
-              { "foo" : 1, "bar" : 2, @{not} /.*/ : any @+ }
+               { "foo" : 1, "bar" : 2, @{not} // : any @+ }
+
+   The following JSON object will validate against the above rule.
+
+                         { "foo" : 1, "bar" : 2 }
+
+
+
+
+
+Newton & Cordell        Expires January 28, 2017               [Page 21]
+
+Internet-Draft             JSON Content Rules                  July 2016
+
+
+   However, the following JSON object will not validate against the
+   above rule.
+
+                    { "foo" : 1, "bar" : 2, "baz" : 3 }
 
    This works because subordinate components are evaluated in the order
    they appear in the object rule, and the last component accepts any
@@ -1169,15 +1207,6 @@ Internet-Draft             JSON Content Rules                  July 2016
 
                        [ "item1", "item2", any @* ]
 
-
-
-
-
-Newton & Cordell        Expires January 12, 2017               [Page 21]
-
-Internet-Draft             JSON Content Rules                  July 2016
-
-
 6.4.  Lists of Values
 
    Group specifications may be used to create enumerated lists of
@@ -1195,115 +1224,105 @@ Internet-Draft             JSON Content Rules                  July 2016
                 ; allowable fruits
                 $fruits =: ( "apple" | "banana" | "pear" )
 
+
+
+
+
+
+Newton & Cordell        Expires January 28, 2017               [Page 22]
+
+Internet-Draft             JSON Content Rules                  July 2016
+
+
 6.5.  Groups in Arrays
 
-   Groups may also be a subordinate rule of array rules:
+   Groups may be a subordinate component of array specifications:
 
-      [ ( :ip4 | :ip6 ), :integer ]
+                       [ ( ipv4 | ipv6 ), integer ]
 
-   Unlike value rules, subordinate group rules in array rules may have
-   sequence combinations and contain any rule type with the exception of
-   member rules.
+   Unlike primitive specifications, subordinate group specifications in
+   array specifications may have sequence combinations and contain any
+   type specification with the exception of member specifications.
 
-      [ ( first_name, ? middle_name, last_name ), age ]
+          ; a group in an array
+          [ ( $first_name, $middle_name @?, $last_name ), $age ]
 
-   Of course, the above is better written as:
+          ; a group referenced from an array
+          [ $name, $age ]
+          $name = ( $first_name, $middle_name @?, $last_name )
 
-      [ name, age ]
-
-      name ( first_name, ? middle_name, last_name )
+          $first_name =: string
+          $middle_name =: string
+          $last_name =: string
+          $age =: 0..
 
 6.6.  Groups in Objects
 
-   Groups may also be a subordinate rule of object rules:
+   Groups may be a subordinate component of object specifications:
+   Subordinate group specifications in object specifications may have
+   sequence combinations but must only contain member specifications.
 
-      { ( title, date, author ), + paragraph }
+               ; a group in an object
+               { ( $title, $date, $author ), $paragraph @+ }
 
-   Subordinate group rules in object rules may have sequence
-   combinations but must only contain member rules.
+               ; a group referenced from an object
+               { $front_matter, $paragraph @+ }
+               $front_matter = ( $title, $date, $author )
 
-
-
-
-
-
-
-
-Newton & Cordell        Expires January 12, 2017               [Page 22]
-
-Internet-Draft             JSON Content Rules                  July 2016
-
-
-       { front_matter, + paragraph }
-       front_matter ( title, date, author )
-       title "title" :string
-       date "date" : full-date
-       author "author" [ *:string ]
-       paragraph /p[0-9]*/ :string
+               $title = "title" : string
+               $date = "date" : date
+               $author = "author" : [ string @* ]
+               $paragraph = /p[0-9]*/ : string
 
 6.7.  Group Rules as Macros
 
-   The syntax for group rules accommodates one ore more subordinate
-   rules and a repetition expression for each.  Other than grouping
-   multiple rules, a group rule can be used as a macro definition for a
-   single rule.
+   The syntax for group specifications accommodates one ore more
+   subordinate components and a repetition expression for each.  Other
+   than grouping multiple rules, a group specification can be used as a
+   macro definition for a single rule.
 
-      paragraphs ( + /p[0-9]*/ : string )
-
-6.8.  Comment Separated Rules
-
-   Rules may be placed on the same line, but because they have no
-   termination syntax this style of writing rules can be confusing to
-   some readers:
-
-      first_name "first name" :string last_name "last name" :string
-
-   An empty comment can serve as a visual cue to denote the separation
-   of the two rules:
-
-      first_name "first name" :string ;; last_name "last name" :string
-
-6.9.  Object Mixins
-
-   Group rules can be used to create object mixins, a pattern for
-   writing data models similar in style to object derivation in some
-   programming languages.  In the example in Figure 3, both obj1 and
-   obj2 have a members "foo" and "fob" with obj1 having the additional
-   member "bar" and obj2 having the additional member "baz".
-
-   mixin_group ( "foo" : integer, "fob" : uri )
-
-   obj1 { mixin_group, "bar" : string }
-
-   obj2 { mixin_group, "baz" : string }
-
-                                 Figure 3
+                  $paragraphs = ( /p[0-9]*/ : string @+ )
 
 
 
-
-
-
-
-Newton & Cordell        Expires January 12, 2017               [Page 23]
+Newton & Cordell        Expires January 28, 2017               [Page 23]
 
 Internet-Draft             JSON Content Rules                  July 2016
 
 
-6.10.  Subordinate Rule Dependencies
+6.8.  Object Mixins
 
-   In object and array rules, there may be situations in which it is
-   necessary to condition the existence of a subordinate rule on the
-   existence of a sibling subordinate rule.  In other words,
-   example_rule_two should only be evaluated if example_rule_one
-   evaluates positively.  Or put another way, a member of an object or
-   an item of an array may be present only on the condition that another
-   member of item is present.
+   Group rules can be used to create object mixins, a pattern for
+   writing data models similar in style to object derivation in some
+   programming languages.  In the example in below, both obj1 and obj2
+   have a members "foo" and "fob" with obj1 having the additional member
+   "bar" and obj2 having the additional member "baz".
+
+              $mixin_group = ( "foo" : integer, "fob" : uri )
+
+              $obj1 = { $mixin_group, "bar" : string }
+
+              $obj2 = { $mixin_group, "baz" : string }
+
+6.9.  Subordinate Dependencies
+
+   In object and array specifications, there may be situations in which
+   it is necessary to condition the existence of a subordinate component
+   on the existence of a sibling subordinate component.  In other words,
+   example_two should only be evaluated if example_one evaluates
+   positively.  Or put another way, a member of an object or an item of
+   an array may be present only on the condition that another member or
+   item is present.
 
    In the following example, the referrer_uri member can only be present
    if the location_uri member is present.
 
-      response { ?( location_uri, ?referrer_uri ) }
+                 ; $referrer_uri can only be present if
+                 ; $location_uri is present
+                 { ( $location_uri, $referrer_uri@? )@? }
+
+                 $location_uri = "locationURI" : uri
+                 $referrer_uri = "referrerURI" : uri
 
 7.  ABNF Syntax
 
@@ -1318,6 +1337,14 @@ comment          = ";" *( "\;" / comment-char ) comment-end-char
 comment-char     = HTAB / %x20-3A / %x3C-10FFFF
                    ; Any char other than ";" / CR / LF
 comment-end-char = CR / LF / ";"
+
+
+
+
+Newton & Cordell        Expires January 28, 2017               [Page 24]
+
+Internet-Draft             JSON Content Rules                  July 2016
+
 
 directive        = "#" (one-line-directive / multi-line-directive)
 one-line-directive = [ spaces ]
@@ -1338,14 +1365,6 @@ ruleset-id-alias = name
 one-line-tbd-directive-d = directive-name
                            [ WSP one-line-directive-parameters ]
 directive-name   = name
-
-
-
-Newton & Cordell        Expires January 12, 2017               [Page 24]
-
-Internet-Draft             JSON Content Rules                  July 2016
-
-
 one-line-directive-parameters = *not-eol
 not-eol          = HTAB / %x20-10FFFF
 eol              = CR / LF
@@ -1376,6 +1395,13 @@ type-choice      = annotations "(" type-choice-items
                    *( choice-combiner type-choice-items ) ")"
 type-choice-items = *sp-cmt ( type-choice / type-rule ) *sp-cmt
 
+
+
+Newton & Cordell        Expires January 28, 2017               [Page 25]
+
+Internet-Draft             JSON Content Rules                  July 2016
+
+
 annotations      = *( "@{" *sp-cmt annotation-set *sp-cmt "}" *sp-cmt )
 annotation-set   = reject-annotation / unordered-annotation /
                    root-annotation / tbd-annotation
@@ -1394,14 +1420,6 @@ primimitive-def  = null-type / boolean-type / true-value / false-value /
                    ip4-type / ip6-type / fqdn-type / idn-type /
                    uri-range / uri-type / phone-type / email-type /
                    full-date-type / full-time-type / date-time-type /
-
-
-
-Newton & Cordell        Expires January 12, 2017               [Page 25]
-
-Internet-Draft             JSON Content Rules                  July 2016
-
-
                    base64-type / any
 null-type        = null-kw
 boolean-type     = boolean-kw
@@ -1432,6 +1450,14 @@ full-date-type   = full-date-kw
 full-time-type   = full-time-kw
 date-time-type   = date-time-kw
 base64-type      = base64-kw
+
+
+
+Newton & Cordell        Expires January 28, 2017               [Page 26]
+
+Internet-Draft             JSON Content Rules                  July 2016
+
+
 any              = any-kw
 
 object-rule      = annotations [ ":" *sp-cmt ]
@@ -1449,14 +1475,6 @@ array-items      = array-item (*( sequence-combiner array-item ) /
 array-item       = [ repetition ] *sp-cmt array-item-types
 array-item-types = type-rule / array-group
 array-group      = "(" *sp-cmt [ array-items *sp-cmt ] ")"
-
-
-
-
-Newton & Cordell        Expires January 12, 2017               [Page 26]
-
-Internet-Draft             JSON Content Rules                  July 2016
-
 
 group-rule       = annotations "(" *sp-cmt [ group-items *sp-cmt ] ")"
 group-items      = group-item (*( sequence-combiner group-item ) /
@@ -1488,6 +1506,14 @@ float            = [ minus ] int frac [ exp ]
                    ; From RFC 7159 except 'frac' required
 minus            = %x2D                          ; -
 plus             = %x2B                          ; +
+
+
+
+Newton & Cordell        Expires January 28, 2017               [Page 27]
+
+Internet-Draft             JSON Content Rules                  July 2016
+
+
 int              = zero / ( digit1-9 *DIGIT )
 digit1-9         = %x31-39                       ; 1-9
 frac             = decimal-point 1*DIGIT
@@ -1506,14 +1532,6 @@ char             = unescaped /
                    %x62 /          ; b    backspace       U+0008
                    %x66 /          ; f    form feed       U+000C
                    %x6E /          ; n    line feed       U+000A
-
-
-
-Newton & Cordell        Expires January 12, 2017               [Page 27]
-
-Internet-Draft             JSON Content Rules                  July 2016
-
-
                    %x72 /          ; r    carriage return U+000D
                    %x74 /          ; t    tab             U+0009
                    %x75 4HEXDIG )  ; uXXXX                U+XXXX
@@ -1544,6 +1562,14 @@ full-time-kw     = %x66.75.6C.6C.2D.74.69.6D.65    ; "full-time"
 idn-kw           = %x69.64.6E                      ; "idn"
 import-kw        = %x69.6D.70.6F.72.74             ; "import"
 integer-kw       = %x69.6E.74.65.67.65.72          ; "integer"
+
+
+
+Newton & Cordell        Expires January 28, 2017               [Page 28]
+
+Internet-Draft             JSON Content Rules                  July 2016
+
+
 ip4-kw           = %x69.70.34                      ; "ip4"
 ip6-kw           = %x69.70.36                      ; "ip6"
 jcr-version-kw   = %x6A.63.72.2D.76.65.72.73.69.6F.6E ; "jcr-version"
@@ -1562,26 +1588,18 @@ uri-kw           = %x75.72.69                      ; "uri"
 ALPHA            = %x41-5A / %x61-7A   ; A-Z / a-z
 CR               = %x0D         ; carriage return
 DIGIT            = %x30-39      ; 0-9
-
-
-
-Newton & Cordell        Expires January 12, 2017               [Page 28]
-
-Internet-Draft             JSON Content Rules                  July 2016
-
-
 HEXDIG           = DIGIT / "A" / "B" / "C" / "D" / "E" / "F"
 HTAB             = %x09         ; horizontal tab
 LF               = %x0A         ; linefeed
 SP               = %x20         ; space
 WSP              = SP / HTAB    ; white space
 
-                   Figure 4: ABNF for JSON Content Rules
+                   Figure 3: ABNF for JSON Content Rules
 
 8.  Acknowledgements
 
-   Andrew Biggs and Paul Jones provided feedback and suggestions which
-   led to many changes in the syntax.
+   John Cowan, Andrew Biggs and Paul Jones provided feedback and
+   suggestions which led to many changes in the syntax.
 
 9.  References
 
@@ -1600,6 +1618,14 @@ WSP              = SP / HTAB    ; white space
    [RFC4234]  Crocker, D., Ed. and P. Overell, "Augmented BNF for Syntax
               Specifications: ABNF", RFC 4234, October 2005.
 
+
+
+
+Newton & Cordell        Expires January 28, 2017               [Page 29]
+
+Internet-Draft             JSON Content Rules                  July 2016
+
+
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
               Encodings", RFC 4648, October 2006.
 
@@ -1609,22 +1635,8 @@ WSP              = SP / HTAB    ; white space
    [RFC5952]  Kawamura, S. and M. Kawashima, "A Recommendation for IPv6
               Address Text Representation", RFC 5952, August 2010.
 
-   [RFC6570]  Gregorio, J., Fielding, R., Hadley, M., Nottingham, M.,
-              and D. Orchard, "URI Template", RFC 6570, March 2012.
-
    [RFC7159]  Bray, T., "The JavaScript Object Notation (JSON) Data
               Interchange Format", RFC 7159, March 2014.
-
-
-
-
-
-
-
-Newton & Cordell        Expires January 12, 2017               [Page 29]
-
-Internet-Draft             JSON Content Rules                  July 2016
-
 
 9.2.  Infomative References
 
@@ -1660,13 +1672,23 @@ Appendix B.  Testing Against JSON Content Rules
    into unit tests, which are essential to producing quality protocol
    implementations.
 
+
+
+
+
+
+Newton & Cordell        Expires January 28, 2017               [Page 30]
+
+Internet-Draft             JSON Content Rules                  July 2016
+
+
 B.1.  Locally Overriding Rules
 
    As mentioned in the introduction, one tool for testing would be the
    ability to locally override named rules.  As an example, consider the
    following rule which defines an array of strings.
 
-      statuses [ * :string ]
+                         $statuses = [ string @* ]
 
    Consider the specification where this rule is found does not define
    the values but references an IANA registry for extensibility
@@ -1674,23 +1696,15 @@ B.1.  Locally Overriding Rules
 
    If a software developer desired to test a specific situation in which
    the array must at least contain the status "accepted", the rules from
-
-
-
-Newton & Cordell        Expires January 12, 2017               [Page 30]
-
-Internet-Draft             JSON Content Rules                  July 2016
-
-
    the specification could be used and the statuses rule could be
    explicitly overridden locally as:
 
-      statuses @{unordered} [ :"accepted", * :string ]
+            $statuses = @{unordered} [ "accepted", string @* ]
 
    Alternatively, the developer may need to ensure that the status
    "denied" should not be present in the array:
 
-      statuses @{unordered} [ ? @{reject} :"denied", * :string ]
+        $statuses = @{unordered} [ @{not} "denied" @?, string @* ]
 
 B.2.  Rule Callbacks
 
@@ -1711,6 +1725,34 @@ Appendix C.  JCR Implementations
    [CODALOGIC_JCR_VALIDATOR] have influenced the development of this
    document.
 
+Appendix D.  Syntax Changes from -06
+
+   The syntax described in this document is changed significantly, and
+   in a non-backwards compatible manner, from the syntax described in
+   the -06 version of this specification.  The vast majority of these
+
+
+
+Newton & Cordell        Expires January 28, 2017               [Page 31]
+
+Internet-Draft             JSON Content Rules                  July 2016
+
+
+   changes have occured to meet the goals of the syntax being a superset
+   of JSON and easy to comprehend by a casual reader unfamiliar with JCR
+   but familiar with JSON.
+
+   The latter of those two goals is subjective, and therefore a series
+   of focus group sessions were convened where participants, all
+   professional software developers with familiarity with JSON but not
+   JCR, were asked to read and interpret various rulesets and allowed to
+   offer suggested improvements.  Outcomes of these sessions resulted in
+   many changes, such as the use of '$' characters to note rule names
+   and the change of the repetition syntax.
+
+   Other changes came from feedback given directly to the authors via
+   email and on the IETF JSON Working Group mailing list.
+
 Authors' Addresses
 
    Andrew Lee Newton
@@ -1721,21 +1763,6 @@ Authors' Addresses
 
    Email: andy@arin.net
    URI:   http://www.arin.net
-
-
-
-
-
-
-
-
-
-
-
-
-Newton & Cordell        Expires January 12, 2017               [Page 31]
-
-Internet-Draft             JSON Content Rules                  July 2016
 
 
    Pete Cordell
@@ -1762,31 +1789,4 @@ Internet-Draft             JSON Content Rules                  July 2016
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Newton & Cordell        Expires January 12, 2017               [Page 32]
+Newton & Cordell        Expires January 28, 2017               [Page 32]

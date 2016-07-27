@@ -7,7 +7,7 @@ $octet =: int8
 $name_servers =: fqdn
 
 ; 0 to 99 ethernet addresses
-{ /eth.*/ : $mac_addr @..99 }
+{ /^eth.*/ : $mac_addr @..99 }
 $mac_addr =: hex
 
 ; four or more bytes

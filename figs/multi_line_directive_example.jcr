@@ -1,0 +1,5 @@
+#{ directive_name
+    parameter_1 paramter_2
+    parameter_3
+    ...
+}
