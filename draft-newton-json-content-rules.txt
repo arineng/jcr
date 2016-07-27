@@ -1072,11 +1072,11 @@ Internet-Draft             JSON Content Rules                  July 2016
    of a ruleset.
 
    This directive may have optional extension identifiers following the
-   version number.  Each extension identifier is separated by
-   whitespace.  Extension identifiers are encouraged to contain embedded
-   version numbers.
+   version number.  The extension identifiers are grouped inside
+   parenthesis and separated by white space.  Extension identifiers
+   should contain embedded version numbers.
 
-             # jcr-version 1.0 co-constraints-1.2 jcr-doc-1.0
+            # jcr-version 1.0 (co-constraints-1.2 jcr-doc-1.0)
 
 5.2.  ruleset-id
 

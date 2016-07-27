@@ -823,14 +823,14 @@ n.f..
                 </t>
                 <t>
                     This directive may have optional extension identifiers following the version number.
-                    Each extension identifier is separated by whitespace. Extension identifiers are encouraged
-                    to contain embedded version numbers.
+                    The extension identifiers are grouped inside parenthesis and separated by white space.
+                    Extension identifiers should contain embedded version numbers.
                 </t>
                 <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
                  the working version number. -->
                 <figure>
                     <artwork xml:space="preserve" align="center">
-# jcr-version 1.0 co-constraints-1.2 jcr-doc-1.0
+# jcr-version 1.0 (co-constraints-1.2 jcr-doc-1.0)
                 </artwork>
                 </figure>
             </section>
