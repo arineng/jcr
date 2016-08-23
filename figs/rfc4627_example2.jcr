@@ -2,7 +2,8 @@
 ; this root rule describes that object
 { 
 
-  ; he object specification contains one member specification
+  ; the object specification contains 
+  ; one member specification
   "Image" : {
 
     ; $width and $height are defined below
@@ -12,7 +13,8 @@
     ; "Title" member specification
     "Title" :string,
 
-    ; "Thumbnail" member specification, which defines an object
+    ; "Thumbnail" member specification, which 
+    ; defines an object
     "Thumbnail":  { 
 
       ; $width and $height are re-used again
@@ -21,7 +23,8 @@
       "Url" :uri 
     }, 
 
-    ; "IDs" member that is an array of one ore more integers
+    ; "IDs" member that is an array of 
+    ; one ore more integers
     "IDs" : [ integer @* ] 
 
   }

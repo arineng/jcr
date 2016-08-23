@@ -272,15 +272,33 @@
                 that apply to the processing of a ruleset.
             </t>
             <t>
-                Rules are composed of two parts, an optional rule name assignment and a type specification.
-                Rules may be defined across line boundaries and there is no line continuation syntax. The
-                type specification component of rules are a superset of JSON.
+                Rules are composed of two parts, an optional rule name and
+                a rule specification.  A rule specification can be either a type
+                specification or a member specification.  A member specification
+                consists of a member name specification and a type specification.
             </t>
             <t>
-                Rules with rule name assignments may be referenced in the type specifications of other rules.
-                And type specifications, depending on their type, may be composed of other type specifications.
-                Type specifications define arrays, objects, members of objects, primitive types, and groups
-                of types.
+                A type specification is used to specify constraints on a superset
+                of a JSON value (e.g. number / string / object / array etc.).  In
+                addition to defining primitive types (such as string or integer),
+                array types, and object types, type specifications may define the
+                JCR specific concept of group types.
+            </t>
+            <t>
+                Type specifications corresponding to arrays, objects and groups may
+                be composed of other rule specifications.
+            </t>
+            <t>
+                A member specification is used to specify constraints on a JSON
+                member (i.e. members of a JSON object).
+            </t>
+            <t>
+                Rules with rule name assignments may be referenced in place of
+                type specifications and member specifications.
+            </t>
+            <t>
+                Rules may be defined across line boundaries and there is no line
+                continuation syntax. 
             </t>
             <t>
                 Any rule consisting only of a type specification is considered a root rule. Unless otherwise
@@ -306,17 +324,23 @@
                 Blank lines are allowed.
             </t>
             <t>
-                Comments are very similar to comments in <xref target="RFC4234">ABNF</xref>. They start with a semi-colon (';') and
+                Comments are the same as comments in <xref target="RFC4234">ABNF</xref>. They start with a semi-colon (';') and
                 continue to the end of the line.
             </t>
         </section>
         <section title="Rules">
             <t>
-                Rules have two main components, an optional rule name assignment and a type specification.
+                Rules have two main components, an optional rule name assignment and a type or member specification.
+            </t>
+            <t>
                 Type specifications define arrays, objects, etc... of JSON and may reference other rules
                 using rule names. Most type specifications can be defined with repetitions for specifying
                 the frequency of the type being defined. In addition to the type specifications describing
                 JSON types, there is an additional group specification for grouping types.
+            </t>
+            <t>
+                Member specifications define members of JSON objects, and are composed of a member name specification
+                and either a type specification or a rule name referencing a type specification.
             </t>
             <t>
                 Rules may also contain annotations which may affect the evaluation of all or part of a rule.
@@ -362,9 +386,9 @@
                     <artwork xml:space="preserve" align="center">&assignment_example.jcr;</artwork>
                 </figure>
                 <t>
-                    This is the one little "gotcha" in JCR. This syntax is necessary so that JCR parsers may
-                    distinguish between rules name assignments involving primitives and object member type
-                    specifications involving primitives.
+                    This is the one little "gotcha" in JCR. This syntax is necessary so that JCR parsers may readily
+                    distinguish between rule name assignments involving string and regular expressions primitive typess 
+                    and member names of member specifications.
                 </t>
             </section>
             <section title="Annotations">
@@ -427,6 +451,11 @@
                     <artwork xml:space="preserve" align="center">&primitives_integer_and_float.jcr;</artwork>
                 </figure>
                 <t>
+                    The keyword 'float' represents a single precision IEEE-754 floating point number 
+                    represented in decimal. The keyword 'double' represents a double precision 
+                    IEEE-754 floating point number represented in decimal format.
+                </t>
+                <t>
                 Numbers may also be specified as an absolute value or a range of possible values, where a range
                 may be specified using a minimum, maximum, or both:
                 </t>
@@ -464,7 +493,7 @@ n.f..
                     Generically, a string may be specified using the word 'string'. String literals
                     may be specified using a double quote character followed by the literal content
                     followed by another double quote. And regular expressions may be specified by
-                    enclosing a regular expression in the forward slash ('/') character.
+                    enclosing a regular expression within the forward slash ('/') character.
                 </t>
                 <figure>
                     <artwork align="center" xml:space="preserve">&primitives_strings.jcr;</artwork>
@@ -502,7 +531,7 @@ n.f..
                     <artwork align="center" xml:space="preserve">&primitives_misc.jcr;</artwork>
                 </figure>
                 <t>
-                    Binary date can be specified in string form using the encodings specified in
+                    Binary data can be specified in string form using the encodings specified in
                     <xref target="RFC4648">RFC 4648</xref>. The word 'hex' corresponds to base16, while
                     'base32', 'base32hex', 'base64', and 'base64url' correspond with their
                     RFC 4648 counterparts accordingly.
@@ -530,7 +559,7 @@ n.f..
                 Member specifications consist of a member name specification followed by a colon character (':')
                 followed by either a subordinate component, which is either a
                 rule name or a primitive, object, array, or group specification. Member name specifications
-                can be given either as a quated string using double quotes or as a regular expression
+                can be given either as a quoted string using double quotes or as a regular expression
                 using forward slash ('/') characters. Regular expressions are not implicitly anchored
                 and therefore must have explicit anchors if needed.
             </t>
@@ -584,6 +613,40 @@ n.f..
             <figure>
                 <artwork align="center" xml:space="preserve">&object_order_eval.json;</artwork>
             </figure>
+            <t>
+                By default, members of objects which do not match a rule are ignored.
+                The reason for this validation model is due to the nature of the typical
+                access model to JSON objects in many programming languages, where members
+                of the object are obtained by referencing the member name. Therefore
+                extra members may exist without harm.
+            </t>
+            <t>
+                However, some specifications may need to restrict the members of a JSON
+                object to a known set. To construct a rule specifying that no
+                extra members are expected, the @{not} annotation may be used with
+                a regular expression as the last subordinate component of the object specification.
+            </t>
+            <figure>
+                <artwork xml:space="preserve" align="center">&restrict_objects.jcr;</artwork>
+            </figure>
+            <t>
+                The following JSON object will validate against the above rule.
+            </t>
+            <figure>
+                <artwork xml:space="preserve" align="center">&restrict_objects1.json;</artwork>
+            </figure>
+            <t>
+                However, the following JSON object will not validate against the above rule.
+            </t>
+            <figure>
+                <artwork xml:space="preserve" align="center">&restrict_objects2.json;</artwork>
+            </figure>
+            <t>
+                This works because subordinate components are evaluated in the order they
+                appear in the object rule, and the last component accepts any member with
+                any type but fails to validate if one ore more of those components are found
+                due to the @{not} annotation.
+            </t>
         </section>
         <section title="Array Specifications">
             <t>
@@ -623,6 +686,27 @@ n.f..
             <figure>
                 <artwork align="center" xml:space="preserve">&array_order_eval2.json;</artwork>
             </figure>
+            <section title="Unrestricting Arrays">
+                <t>
+                    Unlike object validation, array specifications will not validate items of an
+                    array that do not match a subordinate component of the array specification. This
+                    processing model is due to the nature of the typical access pattern of
+                    JSON arrays in many programming languages, which is to iterate over the
+                    array. Processes iterating over an array would need to take special
+                    steps for extra items of the array that are not specified, especially
+                    if the items were of a different type than those that are expected.
+                </t>
+                <t>
+                    Like object rules, the subordinate components of an array specification are
+                    evaluated in the order they appear. To allow an array to contain
+                    any value after guaranteeing that it contains the necessary items,
+                    the last subordinate component of the array specification should accept any
+                    item:
+                </t>
+                <figure>
+                    <artwork xml:space="preserve" align="center">&unrestricted_arrays.jcr;</artwork>
+                </figure>
+            </section>
             <section title="Unordered Array Specifications" anchor="unordered_array_specifications">
                 <t>
                     Array specifications can be made to behave in a similar fashion to object specifications
@@ -751,8 +835,10 @@ n.f..
                 <t>
                     A repetition step expression may follow a minimum to maximum expression or the
                     zero or more Kleene operator or the one or more Kleene operator. The repetition step
-                    specifies that the total number of repetition must be a multiple of the repetition step
-                    (e.g. the total repetitions must be divisible by the step value with a remainder of zero).
+                    specifies that the total number of repetitions minus the minimum repetition value
+                    must be a multiple of the repetition step
+                    (e.g. the total repetitions minus the minimum repetition value must be 
+                    divisible by the step value with a remainder of zero).
                 </t>
                 <figure>
                     <artwork xml:space="preserve" align="center">&repetition_step.jcr;</artwork>
@@ -823,8 +909,9 @@ n.f..
                 </t>
                 <t>
                     This directive may have optional extension identifiers following the version number.
-                    Extension identifiers are each preceded by the plus ('+') character.
-                    Extension identifiers should contain embedded version numbers.
+                    Each extension identifiers is preceded by the plus ('+') character and separated by white space.
+                    The format of extension identifiers is specific to the extension, 
+                    but it is recommended that they are terminated by a version number.
                 </t>
                 <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
                  the working version number. -->
@@ -908,63 +995,8 @@ n.f..
                     <artwork xml:space="preserve" align="center">&any_member_any_type2.json;</artwork>
                 </figure>
             </section>
-            <section title="Restricting Objects">   
-                <t>
-                    By default, members of objects which do not match a rule are ignored.
-                    The reason for this validation model is due to the nature of the typical
-                    access model to JSON objects in many programming languages, where members
-                    of the object are obtained by referencing the member name. Therefore
-                    extra members may exist without harm.
-                </t>
-                <t>
-                    However, some specifications may need to restrict the members of a JSON
-                    object to a known set. To construct a rule specifying that no
-                    extra members are expected, the @{not} annotation may be used with
-                    a regular expression as the last subordinate component of the object specification.
-                </t>
-                <figure>
-                    <artwork xml:space="preserve" align="center">&restrict_objects.jcr;</artwork>
-                </figure>
-                <t>
-                    The following JSON object will validate against the above rule.
-                </t>
-                <figure>
-                    <artwork xml:space="preserve" align="center">&restrict_objects1.json;</artwork>
-                </figure>
-                <t>
-                    However, the following JSON object will not validate against the above rule.
-                </t>
-                <figure>
-                    <artwork xml:space="preserve" align="center">&restrict_objects2.json;</artwork>
-                </figure>
-                <t>
-                    This works because subordinate components are evaluated in the order they
-                    appear in the object rule, and the last component accepts any member with
-                    any type but fails to validate if one ore more of those components are found
-                    due to the @{not} annotation.
-                </t>
-            </section>
-            <section title="Unrestricting Arrays">
-                <t>
-                    Unlike object validation, array specifications will not validate items of an
-                    array that do not match a subordinate component of the array specification. This
-                    processing model is due to the nature of the typical access pattern of
-                    JSON arrays in many programming languages, which is to iterate over the
-                    array. Processes iterating over an array would need to take special
-                    steps for extra items of the array that are not specified, especially
-                    if the items were of a different type than those that are expected.
-                </t>
-                <t>
-                    Like object rules, the subordinate components of an array specification are
-                    evaluated in the order they appear. To allow an array to contain
-                    any value after guaranteeing that it contains the necessary items,
-                    the last subordinate component of the array specification should accept any
-                    item:
-                </t>
-                <figure>
-                    <artwork xml:space="preserve" align="center">&unrestricted_arrays.jcr;</artwork>
-                </figure>
-            </section>
+            
+            
             <section title="Lists of Values">
                 <t>
                     Group specifications may be used to create enumerated lists of strings
@@ -989,8 +1021,7 @@ n.f..
                 </figure>
                 <t>
                     Unlike primitive specifications, subordinate group specifications in array specifications
-                    may have sequence combinations and contain any type specification
-                    with the exception of member specifications.
+                    may have sequence combinations and contain any type specification.
                 </t>
                 <figure>
                     <artwork xml:space="preserve" align="center">&groups_in_arrays2.jcr;</artwork>
@@ -1049,6 +1080,8 @@ n.f..
             <figure title="ABNF for JSON Content Rules" anchor="abnf">
                 <preamble>
                     The following ABNF describes the syntax for JSON Content Rules.
+                    A text file containing these ABNF rules can be downloaded from
+                    <xref target="JCR_ABNF"></xref>.
                 </preamble>
                 <artwork xml:space="preserve">&ABNF;</artwork>
             </figure>
@@ -1072,6 +1105,78 @@ n.f..
             &RFC5952;
             &RFC7159;
             
+            <reference anchor="JCR_SPECIFICATION_FIGURES"
+                target="https://github.com/arineng/jcr/tree/07/figs">
+                <front>
+                    <title>Figures in the JCR Specification</title>
+                    <author fullname="Andrew Lee Newton" initials="A.L." surname="Newton">
+                        <organization abbrev="ARIN">American Registry for Internet
+                            Numbers</organization>
+                        <address>
+                        <postal>
+                            <street>3635 Concorde Parkway</street>
+                            <city>Chantilly</city>
+                            <region>VA</region>
+                            <country>US</country>
+                            <code>20151</code>
+                        </postal>
+                        <email>andy@arin.net</email>
+                        <uri>http://www.arin.net</uri>
+                        </address>
+                    </author>
+                    <author fullname="Pete Cordell" initials="P." surname="Cordell">
+                        <organization>Codalogic</organization>
+                        <address>
+                            <postal>
+                            <street>PO Box 30</street>
+                            <city>Ipswich</city>
+                            <country>UK</country>
+                            <code>IP5 2WY</code>
+                            </postal>
+                            <email>pete.cordell@codalogic.com</email>
+                            <uri>http://www.codalogic.com</uri>
+                        </address>
+                    </author>
+                    <date/>
+                </front>
+            </reference>
+            
+            <reference anchor="JCR_ABNF"
+                target="https://raw.githubusercontent.com/arineng/jcr/07/jcr-abnf.txt">
+                <front>
+                    <title>ABNF for JSON Content Rules</title>
+                    <author fullname="Andrew Lee Newton" initials="A.L." surname="Newton">
+                        <organization abbrev="ARIN">American Registry for Internet
+                            Numbers</organization>
+                        <address>
+                        <postal>
+                            <street>3635 Concorde Parkway</street>
+                            <city>Chantilly</city>
+                            <region>VA</region>
+                            <country>US</country>
+                            <code>20151</code>
+                        </postal>
+                        <email>andy@arin.net</email>
+                        <uri>http://www.arin.net</uri>
+                        </address>
+                    </author>
+                    <author fullname="Pete Cordell" initials="P." surname="Cordell">
+                        <organization>Codalogic</organization>
+                        <address>
+                            <postal>
+                            <street>PO Box 30</street>
+                            <city>Ipswich</city>
+                            <country>UK</country>
+                            <code>IP5 2WY</code>
+                            </postal>
+                            <email>pete.cordell@codalogic.com</email>
+                            <uri>http://www.codalogic.com</uri>
+                        </address>
+                    </author>
+                    <date/>
+                </front>
+            </reference>
+            
         </references>
         <references title="Infomative References">
             
@@ -1080,6 +1185,7 @@ n.f..
             <reference anchor="ARIN_JCR_VALIDATOR" target="https://github.com/arineng/jcrvalidator">
                 <front>
                     <title>JSON Content Rules Validator (Work In Progress)</title>
+                    
                     <author>
                         <organization>American Registry for Internet Numbers</organization>
                     </author>
@@ -1124,7 +1230,8 @@ n.f..
                 </figure>
                 <t>
                     Consider the specification where this rule is found does not define the
-                    values but references an IANA registry for extensibility purposes.
+                    values but references an extensible list of possible values updated
+                    independently of the specification, such as in an IANA registry.
                 </t>
                 <t>
                     If a software developer desired to test a specific situation in which the
@@ -1182,6 +1289,9 @@ n.f..
             <t>
                 Other changes came from feedback given directly to the authors via email and on
                 the IETF JSON Working Group mailing list.
+            </t>
+            <t>
+                Most figures from this document can be found in file form at <xref target="JCR_SPECIFICATION_FIGURES"></xref>.
             </t>
         </section>
     </back>

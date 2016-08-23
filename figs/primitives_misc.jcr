@@ -1,6 +1,7 @@
 ;IP addresses
 ipv4
 ipv6
+ipaddr
 
 ;domain names
 fqdn

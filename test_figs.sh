@@ -25,13 +25,13 @@ assert_raises "jcr --test-jcr -r figs/member_specifications.jcr" 0
 assert_raises "jcr --test-jcr -r figs/object_example.jcr" 0
 assert_raises "jcr -r figs/object_example.jcr figs/object_example1.json" 0
 assert_raises "jcr -r figs/object_example.jcr figs/object_example2.json" 0
-assert_raises "jcr -S "o1" -r figs/object_order_eval.jcr figs/object_order_eval.json" 1
+assert_raises "jcr -S "o1" -r figs/object_order_eval.jcr figs/object_order_eval.json" 3
 assert_raises "jcr -S "o2" -r figs/object_order_eval.jcr figs/object_order_eval.json" 0
 assert_raises "jcr --test-jcr -r figs/array_example.jcr" 0
-assert_raises "jcr -S "a1" -r figs/array_order_eval.jcr figs/array_order_eval.json" 1
+assert_raises "jcr -S "a1" -r figs/array_order_eval.jcr figs/array_order_eval.json" 3
 assert_raises "jcr -S "a2" -r figs/array_order_eval.jcr figs/array_order_eval.json" 0
-assert_raises "jcr -S "a2" -r figs/array_order_eval.jcr figs/array_order_eval2.json" 1
-assert_raises "jcr -S "a1" -r figs/array_unordered_eval.jcr figs/array_order_eval.json" 1
+assert_raises "jcr -S "a2" -r figs/array_order_eval.jcr figs/array_order_eval2.json" 3
+assert_raises "jcr -S "a1" -r figs/array_unordered_eval.jcr figs/array_order_eval.json" 3
 assert_raises "jcr -S "a2" -r figs/array_unordered_eval.jcr figs/array_order_eval.json" 0
 assert_raises "jcr --test-jcr -r figs/group_example.jcr" 0
 assert_raises "jcr --test-jcr -r figs/and_or_example.jcr" 0
@@ -41,9 +41,9 @@ assert_raises "jcr --test-jcr -r figs/repetition_min_max.jcr" 0
 assert_raises "jcr --test-jcr -r figs/repetition_kleene.jcr" 0
 assert_raises "jcr --test-jcr -r figs/repetition_step.jcr" 0
 assert_raises "jcr -S "not_two" -r figs/not_annotation.jcr figs/not_annotation1.json" 0
-assert_raises "jcr -S "not_two" -r figs/not_annotation.jcr figs/not_annotation2.json" 1
+assert_raises "jcr -S "not_two" -r figs/not_annotation.jcr figs/not_annotation2.json" 3
 assert_raises "jcr -S "status" -r figs/not_annotation.jcr figs/not_annotation3.json" 0
-assert_raises "jcr -S "status" -r figs/not_annotation.jcr figs/not_annotation4.json" 1
+assert_raises "jcr -S "status" -r figs/not_annotation.jcr figs/not_annotation4.json" 3
 assert_raises "jcr --test-jcr -r figs/single_line_directive_example.jcr" 0
 assert_raises "jcr --test-jcr -r figs/multi_line_directive_example.jcr" 0
 assert_raises "jcr --test-jcr -r figs/jcr_version_current.jcr" 0
@@ -54,7 +54,7 @@ assert_raises "jcr -r figs/any_member_any_type.jcr figs/any_member1.json" 0
 assert_raises "jcr -r figs/any_member_any_type.jcr figs/any_member2.json" 0
 assert_raises "jcr -r figs/any_member_any_type.jcr figs/any_member_any_type2.json" 0
 assert_raises "jcr -r figs/restrict_objects.jcr figs/restrict_objects1.json" 0
-assert_raises "jcr -r figs/restrict_objects.jcr figs/restrict_objects2.json" 1
+assert_raises "jcr -r figs/restrict_objects.jcr figs/restrict_objects2.json" 3
 assert_raises "jcr -r figs/unrestricted_arrays.jcr figs/unrestricted_arrays.json" 0
 assert_raises "jcr --test-jcr -r figs/lists_of_values.jcr" 0
 assert_raises "jcr --test-jcr -r figs/groups_in_arrays.jcr" 0
