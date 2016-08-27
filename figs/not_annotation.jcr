@@ -2,4 +2,4 @@
 $not_two = [ @{not} 2 ]
     
 ; error if one of the status values is "fail"
-$status = @{not} @{unordered} [ "fail", string @* ] 
+$status = @{not} @{unordered} [ "fail", string * ] 

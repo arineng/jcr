@@ -1,1 +1,1 @@
-$statuses = @{unordered} [ @{not} "denied" @?, string @* ]
+$statuses = @{unordered} [ @{not} "denied" ?, string * ]

@@ -348,11 +348,11 @@
                 name assignment can be considered a root rule with the appropriate annotation.
             </t>
             <t>
-                Type specifications, depending on their type, can contain zero or more other type
+                Type specifications, depending on their type, can contain zero or more other
                 specifications or rule names. For example, an object specification might contain multiple
-                member specifications or rules names that resolve to member specifications or a mixture
-                of member specifications and rule names. For the purposes of this document, type specifications
-                and rule names composing other type specifications are called subordinate components.
+                member specifications or rule names that resolve to member specifications or a mixture
+                of member specifications and rule names. For the purposes of this document, specifications
+                and rule names composing other specifications are called subordinate components.
             </t>
             <section title="Rule Names and Assignments">
                 <t>
@@ -393,7 +393,7 @@
             </section>
             <section title="Annotations">
                 <t>
-                    Annotations may appear before a rule name assignment, before a type specification, or
+                    Annotations may appear before a rule name assignment, before a type or member specification, or
                     before a rule name contained within a type specification. In each place, there may be
                     zero or more annotations.
                     Each annotation begins with the
@@ -601,7 +601,7 @@ n.f..
             </figure>
             <t>
                 It defines two rules, o1 and o2. o1 first specifies that an object can have
-                zero or more (that is the meaning of "@*", see <xref target="repetition"></xref>)
+                zero or more (that is the meaning of "*", see <xref target="repetition"></xref>)
                 members where the member name is the letter 'p' followed by a number
                 (e.g. "p0", "p1", "p2") and then a member with the exact member name "p1". o2
                 has the exact same member specifications but in the opposite order.
@@ -807,9 +807,10 @@ n.f..
                 <t>
                     Evaluation of subordinate components in array, object, and group specifications may be succeeded by
                     a repetition expression denoting how many times the subordinate component should be
-                    evaluated. Repetition expressions start with the 'at' character ('@') followed by either
-                    a specific repetition value or a minimum to maximum specification or a single character Kleene operator followed by an
-                    optional repetition step expression, which is a percent character ('%') followed by an step integer.
+                    evaluated. 
+                    Repetition expressions are specified using a Kleene symbol ('?', '+', or '*') or with
+                    the '*' symbol succeeded by specific minimum and/or maximum values, each being non-negative integers. Repetition expressions
+                    may also be appended with a step expression, which is the '%' symbol followed by a positive integer.
                 </t>
                 <t>
                     When no repetition expression is present, both the minimum and maximum
@@ -819,7 +820,7 @@ n.f..
                     A minimum and maximum can be expressed by giving the minimum followed by two period charactes
                     ('..') followed by the maximum, with either the minimum or maximum being optional. When the
                     minimum is not explicitly specified, it is assumed to be zero. When the maximum is not explicitly
-                    specified, it is assumed to be infinity.
+                    specified, it is assumed to be positive infinity.
                 </t>
                 <figure>
                     <artwork xml:space="preserve" align="center">&repetition_min_max.jcr;</artwork>

@@ -5,7 +5,7 @@ $image = "Image" : {
   $height, 
   "Title" : string,
   $thumbnail, 
-  "IDs" : [ integer @* ] 
+  "IDs" : [ integer * ] 
 }
     
 $width = "Width" : $width_v

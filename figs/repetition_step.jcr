@@ -1,12 +1,21 @@
-[ $name_servers @1..12%2 ]
+; there must be at least 2 name servers
+; there may be no more than 12 name servers
+; there must be an even number of name servers
+; e.g. 2,4,6,8,10,12
+[ $name_servers *2..12%2 ]
 $name_servers =: fqdn
 
-{ /^eth.*/ : $mac_addr @..100%2 }
+; minimum is zero
+; maximum is 100
+; must be an even number
+{ /^eth.*/ : $mac_addr *..100%2 }
 $mac_addr =: hex
 
-[ $octet @4..%2 ]
+; at least 32 octets
+; must be be in groups of 16
+[ $octet *32..%16 ]
 $octet =: int8
 
-$error_set = ( string @*%4 )
-
-[ integer @+%10 ]
+; if there are to be error sets,
+; their number must be divisible by 4
+$error_set = ( string *%4 )

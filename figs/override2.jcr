@@ -1,1 +1,1 @@
-$statuses = @{unordered} [ "accepted", string @* ]
+$statuses = @{unordered} [ "accepted", string * ]

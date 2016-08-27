@@ -1,1 +1,1 @@
-[ "item1", "item2", any @* ]
+[ "item1", "item2", any * ]
