@@ -206,7 +206,7 @@
                     The following JSON data describes a JSON object with two members, "line-count" and
                     "word-count", each containing an integer.                    
                 </t>
-                <figure>
+                <figure anchor="first_example.json">
                     <artwork xml:space="preserve" align="center">&first_example.json;</artwork>
                 </figure>
                 <t>
@@ -218,14 +218,14 @@
                     For a protocol specification, it is probably more useful to specify that each member
                     is any integer and not specific, exact integers:
                 </t>
-                <figure>
+                <figure anchor="first_example.jcr">
                     <artwork xml:space="preserve" align="center">&first_example.jcr;</artwork>
                 </figure>
                 <t>
                     Since line counts and word counts should be either zero or a positive integer,
                     the specification may be further narrowed:
                 </t>                
-                <figure>
+                <figure anchor="first_example2.jcr">
                     <artwork xml:space="preserve" align="center">&first_example2.jcr;</artwork>
                 </figure>
             </section>
@@ -234,13 +234,13 @@
                     Building on the first example, this second example describes the same object
                     but with the addition of another member, "file-name".
                 </t>
-                <figure>
+                <figure anchor="second_example.json">
                     <artwork xml:space="preserve" align="center">&second_example.json;</artwork>
                 </figure>                
                 <t>
                     The following JCR describes objects like it.
                 </t>
-                <figure>
+                <figure anchor="second_example.jcr">
                     <artwork xml:space="preserve" align="center">&second_example.jcr;</artwork>
                 </figure>                
                 <t>
@@ -248,7 +248,7 @@
                     named rules to reduce complexity and to enable re-use. The following example takes
                     the JCR from above and rewrites the members as named rules.
                 </t>
-                <figure>
+                <figure anchor="second_example2.jcr">
                     <artwork xml:space="preserve" align="center">&second_example2.jcr;</artwork>
                 </figure>                
                 <t>
@@ -256,7 +256,7 @@
                     for specific test cases. In the following example, the named rules are locally overridden
                     for the test case where the file name is "rfc4627.txt".
                 </t>                
-                <figure>
+                <figure anchor="second_example_override.jcr">
                     <artwork xml:space="preserve" align="center">&second_example_override.jcr;</artwork>
                 </figure>      
                 <t>
@@ -373,7 +373,7 @@
                     an alphabetic character and contain no whitespace. Ruleset identifiers are case sensitive.
                     Simple use cases of JCR will most likely not use ruleset identifiers.
                 </t>
-                <figure>
+                <figure anchor="rule_name_ruleset_id.jcr">
                     <artwork align="center" xml:space="preserve">&rule_name_ruleset_id.jcr;</artwork>
                 </figure>
                 <t>
@@ -382,7 +382,7 @@
                     name from the type specification with the character sequence '=:', whereas rule name assignments
                     for all other type specifications only require the separation using the '=' character.
                 </t>
-                <figure>
+                <figure anchor="assignment_example.jcr">
                     <artwork xml:space="preserve" align="center">&assignment_example.jcr;</artwork>
                 </figure>
                 <t>
@@ -400,7 +400,7 @@
                     character sequence "@{" and ends with "}". The following is an example of a type specification
                     with the not annotation (explained in <xref target="not_annotation"></xref>):
                 </t>
-                <figure>
+                <figure anchor="annotation_example.jcr">
                     <artwork xml:space="preserve" align="center">&annotation_example.jcr;</artwork>
                 </figure>
                 <t>
@@ -429,7 +429,7 @@
                 <t>
                     The syntax of each type of type specifications varies depending on the type:
                 </t>
-                <figure>
+                <figure anchor="primitive_overview.jcr">
                     <artwork xml:space="preserve" align="center">&primitives_overview.jcr;</artwork>
                 </figure>
             </section>
@@ -441,13 +441,13 @@
             <t>
                 The rules for booleans and null are the simplest and take the following forms:
             </t>
-            <figure>
+            <figure anchor="primitive_boolean_and_null.jcr">
                 <artwork xml:space="preserve" align="center">&primitives_boolean_and_null.jcr;</artwork>
             </figure>
                 <t>
                 Rules for numbers can specify the number be either an integer or floating point number:
                 </t>
-                <figure>
+                <figure anchor="primitive_integer_and_float.jcr">
                     <artwork xml:space="preserve" align="center">&primitives_integer_and_float.jcr;</artwork>
                 </figure>
                 <t>
@@ -459,7 +459,7 @@
                 Numbers may also be specified as an absolute value or a range of possible values, where a range
                 may be specified using a minimum, maximum, or both:
                 </t>
-                <figure>
+                <figure anchor="n_to_m">
                     <artwork align="center" xml:space="preserve">
   n
   n..m
@@ -475,7 +475,7 @@ n.f..
                 When specifying a minimum and a maximum, both must either be an integer or a floating point number.
                 Thus to specify a floating point number between zero and ten a definition of the following form is used:
             </t>
-            <figure>
+            <figure anchor="primitive_float_range.jcr">
                 <artwork xml:space="preserve" align="center">&primitives_float_range.jcr;</artwork>
             </figure>  
                 <t>
@@ -483,7 +483,7 @@ n.f..
                     words (i.e. 'int8', 'uint16'). The 'int' word specifies the integer as being signed whereas
                     the 'uint' word specifies the integer as being unsigned.
                 </t>
-                <figure>
+                <figure anchor="primitive_bit_integers.jcr">
                     <artwork xml:space="preserve" align="center">&primitives_bit_integers.jcr;</artwork>
                 </figure>  
             </section>
@@ -495,7 +495,7 @@ n.f..
                     followed by another double quote. And regular expressions may be specified by
                     enclosing a regular expression within the forward slash ('/') character.
                 </t>
-                <figure>
+                <figure anchor="primitive_strings.jcr">
                     <artwork align="center" xml:space="preserve">&primitives_strings.jcr;</artwork>
                 </figure>
                 <t>
@@ -508,7 +508,7 @@ n.f..
                     Specific URI schemes are specified with the word 'uri' followed by two period characters
                     ('..') followed by the URI scheme.
                 </t>
-                <figure>
+                <figure anchor="primitive_uris.jcr">
                     <artwork align="center" xml:space="preserve">&primitives_uris.jcr;</artwork>
                 </figure>
                 <t>
@@ -527,7 +527,7 @@ n.f..
                     be specified using the 'email' word, and E.123 phone number may be specified using the
                     word 'phone'.
                 </t>
-                <figure>
+                <figure anchor="primitive_misc.jcr">
                     <artwork align="center" xml:space="preserve">&primitives_misc.jcr;</artwork>
                 </figure>
                 <t>
@@ -536,7 +536,7 @@ n.f..
                     'base32', 'base32hex', 'base64', and 'base64url' correspond with their
                     RFC 4648 counterparts accordingly.
                 </t>
-                <figure>
+                <figure anchor="primitive_binary.jcr">
                     <artwork align="center" xml:space="preserve">&primitives_binary.jcr;</artwork>
                 </figure>
             </section>
@@ -563,7 +563,7 @@ n.f..
                 using forward slash ('/') characters. Regular expressions are not implicitly anchored
                 and therefore must have explicit anchors if needed.
             </t>
-            <figure>
+            <figure anchor="member_specifications.jcr">
                 <artwork xml:space="preserve" align="center">&member_specifications.jcr;</artwork>
             </figure>
         </section>
@@ -576,17 +576,39 @@ n.f..
                 at the start with a left curly brace character ('{') and at the end with a right curly
                 brace character ('}').
             </t>
-            <figure>
+            <t>
+                Evaluation of the subordinate components of object specifications is as follows:
+                <list style="symbols">
+                    <t>
+                        No order is implied for the members of the object being evaluated.
+                    </t>
+                    <t>
+                        Subordinate components of the object specification are evaluated in
+                        the order they appear.
+                    </t>
+                    <t>
+                        Each member of the object being evaluated can only match one
+                        subordinate component. 
+                    </t>
+                    <t>
+                        Any members not matched against a subordinate component are ignored.
+                    </t>
+                </list>
+            </t>
+            <t>
+                The following examples illustrate match of JSON objects to JCR object specifications.
+            </t>
+            <figure anchor="object_example.jcr">
                 <artwork align="center" xml:space="preserve">&object_example.jcr;</artwork>
             </figure>
             <t>
                 The subordinate components of an object specification do not imply
                 order. Given the example above, both JSON examples are valid:
             </t>
-            <figure>
+            <figure anchor="object_example1.json">
                 <artwork align="center" xml:space="preserve">&object_example1.json;</artwork>
             </figure>
-            <figure>
+            <figure anchor="object_example2.json">
                 <artwork align="center" xml:space="preserve">&object_example2.json;</artwork>
             </figure>
             <t>
@@ -596,7 +618,7 @@ n.f..
             <t>
                 Take for example the following ruleset:
             </t>
-            <figure>
+            <figure anchor="object_order_eval.jcr">
                 <artwork align="center" xml:space="preserve">&object_order_eval.jcr;</artwork>
             </figure>
             <t>
@@ -610,7 +632,7 @@ n.f..
                 The following JSON will not match o1 but will match o2 because of the order
                 of the member specifications.
             </t>
-            <figure>
+            <figure anchor="object_order_eval.json">
                 <artwork align="center" xml:space="preserve">&object_order_eval.json;</artwork>
             </figure>
             <t>
@@ -626,19 +648,19 @@ n.f..
                 extra members are expected, the @{not} annotation may be used with
                 a regular expression as the last subordinate component of the object specification.
             </t>
-            <figure>
+            <figure anchor="restrict_objects.jcr">
                 <artwork xml:space="preserve" align="center">&restrict_objects.jcr;</artwork>
             </figure>
             <t>
                 The following JSON object will validate against the above rule.
             </t>
-            <figure>
+            <figure anchor="restrict_objects1.json">
                 <artwork xml:space="preserve" align="center">&restrict_objects1.json;</artwork>
             </figure>
             <t>
                 However, the following JSON object will not validate against the above rule.
             </t>
-            <figure>
+            <figure anchor="restrict_objects2.json">
                 <artwork xml:space="preserve" align="center">&restrict_objects2.json;</artwork>
             </figure>
             <t>
@@ -655,7 +677,7 @@ n.f..
                 group specification. The subordinate components are enclosed at the start with a left
                 square brace character ('[') and at the end with a right square brace character (']').
             </t>
-            <figure>
+            <figure anchor="array_example.jcr">
                 <artwork align="center" xml:space="preserve">&array_example.jcr;</artwork>
             </figure>
             <t>
@@ -666,14 +688,14 @@ n.f..
             <t>
                 Take for example the following ruleset:
             </t>
-            <figure>
+            <figure anchor="array_order_eval.jcr">
                 <artwork align="center" xml:space="preserve">&array_order_eval.jcr;</artwork>
             </figure>
             <t>
                 It defines two rules, a1 and a2. The array in the following JSON will not match a1, but
                 will match a2.
             </t>
-            <figure>
+            <figure anchor="array_order_eval.json">
                 <artwork align="center" xml:space="preserve">&array_order_eval.json;</artwork>
             </figure>
             <t>
@@ -683,7 +705,7 @@ n.f..
                 array does not match because the last element of the array does not match any subordinate
                 component:
             </t>
-            <figure>
+            <figure anchor="array_order_eval2.json">
                 <artwork align="center" xml:space="preserve">&array_order_eval2.json;</artwork>
             </figure>
             <section title="Unrestricting Arrays">
@@ -703,7 +725,7 @@ n.f..
                     the last subordinate component of the array specification should accept any
                     item:
                 </t>
-                <figure>
+                <figure anchor="unrestricted_arrays.jcr">
                     <artwork xml:space="preserve" align="center">&unrestricted_arrays.jcr;</artwork>
                 </figure>
             </section>
@@ -716,13 +738,13 @@ n.f..
                     In the ruleset below, a1 and a2 have the same subordinate components given in the
                     same order. a2 is annotated with the @{unordered} annotation.
                 </t>
-                <figure>
+                <figure anchor="array_unordered_eval.jcr">
                     <artwork align="center" xml:space="preserve">&array_unordered_eval.jcr;</artwork>
                 </figure>
                 <t>
                     The JSON array below does not match a1 but does match a2.
                 </t>
-                <figure>
+                <figure anchor="array_order_eval.json_2">
                     <artwork align="center" xml:space="preserve">&array_order_eval.json;</artwork>
                 </figure>
                 <t>
@@ -756,7 +778,7 @@ n.f..
             <t>
                 The following is an example of a group specification:
             </t>
-            <figure>
+            <figure anchor="group_example.jcr">
                 <artwork xml:space="preserve" align="center">&group_example.jcr;</artwork>
             </figure>    
             <t>
@@ -785,7 +807,7 @@ n.f..
                     (',') followed by another subordinate component.
                     A choice is a subordinate component followed by a pipe character ('|') followed by another subordinate component.
                 </t>
-                <figure>
+                <figure anchor="and_or_example.jcr">
                     <artwork align="center" xml:space="preserve">&and_or_example.jcr;</artwork>
                 </figure>
                 <t>
@@ -793,13 +815,13 @@ n.f..
                     explicitly declare precedence between a sequence and a choice. Therefore, the following
                     is illegal:
                 </t>
-                <figure>
+                <figure anchor="mixed_and_or_bad.jcr">
                     <artwork xml:space="preserve" align="center">&mixed_and_or_bad.jcr;</artwork>
                 </figure>
                 <t>
                     The example above should be expressed as:
                 </t>
-                <figure>
+                <figure anchor="mixed_and_or_good.jcr">
                     <artwork xml:space="preserve" align="center">&mixed_and_or_good.jcr;</artwork>
                 </figure>
             </section>
@@ -822,7 +844,7 @@ n.f..
                     minimum is not explicitly specified, it is assumed to be zero. When the maximum is not explicitly
                     specified, it is assumed to be positive infinity.
                 </t>
-                <figure>
+                <figure anchor="repetition_min_max.jcr">
                     <artwork xml:space="preserve" align="center">&repetition_min_max.jcr;</artwork>
                 </figure>
                 <t>
@@ -830,7 +852,7 @@ n.f..
                     specifies zero or one (i.e. optional), the plus character ('+') which specifies
                     one ore more, and the asterisk character ('*') which specifies zero or more.
                 </t>
-                <figure>
+                <figure anchor="repetition_kleene.jcr">
                     <artwork xml:space="preserve" align="center">&repetition_kleene.jcr;</artwork>
                 </figure>
                 <t>
@@ -841,7 +863,7 @@ n.f..
                     (e.g. the total repetitions minus the minimum repetition value must be 
                     divisible by the step value with a remainder of zero).
                 </t>
-                <figure>
+                <figure anchor="repetition_step.jcr">
                     <artwork xml:space="preserve" align="center">&repetition_step.jcr;</artwork>
                 </figure>
             </section>
@@ -849,7 +871,7 @@ n.f..
                 <t>
                     The evaluation of a rule can be changed with the @{not} annotation. With this annotation,
                     a rule that would otherwise match does not, and a rule that would not have matched does.
-                    <figure>
+                    <figure anchor="not_annotation.jcr">
                         <artwork xml:space="preserve" align="center">&not_annotation.jcr;</artwork>
                     </figure>         
                 </t>
@@ -865,7 +887,7 @@ n.f..
                 with a hash character ('#') and are terminated by the end of the line.
                 They take the following form:
             </t>
-            <figure>
+            <figure anchor="single_line_directive_example.jcr">
                 <artwork xml:space="preserve" align="center">&single_line_directive_example.jcr;</artwork>
             </figure>      
             <t>
@@ -873,7 +895,7 @@ n.f..
                 They begin with the character sequence "#{" and end with "}". The take the
                 following form:
             </t>
-            <figure>
+            <figure anchor="multi_line_directive_example.jcr">
                 <artwork xml:space="preserve" align="center">&multi_line_directive_example.jcr;</artwork>
             </figure>
             <t>
@@ -887,7 +909,7 @@ n.f..
                     standard. The version is expressed as a major integer followed by a period followed
                     by a minor integer.
                 </t>            
-                <figure>
+                <figure anchor="jcr_version_current.jcr">
                     <artwork xml:space="preserve" align="center">&jcr_version_current.jcr;</artwork>
                 </figure>
                 <t>
@@ -900,7 +922,7 @@ n.f..
                 </t>
                 <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
                  the working version number. -->
-                <figure>
+                <figure anchor="jcr_version_final.jcr">
                     <artwork xml:space="preserve" align="center">
 # jcr-version 1.0
                 </artwork>
@@ -916,7 +938,7 @@ n.f..
                 </t>
                 <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
                  the working version number. -->
-                <figure>
+                <figure anchor="jcr_version_extensions.jcr">
                     <artwork xml:space="preserve" align="center">
 # jcr-version 1.0 +co-constraints-1.2 +jcr-doc-1.0
                 </artwork>
@@ -926,7 +948,7 @@ n.f..
                 <t>
                     This directive identifies a ruleset to rule processors. It takes the form:
                 </t>
-                <figure>
+                <figure anchor="ruleset_id.jcr">
                     <artwork xml:space="preserve" align="center">&ruleset_id.jcr;</artwork>
                 </figure>
                 <t>
@@ -945,7 +967,7 @@ n.f..
                     The following is an example:
                 </t>
                 <!-- We don't have control of example.com, so this can't be put in as a test.-->
-                <figure>
+                <figure anchor="import_directive.jcr">
                     <artwork xml:space="preserve" align="center">
 # import http://example.com/rfc9999 as rfc9999
                 </artwork>
@@ -967,32 +989,32 @@ n.f..
                     As an example, the following defines an object with a member with any name
                     that has a value that is a string:
                 </t>
-                <figure>
+                <figure anchor="any_member.jcr">
                     <artwork xml:space="preserve" align="center">&any_member.jcr;</artwork>
                 </figure>
                 <t>
                     The JSON below matches the above rule.
                 </t>
-                <figure>
+                <figure anchor="any_member1.json">
                     <artwork xml:space="preserve" align="center">&any_member1.json;</artwork>
                 </figure>
                 <t>
                     Likewise, the JSON below also matches the same rule.
                 </t>
-                <figure>
+                <figure anchor="any_member2.json">
                     <artwork xml:space="preserve" align="center">&any_member2.json;</artwork>
                 </figure>
                 <t>
                     Constructing an object with a member of any name with any type would therefore
                     take the form:
                 </t>
-                <figure>
+                <figure anchor="any_member_any_type.jcr">
                     <artwork xml:space="preserve" align="center">&any_member_any_type.jcr;</artwork>
                 </figure>
                 <t>
                     The above rule matches not only the two JSON objects above, but the JSON object below.
                 </t>
-                <figure>
+                <figure anchor="any_member_any_type2.json">
                     <artwork xml:space="preserve" align="center">&any_member_any_type2.json;</artwork>
                 </figure>
             </section>
@@ -1009,7 +1031,7 @@ n.f..
                 <t>
                     Consider the following examples:
                 </t>
-                <figure>
+                <figure anchor="lists_of_values.jcr">
                     <artwork xml:space="preserve" align="center">&lists_of_values.jcr;</artwork>
                 </figure>
             </section>
@@ -1017,14 +1039,14 @@ n.f..
                 <t>
                     Groups may be a subordinate component of array specifications:
                 </t>
-                <figure>
+                <figure anchor="groups_in_arrays.jcr">
                     <artwork xml:space="preserve" align="center">&groups_in_arrays.jcr;</artwork>
                 </figure>
                 <t>
                     Unlike primitive specifications, subordinate group specifications in array specifications
                     may have sequence combinations and contain any type specification.
                 </t>
-                <figure>
+                <figure anchor="groups_in_arrays2.jcr">
                     <artwork xml:space="preserve" align="center">&groups_in_arrays2.jcr;</artwork>
                 </figure>
             </section>
@@ -1034,7 +1056,7 @@ n.f..
                     Subordinate group specifications in object specifications may have sequence
                     combinations but must only contain member specifications.
                 </t>
-                <figure>
+                <figure anchor="groups_in_objects.jcr">
                     <artwork xml:space="preserve" align="center">&groups_in_objects.jcr;</artwork>
                 </figure> 
             </section>
@@ -1044,7 +1066,7 @@ n.f..
                     a repetition expression for each. Other than grouping multiple rules, a
                     group specification can be used as a macro definition for a single rule.
                 </t>
-                <figure>
+                <figure anchor="macro.jcr">
                     <artwork xml:space="preserve" align="center">&macro.jcr;</artwork>
                 </figure> 
             </section>
@@ -1056,7 +1078,7 @@ n.f..
                     both obj1 and obj2 have a members "foo" and "fob" with obj1 having the additional member "bar"
                     and obj2 having the additional member "baz".
                 </t>
-                <figure>
+                <figure anchor="object_mixin.jcr">
                     <artwork xml:space="preserve" align="center">&object_mixin.jcr;</artwork>
                 </figure>
             </section>
@@ -1072,7 +1094,7 @@ n.f..
                     In the following example, the referrer_uri member can only be present if the
                     location_uri member is present.
                 </t>
-                <figure>
+                <figure anchor="subordinate_dependents.jcr">
                     <artwork xml:space="preserve" align="center">&subordinate_dependents.jcr;</artwork>
                 </figure>
             </section>
@@ -1226,7 +1248,7 @@ n.f..
                     ability to locally override named rules. As an example, consider the
                     following rule which defines an array of strings.
                 </t>
-                <figure>
+                <figure anchor="override1.jcr">
                     <artwork xml:space="preserve" align="center">&override1.jcr;</artwork>
                 </figure>
                 <t>
@@ -1239,14 +1261,14 @@ n.f..
                     array must at least contain the status "accepted", the rules from the specification
                     could be used and the statuses rule could be explicitly overridden locally as:
                 </t>
-                <figure>
+                <figure anchor="override2.jcr">
                     <artwork xml:space="preserve" align="center">&override2.jcr;</artwork>
                 </figure>
                 <t>
                     Alternatively, the developer may need to ensure that the status "denied" should
                     not be present in the array:
                 </t>
-                <figure>
+                <figure anchor="override3.jcr">
                     <artwork xml:space="preserve" align="center">&override3.jcr;</artwork>
                 </figure>
             </section>
