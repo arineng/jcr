@@ -60,6 +60,9 @@ assert_raises "jcr --test-jcr -r figs/lists_of_values.jcr" 0
 assert_raises "jcr --test-jcr -r figs/groups_in_arrays.jcr" 0
 assert_raises "jcr --test-jcr -r figs/groups_in_arrays2.jcr" 0
 assert_raises "jcr --test-jcr -r figs/groups_in_objects.jcr" 0
+assert_raises "jcr -r figs/groups_in_objects_ignored1.jcr figs/groups_in_objects_ignored.json" 0
+assert_raises "jcr -r figs/groups_in_objects_ignored2.jcr figs/groups_in_objects_ignored.json" 3
+assert_raises "jcr -r figs/groups_in_objects_ignored3.jcr figs/groups_in_objects_ignored.json" 3
 assert_raises "jcr --test-jcr -r figs/macro.jcr" 0
 assert_raises "jcr --test-jcr -r figs/object_mixin.jcr" 0
 assert_raises "jcr --test-jcr -r figs/subordinate_dependents.jcr" 0
