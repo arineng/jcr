@@ -156,8 +156,12 @@
     'figs/subordinate_dependents.jcr'>
   <!ENTITY override1.jcr PUBLIC ''
     'figs/override1.jcr'>
+  <!ENTITY override1.json PUBLIC ''
+    'figs/override1.json'>
   <!ENTITY override2.jcr PUBLIC ''
     'figs/override2.jcr'>
+  <!ENTITY override2.json PUBLIC ''
+    'figs/override2.json'>
   <!ENTITY override3.jcr PUBLIC ''
     'figs/override3.jcr'>
 ]>
@@ -1320,14 +1324,27 @@ n.f..
                     could be used and the statuses rule could be explicitly overridden locally as:
                 </t>
                 <figure anchor="override2.jcr">
+                    <preamble>
+                        This rule will evaluate positively with the JSON in <xref target="override1.json"></xref>
+                    </preamble>
                     <artwork xml:space="preserve" align="center">&override2.jcr;</artwork>
+                </figure>
+                <figure anchor="override1.json">
+                    <artwork xml:space="preserve" align="center">&override1.json;</artwork>
                 </figure>
                 <t>
                     Alternatively, the developer may need to ensure that the status "denied" should
                     not be present in the array:
                 </t>
                 <figure anchor="override3.jcr">
+                    <preamble>
+                        This rule will fail to evaluate the JSON in <xref target="override2.json"></xref>
+                        thus signaling a problem.
+                    </preamble>
                     <artwork xml:space="preserve" align="center">&override3.jcr;</artwork>
+                </figure>
+                <figure anchor="override2.json">
+                    <artwork xml:space="preserve" align="center">&override2.json;</artwork>
                 </figure>
             </section>
             <section title="Rule Callbacks">

@@ -66,9 +66,10 @@ assert_raises "jcr -r figs/groups_in_objects_ignored3.jcr figs/groups_in_objects
 assert_raises "jcr --test-jcr -r figs/macro.jcr" 0
 assert_raises "jcr --test-jcr -r figs/object_mixin.jcr" 0
 assert_raises "jcr --test-jcr -r figs/subordinate_dependents.jcr" 0
-assert_raises "jcr --test-jcr -r figs/override1.jcr" 0
-assert_raises "jcr --test-jcr -r figs/override2.jcr" 0
-assert_raises "jcr --test-jcr -r figs/override3.jcr" 0
+assert_raises "jcr -S "statuses" -r figs/override1.jcr figs/override1.json" 0
+assert_raises "jcr -S "statuses" -r figs/override2.jcr figs/override1.json" 0
+assert_raises "jcr -S "statuses" -r figs/override3.jcr figs/override2.json" 3
+assert_raises "jcr -S "statuses" -r figs/override3.jcr figs/override1.json" 0
 
 assert_end figs
 
