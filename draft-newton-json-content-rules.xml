@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE rfc SYSTEM "http://xml.resource.org/authoring/rfc2629.dtd"
+<!DOCTYPE rfc SYSTEM "http://xml2rfc.tools.ietf.org/authoring/rfc2629.dtd"
 [
   <!ENTITY RFC1166 PUBLIC ''
-   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.1166.xml'>
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1166.xml'>
   <!ENTITY RFC3339 PUBLIC ''
-   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.3339.xml'>
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3339.xml'>
   <!ENTITY RFC3986 PUBLIC ''
-   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.3986.xml'>
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml'>
   <!ENTITY RFC4234 PUBLIC ''
-   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.4234.xml'>
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4234.xml'>
   <!ENTITY RFC4627 PUBLIC ''
-   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.4627.xml'>
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4627.xml'>
   <!ENTITY RFC4648 PUBLIC ''
-   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.4648.xml'>
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4648.xml'>
   <!ENTITY RFC5322 PUBLIC ''
-   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5322.xml'>
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5322.xml'>
   <!ENTITY RFC5952 PUBLIC ''
-   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.5952.xml'>
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5952.xml'>
   <!ENTITY RFC7159 PUBLIC ''
-   'http://xml.resource.org/public/rfc/bibxml/reference.RFC.7159.xml'>
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7159.xml'>
   <!ENTITY I-D.cordell-jcr-co-constraints PUBLIC ''
-   'http://xml.resource.org/public/rfc/bibxml3/reference.I-D.cordell-jcr-co-constraints.xml'>
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.cordell-jcr-co-constraints.xml'>
    
   <!ENTITY ABNF PUBLIC ''
     'jcr-abnf.txt'>
@@ -858,6 +858,14 @@ n.f..
                 <figure anchor="mixed_and_or_good.jcr">
                     <artwork xml:space="preserve" align="center">&mixed_and_or_good.jcr;</artwork>
                 </figure>
+                <t>
+                        A future specification will clarify the choice ('|') operation as inclusive or,
+                        exclusive or ("xor") or otherwise. At present readers should assume the choice
+                        ('|') operator is an inclusive or. However, for objects and unordered arrays
+                        that is not ideal, nor is xor. We are in the process of defining an algorithm
+                        to "rewrite" choices of rules for use with inclusive or which is more suitable
+                        for the data model of JSON.
+                </t>
             </section>
             <section title="Repetition in Array, Object, and Group Specifications" anchor="repetition">
                 <t>
@@ -891,11 +899,14 @@ n.f..
                 </figure>
                 <t>
                     A repetition step expression may follow a minimum to maximum expression or the
-                    zero or more Kleene operator or the one or more Kleene operator. The repetition step
+                    zero or more Kleene operator or the one or more Kleene operator. When the repetition step
+                    follows a minimum to maximum expression or the zero or more Kleene operator, it
                     specifies that the total number of repetitions minus the minimum repetition value
                     must be a multiple of the repetition step
                     (e.g. the total repetitions minus the minimum repetition value must be 
-                    divisible by the step value with a remainder of zero).
+                    divisible by the step value with a remainder of zero). When the repetition step
+                    follows a one ore more Kleene operator, it specifies that the total number of repetitions
+                    minux the step value must be a multiple of the repetition step value.
                 </t>
                 <figure anchor="repetition_step.jcr">
                     <artwork xml:space="preserve" align="center">&repetition_step.jcr;</artwork>
