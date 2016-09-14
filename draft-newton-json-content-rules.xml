@@ -899,16 +899,27 @@ n.f..
                 </figure>
                 <t>
                     A repetition step expression may follow a minimum to maximum expression or the
-                    zero or more Kleene operator or the one or more Kleene operator. When the repetition step
-                    follows a minimum to maximum expression or the zero or more Kleene operator, it
-                    specifies that the total number of repetitions minus the minimum repetition value
-                    must be a multiple of the repetition step
-                    (e.g. the total repetitions minus the minimum repetition value must be 
-                    divisible by the step value with a remainder of zero). When the repetition step
-                    follows a one ore more Kleene operator, it specifies that the total number of repetitions
-                    minux the step value must be a multiple of the repetition step value.
+                    zero or more Kleene operator or the one or more Kleene operator. 
+                    <list style="symbols">
+                        <t>
+                            When the repetition step
+                            follows a minimum to maximum expression or the zero or more Kleene operator ('*'), it
+                            specifies that the total number of repetitions minus the minimum repetition value
+                            must be a multiple of the repetition step
+                            (e.g. the total repetitions minus the minimum repetition value must be 
+                            divisible by the step value with a remainder of zero).
+                        </t>
+                        <t>
+                            When the repetition step follows 
+                            a one or more Kleene operator ('+'), the minimum repetition value is set equal to the 
+                            repetition step value and the total number of repetitions minus the step value must 
+                            be a multiple of the repetition step value.
+                        </t>
+                    </list>
+                     
                 </t>
                 <figure anchor="repetition_step.jcr">
+                    <preamble>The following is an example for repetition steps in repetition expressions.</preamble>
                     <artwork xml:space="preserve" align="center">&repetition_step.jcr;</artwork>
                 </figure>
             </section>
@@ -1201,41 +1212,7 @@ n.f..
             &RFC5952;
             &RFC7159;
             
-            <reference anchor="JCR_SPECIFICATION_FIGURES"
-                target="https://github.com/arineng/jcr/tree/07/figs">
-                <front>
-                    <title>Figures in the JCR Specification</title>
-                    <author fullname="Andrew Lee Newton" initials="A.L." surname="Newton">
-                        <organization abbrev="ARIN">American Registry for Internet
-                            Numbers</organization>
-                        <address>
-                        <postal>
-                            <street>3635 Concorde Parkway</street>
-                            <city>Chantilly</city>
-                            <region>VA</region>
-                            <country>US</country>
-                            <code>20151</code>
-                        </postal>
-                        <email>andy@arin.net</email>
-                        <uri>http://www.arin.net</uri>
-                        </address>
-                    </author>
-                    <author fullname="Pete Cordell" initials="P." surname="Cordell">
-                        <organization>Codalogic</organization>
-                        <address>
-                            <postal>
-                            <street>PO Box 30</street>
-                            <city>Ipswich</city>
-                            <country>UK</country>
-                            <code>IP5 2WY</code>
-                            </postal>
-                            <email>pete.cordell@codalogic.com</email>
-                            <uri>http://www.codalogic.com</uri>
-                        </address>
-                    </author>
-                    <date/>
-                </front>
-            </reference>
+            
             
             <reference anchor="JCR_ABNF"
                 target="https://raw.githubusercontent.com/arineng/jcr/07/jcr-abnf.txt">
@@ -1277,7 +1254,41 @@ n.f..
         <references title="Infomative References">
             
             &I-D.cordell-jcr-co-constraints;
-            
+            <reference anchor="JCR_SPECIFICATION_FIGURES"
+                target="https://github.com/arineng/jcr/tree/07/figs">
+                <front>
+                    <title>Figures in the JCR Specification</title>
+                    <author fullname="Andrew Lee Newton" initials="A.L." surname="Newton">
+                        <organization abbrev="ARIN">American Registry for Internet
+                            Numbers</organization>
+                        <address>
+                        <postal>
+                            <street>3635 Concorde Parkway</street>
+                            <city>Chantilly</city>
+                            <region>VA</region>
+                            <country>US</country>
+                            <code>20151</code>
+                        </postal>
+                        <email>andy@arin.net</email>
+                        <uri>http://www.arin.net</uri>
+                        </address>
+                    </author>
+                    <author fullname="Pete Cordell" initials="P." surname="Cordell">
+                        <organization>Codalogic</organization>
+                        <address>
+                            <postal>
+                            <street>PO Box 30</street>
+                            <city>Ipswich</city>
+                            <country>UK</country>
+                            <code>IP5 2WY</code>
+                            </postal>
+                            <email>pete.cordell@codalogic.com</email>
+                            <uri>http://www.codalogic.com</uri>
+                        </address>
+                    </author>
+                    <date/>
+                </front>
+            </reference>
             <reference anchor="ARIN_JCR_VALIDATOR" target="https://github.com/arineng/jcrvalidator">
                 <front>
                     <title>JSON Content Rules Validator (Work In Progress)</title>
