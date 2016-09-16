@@ -465,7 +465,7 @@ Internet-Draft             JSON Content Rules             September 2016
 
                                  Figure 10
 
-   There are two forms of rule name assignments: assignements of
+   There are two forms of rule name assignments: assignments of
    primitive types and assignments of all other types.  Rule name
    assignments to primitive type specifications separate the rule name
    from the type specification with the character sequence '=:', whereas
@@ -487,7 +487,7 @@ Internet-Draft             JSON Content Rules             September 2016
 
    This is the one little "gotcha" in JCR.  This syntax is necessary so
    that JCR parsers may readily distinguish between rule name
-   assignments involving string and regular expressions primitive typess
+   assignments involving string and regular expressions primitive types
    and member names of member specifications.
 
 4.2.  Annotations
@@ -851,7 +851,7 @@ Internet-Draft             JSON Content Rules             September 2016
 4.7.  Member Specifications
 
    Member specifications define members of JSON objects.  Unlike other
-   type specfications, member specifications cannot be root rules and
+   type specifications, member specifications cannot be root rules and
    must be part of an object specification or preceded by a rule name
    assignment.
 
@@ -976,7 +976,7 @@ Internet-Draft             JSON Content Rules             September 2016
    exact member name of "p1".  Rule o2 has the exact same member
    specifications but in the opposite order.  Figure 28 does not match
    rule o1 because all of the members match the first subordinate rule
-   leaving none to match the second suborindate rule.  However, rule o2
+   leaving none to match the second subordinate rule.  However, rule o2
    does match because the first subordinate rule matches only one member
    of the JSON object allowing the second subordinate rule to match the
    other member of the JSON object.
@@ -1182,8 +1182,8 @@ Internet-Draft             JSON Content Rules             September 2016
 
    Unlike the other type specifications, group specifications have no
    direct tie with JSON syntax.  Group specifications simply group
-   together their subordinate components.  Group specfications enclose
-   one or more suborindate components with the parenthesis characters.
+   together their subordinate components.  Group specifications enclose
+   one or more subordinate components with the parenthesis characters.
 
    Group specifications and any nesting of group specifications, must
    conform to the allowable set of type specifications of the type
@@ -1193,7 +1193,7 @@ Internet-Draft             JSON Content Rules             September 2016
    direct subordinates of array specifications (arrays contain values,
    not object members in JSON).  Likewise, a group specification
    referenced inside an object specification must only contain member
-   specifictions (JSON objects may only contain object members).
+   specifications (JSON objects may only contain object members).
 
    The following is an example of a group specification:
 
@@ -1297,7 +1297,7 @@ Internet-Draft             JSON Content Rules             September 2016
    maximum are 1.
 
    A minimum and maximum can be expressed by giving the minimum followed
-   by two period charactes ('..') followed by the maximum, with either
+   by two period characters ('..') followed by the maximum, with either
    the minimum or maximum being optional.  When the minimum is not
    explicitly specified, it is assumed to be zero.  When the maximum is
    not explicitly specified, it is assumed to be positive infinity.
@@ -1495,7 +1495,7 @@ Internet-Draft             JSON Content Rules             September 2016
    An identifier can be a URL (e.g. http://example.com/foo), an inverted
    domain name (e.g. com.example.foo) or any other form that conforms to
    the JCR ABNF syntax that a ruleset author deems appropriate.  To a
-   JCR processor the identifier is treated as an opague, case-sensitive
+   JCR processor the identifier is treated as an opaque, case-sensitive
    string.
 
 5.3.  import
@@ -2247,9 +2247,9 @@ Appendix D.  Syntax Changes from -06
    The syntax described in this document is changed significantly, and
    in a non-backwards compatible manner, from the syntax described in
    the -06 version of this specification.  The vast majority of these
-   changes have occured to meet the goals of the syntax being a superset
-   of JSON and easy to comprehend by a casual reader unfamiliar with JCR
-   but familiar with JSON.
+   changes have occurred to meet the goals of the syntax being a
+   superset of JSON and easy to comprehend by a casual reader unfamiliar
+   with JCR but familiar with JSON.
 
    The latter of those two goals is subjective, and therefore a series
    of focus group sessions were convened where participants, all
