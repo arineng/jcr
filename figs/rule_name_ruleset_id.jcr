@@ -1,3 +1,4 @@
+# ruleset-id http://ietf.org/rfcYYYY.JCR
 # import http://ietf.org/rfcXXXX.JCR as rfcXXXX
 $my_encodings  = ( "mythic" | "magic" )
 $all_encodings = ( $rfcXXXX.encodings | $my_encodings )

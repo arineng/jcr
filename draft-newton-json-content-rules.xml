@@ -369,23 +369,27 @@
             <section title="Rule Names and Assignments">
                 <t>
                     Rule names are signified with the dollar character ('$'), which is not part of the
-                    rule name itself. Rule names have two components, an optional ruleset identifier and a local
+                    rule name itself. Rule names have two components, an optional ruleset identifier alias and a local
                     rule name.
                 </t>
                 <t>
                     Local rule names must start with an alphabetic character (a-z,A-Z) and must contain only
                     alphabetic characters, numeric characters, the hyphen character ('-') and the
                     underscore character ('_'). Local rule names are case sensitive, and must be unique
-                    within a ruleset (that is, no two rule name assignements may use the same local rule name).
+                    within a ruleset (that is, no two rule name assignments may use the same local rule name).
                 </t>
                 <t>
-                    Ruleset identifiers reference rules from another ruleset. They are not allowed in rule
-                    name assignments, and only found in the directive specifying the ruleset identifier for
-                    a ruleset and rule names referenced by other rules. Ruleset identifiers must start with
+                    Ruleset identifier aliases enable referencing rules from another ruleset. They are not allowed in rule
+                    name assignments, and only found in rule names referencing other rules. Ruleset identifiers must start with
                     an alphabetic character and contain no whitespace. Ruleset identifiers are case sensitive.
                     Simple use cases of JCR will most likely not use ruleset identifiers.
                 </t>
                 <figure anchor="rule_name_ruleset_id.jcr">
+                    <preamble>
+                        In Figure 10 below,
+                        "http://ietf.org/rfcYYYY.JCR" and "http://ietf.org/rfcXXXX.JCR" are ruleset 
+                        identifiers and "rfcXXXX" is a ruleset identifier alias.
+                    </preamble>
                     <artwork align="center" xml:space="preserve">&rule_name_ruleset_id.jcr;</artwork>
                 </figure>
                 <t>
@@ -492,8 +496,8 @@ n.f..
             </figure>  
                 <t>
                     Integers may also be specified as ranges using bit lengths preceded by the 'int' or 'uint'
-                    words (i.e. 'int8', 'uint16'). The 'int' word specifies the integer as being signed whereas
-                    the 'uint' word specifies the integer as being unsigned.
+                    words (i.e. 'int8', 'uint16'). The 'int' prefix specifies the integer as being signed whereas
+                    the 'uint' prefix specifies the integer as being unsigned.
                 </t>
                 <figure anchor="primitive_bit_integers.jcr">
                     <artwork xml:space="preserve" align="center">&primitives_bit_integers.jcr;</artwork>
@@ -536,7 +540,7 @@ n.f..
                 </t>
                 <t>
                     Email addresses formatted according to <xref target="RFC5322">RFC 5322</xref> may
-                    be specified using the 'email' word, and E.123 phone number may be specified using the
+                    be specified using the 'email' word, and E.123 phone numbers may be specified using the
                     word 'phone'.
                 </t>
                 <figure anchor="primitive_misc.jcr">
@@ -679,7 +683,7 @@ n.f..
             <t>
                 This works because subordinate components are evaluated in the order they
                 appear in the object rule, and the last component accepts any member with
-                any type but fails to validate if one ore more of those components are found
+                any type but fails to validate if one or more of those components are found
                 due to the @{not} annotation.
             </t>
         </section>
@@ -694,7 +698,7 @@ n.f..
                 Evaluation of the subordinate components of array specifications is as follows:
                 <list style="symbols">
                     <t>
-                        The order of array items is implied.
+                        The order of array items is implied unless the @{unordered} annotation is present.
                     </t>
                     <t>
                         Subordinate components of the array specification are evaluated in
@@ -859,12 +863,16 @@ n.f..
                     <artwork xml:space="preserve" align="center">&mixed_and_or_good.jcr;</artwork>
                 </figure>
                 <t>
-                        A future specification will clarify the choice ('|') operation as inclusive or,
-                        exclusive or ("xor") or otherwise. At present readers should assume the choice
-                        ('|') operator is an inclusive or. However, for objects and unordered arrays
-                        that is not ideal, nor is xor. We are in the process of defining an algorithm
-                        to "rewrite" choices of rules for use with inclusive or which is more suitable
-                        for the data model of JSON.
+                    <list style="none">
+                        <t>
+                            NOTE: A future specification will clarify the choice ('|') operation as inclusive or,
+                            exclusive or ("xor") or otherwise. At present readers should assume the choice
+                            ('|') operator is an inclusive or. However, for objects and unordered arrays
+                            that is not ideal, nor is xor. We are in the process of defining an algorithm
+                            to "rewrite" choices of rules for use with inclusive or which is more suitable
+                            for the data model of JSON.
+                        </t>
+                    </list>
                 </t>
             </section>
             <section title="Repetition in Array, Object, and Group Specifications" anchor="repetition">
@@ -892,7 +900,7 @@ n.f..
                 <t>
                     The allowable Kleene operators are the question mark character ('?') which
                     specifies zero or one (i.e. optional), the plus character ('+') which specifies
-                    one ore more, and the asterisk character ('*') which specifies zero or more.
+                    one or more, and the asterisk character ('*') which specifies zero or more.
                 </t>
                 <figure anchor="repetition_kleene.jcr">
                     <artwork xml:space="preserve" align="center">&repetition_kleene.jcr;</artwork>
@@ -904,7 +912,8 @@ n.f..
                         <t>
                             When the repetition step
                             follows a minimum to maximum expression or the zero or more Kleene operator ('*'), it
-                            specifies that the total number of repetitions minus the minimum repetition value
+                            specifies that the total number of repetitions present in the JSON instance
+                            being validated minus the minimum repetition value
                             must be a multiple of the repetition step
                             (e.g. the total repetitions minus the minimum repetition value must be 
                             divisible by the step value with a remainder of zero).
@@ -973,7 +982,7 @@ n.f..
                     of this specification as an IETF proposed standard, it will be "1.0".
                     
                     <cref>
-                        This will be removed in the final version.
+                        NOTE: This will be removed in the final version.
                     </cref>
                 </t>
                 <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
@@ -1078,8 +1087,8 @@ n.f..
             
             <section title="Lists of Values">
                 <t>
-                    Group specifications may be used to create enumerated lists of strings
-                    and other primitive data types, because primitive specifications may
+                    Group specifications may be used to create enumerated lists of
+                    primitive data types, because primitive specifications may
                     contain a group specification, which may have multiple primitive specifications.
                     Because a primitive specification must resolve to a single data type,
                     the group specification must only contain choice combinations.
@@ -1115,6 +1124,18 @@ n.f..
                 <figure anchor="groups_in_objects.jcr">
                     <artwork xml:space="preserve" align="center">&groups_in_objects.jcr;</artwork>
                 </figure>
+                <t>
+                    <list style="none">
+                        <t>
+                            NOTE: A future specification will clarify the choice ('|') operation as inclusive or,
+                            exclusive or ("xor") or otherwise. At present readers should assume the choice
+                            ('|') operator is an inclusive or. We are in the process of defining an algorithm
+                            to "rewrite" choices of rules for use with inclusive or which is more suitable
+                            for the data model of JSON. Such a change will impact the guidance given below.
+                        </t>
+                    </list>
+                </t>
+                
                 <t>
                     When using groups to use both sequences and choices of member specifications,
                     consideration must be given to the processing of object specifications where by

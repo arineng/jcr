@@ -13,9 +13,15 @@ $mac_addr =: hex
 
 ; at least 32 octets
 ; must be be in groups of 16
+; e.g. 32, 48, 64 etc
 [ $octet *32..%16 ]
 $octet =: int8
 
 ; if there are to be error sets,
 ; their number must be divisible by 4
+; e.g. 0, 4, 8, 12 etc
 $error_set = ( string *%4 )
+
+; Throws of a pair of dice must be divisible by 2 
+; e.g. 2, 4, 6 etc
+$dice_throws = ( 1..6 +%2 )

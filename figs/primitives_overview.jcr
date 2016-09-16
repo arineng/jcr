@@ -8,30 +8,32 @@
 ; primitive types can also be more generalized types
 string
 integer
-        
+
+; primitive type rules may be named 
+$my_int =: 12
+
 ; member specifications consist of a member name 
 ; followed by a colon and then followed by another 
 ; type specification or a rule name
 ; (example shown with a rule name assignment)
 $mem1 = "bar" : "baz" 
+$mem2 = "fizz" : $my_int
     
 ; member names may either be quoted strings 
 ; or regular expressions
 ; (example shown with a rule name assignment)
-$mem2 = /^dev[0-9]$/ : 0..4096
+$mem3 = /^dev[0-9]$/ : 0..4096
     
 ; object specifications start and end with "curly braces"
 ; object specifications contain zero 
 ; or more member specifications 
 ; or rule names which reference a member specification
 { $mem1, "foo" : "fuzz", "fizz" : $my_int } 
-$my_int =: 12
     
 ; array specifications start and end with square brackets
 ; array specifications contain zero 
 ; or more non-member type specifications
-[ 1, 2, 3, $item1 ] 
-$item1 =: 4
+[ 1, 2, 3, $my_int ] 
 
 ; finally, group specifications start and end with parenthesis
 ; groups contain other type specifications
