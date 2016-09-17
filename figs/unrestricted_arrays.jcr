@@ -1,1 +1,4 @@
-[ "item1", "item2", any * ]
+; the first element of the array is to be an integer
+; the second element of the array is to be a string
+; anything else can follow
+$a3 = [ integer, string, any * ]

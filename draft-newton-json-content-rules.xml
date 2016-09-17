@@ -737,7 +737,7 @@ n.f..
                 <artwork align="center" xml:space="preserve">&array_order_eval.json;</artwork>
             </figure>
             <t>
-                Finally, if an array has more elements than can be matched from the array specification,
+                If an array has more elements than can be matched from the array specification,
                 the array does not match the array specification. Or stated differently, an array with unmatched
                 elements does not validate. Using the example array rule a2 from above, the following
                 array does not match because the last element of the array does not match any subordinate
@@ -746,27 +746,20 @@ n.f..
             <figure anchor="array_order_eval2.json">
                 <artwork align="center" xml:space="preserve">&array_order_eval2.json;</artwork>
             </figure>
-            <section title="Unrestricting Arrays">
                 <t>
-                    Unlike object validation, array specifications will not validate items of an
-                    array that do not match a subordinate component of the array specification. This
-                    processing model is due to the nature of the typical access pattern of
-                    JSON arrays in many programming languages, which is to iterate over the
-                    array. Processes iterating over an array would need to take special
-                    steps for extra items of the array that are not specified, especially
-                    if the items were of a different type than those that are expected.
-                </t>
-                <t>
-                    Like object rules, the subordinate components of an array specification are
-                    evaluated in the order they appear. To allow an array to contain
+                    To allow an array to contain
                     any value after guaranteeing that it contains the necessary items,
                     the last subordinate component of the array specification should accept any
                     item:
                 </t>
                 <figure anchor="unrestricted_arrays.jcr">
                     <artwork xml:space="preserve" align="center">&unrestricted_arrays.jcr;</artwork>
+                    <postamble>
+                        The JSON array in <xref target="array_order_eval2.json"></xref> will validate
+                        against the a3 rule in this example.
+                    </postamble>
                 </figure>
-            </section>
+            
             <section title="Unordered Array Specifications" anchor="unordered_array_specifications">
                 <t>
                     Array specifications can be made to behave in a similar fashion to object specifications
