@@ -419,7 +419,7 @@
 <link href="#rfc.appendix.B.1" rel="Chapter" title="B.1 Locally Overriding Rules"/>
 <link href="#rfc.appendix.B.2" rel="Chapter" title="B.2 Rule Callbacks"/>
 <link href="#rfc.appendix.C" rel="Chapter" title="C JCR Implementations"/>
-<link href="#rfc.appendix.D" rel="Chapter" title="D Syntax Changes from -06"/>
+<link href="#rfc.appendix.D" rel="Chapter" title="D Syntax Changes from -06 and -07"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
@@ -534,7 +534,7 @@
 <li>B.1.   <a href="#rfc.appendix.B.1">Locally Overriding Rules</a></li>
 <li>B.2.   <a href="#rfc.appendix.B.2">Rule Callbacks</a></li>
 <li>Appendix C.   <a href="#rfc.appendix.C">JCR Implementations</a></li>
-<li>Appendix D.   <a href="#rfc.appendix.D">Syntax Changes from -06</a></li>
+<li>Appendix D.   <a href="#rfc.appendix.D">Syntax Changes from -06 and -07</a></li>
 <li><a href="#rfc.authors">Authors' Addresses</a></li>
 
 
@@ -1724,7 +1724,7 @@ WSP              = SP / HTAB    ; white space
       <td class="reference">
         <b id="JCR_ABNF">[JCR_ABNF]</b>
       </td>
-      <td class="top"><a href="mailto:andy@arin.net" title="American Registry for Internet Numbers">Newton, A.</a> and <a href="mailto:pete.cordell@codalogic.com" title="Codalogic">P. Cordell</a>, "<a href="https://raw.githubusercontent.com/arineng/jcr/07/jcr-abnf.txt">ABNF for JSON Content Rules</a>", .</td>
+      <td class="top"><a href="mailto:andy@arin.net" title="American Registry for Internet Numbers">Newton, A.</a> and <a href="mailto:pete.cordell@codalogic.com" title="Codalogic">P. Cordell</a>, "<a href="https://raw.githubusercontent.com/arineng/jcr/08/jcr-abnf.txt">ABNF for JSON Content Rules</a>", .</td>
     </tr>
   </tbody>
 </table>
@@ -1741,7 +1741,7 @@ WSP              = SP / HTAB    ; white space
       <td class="reference">
         <b id="JCR_SPECIFICATION_FIGURES">[JCR_SPECIFICATION_FIGURES]</b>
       </td>
-      <td class="top"><a href="mailto:andy@arin.net" title="American Registry for Internet Numbers">Newton, A.</a> and <a href="mailto:pete.cordell@codalogic.com" title="Codalogic">P. Cordell</a>, "<a href="https://github.com/arineng/jcr/tree/07/figs">Figures in the JCR Specification</a>", .</td>
+      <td class="top"><a href="mailto:andy@arin.net" title="American Registry for Internet Numbers">Newton, A.</a> and <a href="mailto:pete.cordell@codalogic.com" title="Codalogic">P. Cordell</a>, "<a href="https://github.com/arineng/jcr/tree/08/figs">Figures in the JCR Specification</a>", .</td>
     </tr>
     <tr>
       <td class="reference">
@@ -1798,11 +1798,12 @@ WSP              = SP / HTAB    ; white space
 <p id="rfc.section.B.2.p.2">A JCR processor may provide a mechanism for the execution of local functions or methods based on the name of a rule being evaluated. Such a mechanism could pass to the function the data to be evaluated, and that function could return to the processor the result of evaluating the data in the function.  </p>
 <h1 id="rfc.appendix.C"><a href="#rfc.appendix.C">Appendix C.</a> JCR Implementations</h1>
 <p id="rfc.section.C.p.1">The following implementations, <a href="#ARIN_JCR_VALIDATOR">[ARIN_JCR_VALIDATOR]</a> and <a href="#CODALOGIC_JCR_VALIDATOR">[CODALOGIC_JCR_VALIDATOR]</a> have influenced the development of this document.  </p>
-<h1 id="rfc.appendix.D"><a href="#rfc.appendix.D">Appendix D.</a> <a href="#syntax_changes" id="syntax_changes">Syntax Changes from -06</a></h1>
-<p id="rfc.section.D.p.1">The syntax described in this document is changed significantly, and in a non-backwards compatible manner, from the syntax described in the -06 version of this specification.  The vast majority of these changes have occurred to meet the goals of the syntax being a superset of JSON and easy to comprehend by a casual reader unfamiliar with JCR but familiar with JSON.  </p>
-<p id="rfc.section.D.p.2">The latter of those two goals is subjective, and therefore a series of focus group sessions were convened where participants, all professional software developers with familiarity with JSON but not JCR, were asked to read and interpret various rulesets and allowed to offer suggested improvements. Outcomes of these sessions resulted in many changes, such as the use of '$' characters to note rule names and the change of the repetition syntax.  </p>
-<p id="rfc.section.D.p.3">Other changes came from feedback given directly to the authors via email and on the IETF JSON Working Group mailing list.  </p>
-<p id="rfc.section.D.p.4">Most figures from this document can be found in file form at <a href="#JCR_SPECIFICATION_FIGURES">[JCR_SPECIFICATION_FIGURES]</a>.  </p>
+<h1 id="rfc.appendix.D"><a href="#rfc.appendix.D">Appendix D.</a> <a href="#syntax_changes" id="syntax_changes">Syntax Changes from -06 and -07</a></h1>
+<p id="rfc.section.D.p.1">The differences between this document and -07 are not significant, as this version of this draft is provided for the purposes of keeping the document active within the IETF archives.  </p>
+<p id="rfc.section.D.p.2">The syntax described in this document is changed significantly, and in a non-backwards compatible manner, from the syntax described in the -06 version of this specification.  The vast majority of these changes have occurred to meet the goals of the syntax being a superset of JSON and easy to comprehend by a casual reader unfamiliar with JCR but familiar with JSON.  </p>
+<p id="rfc.section.D.p.3">The latter of those two goals is subjective, and therefore a series of focus group sessions were convened where participants, all professional software developers with familiarity with JSON but not JCR, were asked to read and interpret various rulesets and allowed to offer suggested improvements. Outcomes of these sessions resulted in many changes, such as the use of '$' characters to note rule names and the change of the repetition syntax.  </p>
+<p id="rfc.section.D.p.4">Other changes came from feedback given directly to the authors via email and on the IETF JSON Working Group mailing list.  </p>
+<p id="rfc.section.D.p.5">Most figures from this document can be found in file form at <a href="#JCR_SPECIFICATION_FIGURES">[JCR_SPECIFICATION_FIGURES]</a>.  </p>
 <h1 id="rfc.authors">
   <a href="#rfc.authors">Authors' Addresses</a>
 </h1>

@@ -419,7 +419,7 @@
 <link href="#rfc.appendix.B.1" rel="Chapter" title="B.1 Locally Overriding Rules"/>
 <link href="#rfc.appendix.B.2" rel="Chapter" title="B.2 Rule Callbacks"/>
 <link href="#rfc.appendix.C" rel="Chapter" title="C JCR Implementations"/>
-<link href="#rfc.appendix.D" rel="Chapter" title="D Syntax Changes from -06"/>
+<link href="#rfc.appendix.D" rel="Chapter" title="D Syntax Changes from -06 and -07"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
@@ -427,8 +427,8 @@
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Newton, A. and P. Cordell" />
-  <meta name="dct.identifier" content="urn:ietf:id:draft-newton-json-content-rules-07" />
-  <meta name="dct.issued" scheme="ISO8601" content="2016-9-18" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-newton-json-content-rules-08" />
+  <meta name="dct.issued" scheme="ISO8601" content="2017-3-15" />
   <meta name="dct.abstract" content="This document describes a language for specifying and testing the expected content of JSON structures found in JSON-using protocols, software, and processes.  " />
   <meta name="description" content="This document describes a language for specifying and testing the expected content of JSON structures found in JSON-using protocols, software, and processes.  " />
 
@@ -452,12 +452,12 @@
   <td class="right">P. Cordell</td>
 </tr>
 <tr>
-  <td class="left">Expires: March 22, 2017</td>
+  <td class="left">Expires: September 16, 2017</td>
   <td class="right">Codalogic</td>
 </tr>
 <tr>
   <td class="left"></td>
-  <td class="right">September 18, 2016</td>
+  <td class="right">March 15, 2017</td>
 </tr>
 
     	
@@ -465,7 +465,7 @@
   </table>
 
   <p class="title">A Language for Rules Describing JSON Content<br />
-  <span class="filename">draft-newton-json-content-rules-07</span></p>
+  <span class="filename">draft-newton-json-content-rules-08</span></p>
   
   <h1 id="rfc.abstract">
   <a href="#rfc.abstract">Abstract</a>
@@ -477,11 +477,11 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on March 22, 2017.</p>
+<p>This Internet-Draft will expire on September 16, 2017.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
-<p>Copyright (c) 2016 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>Copyright (c) 2017 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
 
   
@@ -534,7 +534,7 @@
 <li>B.1.   <a href="#rfc.appendix.B.1">Locally Overriding Rules</a></li>
 <li>B.2.   <a href="#rfc.appendix.B.2">Rule Callbacks</a></li>
 <li>Appendix C.   <a href="#rfc.appendix.C">JCR Implementations</a></li>
-<li>Appendix D.   <a href="#rfc.appendix.D">Syntax Changes from -06</a></li>
+<li>Appendix D.   <a href="#rfc.appendix.D">Syntax Changes from -06 and -07</a></li>
 <li><a href="#rfc.authors">Authors' Addresses</a></li>
 
 
@@ -1724,7 +1724,7 @@ WSP              = SP / HTAB    ; white space
       <td class="reference">
         <b id="JCR_ABNF">[JCR_ABNF]</b>
       </td>
-      <td class="top"><a href="mailto:andy@arin.net" title="American Registry for Internet Numbers">Newton, A.</a> and <a href="mailto:pete.cordell@codalogic.com" title="Codalogic">P. Cordell</a>, "<a href="https://raw.githubusercontent.com/arineng/jcr/07/jcr-abnf.txt">ABNF for JSON Content Rules</a>", .</td>
+      <td class="top"><a href="mailto:andy@arin.net" title="American Registry for Internet Numbers">Newton, A.</a> and <a href="mailto:pete.cordell@codalogic.com" title="Codalogic">P. Cordell</a>, "<a href="https://raw.githubusercontent.com/arineng/jcr/08/jcr-abnf.txt">ABNF for JSON Content Rules</a>", .</td>
     </tr>
   </tbody>
 </table>
@@ -1741,7 +1741,7 @@ WSP              = SP / HTAB    ; white space
       <td class="reference">
         <b id="JCR_SPECIFICATION_FIGURES">[JCR_SPECIFICATION_FIGURES]</b>
       </td>
-      <td class="top"><a href="mailto:andy@arin.net" title="American Registry for Internet Numbers">Newton, A.</a> and <a href="mailto:pete.cordell@codalogic.com" title="Codalogic">P. Cordell</a>, "<a href="https://github.com/arineng/jcr/tree/07/figs">Figures in the JCR Specification</a>", .</td>
+      <td class="top"><a href="mailto:andy@arin.net" title="American Registry for Internet Numbers">Newton, A.</a> and <a href="mailto:pete.cordell@codalogic.com" title="Codalogic">P. Cordell</a>, "<a href="https://github.com/arineng/jcr/tree/08/figs">Figures in the JCR Specification</a>", .</td>
     </tr>
     <tr>
       <td class="reference">
@@ -1798,11 +1798,12 @@ WSP              = SP / HTAB    ; white space
 <p id="rfc.section.B.2.p.2">A JCR processor may provide a mechanism for the execution of local functions or methods based on the name of a rule being evaluated. Such a mechanism could pass to the function the data to be evaluated, and that function could return to the processor the result of evaluating the data in the function.  </p>
 <h1 id="rfc.appendix.C"><a href="#rfc.appendix.C">Appendix C.</a> JCR Implementations</h1>
 <p id="rfc.section.C.p.1">The following implementations, <a href="#ARIN_JCR_VALIDATOR">[ARIN_JCR_VALIDATOR]</a> and <a href="#CODALOGIC_JCR_VALIDATOR">[CODALOGIC_JCR_VALIDATOR]</a> have influenced the development of this document.  </p>
-<h1 id="rfc.appendix.D"><a href="#rfc.appendix.D">Appendix D.</a> <a href="#syntax_changes" id="syntax_changes">Syntax Changes from -06</a></h1>
-<p id="rfc.section.D.p.1">The syntax described in this document is changed significantly, and in a non-backwards compatible manner, from the syntax described in the -06 version of this specification.  The vast majority of these changes have occurred to meet the goals of the syntax being a superset of JSON and easy to comprehend by a casual reader unfamiliar with JCR but familiar with JSON.  </p>
-<p id="rfc.section.D.p.2">The latter of those two goals is subjective, and therefore a series of focus group sessions were convened where participants, all professional software developers with familiarity with JSON but not JCR, were asked to read and interpret various rulesets and allowed to offer suggested improvements. Outcomes of these sessions resulted in many changes, such as the use of '$' characters to note rule names and the change of the repetition syntax.  </p>
-<p id="rfc.section.D.p.3">Other changes came from feedback given directly to the authors via email and on the IETF JSON Working Group mailing list.  </p>
-<p id="rfc.section.D.p.4">Most figures from this document can be found in file form at <a href="#JCR_SPECIFICATION_FIGURES">[JCR_SPECIFICATION_FIGURES]</a>.  </p>
+<h1 id="rfc.appendix.D"><a href="#rfc.appendix.D">Appendix D.</a> <a href="#syntax_changes" id="syntax_changes">Syntax Changes from -06 and -07</a></h1>
+<p id="rfc.section.D.p.1">The differences between this document and -07 are not significant, as this version of this draft is provided for the purposes of keeping the document active within the IETF archives.  </p>
+<p id="rfc.section.D.p.2">The syntax described in this document is changed significantly, and in a non-backwards compatible manner, from the syntax described in the -06 version of this specification.  The vast majority of these changes have occurred to meet the goals of the syntax being a superset of JSON and easy to comprehend by a casual reader unfamiliar with JCR but familiar with JSON.  </p>
+<p id="rfc.section.D.p.3">The latter of those two goals is subjective, and therefore a series of focus group sessions were convened where participants, all professional software developers with familiarity with JSON but not JCR, were asked to read and interpret various rulesets and allowed to offer suggested improvements. Outcomes of these sessions resulted in many changes, such as the use of '$' characters to note rule names and the change of the repetition syntax.  </p>
+<p id="rfc.section.D.p.4">Other changes came from feedback given directly to the authors via email and on the IETF JSON Working Group mailing list.  </p>
+<p id="rfc.section.D.p.5">Most figures from this document can be found in file form at <a href="#JCR_SPECIFICATION_FIGURES">[JCR_SPECIFICATION_FIGURES]</a>.  </p>
 <h1 id="rfc.authors">
   <a href="#rfc.authors">Authors' Addresses</a>
 </h1>
@@ -1816,12 +1817,12 @@ WSP              = SP / HTAB    ; white space
 	</span>
 	<span class="org vcardline">American Registry for Internet Numbers</span>
 	<span class="adr">
-	  <span class="vcardline">3635 Concorde Parkway</span>
+	  <span class="vcardline">PO Box 232290</span>
 
 	  <span class="vcardline">
-		<span class="locality">Chantilly</span>,  
+		<span class="locality">Centreville</span>,  
 		<span class="region">VA</span> 
-		<span class="code">20151</span>
+		<span class="code">20120</span>
 	  </span>
 	  <span class="country-name vcardline">US</span>
 	</span>

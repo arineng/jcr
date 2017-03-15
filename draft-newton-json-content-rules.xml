@@ -166,18 +166,18 @@
     'figs/override3.jcr'>
 ]>
 <?rfc toc="yes"?>
-<rfc category="std" docName="draft-newton-json-content-rules-07" ipr="trust200902">
+<rfc category="std" docName="draft-newton-json-content-rules-08" ipr="trust200902">
     <front>
         <title abbrev="JSON Content Rules">A Language for Rules Describing JSON Content</title>
         <author fullname="Andrew Lee Newton" initials="A.L." surname="Newton">
             <organization abbrev="ARIN">American Registry for Internet Numbers</organization>
             <address>
                 <postal>
-                    <street>3635 Concorde Parkway</street>
-                    <city>Chantilly</city>
+                    <street>PO Box 232290</street>
+                    <city>Centreville</city>
                     <region>VA</region>
                     <country>US</country>
-                    <code>20151</code>
+                    <code>20120</code>
                 </postal>
                 <email>andy@arin.net</email>
                 <uri>http://www.arin.net</uri>
@@ -1229,7 +1229,7 @@ n.f..
             
             
             <reference anchor="JCR_ABNF"
-                target="https://raw.githubusercontent.com/arineng/jcr/07/jcr-abnf.txt">
+                target="https://raw.githubusercontent.com/arineng/jcr/08/jcr-abnf.txt">
                 <front>
                     <title>ABNF for JSON Content Rules</title>
                     <author fullname="Andrew Lee Newton" initials="A.L." surname="Newton">
@@ -1269,7 +1269,7 @@ n.f..
             
             &I-D.cordell-jcr-co-constraints;
             <reference anchor="JCR_SPECIFICATION_FIGURES"
-                target="https://github.com/arineng/jcr/tree/07/figs">
+                target="https://github.com/arineng/jcr/tree/08/figs">
                 <front>
                     <title>Figures in the JCR Specification</title>
                     <author fullname="Andrew Lee Newton" initials="A.L." surname="Newton">
@@ -1404,7 +1404,11 @@ n.f..
                 of this document.
             </t>
         </section>
-        <section title="Syntax Changes from -06" anchor="syntax_changes">
+        <section title="Syntax Changes from -06 and -07" anchor="syntax_changes">
+            <t>
+                The differences between this document and -07 are not significant, as this version of this
+                draft is provided for the purposes of keeping the document active within the IETF archives.
+            </t>
             <t>
                 The syntax described in this document is changed significantly, and in a non-backwards
                 compatible manner, from the syntax described in the -06 version of this specification.

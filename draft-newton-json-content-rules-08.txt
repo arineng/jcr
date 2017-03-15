@@ -114,7 +114,7 @@ Newton & Cordell       Expires September 16, 2017               [Page 2]
 Internet-Draft             JSON Content Rules                 March 2017
 
 
-   Appendix D.  Syntax Changes from -06  . . . . . . . . . . . . . .  41
+   Appendix D.  Syntax Changes from -06 and -07  . . . . . . . . . .  41
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  41
 
 1.  Introduction
@@ -2110,7 +2110,7 @@ Internet-Draft             JSON Content Rules                 March 2017
 
    [JCR_ABNF]
               Newton, A. and P. Cordell, "ABNF for JSON Content Rules",
-              <https://raw.githubusercontent.com/arineng/jcr/07/jcr-
+              <https://raw.githubusercontent.com/arineng/jcr/08/jcr-
               abnf.txt>.
 
 9.2.  Infomative References
@@ -2132,7 +2132,7 @@ Internet-Draft             JSON Content Rules                 March 2017
 
    [JCR_SPECIFICATION_FIGURES]
               Newton, A. and P. Cordell, "Figures in the JCR
-              Specification", <https://github.com/arineng/jcr/tree/07/
+              Specification", <https://github.com/arineng/jcr/tree/08/
               figs>.
 
    [ARIN_JCR_VALIDATOR]
@@ -2242,7 +2242,11 @@ Newton & Cordell       Expires September 16, 2017              [Page 40]
 Internet-Draft             JSON Content Rules                 March 2017
 
 
-Appendix D.  Syntax Changes from -06
+Appendix D.  Syntax Changes from -06 and -07
+
+   The differences between this document and -07 are not significant, as
+   this version of this draft is provided for the purposes of keeping
+   the document active within the IETF archives.
 
    The syntax described in this document is changed significantly, and
    in a non-backwards compatible manner, from the syntax described in
@@ -2285,10 +2289,6 @@ Authors' Addresses
 
    Email: pete.cordell@codalogic.com
    URI:   http://www.codalogic.com
-
-
-
-
 
 
 
