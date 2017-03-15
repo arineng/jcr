@@ -1,18 +1,18 @@
 <?xml version='1.0' encoding='ascii'?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd">
 <?rfc toc="yes"?>
-<rfc category="std" docName="draft-newton-json-content-rules-07" ipr="trust200902" obsoletes="" updates="" submissionType="IETF" xml:lang="en">
+<rfc category="std" docName="draft-newton-json-content-rules-08" ipr="trust200902" obsoletes="" updates="" submissionType="IETF" xml:lang="en">
   <front>
     <title abbrev="JSON Content Rules">A Language for Rules Describing JSON Content</title>
     <author fullname="Andrew Lee Newton" initials="A.L." surname="Newton">
       <organization abbrev="ARIN">American Registry for Internet Numbers</organization>
       <address>
         <postal>
-          <street>3635 Concorde Parkway</street>
-          <city>Chantilly</city>
+          <street>PO Box 232290</street>
+          <city>Centreville</city>
           <region>VA</region>
           <country>US</country>
-          <code>20151</code>
+          <code>20120</code>
         </postal>
         <email>andy@arin.net</email>
         <uri>http://www.arin.net</uri>
