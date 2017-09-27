@@ -19,6 +19,8 @@
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5952.xml'>
   <!ENTITY RFC7159 PUBLIC ''
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7159.xml'>
+  <!ENTITY RFC7492 PUBLIC ''
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7492.xml'>
   <!ENTITY I-D.cordell-jcr-co-constraints PUBLIC ''
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.cordell-jcr-co-constraints.xml'>
    
@@ -166,7 +168,7 @@
     'figs/override3.jcr'>
 ]>
 <?rfc toc="yes"?>
-<rfc category="std" docName="draft-newton-json-content-rules-08" ipr="trust200902">
+<rfc category="std" docName="draft-newton-json-content-rules-09" ipr="trust200902">
     <front>
         <title abbrev="JSON Content Rules">A Language for Rules Describing JSON Content</title>
         <author fullname="Andrew Lee Newton" initials="A.L." surname="Newton">
@@ -274,6 +276,9 @@
                 <t>
                     In this example, the protocol specification describes the JSON object in general and
                     an implementation overrides the rules for testing specific cases.
+                </t>
+                <t>
+                    All figures used in this specification are available <eref target="https://github.com/arineng/jcr/tree/master/figs">here</eref>.
                 </t>
             </section>
         </section>
@@ -1197,6 +1202,74 @@ n.f..
                 </figure>
             </section>
         </section>
+        <section title="Implementation Status" anchor="implementation_status">
+            <t>
+                This section records the status of known implementations of the
+                protocol defined by this specification at the time of posting of
+                this Internet-Draft, and is based on a proposal described in
+                <xref target="RFC7492"></xref> .  The description of implementations in this section is
+                intended to assist the IETF in its decision processes in
+                progressing drafts to RFCs.  Please note that the listing of any
+                individual implementation here does not imply endorsement by the
+                IETF.  Furthermore, no effort has been spent to verify the
+                information presented here that was supplied by IETF contributors.
+                This is not intended as, and must not be construed to be, a
+                catalog of available implementations or their features.  Readers
+                are advised to note that other implementations may exist.
+            </t>
+            <t>
+                According to <xref target="RFC7492"></xref> , "this will allow reviewers and working
+                groups to assign due consideration to documents that have the
+                benefit of running code, which may serve as evidence of valuable
+                experimentation and feedback that have made the implemented
+                protocols more mature.  It is up to the individual working groups
+                to use this information as they see fit".
+            </t>
+            <section title="JCR Validator" anchor="jcr_validator">
+                <t>
+                    The JCR Validator currently implements all portions of this
+                    specification, and has been used extensively to prototype various aspects of JCR under
+                    consideration. It's development has gone hand-in-hand with this specification.
+                </t>
+                <t>
+                    This software is primarily produced by the American Registry for Internet Numbers (ARIN)
+                    and freely distributable under the ISC license.
+                </t>
+                <t>
+                    Source code for this software is available on GitHub at
+                    <eref target="https://github.com/arineng/jcrvalidator"></eref>. This software is also easily
+                    obtained as a Ruby Gem through the Ruby Gem system.
+                </t>
+            </section>
+            <section title="Codalogic JCR Parser" anchor="codalogic_jcr_parser">
+                <t>
+                    The Codalogic JCR Parser is a C++ implementation of a JCR parsing engine, and is a work
+                    in progress. It is targeted for the Windows platform.
+                </t>
+                <t>
+                    This software is produced by Codalogic Ltd and freely distributable under the Gnu LGPL v3
+                    license.
+                </t>
+                <t>
+                    Source code is availabe on GitHub at
+                    <eref target="https://github.com/codalogic/cl-jcr-parser"></eref>.
+                </t>
+            </section>
+            <section title="JCR Java" anchor="jcr_java">
+                <t>
+                    JCR Java is a work in progress and currently only implements the parsing of JCR rulesets
+                    according to the ABNF using a custom parsing framework.
+                </t>
+                <t>
+                    This software is produced by the American Registry for Internet Numbers (ARIN)
+                    and freely distributable under the MIT license.
+                </t>
+                <t>
+                    Source code is available on BitBucket at
+                    <eref target="https://bitbucket.org/anewton_1998/jcr_java"></eref>.
+                </t>
+            </section>
+        </section>
         <section title="ABNF Syntax">
             <figure title="ABNF for JSON Content Rules" anchor="abnf">
                 <preamble>
@@ -1229,7 +1302,7 @@ n.f..
             
             
             <reference anchor="JCR_ABNF"
-                target="https://raw.githubusercontent.com/arineng/jcr/08/jcr-abnf.txt">
+                target="https://raw.githubusercontent.com/arineng/jcr/master/jcr-abnf.txt">
                 <front>
                     <title>ABNF for JSON Content Rules</title>
                     <author fullname="Andrew Lee Newton" initials="A.L." surname="Newton">
@@ -1268,60 +1341,7 @@ n.f..
         <references title="Infomative References">
             
             &I-D.cordell-jcr-co-constraints;
-            <reference anchor="JCR_SPECIFICATION_FIGURES"
-                target="https://github.com/arineng/jcr/tree/08/figs">
-                <front>
-                    <title>Figures in the JCR Specification</title>
-                    <author fullname="Andrew Lee Newton" initials="A.L." surname="Newton">
-                        <organization abbrev="ARIN">American Registry for Internet
-                            Numbers</organization>
-                        <address>
-                        <postal>
-                            <street>3635 Concorde Parkway</street>
-                            <city>Chantilly</city>
-                            <region>VA</region>
-                            <country>US</country>
-                            <code>20151</code>
-                        </postal>
-                        <email>andy@arin.net</email>
-                        <uri>http://www.arin.net</uri>
-                        </address>
-                    </author>
-                    <author fullname="Pete Cordell" initials="P." surname="Cordell">
-                        <organization>Codalogic</organization>
-                        <address>
-                            <postal>
-                            <street>PO Box 30</street>
-                            <city>Ipswich</city>
-                            <country>UK</country>
-                            <code>IP5 2WY</code>
-                            </postal>
-                            <email>pete.cordell@codalogic.com</email>
-                            <uri>http://www.codalogic.com</uri>
-                        </address>
-                    </author>
-                    <date/>
-                </front>
-            </reference>
-            <reference anchor="ARIN_JCR_VALIDATOR" target="https://github.com/arineng/jcrvalidator">
-                <front>
-                    <title>JSON Content Rules Validator (Work In Progress)</title>
-                    
-                    <author>
-                        <organization>American Registry for Internet Numbers</organization>
-                    </author>
-                    <date/>
-                </front>
-            </reference>
-            <reference anchor="CODALOGIC_JCR_VALIDATOR" target="https://github.com/codalogic/cl-jcr-parser">
-                <front>
-                    <title>cl-jcr-parser (Work In Progress)</title>
-                    <author>
-                        <organization>Codalogic</organization>
-                    </author>
-                    <date/>
-                </front>
-            </reference>
+            &RFC7492;
         </references>
         <section title="Co-Constraints">
             <t>
@@ -1397,39 +1417,12 @@ n.f..
                 </t>
             </section>
         </section>
-        <section title="JCR Implementations">
+        <section title="Changes from -07 and -08" anchor="changes">
             <t>
-                The following implementations, <xref target="ARIN_JCR_VALIDATOR"></xref> and
-                <xref target="CODALOGIC_JCR_VALIDATOR"></xref> have influenced the development
-                of this document.
-            </t>
-        </section>
-        <section title="Syntax Changes from -06 and -07" anchor="syntax_changes">
-            <t>
-                The differences between this document and -07 are not significant, as this version of this
-                draft is provided for the purposes of keeping the document active within the IETF archives.
-            </t>
-            <t>
-                The syntax described in this document is changed significantly, and in a non-backwards
-                compatible manner, from the syntax described in the -06 version of this specification.
-                The vast majority of these changes have occurred to meet the goals of the syntax being
-                a superset of JSON and easy to comprehend by a casual reader unfamiliar with JCR but
-                familiar with JSON.
-            </t>
-            <t>
-                The latter of those two goals is subjective, and therefore a series of focus group
-                sessions were convened where participants, all professional software developers with
-                familiarity with JSON but not JCR, were asked to read and interpret various rulesets
-                and allowed to offer suggested improvements. Outcomes of these sessions resulted in
-                many changes, such as the use of '$' characters to note rule names and the change of
-                the repetition syntax.
-            </t>
-            <t>
-                Other changes came from feedback given directly to the authors via email and on
-                the IETF JSON Working Group mailing list.
-            </t>
-            <t>
-                Most figures from this document can be found in file form at <xref target="JCR_SPECIFICATION_FIGURES"></xref>.
+                This revision of the document makes no substantive changes to any parts of
+                the specification. Some of the ABNF has been updated to more correctly allow
+                group rules, and other small change have been made to the ABNF to make it
+                simpler.
             </t>
         </section>
     </back>
