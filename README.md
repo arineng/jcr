@@ -35,5 +35,6 @@ The commands for creating HTML and TXT documents are `xml2rfc draft-newton-json-
 
 Check in the XML, HTML, and TXT files so that your co-author and others can review them.
 
-Then submit it to the IETF via the IETF submission page. Once that is done, merge the working branch back to master (because some 
+Then submit it to the IETF via the IETF submission page (use the .txt file as the .xml file will not work since local entity references cannot be uploaded). 
+Once that is done, merge the working branch back to master (because some 
 references in the document point to `master`).
