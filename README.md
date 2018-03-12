@@ -6,7 +6,7 @@ This is the repository of the JSON Content Rules (JCR) specification. It is curr
 For background on JCR:
 
 * IETF Internet-Drraft specification [draft-newton-json-content-rules-08](https://tools.ietf.org/html/draft-newton-json-content-rules-08)
-* [JSON Content Rules](https://json-content-rules.org) web page
+* [JSON Content Rules](http://json-content-rules.org) web page
 * The [JCRValidator](https://github.com/arineng/jcrvalidator) Ruby implementation on GitHub
 * Codalogic's [C++ JCR Parser](https://github.com/codalogic/cl-jcr-parser) on GitHub
 * The [IETF Internet-Draft GitHub](https://github.com/arineng/jcr) page.
