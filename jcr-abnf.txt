@@ -24,12 +24,13 @@ jcr-version-d    = jcr-version-kw DSPs major-version
                    *( DSPs "+" [ DSPs ] extension-id )
 major-version    = non-neg-integer
 minor-version    = non-neg-integer
-extension-id     = ALPHA *not-space
+extension-id     = id
+id               = ALPHA *id-tail
+id-tail          = %x21-7C / %x7E-10FFFF ; not spaces, not }
 ruleset-id-d     = ruleset-id-kw DSPs ruleset-id
 import-d         = import-kw DSPs ruleset-id
                    [ DSPs as-kw DSPs ruleset-id-alias ]
-ruleset-id       = ALPHA *not-space
-not-space        = %x21-10FFFF
+ruleset-id       = id
 ruleset-id-alias = name
 one-line-tbd-directive-d = directive-name
                    [ WSP one-line-directive-parameters ]
@@ -40,10 +41,10 @@ eol              = CR / LF
 multi-line-tbd-directive-d = directive-name
                    [ 1*sp-cmt multi-line-directive-parameters ]
 multi-line-directive-parameters = multi-line-parameters
-multi-line-parameters = *(comment / q-string / regex /
+multi-line-parameters = *(comment / q-string /
                    not-multi-line-special)
-not-multi-line-special = spaces / %x21 / %x23-2E / %x30-3A /
-                   %x3C-7C / %x7E-10FFFF ; not ", /, ; or }
+not-multi-line-special = spaces / %x21 / %x23-3A /
+                   %x3C-7C / %x7E-10FFFF ; not ", ; or }
 
 root-rule        = value-rule / group-rule
 
@@ -54,11 +55,10 @@ rule-name        = name
 target-rule-name = annotations "$"
                    [ ruleset-id-alias "." ]
                    rule-name
-name             = ALPHA *( ALPHA / DIGIT / "-" / "-" )
+name             = ALPHA *( ALPHA / DIGIT / "-" / "_" )
 
 rule-def         = member-rule / type-designator rule-def-type-rule /
-                   array-rule / object-rule / group-rule /
-                   target-rule-name
+                   value-rule / group-rule / target-rule-name
 type-designator  = type-kw 1*sp-cmt / ":" *sp-cmt
 rule-def-type-rule = value-rule / type-choice
 value-rule       = primitive-rule / array-rule / object-rule
@@ -68,7 +68,6 @@ member-name-spec = regex / q-string
 type-rule        = value-rule / type-choice / target-rule-name
 type-choice      = annotations "(" type-choice-items
                    *( choice-combiner type-choice-items ) ")"
-explicit-type-choice = type-designator type-choice
 type-choice-items = *sp-cmt ( type-choice / type-rule ) *sp-cmt
 
 annotations      = *( "@{" *sp-cmt annotation-set *sp-cmt "}"
@@ -145,15 +144,14 @@ array-rule       = annotations "[" *sp-cmt [ array-items *sp-cmt ] "]"
 array-items      = array-item [ 1*( sequence-combiner array-item ) /
                    1*( choice-combiner array-item ) ]
 array-item       = array-item-types *sp-cmt [ repetition *sp-cmt ]
-array-item-types = array-group / type-rule / explicit-type-choice
+array-item-types = array-group / type-rule
 array-group      = annotations "(" *sp-cmt [ array-items *sp-cmt ] ")"
 
 group-rule       = annotations "(" *sp-cmt [ group-items *sp-cmt ] ")"
 group-items      = group-item [ 1*( sequence-combiner group-item ) /
                    1*( choice-combiner group-item ) ]
 group-item       = group-item-types *sp-cmt [ repetition *sp-cmt ]
-group-item-types = group-group / member-rule /
-                   type-rule / explicit-type-choice
+group-item-types = group-group / member-rule / type-rule
 group-group      = group-rule
 
 sequence-combiner = "," *sp-cmt
@@ -210,8 +208,9 @@ escape           = %x5C              ; \
 quotation-mark   = %x22      ; "
 unescaped        = %x20-21 / %x23-5B / %x5D-10FFFF
 
-regex            = "/" *( escape "/" / not-slash ) "/"
+regex            = "/" *( escape re-escape-code / not-slash ) "/"
                    [ regex-modifiers ]
+re-escape-code   = %x20-7F ; Specific codes listed elsewhere
 not-slash        = HTAB / CR / LF / %x20-2E / %x30-10FFFF
                    ; Any char except "/"
 regex-modifiers  = *( "i" / "s" / "x" )

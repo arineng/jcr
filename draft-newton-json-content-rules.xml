@@ -168,7 +168,7 @@
     'figs/override3.jcr'>
 ]>
 <?rfc toc="yes"?>
-<rfc category="std" docName="draft-newton-json-content-rules-09" ipr="trust200902">
+<rfc category="std" docName="draft-newton-json-content-rules-10" ipr="trust200902">
     <front>
         <title abbrev="JSON Content Rules">A Language for Rules Describing JSON Content</title>
         <author fullname="Andrew Lee Newton" initials="A.L." surname="Newton">
@@ -207,6 +207,174 @@
         </abstract>
     </front>
     <middle>
+        <section title="Motivation">
+            <t>
+                As a growing number of protocols use JSON, there is an increasing need to find better mechanisms
+                to help define such protocols.
+            </t>
+            <t>
+                In the past, protocols often used constrained alphabet strings. Such strings could be defined by
+                example, but it was found better to use Backus-Naur Form (BNF), or variants such
+                as ABNF. The benefit of using ABNF over examples is that the full variation of what is allowed in a
+                protocol can be expressed in a single location. This leads to easier implementation and better
+                interoperability.
+            </t>
+            <t>
+                As protocols migrate to being defined in JSON, the same need to define the valid set of JSON
+                messages arises. It is conceivable to define the JSON-based message set by way of examples. But as
+                with constrained alphabet strings, this can be cumbersome, incomplete and easily misinterpreted,
+                leading to the problems of implementation and interoperability mentioned earlier.
+            </t>
+            <t>
+                It would be theoretically possible to express the valid set of a protocol’s JSON messages using ABNF.
+                However, ABNF is difficult to get right at the best of times, and defining an ABNF that simultaneously
+                interwove the constraints of JSON and the constraints of the protocol into a single ABNF definition
+                would be a task few could, or would, want to achieve. Even if such were possible, much of what was
+                intended to describe the protocol, would be obscured by the aspects describing the JSON
+                constraints. Such an approach is likely to end up being only comprehendible by a machine, and be
+                impenetrable to humans. As such, arguably, such a definition would not satisfy it primary target
+                audience.
+            </t>
+            <t>
+                The solution is to move up a level of abstraction. In the same way JSON is a level of abstraction
+                above constrained alphabet strings for representing protocols, a similar move up in abstraction level
+                is needed for the mechanism used to define such protocols.
+            </t>
+            <t>
+                JSON Content Rules (JCR) is such a step up in abstraction. It’s relation to JSON is that of ABNF to
+                constrained string alphabets. By ‘knowing’ about JSON it can more accurately and concisely define
+                JSON messages than other methods that are less abstracted. In the same way that abstracted
+                languages such as Java and Python enable a programmer to work more efficiently than they can with
+                assembler, protocol developers can work more efficiently using JCR than they can with ABNF.
+            </t>
+            <t>
+                That said, JCR is not the only language in this space nor the only solution, beyond ABNF, to this
+                problem. Of the various method and languages that the authors know about, in addition to JCR,
+                there are format translators which algorithmically convert a specification from one format to
+                another (e.g. XML to JSON), abstraction languages such as Yang and CDDL, and at least one other JSON
+                specific language: JSON Schema.
+            </t>
+            <section title="Format Translation">
+                <t>
+                    Format translation is an algorithmic approach to specifying protocol messages in multiple formats
+                    by using one format as the base specification and an algorithm for translating that formatting
+                    into another. One example would be the translation of XML into JSON using the BadgerFish
+                    algorithm and software.
+                </t>
+                <t>
+                    This approach often creates difficult protocol messages in the destination format (i.e. JSON in
+                    the case of XML to JSON) which are hard to implement towards or debug. Additionally, while it be
+                    fashionable to have multiple formats, most software implementations of protocols work best with
+                    one format and often not well with others if at all.
+                </t>
+                <t>
+                    vCard and jCard are good examples of this. The original format and data model for vCard
+                    are specified in MIME. jCard is an algorthmic conversion of vCard to jCard. Consequently,
+                    writing software implementations of jCard requires software developers to have an intimate
+                    knowledge of MIME, saving them little in the way of time or effort.
+                </t>
+            </section>
+            <section title="Abstraction Languages">
+                <t>
+                    Abstraction languages are nothing new to the schema and data definition language space, with ASN.1
+                    being a classic example of specifying a data model in a higher level syntax and defined algorithms
+                    for multiple data formats. ASN.1 has many, such as BER and DER and XER (XML Encoding Rules).
+                    Yang is a more modern and popular abstraction languages.
+                </t>
+                <t>
+                    These languages have their place but suffer the same issues as format translators as they
+                    require software implementors to spend valuable energy on a syntax that is not specific to the
+                    software being implemented. Additionally, abstraction languages have, in many instances, specified
+                    features in the data model that do not translate well to all data formats or may lack compelling
+                    features because the langauge must cater to multiple formats.
+                </t>
+                <t>
+                    With respect to JSON, CDDL is an abstraction language as it's data model is a superset of the
+                    data model of JSON. In other words, it is possible to specify protocol messages in CDDL that are
+                    not applicable to JSON. And because CDDL targets CBOR specifically, it does not benefit from being
+                    a superset of JSON, as is the case of JCR, or specified in JSON, as is the case of JSON Schema.
+                </t>
+            </section>
+            <section title="JSON Schema vs JCR">
+                <t>
+                    JSON Schema, like JCR, is a data definition language designed specifically for JSON. And while JCR
+                    is more tightly scoped to defining JSON protocol messages and content, JSON Schema is more
+                    broadly scoped in its goals. From a high-level view point, it could be said that JSON Schema is
+                    like XML Schema whereas JCR is more like Compact RelaxNG.
+                </t>
+                <t>
+                    JSON Schema benefits from being defined in JSON (as this makes implementations of JSON Schema tools
+                    easier), but this benefit impacts readability of specifications defining content using it. To
+                    demonstrate, the following examples define JSON using the classic example of a catolog object.
+                </t>
+                <figure anchor="example_catalog_json_schema">
+                    <preamble>
+                        In this example, the catalog entry is defined in JSON Schema.
+                    </preamble>
+                    <artwork xml:space="preserve" align="center">
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "title": "Product",
+  "description": "A product from Acme&#39;s catalog",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique identifier for a product",
+      "type": "integer"
+    },
+    "name": {
+      "description": "Name of the product",
+      "type": "string"
+    },
+    "price": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+      "type": "string"
+    },
+    "minItems": 1,
+    "uniqueItems": true
+    }
+  },
+  "required": ["id", "name", "price"]
+}
+                    </artwork>
+                </figure>
+                <figure anchor="example_catalog_jcr">
+                    <preamble>
+                        For comparison, this example demonstrates the same catalog
+                        entry as described in <xref target="example_catalog_json_schema"></xref>
+                        but in JCR.
+                    </preamble>
+                    <artwork xml:space="preserve" align="center">
+#jcr-version 0.9
+; Product – A Product for Acme’s catalog
+{
+  "id"    : integer,      ; Unique identifier for the product
+  "name"  : string,       ; Name of the product
+  "price" : @{minExclusive} 0.0..,
+  "tags"  : [ string + ] ?
+}
+                    </artwork>
+                </figure>
+                <t>
+                    The above examples demonstrate that the JCR is more concise and conveys the same
+                    information but in fewer lines in a syntax familiar with a JSON-aware software
+                    implementor.
+                </t>
+                <t>
+                    Additionally, JCR is a superset of JSON whereby specification authors may use example
+                    JSON protocol messages as a starting point for defining JCR rules (as is described in
+                    <xref target="a_first_example"></xref>). Combined with the brevity of describing rules
+                    and the ability to name rules, specification authors may also interleave their prose
+                    with JCR rules in their specifications thus describing semantics in close proximity
+                    to syntax.
+                </t>
+            </section>
+        </section>
         <section title="Introduction">
             <t>
                 This document describes JSON Content Rules (JCR), a language
@@ -215,7 +383,7 @@
                 The syntax of JCR is not JSON but is "JSON-like", possessing the conciseness and
                 utility that has made JSON popular.
             </t>
-            <section title="A First Example: Specifying Content">
+            <section title="A First Example: Specifying Content" anchor="a_first_example">
                 <t>
                     The following JSON data describes a JSON object with two members, "line-count" and
                     "word-count", each containing an integer.                    
@@ -398,18 +566,16 @@
                     <artwork align="center" xml:space="preserve">&rule_name_ruleset_id.jcr;</artwork>
                 </figure>
                 <t>
-                    There are two forms of rule name assignments: assignments of primitive types and assignments
-                    of all other types. Rule name assignments to primitive type specifications separate the rule
-                    name from the type specification with the character sequence '=:', whereas rule name assignments
-                    for all other type specifications only require the separation using the '=' character.
+                    Rule name assignments separate the rule name from the type specification using the '='
+                    character. Rule name assignments to primitive type specifications may optionally use
+                    the character sequence '=:'.
                 </t>
                 <figure anchor="assignment_example.jcr">
                     <artwork xml:space="preserve" align="center">&assignment_example.jcr;</artwork>
                 </figure>
                 <t>
-                    This is the one little "gotcha" in JCR. This syntax is necessary so that JCR parsers may readily
-                    distinguish between rule name assignments involving string and regular expressions primitive types 
-                    and member names of member specifications.
+                    The optional syntax for rule name assignments to primitive type specifications allows
+                    backwards compatibility with earlier versions of JCR in which this syntax was required.
                 </t>
             </section>
             <section title="Annotations">
@@ -1343,6 +1509,100 @@ n.f..
             &I-D.cordell-jcr-co-constraints;
             &RFC7492;
         </references>
+        <section title="Experimental Features">
+            <t>
+                The following features are in development and may appear in a future version
+                of this specification.
+            </t>
+            <section title="Augmented OR of Objects">
+                <t>
+                    Augmented OR of objects is an algorithm for better writing of OR, where the
+                    current approach uses simple inclusive OR. The design goal behind augmented OR
+                    is to give the writer and the reader a "that's what I meant" solution.
+                </t>
+                <figure anchor="augmented_or_jcr">
+                    <preamble>
+                        For example, take the following rule for an object where two members are
+                        given as a choice.
+                    </preamble>
+                    <artwork xml:space="preserve" align="center">
+{ "foo":string | "bar":integer }
+                    </artwork>
+                </figure>
+                <t>
+                    The interpretation of <xref target="augmented_or_jcr"/> is that the object may either
+                    contain a member named "foo" that is a string or a member named "bar" that is an
+                    integer. To some, that raises a number of questions:
+                    <list>
+                        <t>May the object contain both "foo" and "bar"?</t>
+                        <t>May the object contain "foo" as a string and "bar" as anything other than an integer?</t>
+                    </list>
+                </t>
+                <figure anchor="ior_rewritten_jcr">
+                    <preamble>
+                        With normal inclusive OR, it might be necessary to write more complicated rules to
+                        disambiguate the desired contents of the object, as this rule demonstrates.
+                    </preamble>
+                    <artwork xml:space="preserve" align="center">
+{
+  ( "foo":string , @{not} "bar":any ) |
+  ( "bar":integer, @{not} "foo":any )
+}
+                    </artwork>
+                </figure>
+                <t>
+                    The augmented OR algorithm for objects would allow <xref target="augmented_or_jcr"></xref>
+                    to mean the equivalent as the <xref target="ior_rewritten_jcr"></xref> using inclusive OR.
+                </t>
+            </section>
+            <section title="New Data Types">
+                <t>
+                    JCR is intentionally designed with a rich set of data types to eas the burden of reading
+                    and writing rules.
+                </t>
+                <t>
+                    The following are a list of new data types under consideration:
+                    <list>
+                        <t>
+                            JCR currently has 'ipaddr', 'ipv4', and 'ipv6' data types, but often
+                            groups of IP addresses are specified using CIDR notation. 'cidr', 'cidr4',
+                            'cidr6' are under consideration to cover these data types.
+                        </t>
+                        <t>
+                            The 'any' type covers all value type specifications: objects, arrays, and
+                            primitives. There may be cases where narrowing to a specific value type is
+                            desired, so 'anyobject', 'anyarray', and 'anyprimitive' are under consideration.
+                        </t>
+                    </list>
+                </t>
+            </section>
+            <section title="New Annotations">
+                <t>
+                    JCR can be extended through the use of annotation but also has a set of standard
+                    annotations. The design philosophy for annotations are to provide features to the
+                    language that are not as common or do not have a clear, less-wordy syntax.
+                </t>
+                <t>
+                    The following annotations are under consideration:
+                    <list>
+                        <t>
+                            A '@{default ...}' annotation has been proposed to help the reader understand
+                            there may be a default value if one is not given. This annotation does not provide
+                            much value for validation and is intended as a reading aid to provide semantic
+                            information.
+                        </t>
+                        <t>
+                            Both '@{minExclusive ...}' and '@{maxExclusive ...}' annotations have been proposed
+                            to avoid adding extra arcane syntax for excluding the boundaries of numeric ranges.
+                        </t>
+                        <t>
+                            A '@{augments RULENAME}' or '@{extends RULENAME}' annotation has been discussed to
+                            provide a better extension mechanism of rules.
+                        </t>
+                    </list>
+                </t>
+            </section>
+        </section>
         <section title="Co-Constraints">
             <t>
                 This specification defines a small set of annotations and directives for JCR, yet
@@ -1417,12 +1677,12 @@ n.f..
                 </t>
             </section>
         </section>
-        <section title="Changes from -07 and -08" anchor="changes">
+        <section title="Changes from -09 and -10" anchor="changes">
             <t>
-                This revision of the document makes no substantive changes to any parts of
-                the specification. Some of the ABNF has been updated to more correctly allow
-                group rules, and other small change have been made to the ABNF to make it
-                simpler.
+                The syntax of JCR was changed so that rule name assignments to primitive types
+                no longer requires the '=:' syntax. The '=:' is still provided for backwards
+                compatibility. Other syntax changes have been made to accommodate the syntax
+                of future annotations.
             </t>
         </section>
     </back>
