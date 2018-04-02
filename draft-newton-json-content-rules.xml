@@ -384,6 +384,49 @@
                 </t>
             </section>
         </section>
+        <section title="Uses">
+                <t>
+					JCR's primary focus is to help specification authors concisely and clearly describe
+					complex JSON data structures.
+                </t>
+                <t>
+					Being a precise, defined format reduces the potential for misunderstanding between what
+					specification authors intended and what software developers implement.
+                </t>
+                <t>
+					Being a machine-readable format, the examples in a specification can be validated by the
+					specified JCR, and it can be verified that the JCR represents the examples.  This acts
+					like unit testing in software development.
+                </t>
+                <t>
+					JCR aids software developers to verify that their implementations conform to specifications
+					by validating any generated JSON against the specified JCR.  This can be used to highlight
+					bugs in their code, or possibly identify where a specification has omissions and requires
+					further work.
+                </t>
+                <t>
+					Specific examples of JCR and JSON can be included as part of conformance test vector sets to
+					give confidence that an implementation meets a specification.  JCR's ability to be specific
+					in some locations, and loose in others, allows such tests to be run on a repeatable, automated
+					basis without requiring detailed human involvement.
+                </t>
+                <t>
+					JCR can help resolve interoperability issues by acting as an independent arbiter between
+					parties experiencing interoperability issues.  Appealing to a JCR opinion offers the
+					potential for a quick and cheap resolution to a disagreement.  (Naturally, either party
+					may disagree with the JCR result and take the matter further.)
+                </t>
+                <t>
+					Once software has been developed and deployed, JCR offers the potential for day-one in-the-field
+					monitoring of JSON message exchanges in order to highlight conformance issues that may have
+					slipped through the development phase.
+                </t>
+                <t>
+					Being a simple, defined language, JCR can also be used on an ad-hoc basis by developers as part
+					of the design process, such as during brainstorming and whiteboarding sessions, without risking
+					confusion over notation that may occur if an un-documented method is used.
+                </t>
+        </section>
         <section title="JCR Examples">
             <section title="A First Example: Specifying Content" anchor="a_first_example">
                 <t>
