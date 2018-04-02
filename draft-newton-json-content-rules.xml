@@ -801,9 +801,8 @@ n.f..
                         <artwork xml:space="preserve" align="center">&primitives_bit_integers.jcr;</artwork>
                     </figure>
                 </section>
-                <section title="Strings">
+                <section title="Plain Strings">
                     <t>
-                        JCR provides a large number of data types to define the contents of JSON strings.
                         Generically, a string may be specified using the word 'string'. String literals
                         may be specified using a double quote character followed by the literal content
                         followed by another double quote. And regular expressions may be specified by
@@ -815,6 +814,12 @@ n.f..
                     <t>
                         Regular expressions are not implicitly anchored and therefore must be explicitly
                         anchored if necessary.
+                    </t>
+                </section>
+                <section title="Strings with Additional Semantics">
+                    <t>
+                        JCR provides a large number of data types beyond those defined by JSON.
+                        They are encoded in JSON instances using JSON strings.
                     </t>
                     <t>
                         A string can be specified as a <xref target="RFC3986">URI</xref> using the
