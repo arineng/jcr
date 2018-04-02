@@ -670,14 +670,22 @@
                     zero or more annotations.
                     Each annotation begins with the
                     character sequence "@{" and ends with "}". The following is an example of a type specification
-                    with the not annotation (explained in <xref target="not_annotation"></xref>):
+                    with the not annotation:
                 </t>
                 <figure anchor="annotation_example.jcr">
                     <artwork xml:space="preserve" align="center">&annotation_example.jcr;</artwork>
                 </figure>
                 <t>
-                    This specification defines the annotations "root", "not", and "unordered", but
-                    other annotations may be defined for other purposes.
+                    The @{not} annotation is described in <xref target="not_annotation"></xref>.
+                </t>
+                <t>
+                    The @{root} annotation is described in <xref target="starting-points"></xref>.
+                </t>
+                <t>
+                    The @{unordered} annotation is described in <xref target="unordered_array_specifications"></xref>.
+                </t>
+                <t>
+                    Other annotations may be defined for other purposes in future.
                 </t>
             </section>
             <section title="Starting Points and Root Rules" anchor="starting-points">
