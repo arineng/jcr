@@ -868,9 +868,8 @@ n.f..
 
             <section title="Any Type">
                 <t>
-                    It is possible to specify that a value can be of any type allowable
-                    by JSON using the word 'any'. The 'any' type specifies any primitive
-                    type, array, or object.
+                    The 'any' type specifies that a JSON value instance can be any primitive
+                    type, array type, or object type.
                 </t>
             </section>            
         <section title="Member Specifications">
