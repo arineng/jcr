@@ -523,15 +523,16 @@
                 member (i.e. members of a JSON object).
             </t>
             <t>
-                Rules with rule name assignments may be referenced in place of
-                type specifications and member specifications.
+                Rules that have a rule name may be referenced in place of
+                rule specifications.
             </t>
             <t>
                 Rules may be defined across line boundaries and there is no line
                 continuation syntax. 
             </t>
             <t>
-                Any rule consisting only of a type specification is considered a root rule. Unless otherwise
+                Any rule without a rule name is considered a root rule. Such a rule
+                MUST be a type specification. Unless otherwise
                 specified, all the root rules of a ruleset are evaluated against a JSON instance or document.
             </t>
             <t>
