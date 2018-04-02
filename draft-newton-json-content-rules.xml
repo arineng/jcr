@@ -162,6 +162,8 @@
     'figs/object_mixin.jcr'>
   <!ENTITY subordinate_dependents.jcr PUBLIC ''
     'figs/subordinate_dependents.jcr'>
+  <!ENTITY subordinate_dependents_equiv.jcr PUBLIC ''
+    'figs/subordinate_dependents_equiv.jcr'>
   <!ENTITY override1.jcr PUBLIC ''
     'figs/override1.jcr'>
   <!ENTITY override1.json PUBLIC ''
@@ -1520,6 +1522,12 @@ n.f..
                 </t>
                 <figure anchor="subordinate_dependents.jcr">
                     <artwork xml:space="preserve" align="center">&subordinate_dependents.jcr;</artwork>
+                </figure>
+                <t>
+                    For validation, the above optional group is equivalent to:
+                </t>
+                <figure anchor="subordinate_dependents_equiv.jcr">
+                    <artwork xml:space="preserve" align="center">&subordinate_dependents_equiv.jcr;</artwork>
                 </figure>
             </section>
         </section>
