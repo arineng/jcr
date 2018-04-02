@@ -1089,6 +1089,10 @@ n.f..
                     <artwork align="center" xml:space="preserve">&array_order_eval.json;</artwork>
                 </figure>
                 <t>
+                    The @{unordered} annotation can only be applied to an array as a whole.
+                    It can not be applied to groups within an array.
+                </t>
+                <t>
                     Like ordered array specifications, the subordinate components in an unordered array specification
                     are evaluated in the order they are specified. The difference is that they
                     need not match an element of the array in the same position as given in the
