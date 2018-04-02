@@ -287,7 +287,7 @@
                 <t>
                     Abstraction languages are nothing new to the schema and data definition language space, with ASN.1
                     being a classic example of specifying a data model in a higher level syntax and defined algorithms
-                    for multiple data formats. ASN.1 has many, such as BER and DER and XER (XML Encoding Rules).
+                    for multiple data formats. ASN.1 supports many data formats, such as BER and DER and XER (XML Encoding Rules).
                     Yang is a more modern and popular abstraction languages.
                 </t>
                 <t>
@@ -295,7 +295,7 @@
                     require software implementors to spend valuable energy on a syntax that is not specific to the
                     software being implemented. Additionally, abstraction languages have, in many instances, specified
                     features in the data model that do not translate well to all data formats or may lack compelling
-                    features because the langauge must cater to multiple formats.
+                    features because the language must cater to multiple formats.
                 </t>
                 <t>
                     With respect to JSON, CDDL is an abstraction language as it's data model is a superset of the
@@ -314,7 +314,7 @@
                 <t>
                     JSON Schema benefits from being defined in JSON (as this makes implementations of JSON Schema tools
                     easier), but this benefit impacts readability of specifications defining content using it. To
-                    demonstrate, the following examples define JSON using the classic example of a catolog object.
+                    demonstrate, the following examples define JSON using the classic example of a catalog object.
                 </t>
                 <figure anchor="example_catalog_json_schema">
                     <preamble>
