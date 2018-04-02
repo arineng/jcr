@@ -1279,12 +1279,12 @@ n.f..
                         This directive declares that the ruleset complies with a specific version of this
                         standard. The version is expressed as a major integer followed by a period followed
                         by a minor integer.
-                    </t>            
+                    </t>
                     <figure anchor="jcr_version_current.jcr">
                         <artwork xml:space="preserve" align="center">&jcr_version_current.jcr;</artwork>
                     </figure>
                     <t>
-                        The major.minor number signifying compliance with this document is "0.7". Upon publication
+                        The major.minor number signifying compliance with this document is "0.9". Upon publication
                         of this specification as an IETF proposed standard, it will be "1.0".
                         
                         <cref>
@@ -1299,9 +1299,6 @@ n.f..
                     </artwork>
                     </figure>
                     <t>
-                        Ruleset authors are advised to place this directive as the first line of a ruleset.
-                    </t>
-                    <t>
                         This directive may have optional extension identifiers following the version number.
                         Each extension identifiers is preceded by the plus ('+') character and separated by white space.
                         The format of extension identifiers is specific to the extension, 
@@ -1314,6 +1311,10 @@ n.f..
 # jcr-version 1.0 +co-constraints-1.2 +jcr-doc-1.0
                     </artwork>
                     </figure>
+                    <t>
+                        A maximum of one jcr-version directive is permitted in a ruleset.
+                        Ruleset authors are advised to place this directive as the first line of a ruleset.
+                    </t>
                 </section>
                 <section title="ruleset-id">
                     <t>
@@ -1327,6 +1328,11 @@ n.f..
                         (e.g. com.example.foo) or any other form that conforms to the JCR ABNF syntax that
                         a ruleset author deems appropriate.  To a JCR processor the identifier is treated as
                         an opaque, case-sensitive string.
+                    </t>
+                    <t>
+                        A maximum of one ruleset-id directive is permitted in a ruleset.
+                        If present, it is suggested that it be the second line of a ruleset, following the
+                        jcr-version directive, or the first line if no jcr-version directive is present.
                     </t>
                 </section>            
                 <section title="import">
