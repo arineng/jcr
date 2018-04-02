@@ -17,10 +17,10 @@
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5322.xml'>
   <!ENTITY RFC5952 PUBLIC ''
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5952.xml'>
-  <!ENTITY RFC7159 PUBLIC ''
-   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7159.xml'>
   <!ENTITY RFC7492 PUBLIC ''
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7492.xml'>
+  <!ENTITY RFC8259 PUBLIC ''
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml'>
   <!ENTITY I-D.cordell-jcr-co-constraints PUBLIC ''
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.cordell-jcr-co-constraints.xml'>
    
@@ -379,7 +379,7 @@
             <t>
                 This document describes JSON Content Rules (JCR), a language
                 for specifying and testing the interchange of data
-                in <xref target="RFC7159">JSON</xref> format used by computer protocols and processes.
+                in <xref target="RFC8259">JSON</xref> format used by computer protocols and processes.
                 The syntax of JCR is not JSON but is "JSON-like", possessing the conciseness and
                 utility that has made JSON popular.
             </t>
@@ -1463,7 +1463,7 @@ n.f..
             &RFC4648;
             &RFC5322;
             &RFC5952;
-            &RFC7159;
+            &RFC8259;
             
             
             
