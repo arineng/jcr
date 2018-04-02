@@ -792,9 +792,10 @@ n.f..
                         <artwork xml:space="preserve" align="center">&annotations-range-exclusive.jcr;</artwork>
                     </figure>
                     <t>
-                        Integers may also be specified as ranges using bit lengths preceded by the 'int' or 'uint'
-                        words (i.e. 'int8', 'uint16'). The 'int' prefix specifies the integer as being signed whereas
-                        the 'uint' prefix specifies the integer as being unsigned.
+                        The size of integers may also be specified using bit lengths. The type name is
+                        constructed with a prefix followed by a number. The prefix 'int' specifies
+                        a signed integer and the prefix 'uint' specifies an unsigned integer. The number
+                        that follows is a positive integer that specifies the number of bits in the integer.
                     </t>
                     <figure anchor="primitive_bit_integers.jcr">
                         <artwork xml:space="preserve" align="center">&primitives_bit_integers.jcr;</artwork>
