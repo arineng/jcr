@@ -805,7 +805,7 @@ n.f..
                     <t>
                         Generically, a string may be specified using the word 'string'. String literals
                         may be specified using a double quote character followed by the literal content
-                        followed by another double quote. And regular expressions may be specified by
+                        followed by another double quote. Regular expressions can be specified by
                         enclosing a regular expression within the forward slash ('/') character.
                     </t>
                     <figure anchor="primitive_strings.jcr">
