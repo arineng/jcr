@@ -1351,10 +1351,16 @@ n.f..
                     </figure>
                     <t>
                         The rule names of the ruleset to be imported may be referenced by prepending
-                        the alias followed by a period character ('.') followed by the rule name
+                        the alias followed by a period character ('.') followed by the local rule name
                         (i.e. "alias.name"). To continue the example above, if the ruleset at http://example.com/rfc9999
                         were to have a rule named 'encoding', rules in the ruleset importing it can
                         refer to that rule as 'rfc9999.encoding'.
+                    </t>
+                    <t>
+                        If an import directive does not specify an alias with the 'as' keyword, the local
+                        names of the imported ruleset effectively become local to the importing ruleset,
+                        except that a referenced name without an alias is sought in the importing ruleset
+                        before being sought in each of the unaliased imported rulesets.
                     </t>
                 </section>
             </section>
