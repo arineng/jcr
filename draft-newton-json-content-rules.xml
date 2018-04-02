@@ -542,6 +542,13 @@
                 of its members isn't significant.
             </t>
             <t>
+                The syntax of each type of type specifications varies depending on the type.
+                For example:
+            </t>
+            <figure anchor="primitive_overview.jcr">
+                <artwork xml:space="preserve" align="center">&primitives_overview.jcr;</artwork>
+            </figure>
+            <t>
                 Putting it all together, <xref target="rfc4627-example-1-compact-rules"></xref>
                 describes the JSON in <xref target="rfc4627-example-1"></xref>.
             </t>
@@ -665,12 +672,6 @@
                 </t>
             </section>
             <section title="Type Specifications">
-                <t>
-                    The syntax of each type of type specifications varies depending on the type:
-                </t>
-                <figure anchor="primitive_overview.jcr">
-                    <artwork xml:space="preserve" align="center">&primitives_overview.jcr;</artwork>
-                </figure>
             </section>
             <section title="Primitive Specifications">
             <t>
