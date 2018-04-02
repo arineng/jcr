@@ -576,6 +576,24 @@
                     continue to the end of the line.
                 </t>
             </section>
+            <section title="Names and Identifiers" anchor="names-and-identifiers">
+                <t>
+                    JCR uses names and identifiers to enable cross-referencing one part of a ruleset with
+                    another, or from one ruleset to another.  There are different types of names and different
+                    type of identifiers.  For example, a local rule name is a name, and a ruleset-id is an
+                    identifier.
+                </t>
+                <t>
+                    A name must start with an ASCII alphabetic character (a-z,A-Z) and must contain only ASCII
+                    alphabetic characters, numeric characters, the hyphen character ('-') and the underscore
+                    character ('_').  Names are case sensitive.
+                </t>
+                <t>
+                    An identifier must start with an ASCII alphabetic character (a-z,A-Z) and can be followed
+                    by any character other than whitespace and the closing brace ('}').  Identifiers are treated
+                    as opaque strings, and therefore case-sensitive.
+                </t>
+            </section>
             <section title="Rules">
                 <t>
                     Rules have two main components, an optional rule name assignment and a type or member specification.
@@ -605,21 +623,27 @@
             </section>
             <section title="Rule Names and Assignments">
                 <t>
-                    Rule names are signified with the dollar character ('$'), which is not part of the
-                    rule name itself. Rule names have two components, an optional ruleset identifier alias and a local
-                    rule name.
+                    Rule names are used to represent rule specifications so they can be referenced elsewhere
+                    in a ruleset.  A rule name can be used in two scenarios; rule specification assignment,
+                    and rule specification referencing.
                 </t>
                 <t>
-                    Local rule names must start with an alphabetic character (a-z,A-Z) and must contain only
-                    alphabetic characters, numeric characters, the hyphen character ('-') and the
-                    underscore character ('_'). Local rule names are case sensitive, and must be unique
-                    within a ruleset (that is, no two rule name assignments may use the same local rule name).
+                    Rule names are signified with the dollar character ('$'), which is
+                    not part of the rule name itself.  Rule names have two components, an
+                    optional ruleset identifier alias and a local rule name.  If a ruleset identifier alias
+                    is present, it is separated from the local rule name by a dot character ('.').  Both ruleset
+                    identifier aliases and local rule names are types of name (see <xref target="names-and-identifiers"></xref>).
                 </t>
                 <t>
-                    Ruleset identifier aliases enable referencing rules from another ruleset. They are not allowed in rule
-                    name assignments, and only found in rule names referencing other rules. Ruleset identifiers must start with
-                    an alphabetic character and contain no whitespace. Ruleset identifiers are case sensitive.
-                    Simple use cases of JCR will most likely not use ruleset identifiers.
+                    When a rule specification is assigned to a rule name, only the local rule name part can be
+                    present.  In this scenario the local rule name must be unique within a ruleset
+                    (that is, no two rule name assignments may use the same local rule
+                    name).
+                </t>
+                <t>
+                    Ruleset identifier aliases may be included in a rule name that is used as a reference.
+                    They enable referencing rules from another ruleset.  Simple use cases of JCR will
+                    most likely not use ruleset identifiers.
                 </t>
                 <figure anchor="rule_name_ruleset_id.jcr">
                     <preamble>
