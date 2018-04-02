@@ -561,43 +561,48 @@
                 <artwork xml:space="preserve" align="center">&rfc4627_example2.jcr;</artwork>
             </figure>
         </section> 
-        <section title="Lines and Comments">
+        <section title="Language Components">
             <t>
-                There is no statement terminator and therefore no need for a line continuation syntax.
-                Rules may be defined across line boundaries.
-                Blank lines are allowed.
+                This section describes each component of the JCR language in detail.
             </t>
-            <t>
-                Comments are the same as comments in <xref target="RFC4234">ABNF</xref>. They start with a semi-colon (';') and
-                continue to the end of the line.
-            </t>
-        </section>
-        <section title="Rules">
-            <t>
-                Rules have two main components, an optional rule name assignment and a type or member specification.
-            </t>
-            <t>
-                Type specifications define arrays, objects, etc... of JSON and may reference other rules
-                using rule names. Most type specifications can be defined with repetitions for specifying
-                the frequency of the type being defined. In addition to the type specifications describing
-                JSON types, there is an additional group specification for grouping types.
-            </t>
-            <t>
-                Member specifications define members of JSON objects, and are composed of a member name specification
-                and either a type specification or a rule name referencing a type specification.
-            </t>
-            <t>
-                Rules may also contain annotations which may affect the evaluation of all or part of a rule.
-                Rules without a rule name assignment are considered root rules, though rules with a rule
-                name assignment can be considered a root rule with the appropriate annotation.
-            </t>
-            <t>
-                Type specifications, depending on their type, can contain zero or more other
-                specifications or rule names. For example, an object specification might contain multiple
-                member specifications or rule names that resolve to member specifications or a mixture
-                of member specifications and rule names. For the purposes of this document, specifications
-                and rule names composing other specifications are called subordinate components.
-            </t>
+            <section title="Lines and Comments">
+                <t>
+                    There is no statement terminator and therefore no need for a line continuation syntax.
+                    Rules may be defined across line boundaries.
+                    Blank lines are allowed.
+                </t>
+                <t>
+                    Comments are the same as comments in <xref target="RFC4234">ABNF</xref>. They start with a semi-colon (';') and
+                    continue to the end of the line.
+                </t>
+            </section>
+            <section title="Rules">
+                <t>
+                    Rules have two main components, an optional rule name assignment and a type or member specification.
+                </t>
+                <t>
+                    Type specifications define arrays, objects, etc... of JSON and may reference other rules
+                    using rule names. Most type specifications can be defined with repetitions for specifying
+                    the frequency of the type being defined. In addition to the type specifications describing
+                    JSON types, there is an additional group specification for grouping types.
+                </t>
+                <t>
+                    Member specifications define members of JSON objects, and are composed of a member name specification
+                    and either a type specification or a rule name referencing a type specification.
+                </t>
+                <t>
+                    Rules may also contain annotations which may affect the evaluation of all or part of a rule.
+                    Rules without a rule name assignment are considered root rules, though rules with a rule
+                    name assignment can be considered a root rule with the appropriate annotation.
+                </t>
+                <t>
+                    Type specifications, depending on their type, can contain zero or more other
+                    specifications or rule names. For example, an object specification might contain multiple
+                    member specifications or rule names that resolve to member specifications or a mixture
+                    of member specifications and rule names. For the purposes of this document, specifications
+                    and rule names composing other specifications are called subordinate components.
+                </t>
+            </section>
             <section title="Rule Names and Assignments">
                 <t>
                     Rule names are signified with the dollar character ('$'), which is not part of the
@@ -1158,109 +1163,109 @@ n.f..
                     </figure>         
                 </t>
             </section>
-        </section>
-        <section title="Directives">
-            <t>
-                Directives modify the processing of a ruleset. There are two forms of the directive, the 
-                single line directive and the multi-line directive.
-            </t>
-            <t>
-                Single line directives appear on their own line in a ruleset, begin
-                with a hash character ('#') and are terminated by the end of the line.
-                They take the following form:
-            </t>
-            <figure anchor="single_line_directive_example.jcr">
-                <artwork xml:space="preserve" align="center">&single_line_directive_example.jcr;</artwork>
-            </figure>      
-            <t>
-                Multi-line directives also appear on their own lines, but may span multiple lines.
-                They begin with the character sequence "#{" and end with "}". The take the
-                following form:
-            </t>
-            <figure anchor="multi_line_directive_example.jcr">
-                <artwork xml:space="preserve" align="center">&multi_line_directive_example.jcr;</artwork>
-            </figure>
-            <t>
-                This specification defines the directives "jcr-version", "ruleset-id",
-                and "import", but other directives may be defined.
-            </t>
-            <section title="jcr-version">
-                <!-- We'll obviously have to revisit this section upon publication.-->
+            <section title="Directives">
                 <t>
-                    This directive declares that the ruleset complies with a specific version of this
-                    standard. The version is expressed as a major integer followed by a period followed
-                    by a minor integer.
-                </t>            
-                <figure anchor="jcr_version_current.jcr">
-                    <artwork xml:space="preserve" align="center">&jcr_version_current.jcr;</artwork>
+                    Directives modify the processing of a ruleset. There are two forms of the directive, the 
+                    single line directive and the multi-line directive.
+                </t>
+                <t>
+                    Single line directives appear on their own line in a ruleset, begin
+                    with a hash character ('#') and are terminated by the end of the line.
+                    They take the following form:
+                </t>
+                <figure anchor="single_line_directive_example.jcr">
+                    <artwork xml:space="preserve" align="center">&single_line_directive_example.jcr;</artwork>
+                </figure>      
+                <t>
+                    Multi-line directives also appear on their own lines, but may span multiple lines.
+                    They begin with the character sequence "#{" and end with "}". The take the
+                    following form:
+                </t>
+                <figure anchor="multi_line_directive_example.jcr">
+                    <artwork xml:space="preserve" align="center">&multi_line_directive_example.jcr;</artwork>
                 </figure>
                 <t>
-                    The major.minor number signifying compliance with this document is "0.7". Upon publication
-                    of this specification as an IETF proposed standard, it will be "1.0".
-                    
-                    <cref>
-                        NOTE: This will be removed in the final version.
-                    </cref>
+                    This specification defines the directives "jcr-version", "ruleset-id",
+                    and "import", but other directives may be defined.
                 </t>
-                <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
-                 the working version number. -->
-                <figure anchor="jcr_version_final.jcr">
-                    <artwork xml:space="preserve" align="center">
+                <section title="jcr-version">
+                    <!-- We'll obviously have to revisit this section upon publication.-->
+                    <t>
+                        This directive declares that the ruleset complies with a specific version of this
+                        standard. The version is expressed as a major integer followed by a period followed
+                        by a minor integer.
+                    </t>            
+                    <figure anchor="jcr_version_current.jcr">
+                        <artwork xml:space="preserve" align="center">&jcr_version_current.jcr;</artwork>
+                    </figure>
+                    <t>
+                        The major.minor number signifying compliance with this document is "0.7". Upon publication
+                        of this specification as an IETF proposed standard, it will be "1.0".
+                        
+                        <cref>
+                            NOTE: This will be removed in the final version.
+                        </cref>
+                    </t>
+                    <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
+                     the working version number. -->
+                    <figure anchor="jcr_version_final.jcr">
+                        <artwork xml:space="preserve" align="center">
 # jcr-version 1.0
-                </artwork>
-                </figure>
-                <t>
-                    Ruleset authors are advised to place this directive as the first line of a ruleset.
-                </t>
-                <t>
-                    This directive may have optional extension identifiers following the version number.
-                    Each extension identifiers is preceded by the plus ('+') character and separated by white space.
-                    The format of extension identifiers is specific to the extension, 
-                    but it is recommended that they are terminated by a version number.
-                </t>
-                <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
-                 the working version number. -->
-                <figure anchor="jcr_version_extensions.jcr">
-                    <artwork xml:space="preserve" align="center">
+                    </artwork>
+                    </figure>
+                    <t>
+                        Ruleset authors are advised to place this directive as the first line of a ruleset.
+                    </t>
+                    <t>
+                        This directive may have optional extension identifiers following the version number.
+                        Each extension identifiers is preceded by the plus ('+') character and separated by white space.
+                        The format of extension identifiers is specific to the extension, 
+                        but it is recommended that they are terminated by a version number.
+                    </t>
+                    <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
+                     the working version number. -->
+                    <figure anchor="jcr_version_extensions.jcr">
+                        <artwork xml:space="preserve" align="center">
 # jcr-version 1.0 +co-constraints-1.2 +jcr-doc-1.0
-                </artwork>
-                </figure>
-            </section>
-            <section title="ruleset-id">
-                <t>
-                    This directive identifies a ruleset to rule processors. It takes the form:
-                </t>
-                <figure anchor="ruleset_id.jcr">
-                    <artwork xml:space="preserve" align="center">&ruleset_id.jcr;</artwork>
-                </figure>
-                <t>
-					An identifier can be a URL (e.g. http://example.com/foo), an inverted domain name
-					(e.g. com.example.foo) or any other form that conforms to the JCR ABNF syntax that
-					a ruleset author deems appropriate.  To a JCR processor the identifier is treated as
-					an opaque, case-sensitive string.
-				</t>
-            </section>            
-            <section title="import">
-                <t>
-                    The import directive specifies that another ruleset is to have its rules
-                    evaluated in addition to the ruleset where the directive appears.
-                </t>
-                <t>
-                    The following is an example:
-                </t>
-                <!-- We don't have control of example.com, so this can't be put in as a test.-->
-                <figure anchor="import_directive.jcr">
-                    <artwork xml:space="preserve" align="center">
+                    </artwork>
+                    </figure>
+                </section>
+                <section title="ruleset-id">
+                    <t>
+                        This directive identifies a ruleset to rule processors. It takes the form:
+                    </t>
+                    <figure anchor="ruleset_id.jcr">
+                        <artwork xml:space="preserve" align="center">&ruleset_id.jcr;</artwork>
+                    </figure>
+                    <t>
+                        An identifier can be a URL (e.g. http://example.com/foo), an inverted domain name
+                        (e.g. com.example.foo) or any other form that conforms to the JCR ABNF syntax that
+                        a ruleset author deems appropriate.  To a JCR processor the identifier is treated as
+                        an opaque, case-sensitive string.
+                    </t>
+                </section>            
+                <section title="import">
+                    <t>
+                        The import directive specifies that another ruleset is to have its rules
+                        evaluated in addition to the ruleset where the directive appears.
+                    </t>
+                    <t>
+                        The following is an example:
+                    </t>
+                    <!-- We don't have control of example.com, so this can't be put in as a test.-->
+                    <figure anchor="import_directive.jcr">
+                        <artwork xml:space="preserve" align="center">
 # import http://example.com/rfc9999 as rfc9999
-                </artwork>
-                </figure>
-                <t>
-                    The rule names of the ruleset to be imported may be referenced by prepending
-                    the alias followed by a period character ('.') followed by the rule name
-                    (i.e. "alias.name"). To continue the example above, if the ruleset at http://example.com/rfc9999
-                    were to have a rule named 'encoding', rules in the ruleset importing it can
-                    refer to that rule as 'rfc9999.encoding'.
-                </t>
+                    </artwork>
+                    </figure>
+                    <t>
+                        The rule names of the ruleset to be imported may be referenced by prepending
+                        the alias followed by a period character ('.') followed by the rule name
+                        (i.e. "alias.name"). To continue the example above, if the ruleset at http://example.com/rfc9999
+                        were to have a rule named 'encoding', rules in the ruleset importing it can
+                        refer to that rule as 'rfc9999.encoding'.
+                    </t>
+                </section>
             </section>
         </section>
         <section title="Tips and Tricks">
