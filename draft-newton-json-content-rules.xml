@@ -536,6 +536,12 @@
                 specified, all the root rules of a ruleset are evaluated against a JSON instance or document.
             </t>
             <t>
+                Rule specifications may be augmented with annotations to specify
+                additional constraints and properties.  For example, arrays can be
+                augmented with an 'unordered' annotation to indicate that the order
+                of its members isn't significant.
+            </t>
+            <t>
                 Putting it all together, <xref target="rfc4627-example-1-compact-rules"></xref>
                 describes the JSON in <xref target="rfc4627-example-1"></xref>.
             </t>
