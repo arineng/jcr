@@ -553,7 +553,7 @@
                 describes the JSON in <xref target="rfc4627-example-1"></xref>.
             </t>
             <figure anchor="rfc4627-example-1">
-                <preamble>Example JSON shamelessly lifted from RFC 4627</preamble>
+                <preamble>Example JSON shamelessly lifted from RFC 8259</preamble>
                 <artwork xml:space="preserve" align="center">&rfc4627_example.json;</artwork>
             </figure>
             <figure anchor="rfc4627-example-1-compact-rules">
