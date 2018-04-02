@@ -364,7 +364,7 @@
 {
   "id"    : integer,      ; Unique identifier for the product
   "name"  : string,       ; Name of the product
-  "price" : @{minExclusive} 0.0..,
+  "price" : @{min-exclusive} 0.0..,
   "tags"  : [ string + ] ?
 }
                     </artwork>
