@@ -56,8 +56,10 @@
     'figs/annotation_example.jcr'>
   <!ENTITY primitives_overview.jcr PUBLIC ''
     'figs/primitives_overview.jcr'>
-  <!ENTITY primitives_boolean_and_null.jcr PUBLIC ''
-    'figs/primitives_boolean_and_null.jcr'>
+  <!ENTITY primitives_null.jcr PUBLIC ''
+    'figs/primitives_null.jcr'>
+  <!ENTITY primitives_boolean.jcr PUBLIC ''
+    'figs/primitives_boolean.jcr'>
   <!ENTITY primitives_integer_and_float.jcr PUBLIC ''
     'figs/primitives_integer_and_float.jcr'>
   <!ENTITY primitives_float_range.jcr PUBLIC ''
@@ -713,33 +715,51 @@
                 </t>
             </section>
             <section title="Primitive Specifications">
-            <t>
-                Primitive type specifications define content for JSON numbers, booleans, strings, and null.
-            </t>
-            <section title="Numbers, Booleans and Null">
-            <t>
-                The rules for booleans and null are the simplest and take the following forms:
-            </t>
-            <figure anchor="primitive_boolean_and_null.jcr">
-                <artwork xml:space="preserve" align="center">&primitives_boolean_and_null.jcr;</artwork>
-            </figure>
                 <t>
-                Rules for numbers can specify the number be either an integer or floating point number:
+                    Primitive type specifications define content for JSON numbers, booleans, strings, and null.
                 </t>
-                <figure anchor="primitive_integer_and_float.jcr">
-                    <artwork xml:space="preserve" align="center">&primitives_integer_and_float.jcr;</artwork>
-                </figure>
-                <t>
-                    The keyword 'float' represents a single precision IEEE-754 floating point number 
-                    represented in decimal. The keyword 'double' represents a double precision 
-                    IEEE-754 floating point number represented in decimal format.
-                </t>
-                <t>
-                Numbers may also be specified as an absolute value or a range of possible values, where a range
-                may be specified using a minimum, maximum, or both:
-                </t>
-                <figure anchor="n_to_m">
-                    <artwork align="center" xml:space="preserve">
+                <section title="Null">
+                    <t>
+                        The rule for a null type specification is the simplest and takes the following form:
+                    </t>
+                    <figure anchor="primitive_null.jcr">
+                        <artwork xml:space="preserve" align="center">&primitives_null.jcr;</artwork>
+                    </figure>
+                    <t>
+                        A JSON instance value specified to be null must have the null value to be valid.
+                     </t>
+                </section>
+                <section title="Booleans">
+                    <t>
+                        The rules for booleans take the following forms:
+                    </t>
+                    <figure anchor="primitive_boolean.jcr">
+                        <artwork xml:space="preserve" align="center">&primitives_boolean.jcr;</artwork>
+                    </figure>
+                    <t>
+                        A JSON instance value specified to be true must have the true value to
+                        be valid.  If specified to be false, it must have the false value.  If
+                        specified to be boolean, it must have either the true or false values.
+                    </t>
+                </section>
+                <section title="Numbers">
+                    <t>
+                        Rules for numbers can specify the number be either an integer or floating point number:
+                    </t>
+                    <figure anchor="primitive_integer_and_float.jcr">
+                        <artwork xml:space="preserve" align="center">&primitives_integer_and_float.jcr;</artwork>
+                    </figure>
+                    <t>
+                        The keyword 'float' represents a single precision IEEE-754 floating point number 
+                        represented in decimal. The keyword 'double' represents a double precision 
+                        IEEE-754 floating point number represented in decimal format.
+                    </t>
+                    <t>
+                        Numbers may also be specified as an absolute value or a range of possible values, where a range
+                        may be specified using a minimum, maximum, or both:
+                    </t>
+                    <figure anchor="n_to_m">
+                        <artwork align="center" xml:space="preserve">
   n
   n..m
    ..m
@@ -748,79 +768,79 @@ n.f
 n.f..m.f
    ..m.f
 n.f..
-                    </artwork>
-                </figure>
-                <t>
-                When specifying a minimum and a maximum, both must either be an integer or a floating point number.
-                Thus to specify a floating point number between zero and ten a definition of the following form is used:
-            </t>
-            <figure anchor="primitive_float_range.jcr">
-                <artwork xml:space="preserve" align="center">&primitives_float_range.jcr;</artwork>
-            </figure>  
-                <t>
-                    Integers may also be specified as ranges using bit lengths preceded by the 'int' or 'uint'
-                    words (i.e. 'int8', 'uint16'). The 'int' prefix specifies the integer as being signed whereas
-                    the 'uint' prefix specifies the integer as being unsigned.
-                </t>
-                <figure anchor="primitive_bit_integers.jcr">
-                    <artwork xml:space="preserve" align="center">&primitives_bit_integers.jcr;</artwork>
-                </figure>  
-            </section>
-            <section title="Strings">
-                <t>
-                    JCR provides a large number of data types to define the contents of JSON strings.
-                    Generically, a string may be specified using the word 'string'. String literals
-                    may be specified using a double quote character followed by the literal content
-                    followed by another double quote. And regular expressions may be specified by
-                    enclosing a regular expression within the forward slash ('/') character.
-                </t>
-                <figure anchor="primitive_strings.jcr">
-                    <artwork align="center" xml:space="preserve">&primitives_strings.jcr;</artwork>
-                </figure>
-                <t>
-                    Regular expressions are not implicitly anchored and therefore must be explicitly
-                    anchored if necessary.
-                </t>
-                <t>
-                    A string can be specified as a <xref target="RFC3986">URI</xref> using the
-                    word 'uri', but also may be more narrowly scoped to a URI of a specific scheme.
-                    Specific URI schemes are specified with the word 'uri' followed by two period characters
-                    ('..') followed by the URI scheme.
-                </t>
-                <figure anchor="primitive_uris.jcr">
-                    <artwork align="center" xml:space="preserve">&primitives_uris.jcr;</artwork>
-                </figure>
-                <t>
-                    IP addresses may be specified with either the word 'ipv4' for
-                    <xref target="RFC1166">IPv4 addresses</xref> or the word 'ipv6' for
-                    <xref target="RFC5952">IPv6 addresses</xref>. Fully qualified A-label and
-                    U-label domain names may be specified with the words 'fqdn' and 'idn'.
-                </t>
-                <t>
-                    Dates and time can be specified as formats found in <xref target="RFC3339">RFC 3339</xref>.
-                    The word 'date' corresponds to the full-date ABNF rule, the word 'time' corresponds to the
-                    full-time ABNF rule, and the word 'datetime' corresponds to the 'date-time' ABNF rule.
-                </t>
-                <t>
-                    Email addresses formatted according to <xref target="RFC5322">RFC 5322</xref> may
-                    be specified using the 'email' word, and E.123 phone numbers may be specified using the
-                    word 'phone'.
-                </t>
-                <figure anchor="primitive_misc.jcr">
-                    <artwork align="center" xml:space="preserve">&primitives_misc.jcr;</artwork>
-                </figure>
-                <t>
-                    Binary data can be specified in string form using the encodings specified in
-                    <xref target="RFC4648">RFC 4648</xref>. The word 'hex' corresponds to base16, while
-                    'base32', 'base32hex', 'base64', and 'base64url' correspond with their
-                    RFC 4648 counterparts accordingly.
-                </t>
-                <figure anchor="primitive_binary.jcr">
-                    <artwork align="center" xml:space="preserve">&primitives_binary.jcr;</artwork>
-                </figure>
+                        </artwork>
+                    </figure>
+                    <t>
+                        When specifying a minimum and a maximum, both must either be an integer or a floating point number.
+                        Thus to specify a floating point number between zero and ten a definition of the following form is used:
+                    </t>
+                    <figure anchor="primitive_float_range.jcr">
+                        <artwork xml:space="preserve" align="center">&primitives_float_range.jcr;</artwork>
+                    </figure>  
+                    <t>
+                        Integers may also be specified as ranges using bit lengths preceded by the 'int' or 'uint'
+                        words (i.e. 'int8', 'uint16'). The 'int' prefix specifies the integer as being signed whereas
+                        the 'uint' prefix specifies the integer as being unsigned.
+                    </t>
+                    <figure anchor="primitive_bit_integers.jcr">
+                        <artwork xml:space="preserve" align="center">&primitives_bit_integers.jcr;</artwork>
+                    </figure>  
+                </section>
+                <section title="Strings">
+                    <t>
+                        JCR provides a large number of data types to define the contents of JSON strings.
+                        Generically, a string may be specified using the word 'string'. String literals
+                        may be specified using a double quote character followed by the literal content
+                        followed by another double quote. And regular expressions may be specified by
+                        enclosing a regular expression within the forward slash ('/') character.
+                    </t>
+                    <figure anchor="primitive_strings.jcr">
+                        <artwork align="center" xml:space="preserve">&primitives_strings.jcr;</artwork>
+                    </figure>
+                    <t>
+                        Regular expressions are not implicitly anchored and therefore must be explicitly
+                        anchored if necessary.
+                    </t>
+                    <t>
+                        A string can be specified as a <xref target="RFC3986">URI</xref> using the
+                        word 'uri', but also may be more narrowly scoped to a URI of a specific scheme.
+                        Specific URI schemes are specified with the word 'uri' followed by two period characters
+                        ('..') followed by the URI scheme.
+                    </t>
+                    <figure anchor="primitive_uris.jcr">
+                        <artwork align="center" xml:space="preserve">&primitives_uris.jcr;</artwork>
+                    </figure>
+                    <t>
+                        IP addresses may be specified with either the word 'ipv4' for
+                        <xref target="RFC1166">IPv4 addresses</xref> or the word 'ipv6' for
+                        <xref target="RFC5952">IPv6 addresses</xref>. Fully qualified A-label and
+                        U-label domain names may be specified with the words 'fqdn' and 'idn'.
+                    </t>
+                    <t>
+                        Dates and time can be specified as formats found in <xref target="RFC3339">RFC 3339</xref>.
+                        The word 'date' corresponds to the full-date ABNF rule, the word 'time' corresponds to the
+                        full-time ABNF rule, and the word 'datetime' corresponds to the 'date-time' ABNF rule.
+                    </t>
+                    <t>
+                        Email addresses formatted according to <xref target="RFC5322">RFC 5322</xref> may
+                        be specified using the 'email' word, and E.123 phone numbers may be specified using the
+                        word 'phone'.
+                    </t>
+                    <figure anchor="primitive_misc.jcr">
+                        <artwork align="center" xml:space="preserve">&primitives_misc.jcr;</artwork>
+                    </figure>
+                    <t>
+                        Binary data can be specified in string form using the encodings specified in
+                        <xref target="RFC4648">RFC 4648</xref>. The word 'hex' corresponds to base16, while
+                        'base32', 'base32hex', 'base64', and 'base64url' correspond with their
+                        RFC 4648 counterparts accordingly.
+                    </t>
+                    <figure anchor="primitive_binary.jcr">
+                        <artwork align="center" xml:space="preserve">&primitives_binary.jcr;</artwork>
+                    </figure>
+                </section>
             </section>
 
-        </section>
             <section title="Any Type">
                 <t>
                     It is possible to specify that a value can be of any type allowable
