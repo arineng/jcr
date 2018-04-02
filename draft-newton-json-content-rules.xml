@@ -744,7 +744,7 @@
                 </section>
                 <section title="Numbers">
                     <t>
-                        Rules for numbers can specify the number be either an integer or floating point number:
+                        Rules for numbers can specify a JSON instance value to be either an integer or floating point number:
                     </t>
                     <figure anchor="primitive_integer_and_float.jcr">
                         <artwork xml:space="preserve" align="center">&primitives_integer_and_float.jcr;</artwork>
