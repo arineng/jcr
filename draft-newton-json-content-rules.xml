@@ -815,6 +815,11 @@ n.f..
                         Regular expressions are not implicitly anchored and therefore must be explicitly
                         anchored if necessary.
                     </t>
+                    <t>
+                        Regular expressions SHOULD use the ECMA 262 dialect used by JavaScript.  This is
+                        mostly a sub-set of the common regular expression dialects, and any regular expression
+                        thus defined should be usable in any mainstream regular expression engine.
+                    </t>
                 </section>
                 <section title="Strings with Additional Semantics">
                     <t>
