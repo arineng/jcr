@@ -1,0 +1,7 @@
+$greater-than-or-equal-to-10 = 10.0..
+$greater-than-10 = @{min-exclusive} 10.0..
+
+$less-than-or-equal-to-100 = ..100.0
+$less-than-100 = @{max-exclusive} ..100.0
+
+$gt-10-lt-100 = @{min-exclusive} @{max-exclusive} 10.0..100.0

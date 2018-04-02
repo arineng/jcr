@@ -66,6 +66,8 @@
     'figs/primitives_float_range.jcr'>
   <!ENTITY primitives_bit_integers.jcr PUBLIC ''
     'figs/primitives_bit_integers.jcr'>
+  <!ENTITY annotations-range-exclusive.jcr PUBLIC ''
+    'figs/annotations-range-exclusive.jcr'>
   <!ENTITY primitives_strings.jcr PUBLIC ''
     'figs/primitives_strings.jcr'>
   <!ENTITY primitives_uris.jcr PUBLIC ''
@@ -687,6 +689,9 @@
                     The @{unordered} annotation is described in <xref target="unordered_array_specifications"></xref>.
                 </t>
                 <t>
+                    The @{min-exclusive} and @{max-exclusive} annotations are described in <xref target="numbers"></xref>.
+                </t>
+                <t>
                     Other annotations may be defined for other purposes in future.
                 </t>
             </section>
@@ -742,7 +747,7 @@
                         specified to be boolean, it must have either the true or false values.
                     </t>
                 </section>
-                <section title="Numbers">
+                <section title="Numbers" anchor="numbers">
                     <t>
                         Rules for numbers can specify a JSON instance value to be either an integer or floating point number:
                     </t>
@@ -776,7 +781,16 @@ n.f..
                     </t>
                     <figure anchor="primitive_float_range.jcr">
                         <artwork xml:space="preserve" align="center">&primitives_float_range.jcr;</artwork>
-                    </figure>  
+                    </figure>
+                    <t>
+                        When a range is used to define an integer or a float, by default the minimum and
+                        maximum values are included in the range.  The @{min-exclusive} annotation can be
+                        specified to exclude the minimum from the range and the @{max-exclusive} annotation
+                        can be specified to exclude the maximum from the range.
+                    </t>
+                    <figure anchor="annotations-range-exclusive.jcr">
+                        <artwork xml:space="preserve" align="center">&annotations-range-exclusive.jcr;</artwork>
+                    </figure>
                     <t>
                         Integers may also be specified as ranges using bit lengths preceded by the 'int' or 'uint'
                         words (i.e. 'int8', 'uint16'). The 'int' prefix specifies the integer as being signed whereas
@@ -784,7 +798,7 @@ n.f..
                     </t>
                     <figure anchor="primitive_bit_integers.jcr">
                         <artwork xml:space="preserve" align="center">&primitives_bit_integers.jcr;</artwork>
-                    </figure>  
+                    </figure>
                 </section>
                 <section title="Strings">
                     <t>
