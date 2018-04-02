@@ -889,8 +889,11 @@ n.f..
             <figure anchor="member_specifications.jcr">
                 <artwork xml:space="preserve" align="center">&member_specifications.jcr;</artwork>
             </figure>
+            <t>
+                Member specification validation is described in <xref target="object-specifications"></xref>.
+            </t>
         </section>
-        <section title="Object Specifications">
+        <section title="Object Specifications" anchor="object-specifications">
             <t>
                 Object specifications define JSON objects and are composed of zero or more
                 subordinate components, each of which can be either a
