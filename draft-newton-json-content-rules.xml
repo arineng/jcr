@@ -50,6 +50,8 @@
     'figs/rule_name_ruleset_id.jcr'>
   <!ENTITY assignment_example.jcr PUBLIC ''
     'figs/assignment_example.jcr'>
+  <!ENTITY assignment_legacy_example.jcr PUBLIC ''
+    'figs/assignment_legacy_example.jcr'>
   <!ENTITY annotation_example.jcr PUBLIC ''
     'figs/annotation_example.jcr'>
   <!ENTITY primitives_overview.jcr PUBLIC ''
@@ -655,16 +657,11 @@
                 </figure>
                 <t>
                     Rule name assignments separate the rule name from the type specification using the '='
-                    character. Rule name assignments to primitive type specifications may optionally use
-                    the character sequence '=:'.
+                    character.
                 </t>
                 <figure anchor="assignment_example.jcr">
                     <artwork xml:space="preserve" align="center">&assignment_example.jcr;</artwork>
                 </figure>
-                <t>
-                    The optional syntax for rule name assignments to primitive type specifications allows
-                    backwards compatibility with earlier versions of JCR in which this syntax was required.
-                </t>
             </section>
             <section title="Annotations">
                 <t>
@@ -1449,6 +1446,23 @@ n.f..
                     <artwork xml:space="preserve" align="center">&subordinate_dependents.jcr;</artwork>
                 </figure>
             </section>
+        </section>
+        <section title="Legacy Features">
+            <t>
+                JCR has evolved since its initial conception.  Often this has been as a result of
+                'in-the-field' experience.  As JCR has evolved, certain features have been discarded
+                from the main specification, but should still be supported by implementations in order
+                not to break enviroments where JCR is already deployed.  This section lists these
+                deprecated features.
+            </t>
+            <t>
+                For legacy support, rule name assignments to
+                primitive type specifications may optionally use the character
+                sequence '=:' instead of a single '=' character.
+            </t>
+            <figure anchor="assignment_legacy_example.jcr">
+                <artwork xml:space="preserve" align="center">&assignment_legacy_example.jcr;</artwork>
+            </figure>
         </section>
         <section title="Implementation Status" anchor="implementation_status">
             <t>

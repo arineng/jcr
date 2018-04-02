@@ -1,0 +1,4 @@
+;rule name assignments for primitive types
+;using the =: syntax
+$foo          =: "foo"
+$other_string =: string
