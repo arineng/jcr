@@ -2219,8 +2219,8 @@ Internet-Draft             JSON Content Rules                 April 2018
 
    The JCR Validator, written in Ruby, currently implements all portions
    of this specification, and has been used extensively to prototype
-   various aspects of JCR under consideration.  It's development has
-   gone hand-in-hand with this specification.
+   various aspects of JCR under consideration.  Its development has gone
+   hand-in-hand with this specification.
 
    This software is primarily produced by the American Registry for
    Internet Numbers (ARIN) and freely distributable under the ISC

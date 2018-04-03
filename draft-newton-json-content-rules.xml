@@ -1575,7 +1575,7 @@ n.f..
                 <t>
                     The JCR Validator, written in Ruby, currently implements all portions of this
                     specification, and has been used extensively to prototype various aspects of JCR under
-                    consideration. It's development has gone hand-in-hand with this specification.
+                    consideration. Its development has gone hand-in-hand with this specification.
                 </t>
                 <t>
                     This software is primarily produced by the American Registry for Internet Numbers (ARIN)
