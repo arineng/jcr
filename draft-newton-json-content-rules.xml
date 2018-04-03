@@ -1772,10 +1772,6 @@ n.f..
                             information.
                         </t>
                         <t>
-                            Both '@{minExclusive ...}' and '@{maxExclusive ...}' annotations have been proposed
-                            to avoid adding extra arcane syntax for excluding the boundaries of numeric ranges.
-                        </t>
-                        <t>
                             A '@{augments RULENAME}' or '@{extends RULENAME}' annotation has been discussed to
                             provide a better extension mechanism of rules.
                         </t>
