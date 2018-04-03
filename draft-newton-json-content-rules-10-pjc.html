@@ -1479,7 +1479,7 @@ $status = @{not} @{unordered} [ "fail", string * ]
 # jcr-version 1.0
                     </pre>
 <p class="figure">Figure 54</p>
-<p id="rfc.section.6.18.1.p.3">This directive may have optional extension identifiers following the version number.  Each extension identifiers is preceded by the plus ('+') character and separated by white space.  The format of extension identifiers is specific to the extension, but it is recommended that they are terminated by a version number.  </p>
+<p id="rfc.section.6.18.1.p.3">This directive may have optional extension identifiers following the version number.  Each extension identifiers is preceded by the plus ('+') character and separated by white space.  An extension identifier has the form of an identifier as described in <a href="#names-and-identifiers" class="xref">Section 6.2</a>.  The structure of extension identifiers is specific to the extension, but it is recommended that they are terminated by a version number.  </p>
 <div id="rfc.figure.55"></div>
 <div id="jcr_version_extensions.jcr"></div>
 <pre>
@@ -1488,14 +1488,15 @@ $status = @{not} @{unordered} [ "fail", string * ]
 <p class="figure">Figure 55</p>
 <p id="rfc.section.6.18.1.p.4">A maximum of one jcr-version directive is permitted in a ruleset.  Ruleset authors are advised to place this directive as the first line of a ruleset.  </p>
 <h1 id="rfc.section.6.18.2">
-<a href="#rfc.section.6.18.2">6.18.2.</a> ruleset-id</h1>
+<a href="#rfc.section.6.18.2">6.18.2.</a> <a href="#ruleset-id" id="ruleset-id">ruleset-id</a>
+</h1>
 <p id="rfc.section.6.18.2.p.1">This directive identifies a ruleset to rule processors. It takes the form: </p>
 <div id="rfc.figure.56"></div>
 <div id="ruleset_id.jcr"></div>
-<pre># ruleset-id identifier
+<pre># ruleset-id ruleset-identifier
 </pre>
 <p class="figure">Figure 56</p>
-<p id="rfc.section.6.18.2.p.2">An identifier can be a URL (e.g. http://example.com/foo), an inverted domain name (e.g. com.example.foo) or any other form that conforms to the JCR ABNF syntax that a ruleset author deems appropriate.  To a JCR processor the identifier is treated as an opaque, case-sensitive string.  </p>
+<p id="rfc.section.6.18.2.p.2">The ruleset identifier has the form of an identifier as described in <a href="#names-and-identifiers" class="xref">Section 6.2</a>.  The identifier can be a URL (e.g. http://example.com/foo), an inverted domain name (e.g. com.example.foo) or have any other internal structure that a ruleset author deems appropriate.  To a JCR processor the identifier is treated as an opaque, case-sensitive string.  An identifier that is URI based should not be taken to imply that the ruleset is accessible over the Internet at that address (although it is not prevented from being accessible in such a way).  </p>
 <p id="rfc.section.6.18.2.p.3">A maximum of one ruleset-id directive is permitted in a ruleset.  If present, it is suggested that it be the second line of a ruleset, following the jcr-version directive, or the first line if no jcr-version directive is present.  </p>
 <h1 id="rfc.section.6.18.3">
 <a href="#rfc.section.6.18.3">6.18.3.</a> import</h1>
@@ -1505,10 +1506,13 @@ $status = @{not} @{unordered} [ "fail", string * ]
 <div id="import_directive.jcr"></div>
 <pre>
 # import http://example.com/rfc9999 as rfc9999
+# import http://example.com/rfc9997
                     </pre>
 <p class="figure">Figure 57</p>
-<p id="rfc.section.6.18.3.p.3">The rule names of the ruleset to be imported may be referenced by prepending the alias followed by a period character ('.') followed by the local rule name (i.e. "alias.name"). To continue the example above, if the ruleset at http://example.com/rfc9999 were to have a rule named 'encoding', rules in the ruleset importing it can refer to that rule as 'rfc9999.encoding'.  </p>
-<p id="rfc.section.6.18.3.p.4">If an import directive does not specify an alias with the 'as' keyword, the local names of the imported ruleset effectively become local to the importing ruleset, except that a referenced name without an alias is sought in the importing ruleset before being sought in each of the unaliased imported rulesets.  </p>
+<p id="rfc.section.6.18.3.p.3">The identifier after the import keyword is a ruleset identifier.  As such, it is an identifier as described in <a href="#names-and-identifiers" class="xref">Section 6.2</a>.  The ruleset that is imported is identified by having the specified ruleset identifier assigned in its #ruleset-id directive (See <a href="#ruleset-id" class="xref">Section 6.18.2</a>).  </p>
+<p id="rfc.section.6.18.3.p.4">The string after the as keyword acts as an alias for the identifier. An alias has the form of a name as described in <a href="#names-and-identifiers" class="xref">Section 6.2</a>.  Including the as keyword followed by an alias is optional.  </p>
+<p id="rfc.section.6.18.3.p.5">The rule names of the ruleset being imported may be referenced by prepending the alias followed by a period character ('.') followed by the local rule name (i.e. "alias.name"). To continue the example above, if the ruleset identified as http://example.com/rfc9999 were to have a rule named 'encoding', rules in the ruleset importing it can refer to that rule as 'rfc9999.encoding'.  </p>
+<p id="rfc.section.6.18.3.p.6">If an import directive does not specify an alias with the 'as' keyword, the local names of the imported ruleset effectively become local to the importing ruleset, except that a referenced name without an alias is sought in the importing ruleset before being sought in each of the unaliased imported rulesets.  </p>
 <h1 id="rfc.section.7">
 <a href="#rfc.section.7">7.</a> Tips and Tricks</h1>
 <h1 id="rfc.section.7.1">

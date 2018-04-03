@@ -1303,7 +1303,8 @@ n.f..
                     <t>
                         This directive may have optional extension identifiers following the version number.
                         Each extension identifiers is preceded by the plus ('+') character and separated by white space.
-                        The format of extension identifiers is specific to the extension, 
+                        An extension identifier has the form of an identifier as described in <xref target="names-and-identifiers"></xref>.
+                        The structure of extension identifiers is specific to the extension,
                         but it is recommended that they are terminated by a version number.
                     </t>
                     <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
@@ -1318,7 +1319,7 @@ n.f..
                         Ruleset authors are advised to place this directive as the first line of a ruleset.
                     </t>
                 </section>
-                <section title="ruleset-id">
+                <section title="ruleset-id" anchor="ruleset-id">
                     <t>
                         This directive identifies a ruleset to rule processors. It takes the form:
                     </t>
@@ -1326,10 +1327,13 @@ n.f..
                         <artwork xml:space="preserve" align="center">&ruleset_id.jcr;</artwork>
                     </figure>
                     <t>
-                        An identifier can be a URL (e.g. http://example.com/foo), an inverted domain name
-                        (e.g. com.example.foo) or any other form that conforms to the JCR ABNF syntax that
+                        The ruleset identifier has the form of an identifier as described in <xref target="names-and-identifiers"></xref>.
+                        The identifier can be a URL (e.g. http://example.com/foo), an inverted domain name
+                        (e.g. com.example.foo) or have any other internal structure that
                         a ruleset author deems appropriate.  To a JCR processor the identifier is treated as
-                        an opaque, case-sensitive string.
+                        an opaque, case-sensitive string.  An identifier that is URI based should not be
+                        taken to imply that the ruleset is accessible over the Internet at that address
+                        (although it is not prevented from being accessible in such a way).
                     </t>
                     <t>
                         A maximum of one ruleset-id directive is permitted in a ruleset.
@@ -1349,12 +1353,24 @@ n.f..
                     <figure anchor="import_directive.jcr">
                         <artwork xml:space="preserve" align="center">
 # import http://example.com/rfc9999 as rfc9999
+# import http://example.com/rfc9997
                     </artwork>
                     </figure>
                     <t>
-                        The rule names of the ruleset to be imported may be referenced by prepending
+                        The identifier after the import keyword is a ruleset identifier.
+                        As such, it is an identifier as described in <xref target="names-and-identifiers"/>.
+                        The ruleset that is imported is identified by having the specified ruleset identifier
+                        assigned in its #ruleset-id directive (See <xref target="ruleset-id"/>).
+                    </t>
+                    <t>
+                        The string after the as keyword acts as an alias for the identifier. An alias has
+                        the form of a name as described in <xref target="names-and-identifiers"/>.
+                        Including the as keyword followed by an alias is optional.
+                    </t>
+                    <t>
+                        The rule names of the ruleset being imported may be referenced by prepending
                         the alias followed by a period character ('.') followed by the local rule name
-                        (i.e. "alias.name"). To continue the example above, if the ruleset at http://example.com/rfc9999
+                        (i.e. "alias.name"). To continue the example above, if the ruleset identified as http://example.com/rfc9999
                         were to have a rule named 'encoding', rules in the ruleset importing it can
                         refer to that rule as 'rfc9999.encoding'.
                     </t>
