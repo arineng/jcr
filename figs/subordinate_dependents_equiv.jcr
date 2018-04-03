@@ -1,0 +1,1 @@
+{ ( $location_uri, $referrer_uri? ) | () }

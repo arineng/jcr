@@ -71,5 +71,11 @@ assert_raises "jcr -S "statuses" -r figs/override2.jcr figs/override1.json" 0
 assert_raises "jcr -S "statuses" -r figs/override3.jcr figs/override2.json" 3
 assert_raises "jcr -S "statuses" -r figs/override3.jcr figs/override1.json" 0
 
+assert_raises "jcr --test-jcr -r figs/assignment_legacy_example.jcr" 0
+assert_raises "jcr --test-jcr -r figs/primitives_null.jcr" 0
+assert_raises "jcr --test-jcr -r figs/primitives_boolean.jcr" 0
+assert_raises "jcr --test-jcr -r figs/annotations-range-exclusive.jcr" 0
+assert_raises "jcr --test-jcr -r figs/subordinate_dependents_equiv.jcr" 0
+
 assert_end figs
 

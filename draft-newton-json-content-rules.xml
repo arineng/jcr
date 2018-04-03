@@ -17,10 +17,10 @@
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5322.xml'>
   <!ENTITY RFC5952 PUBLIC ''
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5952.xml'>
-  <!ENTITY RFC7159 PUBLIC ''
-   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7159.xml'>
   <!ENTITY RFC7492 PUBLIC ''
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7492.xml'>
+  <!ENTITY RFC8259 PUBLIC ''
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml'>
   <!ENTITY I-D.cordell-jcr-co-constraints PUBLIC ''
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.cordell-jcr-co-constraints.xml'>
    
@@ -50,18 +50,24 @@
     'figs/rule_name_ruleset_id.jcr'>
   <!ENTITY assignment_example.jcr PUBLIC ''
     'figs/assignment_example.jcr'>
+  <!ENTITY assignment_legacy_example.jcr PUBLIC ''
+    'figs/assignment_legacy_example.jcr'>
   <!ENTITY annotation_example.jcr PUBLIC ''
     'figs/annotation_example.jcr'>
   <!ENTITY primitives_overview.jcr PUBLIC ''
     'figs/primitives_overview.jcr'>
-  <!ENTITY primitives_boolean_and_null.jcr PUBLIC ''
-    'figs/primitives_boolean_and_null.jcr'>
+  <!ENTITY primitives_null.jcr PUBLIC ''
+    'figs/primitives_null.jcr'>
+  <!ENTITY primitives_boolean.jcr PUBLIC ''
+    'figs/primitives_boolean.jcr'>
   <!ENTITY primitives_integer_and_float.jcr PUBLIC ''
     'figs/primitives_integer_and_float.jcr'>
   <!ENTITY primitives_float_range.jcr PUBLIC ''
     'figs/primitives_float_range.jcr'>
   <!ENTITY primitives_bit_integers.jcr PUBLIC ''
     'figs/primitives_bit_integers.jcr'>
+  <!ENTITY annotations-range-exclusive.jcr PUBLIC ''
+    'figs/annotations-range-exclusive.jcr'>
   <!ENTITY primitives_strings.jcr PUBLIC ''
     'figs/primitives_strings.jcr'>
   <!ENTITY primitives_uris.jcr PUBLIC ''
@@ -156,6 +162,8 @@
     'figs/object_mixin.jcr'>
   <!ENTITY subordinate_dependents.jcr PUBLIC ''
     'figs/subordinate_dependents.jcr'>
+  <!ENTITY subordinate_dependents_equiv.jcr PUBLIC ''
+    'figs/subordinate_dependents_equiv.jcr'>
   <!ENTITY override1.jcr PUBLIC ''
     'figs/override1.jcr'>
   <!ENTITY override1.json PUBLIC ''
@@ -207,6 +215,15 @@
         </abstract>
     </front>
     <middle>
+        <section title="Introduction">
+            <t>
+                This document describes JSON Content Rules (JCR), a language
+                for specifying and testing the interchange of data
+                in <xref target="RFC8259">JSON</xref> format used by computer protocols and processes.
+                The syntax of JCR is not JSON but is "JSON-like", possessing the conciseness and
+                utility that has made JSON popular.
+            </t>
+        </section>
         <section title="Motivation">
             <t>
                 As a growing number of protocols use JSON, there is an increasing need to find better mechanisms
@@ -278,7 +295,7 @@
                 <t>
                     Abstraction languages are nothing new to the schema and data definition language space, with ASN.1
                     being a classic example of specifying a data model in a higher level syntax and defined algorithms
-                    for multiple data formats. ASN.1 has many, such as BER and DER and XER (XML Encoding Rules).
+                    for multiple data formats. ASN.1 supports many data formats, such as BER and DER and XER (XML Encoding Rules).
                     Yang is a more modern and popular abstraction languages.
                 </t>
                 <t>
@@ -286,7 +303,7 @@
                     require software implementors to spend valuable energy on a syntax that is not specific to the
                     software being implemented. Additionally, abstraction languages have, in many instances, specified
                     features in the data model that do not translate well to all data formats or may lack compelling
-                    features because the langauge must cater to multiple formats.
+                    features because the language must cater to multiple formats.
                 </t>
                 <t>
                     With respect to JSON, CDDL is an abstraction language as it's data model is a superset of the
@@ -305,7 +322,7 @@
                 <t>
                     JSON Schema benefits from being defined in JSON (as this makes implementations of JSON Schema tools
                     easier), but this benefit impacts readability of specifications defining content using it. To
-                    demonstrate, the following examples define JSON using the classic example of a catolog object.
+                    demonstrate, the following examples define JSON using the classic example of a catalog object.
                 </t>
                 <figure anchor="example_catalog_json_schema">
                     <preamble>
@@ -355,7 +372,7 @@
 {
   "id"    : integer,      ; Unique identifier for the product
   "name"  : string,       ; Name of the product
-  "price" : @{minExclusive} 0.0..,
+  "price" : @{min-exclusive} 0.0..,
   "tags"  : [ string + ] ?
 }
                     </artwork>
@@ -375,14 +392,50 @@
                 </t>
             </section>
         </section>
-        <section title="Introduction">
-            <t>
-                This document describes JSON Content Rules (JCR), a language
-                for specifying and testing the interchange of data
-                in <xref target="RFC7159">JSON</xref> format used by computer protocols and processes.
-                The syntax of JCR is not JSON but is "JSON-like", possessing the conciseness and
-                utility that has made JSON popular.
-            </t>
+        <section title="Uses">
+                <t>
+					JCR's primary focus is to help specification authors concisely and clearly describe
+					complex JSON data structures.
+                </t>
+                <t>
+					Being a precise, defined format reduces the potential for misunderstanding between what
+					specification authors intended and what software developers implement.
+                </t>
+                <t>
+					Being a machine-readable format, the examples in a specification can be validated by the
+					specified JCR, and it can be verified that the JCR represents the examples.  This acts
+					like unit testing in software development.
+                </t>
+                <t>
+					JCR aids software developers to verify that their implementations conform to specifications
+					by validating any generated JSON against the specified JCR.  This can be used to highlight
+					bugs in their code, or possibly identify where a specification has omissions and requires
+					further work.
+                </t>
+                <t>
+					Specific examples of JCR and JSON can be included as part of conformance test vector sets to
+					give confidence that an implementation meets a specification.  JCR's ability to be specific
+					in some locations, and loose in others, allows such tests to be run on a repeatable, automated
+					basis without requiring detailed human involvement.
+                </t>
+                <t>
+					JCR can help resolve interoperability issues by acting as an independent arbiter between
+					parties experiencing interoperability issues.  Appealing to a JCR opinion offers the
+					potential for a quick and cheap resolution to a disagreement.  (Naturally, either party
+					may disagree with the JCR result and take the matter further.)
+                </t>
+                <t>
+					Once software has been developed and deployed, JCR offers the potential for day-one in-the-field
+					monitoring of JSON message exchanges in order to highlight conformance issues that may have
+					slipped through the development phase.
+                </t>
+                <t>
+					Being a simple, defined language, JCR can also be used on an ad-hoc basis by developers as part
+					of the design process, such as during brainstorming and whiteboarding sessions, without risking
+					confusion over notation that may occur if an un-documented method is used.
+                </t>
+        </section>
+        <section title="JCR Examples">
             <section title="A First Example: Specifying Content" anchor="a_first_example">
                 <t>
                     The following JSON data describes a JSON object with two members, "line-count" and
@@ -478,23 +531,37 @@
                 member (i.e. members of a JSON object).
             </t>
             <t>
-                Rules with rule name assignments may be referenced in place of
-                type specifications and member specifications.
+                Rules that have a rule name may be referenced in place of
+                rule specifications.
             </t>
             <t>
                 Rules may be defined across line boundaries and there is no line
                 continuation syntax. 
             </t>
             <t>
-                Any rule consisting only of a type specification is considered a root rule. Unless otherwise
+                Any rule without a rule name is considered a root rule. Such a rule
+                MUST be a type specification. Unless otherwise
                 specified, all the root rules of a ruleset are evaluated against a JSON instance or document.
             </t>
+            <t>
+                Rule specifications may be augmented with annotations to specify
+                additional constraints and properties.  For example, arrays can be
+                augmented with an 'unordered' annotation to indicate that the order
+                of its members isn't significant.
+            </t>
+            <t>
+                The syntax of each type of type specifications varies depending on the type.
+                For example:
+            </t>
+            <figure anchor="primitive_overview.jcr">
+                <artwork xml:space="preserve" align="center">&primitives_overview.jcr;</artwork>
+            </figure>
             <t>
                 Putting it all together, <xref target="rfc4627-example-1-compact-rules"></xref>
                 describes the JSON in <xref target="rfc4627-example-1"></xref>.
             </t>
             <figure anchor="rfc4627-example-1">
-                <preamble>Example JSON shamelessly lifted from RFC 4627</preamble>
+                <preamble>Example JSON shamelessly lifted from RFC 8259</preamble>
                 <artwork xml:space="preserve" align="center">&rfc4627_example.json;</artwork>
             </figure>
             <figure anchor="rfc4627-example-1-compact-rules">
@@ -502,60 +569,89 @@
                 <artwork xml:space="preserve" align="center">&rfc4627_example2.jcr;</artwork>
             </figure>
         </section> 
-        <section title="Lines and Comments">
+        <section title="Language Components">
             <t>
-                There is no statement terminator and therefore no need for a line continuation syntax.
-                Rules may be defined across line boundaries.
-                Blank lines are allowed.
+                This section describes each component of the JCR language in detail.
             </t>
-            <t>
-                Comments are the same as comments in <xref target="RFC4234">ABNF</xref>. They start with a semi-colon (';') and
-                continue to the end of the line.
-            </t>
-        </section>
-        <section title="Rules">
-            <t>
-                Rules have two main components, an optional rule name assignment and a type or member specification.
-            </t>
-            <t>
-                Type specifications define arrays, objects, etc... of JSON and may reference other rules
-                using rule names. Most type specifications can be defined with repetitions for specifying
-                the frequency of the type being defined. In addition to the type specifications describing
-                JSON types, there is an additional group specification for grouping types.
-            </t>
-            <t>
-                Member specifications define members of JSON objects, and are composed of a member name specification
-                and either a type specification or a rule name referencing a type specification.
-            </t>
-            <t>
-                Rules may also contain annotations which may affect the evaluation of all or part of a rule.
-                Rules without a rule name assignment are considered root rules, though rules with a rule
-                name assignment can be considered a root rule with the appropriate annotation.
-            </t>
-            <t>
-                Type specifications, depending on their type, can contain zero or more other
-                specifications or rule names. For example, an object specification might contain multiple
-                member specifications or rule names that resolve to member specifications or a mixture
-                of member specifications and rule names. For the purposes of this document, specifications
-                and rule names composing other specifications are called subordinate components.
-            </t>
+            <section title="Lines and Comments">
+                <t>
+                    There is no statement terminator and therefore no need for a line continuation syntax.
+                    Rules may be defined across line boundaries.
+                    Blank lines are allowed.
+                </t>
+                <t>
+                    Comments are the same as comments in <xref target="RFC4234">ABNF</xref>. They start with a semi-colon (';') and
+                    continue to the end of the line.
+                </t>
+            </section>
+            <section title="Names and Identifiers" anchor="names-and-identifiers">
+                <t>
+                    JCR uses names and identifiers to enable cross-referencing one part of a ruleset with
+                    another, or from one ruleset to another.  There are different types of names and different
+                    type of identifiers.  For example, a local rule name is a name, and a ruleset-id is an
+                    identifier.
+                </t>
+                <t>
+                    A name must start with an ASCII alphabetic character (a-z,A-Z) and must contain only ASCII
+                    alphabetic characters, numeric characters, the hyphen character ('-') and the underscore
+                    character ('_').  Names are case sensitive.
+                </t>
+                <t>
+                    An identifier must start with an ASCII alphabetic character (a-z,A-Z) and can be followed
+                    by any character other than whitespace and the closing brace ('}').  Identifiers are treated
+                    as opaque strings, and therefore case-sensitive.
+                </t>
+            </section>
+            <section title="Rules">
+                <t>
+                    Rules have two main components, an optional rule name assignment and a type or member specification.
+                </t>
+                <t>
+                    Type specifications define arrays, objects, etc... of JSON and may reference other rules
+                    using rule names. Most type specifications can be defined with repetitions for specifying
+                    the frequency of the type being defined. In addition to the type specifications describing
+                    JSON types, there is an additional group specification for grouping types.
+                </t>
+                <t>
+                    Member specifications define members of JSON objects, and are composed of a member name specification
+                    and either a type specification or a rule name referencing a type specification.
+                </t>
+                <t>
+                    Rules may also contain annotations which may affect the evaluation of all or part of a rule.
+                    Rules without a rule name assignment are considered root rules, though rules with a rule
+                    name assignment can be considered a root rule with the appropriate annotation.
+                </t>
+                <t>
+                    Type specifications, depending on their type, can contain zero or more other
+                    specifications or rule names. For example, an object specification might contain multiple
+                    member specifications or rule names that resolve to member specifications or a mixture
+                    of member specifications and rule names. For the purposes of this document, specifications
+                    and rule names composing other specifications are called subordinate components.
+                </t>
+            </section>
             <section title="Rule Names and Assignments">
                 <t>
-                    Rule names are signified with the dollar character ('$'), which is not part of the
-                    rule name itself. Rule names have two components, an optional ruleset identifier alias and a local
-                    rule name.
+                    Rule names are used to represent rule specifications so they can be referenced elsewhere
+                    in a ruleset.  A rule name can be used in two scenarios; rule specification assignment,
+                    and rule specification referencing.
                 </t>
                 <t>
-                    Local rule names must start with an alphabetic character (a-z,A-Z) and must contain only
-                    alphabetic characters, numeric characters, the hyphen character ('-') and the
-                    underscore character ('_'). Local rule names are case sensitive, and must be unique
-                    within a ruleset (that is, no two rule name assignments may use the same local rule name).
+                    Rule names are signified with the dollar character ('$'), which is
+                    not part of the rule name itself.  Rule names have two components, an
+                    optional ruleset identifier alias and a local rule name.  If a ruleset identifier alias
+                    is present, it is separated from the local rule name by a dot character ('.').  Both ruleset
+                    identifier aliases and local rule names are types of name (see <xref target="names-and-identifiers"></xref>).
                 </t>
                 <t>
-                    Ruleset identifier aliases enable referencing rules from another ruleset. They are not allowed in rule
-                    name assignments, and only found in rule names referencing other rules. Ruleset identifiers must start with
-                    an alphabetic character and contain no whitespace. Ruleset identifiers are case sensitive.
-                    Simple use cases of JCR will most likely not use ruleset identifiers.
+                    When a rule specification is assigned to a rule name, only the local rule name part can be
+                    present.  In this scenario the local rule name must be unique within a ruleset
+                    (that is, no two rule name assignments may use the same local rule
+                    name).
+                </t>
+                <t>
+                    Ruleset identifier aliases may be included in a rule name that is used as a reference.
+                    They enable referencing rules from another ruleset.  Simple use cases of JCR will
+                    most likely not use ruleset identifiers.
                 </t>
                 <figure anchor="rule_name_ruleset_id.jcr">
                     <preamble>
@@ -567,16 +663,11 @@
                 </figure>
                 <t>
                     Rule name assignments separate the rule name from the type specification using the '='
-                    character. Rule name assignments to primitive type specifications may optionally use
-                    the character sequence '=:'.
+                    character.
                 </t>
                 <figure anchor="assignment_example.jcr">
                     <artwork xml:space="preserve" align="center">&assignment_example.jcr;</artwork>
                 </figure>
-                <t>
-                    The optional syntax for rule name assignments to primitive type specifications allows
-                    backwards compatibility with earlier versions of JCR in which this syntax was required.
-                </t>
             </section>
             <section title="Annotations">
                 <t>
@@ -585,14 +676,25 @@
                     zero or more annotations.
                     Each annotation begins with the
                     character sequence "@{" and ends with "}". The following is an example of a type specification
-                    with the not annotation (explained in <xref target="not_annotation"></xref>):
+                    with the not annotation:
                 </t>
                 <figure anchor="annotation_example.jcr">
                     <artwork xml:space="preserve" align="center">&annotation_example.jcr;</artwork>
                 </figure>
                 <t>
-                    This specification defines the annotations "root", "not", and "unordered", but
-                    other annotations may be defined for other purposes.
+                    The @{not} annotation is described in <xref target="not_annotation"></xref>.
+                </t>
+                <t>
+                    The @{root} annotation is described in <xref target="starting-points"></xref>.
+                </t>
+                <t>
+                    The @{unordered} annotation is described in <xref target="unordered_array_specifications"></xref>.
+                </t>
+                <t>
+                    The @{min-exclusive} and @{max-exclusive} annotations are described in <xref target="numbers"></xref>.
+                </t>
+                <t>
+                    Other annotations may be defined for other purposes in future.
                 </t>
             </section>
             <section title="Starting Points and Root Rules" anchor="starting-points">
@@ -614,40 +716,57 @@
             </section>
             <section title="Type Specifications">
                 <t>
-                    The syntax of each type of type specifications varies depending on the type:
+                    Type specifications consist of primitive specifications, objects specification, array
+                    specifications and group specifications.  Each of these are described in the sections
+                    below.
                 </t>
-                <figure anchor="primitive_overview.jcr">
-                    <artwork xml:space="preserve" align="center">&primitives_overview.jcr;</artwork>
-                </figure>
             </section>
             <section title="Primitive Specifications">
-            <t>
-                Primitive type specifications define content for JSON numbers, booleans, strings, and null.
-            </t>
-            <section title="Numbers, Booleans and Null">
-            <t>
-                The rules for booleans and null are the simplest and take the following forms:
-            </t>
-            <figure anchor="primitive_boolean_and_null.jcr">
-                <artwork xml:space="preserve" align="center">&primitives_boolean_and_null.jcr;</artwork>
-            </figure>
                 <t>
-                Rules for numbers can specify the number be either an integer or floating point number:
+                    Primitive type specifications define content for JSON numbers, booleans, strings, and null.
                 </t>
-                <figure anchor="primitive_integer_and_float.jcr">
-                    <artwork xml:space="preserve" align="center">&primitives_integer_and_float.jcr;</artwork>
-                </figure>
-                <t>
-                    The keyword 'float' represents a single precision IEEE-754 floating point number 
-                    represented in decimal. The keyword 'double' represents a double precision 
-                    IEEE-754 floating point number represented in decimal format.
-                </t>
-                <t>
-                Numbers may also be specified as an absolute value or a range of possible values, where a range
-                may be specified using a minimum, maximum, or both:
-                </t>
-                <figure anchor="n_to_m">
-                    <artwork align="center" xml:space="preserve">
+                <section title="Null">
+                    <t>
+                        The rule for a null type specification is the simplest and takes the following form:
+                    </t>
+                    <figure anchor="primitive_null.jcr">
+                        <artwork xml:space="preserve" align="center">&primitives_null.jcr;</artwork>
+                    </figure>
+                    <t>
+                        A JSON instance value specified to be null must have the null value to be valid.
+                     </t>
+                </section>
+                <section title="Booleans">
+                    <t>
+                        The rules for booleans take the following forms:
+                    </t>
+                    <figure anchor="primitive_boolean.jcr">
+                        <artwork xml:space="preserve" align="center">&primitives_boolean.jcr;</artwork>
+                    </figure>
+                    <t>
+                        A JSON instance value specified to be true must have the true value to
+                        be valid.  If specified to be false, it must have the false value.  If
+                        specified to be boolean, it must have either the true or false values.
+                    </t>
+                </section>
+                <section title="Numbers" anchor="numbers">
+                    <t>
+                        Rules for numbers can specify a JSON instance value to be either an integer or floating point number:
+                    </t>
+                    <figure anchor="primitive_integer_and_float.jcr">
+                        <artwork xml:space="preserve" align="center">&primitives_integer_and_float.jcr;</artwork>
+                    </figure>
+                    <t>
+                        The keyword 'float' represents a single precision IEEE-754 floating point number 
+                        represented in decimal. The keyword 'double' represents a double precision 
+                        IEEE-754 floating point number represented in decimal format.
+                    </t>
+                    <t>
+                        Numbers may also be specified as an absolute value or a range of possible values, where a range
+                        may be specified using a minimum, maximum, or both:
+                    </t>
+                    <figure anchor="n_to_m">
+                        <artwork align="center" xml:space="preserve">
   n
   n..m
    ..m
@@ -656,84 +775,103 @@ n.f
 n.f..m.f
    ..m.f
 n.f..
-                    </artwork>
-                </figure>
-                <t>
-                When specifying a minimum and a maximum, both must either be an integer or a floating point number.
-                Thus to specify a floating point number between zero and ten a definition of the following form is used:
-            </t>
-            <figure anchor="primitive_float_range.jcr">
-                <artwork xml:space="preserve" align="center">&primitives_float_range.jcr;</artwork>
-            </figure>  
-                <t>
-                    Integers may also be specified as ranges using bit lengths preceded by the 'int' or 'uint'
-                    words (i.e. 'int8', 'uint16'). The 'int' prefix specifies the integer as being signed whereas
-                    the 'uint' prefix specifies the integer as being unsigned.
-                </t>
-                <figure anchor="primitive_bit_integers.jcr">
-                    <artwork xml:space="preserve" align="center">&primitives_bit_integers.jcr;</artwork>
-                </figure>  
-            </section>
-            <section title="Strings">
-                <t>
-                    JCR provides a large number of data types to define the contents of JSON strings.
-                    Generically, a string may be specified using the word 'string'. String literals
-                    may be specified using a double quote character followed by the literal content
-                    followed by another double quote. And regular expressions may be specified by
-                    enclosing a regular expression within the forward slash ('/') character.
-                </t>
-                <figure anchor="primitive_strings.jcr">
-                    <artwork align="center" xml:space="preserve">&primitives_strings.jcr;</artwork>
-                </figure>
-                <t>
-                    Regular expressions are not implicitly anchored and therefore must be explicitly
-                    anchored if necessary.
-                </t>
-                <t>
-                    A string can be specified as a <xref target="RFC3986">URI</xref> using the
-                    word 'uri', but also may be more narrowly scoped to a URI of a specific scheme.
-                    Specific URI schemes are specified with the word 'uri' followed by two period characters
-                    ('..') followed by the URI scheme.
-                </t>
-                <figure anchor="primitive_uris.jcr">
-                    <artwork align="center" xml:space="preserve">&primitives_uris.jcr;</artwork>
-                </figure>
-                <t>
-                    IP addresses may be specified with either the word 'ipv4' for
-                    <xref target="RFC1166">IPv4 addresses</xref> or the word 'ipv6' for
-                    <xref target="RFC5952">IPv6 addresses</xref>. Fully qualified A-label and
-                    U-label domain names may be specified with the words 'fqdn' and 'idn'.
-                </t>
-                <t>
-                    Dates and time can be specified as formats found in <xref target="RFC3339">RFC 3339</xref>.
-                    The word 'date' corresponds to the full-date ABNF rule, the word 'time' corresponds to the
-                    full-time ABNF rule, and the word 'datetime' corresponds to the 'date-time' ABNF rule.
-                </t>
-                <t>
-                    Email addresses formatted according to <xref target="RFC5322">RFC 5322</xref> may
-                    be specified using the 'email' word, and E.123 phone numbers may be specified using the
-                    word 'phone'.
-                </t>
-                <figure anchor="primitive_misc.jcr">
-                    <artwork align="center" xml:space="preserve">&primitives_misc.jcr;</artwork>
-                </figure>
-                <t>
-                    Binary data can be specified in string form using the encodings specified in
-                    <xref target="RFC4648">RFC 4648</xref>. The word 'hex' corresponds to base16, while
-                    'base32', 'base32hex', 'base64', and 'base64url' correspond with their
-                    RFC 4648 counterparts accordingly.
-                </t>
-                <figure anchor="primitive_binary.jcr">
-                    <artwork align="center" xml:space="preserve">&primitives_binary.jcr;</artwork>
-                </figure>
+                        </artwork>
+                    </figure>
+                    <t>
+                        When specifying a minimum and a maximum, both must either be an integer or a floating point number.
+                        Thus to specify a floating point number between zero and ten a definition of the following form is used:
+                    </t>
+                    <figure anchor="primitive_float_range.jcr">
+                        <artwork xml:space="preserve" align="center">&primitives_float_range.jcr;</artwork>
+                    </figure>
+                    <t>
+                        When a range is used to define an integer or a float, by default the minimum and
+                        maximum values are included in the range.  The @{min-exclusive} annotation can be
+                        specified to exclude the minimum from the range and the @{max-exclusive} annotation
+                        can be specified to exclude the maximum from the range.
+                    </t>
+                    <figure anchor="annotations-range-exclusive.jcr">
+                        <artwork xml:space="preserve" align="center">&annotations-range-exclusive.jcr;</artwork>
+                    </figure>
+                    <t>
+                        The size of integers may also be specified using bit lengths. The type name is
+                        constructed with a prefix followed by a number. The prefix 'int' specifies
+                        a signed integer and the prefix 'uint' specifies an unsigned integer. The number
+                        that follows is a positive integer that specifies the number of bits in the integer.
+                    </t>
+                    <figure anchor="primitive_bit_integers.jcr">
+                        <artwork xml:space="preserve" align="center">&primitives_bit_integers.jcr;</artwork>
+                    </figure>
+                </section>
+                <section title="Plain Strings">
+                    <t>
+                        Generically, a string may be specified using the word 'string'. String literals
+                        may be specified using a double quote character followed by the literal content
+                        followed by another double quote. Regular expressions can be specified by
+                        enclosing a regular expression within the forward slash ('/') character.
+                    </t>
+                    <figure anchor="primitive_strings.jcr">
+                        <artwork align="center" xml:space="preserve">&primitives_strings.jcr;</artwork>
+                    </figure>
+                    <t>
+                        Regular expressions are not implicitly anchored and therefore must be explicitly
+                        anchored if necessary.
+                    </t>
+                    <t>
+                        Regular expressions SHOULD use the ECMA 262 dialect used by JavaScript.  This is
+                        mostly a sub-set of the common regular expression dialects, and any regular expression
+                        thus defined should be usable in any mainstream regular expression engine.
+                    </t>
+                </section>
+                <section title="Strings with Additional Semantics">
+                    <t>
+                        JCR provides a large number of data types beyond those defined by JSON.
+                        They are encoded in JSON instances using JSON strings.
+                    </t>
+                    <t>
+                        A string can be specified as a <xref target="RFC3986">URI</xref> using the
+                        word 'uri', but also may be more narrowly scoped to a URI of a specific scheme.
+                        Specific URI schemes are specified with the word 'uri' followed by two period characters
+                        ('..') followed by the URI scheme.
+                    </t>
+                    <figure anchor="primitive_uris.jcr">
+                        <artwork align="center" xml:space="preserve">&primitives_uris.jcr;</artwork>
+                    </figure>
+                    <t>
+                        IP addresses may be specified with either the word 'ipv4' for
+                        <xref target="RFC1166">IPv4 addresses</xref> or the word 'ipv6' for
+                        <xref target="RFC5952">IPv6 addresses</xref>. Fully qualified A-label and
+                        U-label domain names may be specified with the words 'fqdn' and 'idn'.
+                    </t>
+                    <t>
+                        Dates and time can be specified as formats found in <xref target="RFC3339">RFC 3339</xref>.
+                        The word 'date' corresponds to the full-date ABNF rule, the word 'time' corresponds to the
+                        full-time ABNF rule, and the word 'datetime' corresponds to the 'date-time' ABNF rule.
+                    </t>
+                    <t>
+                        Email addresses formatted according to <xref target="RFC5322">RFC 5322</xref> may
+                        be specified using the 'email' word, and E.123 phone numbers may be specified using the
+                        word 'phone'.
+                    </t>
+                    <figure anchor="primitive_misc.jcr">
+                        <artwork align="center" xml:space="preserve">&primitives_misc.jcr;</artwork>
+                    </figure>
+                    <t>
+                        Binary data can be specified in string form using the encodings specified in
+                        <xref target="RFC4648">RFC 4648</xref>. The word 'hex' corresponds to base16, while
+                        'base32', 'base32hex', 'base64', and 'base64url' correspond with their
+                        RFC 4648 counterparts accordingly.
+                    </t>
+                    <figure anchor="primitive_binary.jcr">
+                        <artwork align="center" xml:space="preserve">&primitives_binary.jcr;</artwork>
+                    </figure>
+                </section>
             </section>
 
-        </section>
             <section title="Any Type">
                 <t>
-                    It is possible to specify that a value can be of any type allowable
-                    by JSON using the word 'any'. The 'any' type specifies any primitive
-                    type, array, or object.
+                    The 'any' type specifies that a JSON value instance can be any primitive
+                    type, array type, or object type.
                 </t>
             </section>            
         <section title="Member Specifications">
@@ -753,8 +891,11 @@ n.f..
             <figure anchor="member_specifications.jcr">
                 <artwork xml:space="preserve" align="center">&member_specifications.jcr;</artwork>
             </figure>
+            <t>
+                Member specification validation is described in <xref target="object-specifications"></xref>.
+            </t>
         </section>
-        <section title="Object Specifications">
+        <section title="Object Specifications" anchor="object-specifications">
             <t>
                 Object specifications define JSON objects and are composed of zero or more
                 subordinate components, each of which can be either a
@@ -950,6 +1091,10 @@ n.f..
                     <artwork align="center" xml:space="preserve">&array_order_eval.json;</artwork>
                 </figure>
                 <t>
+                    The @{unordered} annotation can only be applied to an array as a whole.
+                    It can not be applied to groups within an array.
+                </t>
+                <t>
                     Like ordered array specifications, the subordinate components in an unordered array specification
                     are evaluated in the order they are specified. The difference is that they
                     need not match an element of the array in the same position as given in the
@@ -1105,109 +1250,138 @@ n.f..
                     </figure>         
                 </t>
             </section>
-        </section>
-        <section title="Directives">
-            <t>
-                Directives modify the processing of a ruleset. There are two forms of the directive, the 
-                single line directive and the multi-line directive.
-            </t>
-            <t>
-                Single line directives appear on their own line in a ruleset, begin
-                with a hash character ('#') and are terminated by the end of the line.
-                They take the following form:
-            </t>
-            <figure anchor="single_line_directive_example.jcr">
-                <artwork xml:space="preserve" align="center">&single_line_directive_example.jcr;</artwork>
-            </figure>      
-            <t>
-                Multi-line directives also appear on their own lines, but may span multiple lines.
-                They begin with the character sequence "#{" and end with "}". The take the
-                following form:
-            </t>
-            <figure anchor="multi_line_directive_example.jcr">
-                <artwork xml:space="preserve" align="center">&multi_line_directive_example.jcr;</artwork>
-            </figure>
-            <t>
-                This specification defines the directives "jcr-version", "ruleset-id",
-                and "import", but other directives may be defined.
-            </t>
-            <section title="jcr-version">
-                <!-- We'll obviously have to revisit this section upon publication.-->
+            <section title="Directives">
                 <t>
-                    This directive declares that the ruleset complies with a specific version of this
-                    standard. The version is expressed as a major integer followed by a period followed
-                    by a minor integer.
-                </t>            
-                <figure anchor="jcr_version_current.jcr">
-                    <artwork xml:space="preserve" align="center">&jcr_version_current.jcr;</artwork>
+                    Directives modify the processing of a ruleset. There are two forms of the directive, the 
+                    single line directive and the multi-line directive.
+                </t>
+                <t>
+                    Single line directives appear on their own line in a ruleset, begin
+                    with a hash character ('#') and are terminated by the end of the line.
+                    They take the following form:
+                </t>
+                <figure anchor="single_line_directive_example.jcr">
+                    <artwork xml:space="preserve" align="center">&single_line_directive_example.jcr;</artwork>
+                </figure>      
+                <t>
+                    Multi-line directives also appear on their own lines, but may span multiple lines.
+                    They begin with the character sequence "#{" and end with "}". The take the
+                    following form:
+                </t>
+                <figure anchor="multi_line_directive_example.jcr">
+                    <artwork xml:space="preserve" align="center">&multi_line_directive_example.jcr;</artwork>
                 </figure>
                 <t>
-                    The major.minor number signifying compliance with this document is "0.7". Upon publication
-                    of this specification as an IETF proposed standard, it will be "1.0".
-                    
-                    <cref>
-                        NOTE: This will be removed in the final version.
-                    </cref>
+                    This specification defines the directives "jcr-version", "ruleset-id",
+                    and "import", but other directives may be defined.
                 </t>
-                <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
-                 the working version number. -->
-                <figure anchor="jcr_version_final.jcr">
-                    <artwork xml:space="preserve" align="center">
+                <section title="jcr-version">
+                    <!-- We'll obviously have to revisit this section upon publication.-->
+                    <t>
+                        This directive declares that the ruleset complies with a specific version of this
+                        standard. The version is expressed as a major integer followed by a period followed
+                        by a minor integer.
+                    </t>
+                    <figure anchor="jcr_version_current.jcr">
+                        <artwork xml:space="preserve" align="center">&jcr_version_current.jcr;</artwork>
+                    </figure>
+                    <t>
+                        The major.minor number signifying compliance with this document is "0.9". Upon publication
+                        of this specification as an IETF proposed standard, it will be "1.0".
+                        
+                        <cref>
+                            NOTE: This will be removed in the final version.
+                        </cref>
+                    </t>
+                    <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
+                     the working version number. -->
+                    <figure anchor="jcr_version_final.jcr">
+                        <artwork xml:space="preserve" align="center">
 # jcr-version 1.0
-                </artwork>
-                </figure>
-                <t>
-                    Ruleset authors are advised to place this directive as the first line of a ruleset.
-                </t>
-                <t>
-                    This directive may have optional extension identifiers following the version number.
-                    Each extension identifiers is preceded by the plus ('+') character and separated by white space.
-                    The format of extension identifiers is specific to the extension, 
-                    but it is recommended that they are terminated by a version number.
-                </t>
-                <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
-                 the working version number. -->
-                <figure anchor="jcr_version_extensions.jcr">
-                    <artwork xml:space="preserve" align="center">
+                    </artwork>
+                    </figure>
+                    <t>
+                        This directive may have optional extension identifiers following the version number.
+                        Each extension identifiers is preceded by the plus ('+') character and separated by white space.
+                        An extension identifier has the form of an identifier as described in <xref target="names-and-identifiers"></xref>.
+                        The structure of extension identifiers is specific to the extension,
+                        but it is recommended that they are terminated by a version number.
+                    </t>
+                    <!-- This will be put into a file when the jcr validator actually accepts 1.0. Right now it accepts
+                     the working version number. -->
+                    <figure anchor="jcr_version_extensions.jcr">
+                        <artwork xml:space="preserve" align="center">
 # jcr-version 1.0 +co-constraints-1.2 +jcr-doc-1.0
-                </artwork>
-                </figure>
-            </section>
-            <section title="ruleset-id">
-                <t>
-                    This directive identifies a ruleset to rule processors. It takes the form:
-                </t>
-                <figure anchor="ruleset_id.jcr">
-                    <artwork xml:space="preserve" align="center">&ruleset_id.jcr;</artwork>
-                </figure>
-                <t>
-					An identifier can be a URL (e.g. http://example.com/foo), an inverted domain name
-					(e.g. com.example.foo) or any other form that conforms to the JCR ABNF syntax that
-					a ruleset author deems appropriate.  To a JCR processor the identifier is treated as
-					an opaque, case-sensitive string.
-				</t>
-            </section>            
-            <section title="import">
-                <t>
-                    The import directive specifies that another ruleset is to have its rules
-                    evaluated in addition to the ruleset where the directive appears.
-                </t>
-                <t>
-                    The following is an example:
-                </t>
-                <!-- We don't have control of example.com, so this can't be put in as a test.-->
-                <figure anchor="import_directive.jcr">
-                    <artwork xml:space="preserve" align="center">
+                    </artwork>
+                    </figure>
+                    <t>
+                        A maximum of one jcr-version directive is permitted in a ruleset.
+                        Ruleset authors are advised to place this directive as the first line of a ruleset.
+                    </t>
+                </section>
+                <section title="ruleset-id" anchor="ruleset-id">
+                    <t>
+                        This directive identifies a ruleset to rule processors. It takes the form:
+                    </t>
+                    <figure anchor="ruleset_id.jcr">
+                        <artwork xml:space="preserve" align="center">&ruleset_id.jcr;</artwork>
+                    </figure>
+                    <t>
+                        The ruleset identifier has the form of an identifier as described in <xref target="names-and-identifiers"></xref>.
+                        The identifier can be a URL (e.g. http://example.com/foo), an inverted domain name
+                        (e.g. com.example.foo) or have any other internal structure that
+                        a ruleset author deems appropriate.  To a JCR processor the identifier is treated as
+                        an opaque, case-sensitive string.  An identifier that is URI based should not be
+                        taken to imply that the ruleset is accessible over the Internet at that address
+                        (although it is not prevented from being accessible in such a way).
+                    </t>
+                    <t>
+                        A maximum of one ruleset-id directive is permitted in a ruleset.
+                        If present, it is suggested that it be the second line of a ruleset, following the
+                        jcr-version directive, or the first line if no jcr-version directive is present.
+                    </t>
+                </section>            
+                <section title="import">
+                    <t>
+                        The import directive specifies that another ruleset is to have its rules
+                        evaluated in addition to the ruleset where the directive appears.
+                    </t>
+                    <t>
+                        The following is an example:
+                    </t>
+                    <!-- We don't have control of example.com, so this can't be put in as a test.-->
+                    <figure anchor="import_directive.jcr">
+                        <artwork xml:space="preserve" align="center">
 # import http://example.com/rfc9999 as rfc9999
-                </artwork>
-                </figure>
-                <t>
-                    The rule names of the ruleset to be imported may be referenced by prepending
-                    the alias followed by a period character ('.') followed by the rule name
-                    (i.e. "alias.name"). To continue the example above, if the ruleset at http://example.com/rfc9999
-                    were to have a rule named 'encoding', rules in the ruleset importing it can
-                    refer to that rule as 'rfc9999.encoding'.
-                </t>
+# import http://example.com/rfc9997
+                    </artwork>
+                    </figure>
+                    <t>
+                        The identifier after the import keyword is a ruleset identifier.
+                        As such, it is an identifier as described in <xref target="names-and-identifiers"/>.
+                        The ruleset that is imported is identified by having the specified ruleset identifier
+                        assigned in its #ruleset-id directive (See <xref target="ruleset-id"/>).
+                        How a JCR processor locates the imported ruleset is out of scope for this document.
+                    </t>
+                    <t>
+                        The string after the as keyword acts as an alias for the identifier. An alias has
+                        the form of a name as described in <xref target="names-and-identifiers"/>.
+                        Including the as keyword followed by an alias is optional.
+                    </t>
+                    <t>
+                        The rule names of the ruleset being imported may be referenced by prepending
+                        the alias followed by a period character ('.') followed by the local rule name
+                        (i.e. "alias.name"). To continue the example above, if the ruleset identified as http://example.com/rfc9999
+                        were to have a rule named 'encoding', rules in the ruleset importing it can
+                        refer to that rule as 'rfc9999.encoding'.
+                    </t>
+                    <t>
+                        If an import directive does not specify an alias with the 'as' keyword, the local
+                        names of the imported ruleset effectively become local to the importing ruleset,
+                        except that a referenced name without an alias is sought in the importing ruleset
+                        before being sought in each of the unaliased imported rulesets.
+                    </t>
+                </section>
             </section>
         </section>
         <section title="Tips and Tricks">
@@ -1366,7 +1540,30 @@ n.f..
                 <figure anchor="subordinate_dependents.jcr">
                     <artwork xml:space="preserve" align="center">&subordinate_dependents.jcr;</artwork>
                 </figure>
+                <t>
+                    For validation, the above optional group is equivalent to:
+                </t>
+                <figure anchor="subordinate_dependents_equiv.jcr">
+                    <artwork xml:space="preserve" align="center">&subordinate_dependents_equiv.jcr;</artwork>
+                </figure>
             </section>
+        </section>
+        <section title="Legacy Features">
+            <t>
+                JCR has evolved since its initial conception.  Often this has been as a result of
+                'in-the-field' experience.  As JCR has evolved, certain features have been discarded
+                from the main specification, but should still be supported by implementations in order
+                not to break enviroments where JCR is already deployed.  This section lists these
+                deprecated features.
+            </t>
+            <t>
+                For legacy support, rule name assignments to
+                primitive type specifications may optionally use the character
+                sequence '=:' instead of a single '=' character.
+            </t>
+            <figure anchor="assignment_legacy_example.jcr">
+                <artwork xml:space="preserve" align="center">&assignment_legacy_example.jcr;</artwork>
+            </figure>
         </section>
         <section title="Implementation Status" anchor="implementation_status">
             <t>
@@ -1395,7 +1592,7 @@ n.f..
                 <t>
                     The JCR Validator, written in Ruby, currently implements all portions of this
                     specification, and has been used extensively to prototype various aspects of JCR under
-                    consideration. It's development has gone hand-in-hand with this specification.
+                    consideration. Its development has gone hand-in-hand with this specification.
                 </t>
                 <t>
                     This software is primarily produced by the American Registry for Internet Numbers (ARIN)
@@ -1463,7 +1660,7 @@ n.f..
             &RFC4648;
             &RFC5322;
             &RFC5952;
-            &RFC7159;
+            &RFC8259;
             
             
             
@@ -1590,10 +1787,6 @@ n.f..
                             there may be a default value if one is not given. This annotation does not provide
                             much value for validation and is intended as a reading aid to provide semantic
                             information.
-                        </t>
-                        <t>
-                            Both '@{minExclusive ...}' and '@{maxExclusive ...}' annotations have been proposed
-                            to avoid adding extra arcane syntax for excluding the boundaries of numeric ranges.
                         </t>
                         <t>
                             A '@{augments RULENAME}' or '@{extends RULENAME}' annotation has been discussed to

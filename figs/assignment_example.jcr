@@ -2,14 +2,8 @@
 $fuz         = "fuz"
 $some_string = string
 
-;rule name assignments for primitive types
-;using the =: syntax
-$foo          =: "foo"
-$other_string =: string
-
 ;rule name assignments for arrays
 $bar = [ integer, integer, integer ]
 
 ;rule name assignement for objects
 $bob = { "bar" : $bar, "foo" : $foo }
-
