@@ -750,6 +750,9 @@
                         be valid.  If specified to be false, it must have the false value.  If
                         specified to be boolean, it must have either the true or false values.
                     </t>
+                    <t>
+                        No casting or type coercion of non-Boolean types to Boolean types is permitted.
+                    </t>
                 </section>
                 <section title="Numbers" anchor="numbers">
                     <t>
