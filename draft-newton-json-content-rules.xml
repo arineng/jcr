@@ -17,8 +17,8 @@
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5322.xml'>
   <!ENTITY RFC5952 PUBLIC ''
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5952.xml'>
-  <!ENTITY RFC7492 PUBLIC ''
-   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7492.xml'>
+  <!ENTITY RFC7942 PUBLIC ''
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7942.xml'>
   <!ENTITY RFC8259 PUBLIC ''
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8259.xml'>
   <!ENTITY I-D.cordell-jcr-co-constraints PUBLIC ''
@@ -1570,7 +1570,7 @@ n.f..
                 This section records the status of known implementations of the
                 protocol defined by this specification at the time of posting of
                 this Internet-Draft, and is based on a proposal described in
-                <xref target="RFC7492"></xref> .  The description of implementations in this section is
+                <xref target="RFC7942"></xref> .  The description of implementations in this section is
                 intended to assist the IETF in its decision processes in
                 progressing drafts to RFCs.  Please note that the listing of any
                 individual implementation here does not imply endorsement by the
@@ -1581,7 +1581,7 @@ n.f..
                 are advised to note that other implementations may exist.
             </t>
             <t>
-                According to <xref target="RFC7492"></xref> , "this will allow reviewers and working
+                According to <xref target="RFC7942"></xref> , "this will allow reviewers and working
                 groups to assign due consideration to documents that have the
                 benefit of running code, which may serve as evidence of valuable
                 experimentation and feedback that have made the implemented
@@ -1704,7 +1704,7 @@ n.f..
         <references title="Infomative References">
             
             &I-D.cordell-jcr-co-constraints;
-            &RFC7492;
+            &RFC7942;
         </references>
         <section title="Experimental Features">
             <t>
