@@ -230,7 +230,7 @@
                 to help define such protocols.
             </t>
             <t>
-                In the past, protocols often used constrained alphabet strings. Such strings could be defined by
+                In the past, protocols often used constrained grammar strings. Such strings could be defined by
                 example, but it was found better to use Backus-Naur Form (BNF), or variants such
                 as ABNF. The benefit of using ABNF over examples is that the full variation of what is allowed in a
                 protocol can be expressed in a single location. This leads to easier implementation and better
@@ -239,7 +239,7 @@
             <t>
                 As protocols migrate to being defined in JSON, the same need to define the valid set of JSON
                 messages arises. It is conceivable to define the JSON-based message set by way of examples. But as
-                with constrained alphabet strings, this can be cumbersome, incomplete and easily misinterpreted,
+                with constrained grammar strings, this can be cumbersome, incomplete and easily misinterpreted,
                 leading to the problems of implementation and interoperability mentioned earlier.
             </t>
             <t>
@@ -254,12 +254,12 @@
             </t>
             <t>
                 The solution is to move up a level of abstraction. In the same way JSON is a level of abstraction
-                above constrained alphabet strings for representing protocols, a similar move up in abstraction level
+                above constrained grammar strings for representing protocols, a similar move up in abstraction level
                 is needed for the mechanism used to define such protocols.
             </t>
             <t>
                 JSON Content Rules (JCR) is such a step up in abstraction. It’s relation to JSON is that of ABNF to
-                constrained string alphabets. By ‘knowing’ about JSON it can more accurately and concisely define
+                constrained string grammars. By ‘knowing’ about JSON it can more accurately and concisely define
                 JSON messages than other methods that are less abstracted. In the same way that abstracted
                 languages such as Java and Python enable a programmer to work more efficiently than they can with
                 assembler, protocol developers can work more efficiently using JCR than they can with ABNF.
