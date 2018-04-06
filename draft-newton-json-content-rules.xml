@@ -1252,14 +1252,16 @@ n.f..
                             specifies that the total number of repetitions present in the JSON instance
                             being validated minus the minimum repetition value
                             must be a multiple of the repetition step
-                            (e.g. the total repetitions minus the minimum repetition value must be 
-                            divisible by the step value with a remainder of zero).
+                            (e.g. the total repetitions is the minimum repetition plus n times the step - where n
+                            is an integer greater than or equal to zero, while total repetitions is less than or
+                            equal to the maximum repetition).
                         </t>
                         <t>
                             When the repetition step follows 
                             a one or more Kleene operator ('+'), the minimum repetition value is set equal to the 
                             repetition step value and the total number of repetitions minus the step value must 
-                            be a multiple of the repetition step value.
+                            be a multiple of the repetition step value (e.g. the total repetitions is the
+                            step plus n times the step - where n is an integer greater than or equal to zero).
                         </t>
                     </list>
                      
