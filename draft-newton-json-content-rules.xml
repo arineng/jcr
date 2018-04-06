@@ -17,6 +17,8 @@
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5322.xml'>
   <!ENTITY RFC5952 PUBLIC ''
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.5952.xml'>
+  <!ENTITY RFC7493 PUBLIC ''
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7493.xml'>
   <!ENTITY RFC7942 PUBLIC ''
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7942.xml'>
   <!ENTITY RFC8259 PUBLIC ''
@@ -802,6 +804,10 @@ n.f..
                     <figure anchor="primitive_bit_integers.jcr">
                         <artwork xml:space="preserve" align="center">&primitives_bit_integers.jcr;</artwork>
                     </figure>
+                    <t>
+                        When specifying numbers, ruleset authors are recommended to bear in mind the commentary
+                        on numbers in <xref target="RFC7493"/>.
+                    </t>
                 </section>
                 <section title="Plain Strings">
                     <t>
@@ -1704,6 +1710,7 @@ n.f..
         <references title="Infomative References">
             
             &I-D.cordell-jcr-co-constraints;
+            &RFC7493;
             &RFC7942;
         </references>
         <section title="Experimental Features">
