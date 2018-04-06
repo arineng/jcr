@@ -1,14 +1,14 @@
 ; exactly 2 octets
 $word = [ $octet *2 ]
-$octet =: int8
+$octet = int8
 
 ; 1 to 13 name servers
 [ $name_servers *1..13 ]
-$name_servers =: fqdn
+$name_servers = fqdn
 
 ; 0 to 99 ethernet addresses
 { /^eth.*/ : $mac_addr *..99 }
-$mac_addr =: hex
+$mac_addr = hex
 
 ; four or more bytes
 [ $octet *4.. ]

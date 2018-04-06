@@ -1587,7 +1587,7 @@ n.f..
             <t>
                 For legacy support, rule name assignments to
                 primitive type specifications may optionally use the character
-                sequence '=:' instead of a single '=' character.
+                sequence '=:', or the token sequence '= type', instead of a single '=' character.
             </t>
             <figure anchor="assignment_legacy_example.jcr">
                 <artwork xml:space="preserve" align="center">&assignment_legacy_example.jcr;</artwork>

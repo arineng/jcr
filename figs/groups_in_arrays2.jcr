@@ -5,7 +5,7 @@
 [ $name, $age ]
 $name = ( $first_name, $middle_name ?, $last_name )
 
-$first_name =: string
-$middle_name =: string
-$last_name =: string
-$age =: 0..
+$first_name = string
+$middle_name = string
+$last_name = string
+$age = 0..
