@@ -1,0 +1,3 @@
+50.0    ; Invalid integer
+5e1     ; Invalid integer
+"50"    ; Invalid integer

@@ -68,6 +68,8 @@
     'figs/primitives_float_range.jcr'>
   <!ENTITY primitives_bit_integers.jcr PUBLIC ''
     'figs/primitives_bit_integers.jcr'>
+  <!ENTITY illegal_integers.jcr PUBLIC ''
+    'figs/illegal_integers.jcr'>
   <!ENTITY annotations-range-exclusive.jcr PUBLIC ''
     'figs/annotations-range-exclusive.jcr'>
   <!ENTITY primitives_strings.jcr PUBLIC ''
@@ -811,6 +813,23 @@ n.f..
                         When specifying numbers, ruleset authors are recommended to bear in mind the commentary
                         on numbers in <xref target="RFC7493"/>.
                     </t>
+                    <t>
+                        A JSON instance value specified to be a number MUST be represented
+                        in the instance as a JSON number.  Strings containing character sequences representing
+                        numbers MUST NOT be treated as numbers.
+                    </t>
+                    <t>
+                        If a range is specified for a number, the JSON instance value MUST be within the
+                        specified range.
+                    </t>
+                    <t>
+                        A JSON instance value specified to be an integer MUST NOT include a fractional part
+                        (as specified by the frac rule in the ABNF) or an exponential part (as specified by
+                        exp in the ABNF).  The following are invalid representations of integer instance values:
+                    </t>
+                    <figure anchor="illegal_integers.jcr">
+                        <artwork xml:space="preserve" align="center">&illegal_integers.jcr;</artwork>
+                    </figure>
                 </section>
                 <section title="Plain Strings">
                     <t>
