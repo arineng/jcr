@@ -290,7 +290,7 @@
                 </t>
                 <t>
                     vCard and jCard are good examples of this. The original format and data model for vCard
-                    are specified in MIME. jCard is an algorthmic conversion of vCard to jCard. Consequently,
+                    are specified in MIME. jCard is an algorithmic conversion of vCard to jCard. Consequently,
                     writing software implementations of jCard requires software developers to have an intimate
                     knowledge of MIME, saving them little in the way of time or effort.
                 </t>
@@ -298,7 +298,7 @@
             <section title="Abstraction Languages">
                 <t>
                     Abstraction languages are nothing new to the schema and data definition language space, with ASN.1
-                    being a classic example of specifying a data model in a higher level syntax and defined algorithms
+                    being a classic example of specifying a data model in a higher-level syntax and defined algorithms
                     for multiple data formats. ASN.1 supports many data formats, such as BER and DER and XER (XML Encoding Rules).
                     Yang is a more modern and popular abstraction languages.
                 </t>
@@ -1581,7 +1581,7 @@ n.f..
                 JCR has evolved since its initial conception.  Often this has been as a result of
                 'in-the-field' experience.  As JCR has evolved, certain features have been discarded
                 from the main specification, but should still be supported by implementations in order
-                not to break enviroments where JCR is already deployed.  This section lists these
+                not to break environments where JCR is already deployed.  This section lists these
                 deprecated features.
             </t>
             <t>
@@ -1642,7 +1642,7 @@ n.f..
                     license.
                 </t>
                 <t>
-                    Source code is availabe on GitHub at
+                    Source code is available on GitHub at
                     <eref target="https://github.com/codalogic/cl-jcr-parser"></eref>.
                 </t>
             </section>

@@ -5,5 +5,5 @@ $some_string = string
 ;rule name assignments for arrays
 $bar = [ integer, integer, integer ]
 
-;rule name assignement for objects
+;rule name assignment for objects
 $bob = { "bar" : $bar, "foo" : $foo }

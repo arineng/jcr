@@ -1,4 +1,4 @@
-; either an IPv4 or IPv6 adress
+; either an IPv4 or IPv6 address
 $address =: ( ipv4 | ipv6 )
 
 ; allowable fruits
