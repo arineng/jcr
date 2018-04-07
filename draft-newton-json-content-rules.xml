@@ -5,6 +5,8 @@
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.1166.xml'>
   <!ENTITY RFC3339 PUBLIC ''
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3339.xml'>
+  <!ENTITY RFC3629 PUBLIC ''
+   'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3629.xml'>
   <!ENTITY RFC3986 PUBLIC ''
    'http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.3986.xml'>
   <!ENTITY RFC4234 PUBLIC ''
@@ -577,6 +579,18 @@
             <t>
                 This section describes each component of the JCR language in detail.
             </t>
+            <section title="Character Encoding">
+                <t>
+                    Like JSON, JCR rulesets MUST be encoded using UTF-8 <xref target="RFC3629">RFC 3629</xref>
+                    unless used entirely within a private, closed ecosystem.  
+                </t>
+                <t>
+                    This document assumes that both JCR rulesets, and JSON instances being validated
+                    are encoded using UTF-8.
+                    Issues related to handling JCR rulesets or JSON instances that are not encoded using
+                    UTF-8 are outside the scope of this document.
+                </t>
+            </section>
             <section title="Lines and Comments">
                 <t>
                     There is no statement terminator and therefore no need for a line continuation syntax.
@@ -1685,6 +1699,7 @@ n.f..
             
             &RFC1166;
             &RFC3339;
+            &RFC3629;
             &RFC3986;
             &RFC4234;
             &RFC4648;
