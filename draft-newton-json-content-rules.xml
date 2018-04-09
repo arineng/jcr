@@ -708,6 +708,11 @@
                     </preamble>
                     <artwork align="center" xml:space="preserve">&rule_name_ruleset_id.jcr;</artwork>
                 </figure>
+                <t>
+                    The order of rule name references in a ruleset relative to their referenced rule name
+                    assignment is not significant.  Rule name references can be either before or after
+                    their referenced rule name assignment.
+                </t>
             </section>
             <section title="Annotations">
                 <t>
