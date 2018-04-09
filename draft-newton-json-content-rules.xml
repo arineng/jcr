@@ -442,7 +442,7 @@
                 <t>
                     Being a simple, defined language, JCR can also be used on an ad-hoc basis by developers as part
                     of the design process, such as during brainstorming and whiteboarding sessions, without risking
-                    confusion over notation that may occur if an un-documented method is used.
+                    confusion over notation that may occur if an un-documented notation is used.
                 </t>
         </section>
         <section title="JCR Examples">
