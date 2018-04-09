@@ -467,7 +467,8 @@
                 </t>
                 <t>
                     For a protocol specification, it is probably more useful to specify that each member
-                    is any integer and not specific, exact integers:
+                    is any integer and not specific, exact integers.  Thus, a more practical JCR
+                    description would be:
                 </t>
                 <figure anchor="first_example.jcr">
                     <artwork xml:space="preserve" align="center">&first_example.jcr;</artwork>
@@ -483,13 +484,13 @@
             <section title="A Second Example: Testing Content">
                 <t>
                     Building on the first example, this second example describes the same object
-                    but with the addition of another member, "file-name".
+                    but with the addition of another member, "file-name".  An example JSON instance is:
                 </t>
                 <figure anchor="second_example.json">
                     <artwork xml:space="preserve" align="center">&second_example.json;</artwork>
                 </figure>
                 <t>
-                    The following JCR describes objects like it.
+                    The following JCR describes such objects:
                 </t>
                 <figure anchor="second_example.jcr">
                     <artwork xml:space="preserve" align="center">&second_example.jcr;</artwork>
@@ -497,7 +498,7 @@
                 <t>
                     For the purposes of writing a protocol specification, JCR may be broken down into
                     named rules to reduce complexity and to enable re-use. The following example takes
-                    the JCR from above and rewrites the members as named rules.
+                    the JCR from above and rewrites the members as named rules:
                 </t>
                 <figure anchor="second_example2.jcr">
                     <artwork xml:space="preserve" align="center">&second_example2.jcr;</artwork>
@@ -505,14 +506,14 @@
                 <t>
                     With each member specified as a named rule, software testers can override them locally
                     for specific test cases. In the following example, the named rules are locally overridden
-                    for the test case where the file name is "rfc4627.txt".
+                    for the test case where the file name is "rfc4627.txt":
                 </t>
                 <figure anchor="second_example_override.jcr">
                     <artwork xml:space="preserve" align="center">&second_example_override.jcr;</artwork>
                 </figure>
                 <t>
-                    In this example, the protocol specification describes the JSON object in general and
-                    an implementation overrides the rules for testing specific cases.
+                    This example shows how a protocol specification can describe a JSON object in general and
+                    a test environment can override the rules for testing specific cases.
                 </t>
                 <t>
                     All figures used in this specification are available <eref target="https://github.com/arineng/jcr/tree/master/figs">here</eref>.
