@@ -322,8 +322,7 @@
                 <t>
                     JSON Schema, like JCR, is a data definition language designed specifically for JSON. While JCR
                     is more tightly scoped to defining JSON protocol messages and content, JSON Schema is more
-                    broadly scoped in its goals. From a high-level view point, it could be said that JSON Schema is
-                    like XML Schema whereas JCR is more like Compact RelaxNG.
+                    broadly scoped in its goals.
                 </t>
                 <t>
                     JSON Schema benefits from being defined in JSON (as this makes implementations of JSON Schema tools
@@ -388,6 +387,9 @@
                     information but in fewer lines in a syntax familiar with a JSON-aware software
                     implementor.
                 </t>
+                <t>
+                    From a high-level view point, it could be said that JSON Schema is
+                    like XML Schema whereas JCR is more like Compact RelaxNG.                </t>
                 <t>
                     Additionally, JCR is a superset of JSON whereby specification authors may use example
                     JSON protocol messages as a starting point for defining JCR rules (as is described in
