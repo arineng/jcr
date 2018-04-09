@@ -534,9 +534,9 @@
             </t>
             <t>
                 A type specification is used to specify constraints on a superset
-                of a JSON value (e.g. number / string / object / array etc.).  In
-                addition to defining primitive types (such as string or integer),
-                array types, and object types, type specifications may define the
+                of JSON values (e.g. number / string / object / array etc.).  In
+                addition to defining primitive types (such as string and integer),
+                array and object types, type specifications may define the
                 JCR specific concept of group types.
             </t>
             <t>
@@ -544,8 +544,7 @@
                 be composed of other rule specifications.
             </t>
             <t>
-                A member specification is used to specify constraints on a JSON
-                member (i.e. members of a JSON object).
+                A member specification is used to specify constraints on members of a JSON object.
             </t>
             <t>
                 Rules that have a rule name may be referenced in place of
@@ -567,22 +566,20 @@
                 of its members isn't significant.
             </t>
             <t>
-                The syntax of each type of type specifications varies depending on the type.
+                The syntax for each form of type specification varies depending on the type.
                 For example:
             </t>
             <figure anchor="primitive_overview.jcr">
                 <artwork xml:space="preserve" align="center">&primitives_overview.jcr;</artwork>
             </figure>
             <t>
-                Putting it all together, <xref target="rfc4627-example-1-compact-rules"></xref>
-                describes the JSON in <xref target="rfc4627-example-1"></xref>.
+                Putting it all together, the JSON in <xref target="rfc4627-example-1"></xref>
+                is described by the JCR in <xref target="rfc4627-example-1-compact-rules"></xref>.
             </t>
-            <figure anchor="rfc4627-example-1">
-                <preamble>Example JSON shamelessly lifted from RFC 8259</preamble>
+            <figure anchor="rfc4627-example-1" title="Example JSON shamelessly lifted from RFC 8259">
                 <artwork xml:space="preserve" align="center">&rfc4627_example.json;</artwork>
             </figure>
-            <figure anchor="rfc4627-example-1-compact-rules">
-                <preamble>Rules describing <xref target="rfc4627-example-1"></xref></preamble>
+            <figure anchor="rfc4627-example-1-compact-rules" title="JCR for JSON example from RFC 8259">
                 <artwork xml:space="preserve" align="center">&rfc4627_example2.jcr;</artwork>
             </figure>
         </section> 
