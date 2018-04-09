@@ -389,7 +389,8 @@
                 </t>
                 <t>
                     From a high-level view point, it could be said that JSON Schema is
-                    like XML Schema whereas JCR is more like Compact RelaxNG.                </t>
+                    like XML Schema whereas JCR is more like Compact RelaxNG.
+                </t>
                 <t>
                     Additionally, JCR syntax is a superset of JSON syntax, whereby specification authors may use example
                     JSON protocol messages as a starting point for defining JCR rules (as is described in
@@ -454,7 +455,7 @@
             <section title="A First Example: Specifying Content" anchor="a_first_example">
                 <t>
                     The following JSON data describes a JSON object with two members, "line-count" and
-                    "word-count", each containing an integer.                    
+                    "word-count", each containing an integer.
                 </t>
                 <figure anchor="first_example.json">
                     <artwork xml:space="preserve" align="center">&first_example.json;</artwork>
@@ -474,7 +475,7 @@
                 <t>
                     Since line counts and word counts should be either zero or a positive integer,
                     the specification may be further narrowed:
-                </t>                
+                </t>
                 <figure anchor="first_example2.jcr">
                     <artwork xml:space="preserve" align="center">&first_example2.jcr;</artwork>
                 </figure>
@@ -486,13 +487,13 @@
                 </t>
                 <figure anchor="second_example.json">
                     <artwork xml:space="preserve" align="center">&second_example.json;</artwork>
-                </figure>                
+                </figure>
                 <t>
                     The following JCR describes objects like it.
                 </t>
                 <figure anchor="second_example.jcr">
                     <artwork xml:space="preserve" align="center">&second_example.jcr;</artwork>
-                </figure>                
+                </figure>
                 <t>
                     For the purposes of writing a protocol specification, JCR may be broken down into
                     named rules to reduce complexity and to enable re-use. The following example takes
@@ -500,15 +501,15 @@
                 </t>
                 <figure anchor="second_example2.jcr">
                     <artwork xml:space="preserve" align="center">&second_example2.jcr;</artwork>
-                </figure>                
+                </figure>
                 <t>
                     With each member specified as a named rule, software testers can override them locally
                     for specific test cases. In the following example, the named rules are locally overridden
                     for the test case where the file name is "rfc4627.txt".
-                </t>                
+                </t>
                 <figure anchor="second_example_override.jcr">
                     <artwork xml:space="preserve" align="center">&second_example_override.jcr;</artwork>
-                </figure>      
+                </figure>
                 <t>
                     In this example, the protocol specification describes the JSON object in general and
                     an implementation overrides the rules for testing specific cases.
