@@ -590,7 +590,7 @@
             <section title="Character Encoding">
                 <t>
                     Like JSON, JCR rulesets MUST be encoded using UTF-8 <xref target="RFC3629">RFC 3629</xref>
-                    unless used entirely within a private, closed ecosystem.  
+                    unless used entirely within a private, closed ecosystem.
                 </t>
                 <t>
                     This document assumes that both JCR rulesets, and JSON instances being validated
