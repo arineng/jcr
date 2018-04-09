@@ -426,7 +426,7 @@
                     Specific examples of JCR and JSON can be included as part of conformance test vector sets to
                     give confidence that an implementation meets a specification.  JCR's ability to be specific
                     in some locations, and loose in others, allows such tests to be run on a repeatable, automated
-                    basis without requiring detailed human involvement.
+                    basis without requiring detailed human involvement to check the results.
                 </t>
                 <t>
                     JCR can help resolve interoperability issues by acting as an independent arbiter between
