@@ -1442,7 +1442,7 @@ n.f..
                         <artwork xml:space="preserve" align="center">
 # import http://example.com/rfc9999 as rfc9999
 # import http://example.com/rfc9997
-                    </artwork>
+                        </artwork>
                     </figure>
                     <t>
                         The identifier after the import keyword is a ruleset identifier.
