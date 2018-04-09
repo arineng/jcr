@@ -54,6 +54,8 @@
     'figs/rule_name_ruleset_id.jcr'>
   <!ENTITY assignment_example.jcr PUBLIC ''
     'figs/assignment_example.jcr'>
+  <!ENTITY assignment_example_2.jcr PUBLIC ''
+    'figs/assignment_example_2.jcr'>
   <!ENTITY assignment_legacy_example.jcr PUBLIC ''
     'figs/assignment_legacy_example.jcr'>
   <!ENTITY annotation_example.jcr PUBLIC ''
@@ -662,7 +664,7 @@
             <section title="Rule Names and Assignments">
                 <t>
                     Rule names are used to represent rule specifications so they can be referenced elsewhere
-                    in a ruleset.  A rule name can be used in two scenarios; rule specification assignment,
+                    in a ruleset.  A rule name can be used in two contexts; rule specification assignment,
                     and rule specification referencing.
                 </t>
                 <t>
@@ -673,11 +675,25 @@
                     identifier aliases and local rule names are types of name (see <xref target="names-and-identifiers"></xref>).
                 </t>
                 <t>
-                    When a rule specification is assigned to a rule name, only the local rule name part can be
+                    When a rule name is used in the rule specification assignment context, only the local rule name part can be
                     present.  In this context, the local rule name must be unique within a ruleset
                     (that is, no two rule name assignments may use the same local rule
                     name in the same ruleset).
                 </t>
+                <t>
+                    In rule name assignments, the rule name is separated from the rule specification using the '='
+                    character.
+                </t>
+                <figure anchor="assignment_example.jcr">
+                    <artwork xml:space="preserve" align="center">&assignment_example.jcr;</artwork>
+                </figure>
+                <t>
+                    In the rule specification referencing context, a rule name, prefixed by the dollar character ('$'), is
+                    used in place of a rule specification.
+                </t>
+                <figure anchor="assignment_example_2.jcr">
+                    <artwork xml:space="preserve" align="center">&assignment_example_2.jcr;</artwork>
+                </figure>
                 <t>
                     Ruleset identifier aliases may be included in a rule name that is used as a reference.
                     They enable referencing rules from another ruleset.  Simple use cases of JCR will
@@ -687,16 +703,10 @@
                     <preamble>
                         In Figure <xref target="rule_name_ruleset_id.jcr"/> below,
                         "http://ietf.org/rfcYYYY.JCR" and "http://ietf.org/rfcXXXX.JCR" are ruleset 
-                        identifiers and "rfcXXXX" is a ruleset identifier alias.
+                        identifiers and "rfcXXXX" is a ruleset identifier alias.  See Section
+                        <xref target="import"/> for details on defining and using ruleset identifier aliases.
                     </preamble>
                     <artwork align="center" xml:space="preserve">&rule_name_ruleset_id.jcr;</artwork>
-                </figure>
-                <t>
-                    Rule name assignments separate the rule name from the type specification using the '='
-                    character.
-                </t>
-                <figure anchor="assignment_example.jcr">
-                    <artwork xml:space="preserve" align="center">&assignment_example.jcr;</artwork>
                 </figure>
             </section>
             <section title="Annotations">
@@ -1419,7 +1429,7 @@ n.f..
                         jcr-version directive, or the first line if no jcr-version directive is present.
                     </t>
                 </section>            
-                <section title="import">
+                <section title="import" anchor="import">
                     <t>
                         The import directive specifies that another ruleset is to have its rules
                         evaluated in addition to the ruleset where the directive appears.
