@@ -674,9 +674,9 @@
                 </t>
                 <t>
                     When a rule specification is assigned to a rule name, only the local rule name part can be
-                    present.  In this scenario the local rule name must be unique within a ruleset
+                    present.  In this context, the local rule name must be unique within a ruleset
                     (that is, no two rule name assignments may use the same local rule
-                    name).
+                    name in the same ruleset).
                 </t>
                 <t>
                     Ruleset identifier aliases may be included in a rule name that is used as a reference.
@@ -685,7 +685,7 @@
                 </t>
                 <figure anchor="rule_name_ruleset_id.jcr">
                     <preamble>
-                        In Figure 10 below,
+                        In Figure <xref target="rule_name_ruleset_id.jcr"/> below,
                         "http://ietf.org/rfcYYYY.JCR" and "http://ietf.org/rfcXXXX.JCR" are ruleset 
                         identifiers and "rfcXXXX" is a ruleset identifier alias.
                     </preamble>
