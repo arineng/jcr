@@ -414,7 +414,7 @@
                 <t>
                     Being a machine-readable format, the examples in a specification can be validated by the
                     specified JCR, and it can be verified that the JCR represents the examples.  This acts
-                    like unit testing in software development.
+                    like unit testing in software development, and has been done in the authoring of this document.
                 </t>
                 <t>
                     JCR aids software developers to verify that their implementations conform to specifications
