@@ -391,11 +391,13 @@
                     From a high-level view point, it could be said that JSON Schema is
                     like XML Schema whereas JCR is more like Compact RelaxNG.                </t>
                 <t>
-                    Additionally, JCR is a superset of JSON whereby specification authors may use example
+                    Additionally, JCR syntax is a superset of JSON syntax, whereby specification authors may use example
                     JSON protocol messages as a starting point for defining JCR rules (as is described in
-                    <xref target="a_first_example"></xref>). Combined with the brevity of describing rules
-                    and the ability to name rules, specification authors may also interleave their prose
-                    with JCR rules in their specifications thus describing semantics in close proximity
+                    <xref target="a_first_example"></xref>). Consequently, the effort required to turn JSON examples into
+                    JCR specifications is minimimal compared to that required to create an equivalent JSON Schema.
+                    This, combined with the brevity of describing rules
+                    and the ability to name rules, allows specification authors to interleave their prose
+                    with JCR rules in their specifications, facilitating describing semantics in close proximity
                     to syntax.
                 </t>
             </section>
