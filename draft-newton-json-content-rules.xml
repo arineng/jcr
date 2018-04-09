@@ -322,7 +322,7 @@
                 <t>
                     JSON Schema, like JCR, is a data definition language designed specifically for JSON. While JCR
                     is more tightly scoped to defining JSON protocol messages and content, JSON Schema is more
-                    broadly scoped in its goals.
+                    broadly scoped in its goals, including deeper aspects of data set linking and the semantic web.
                 </t>
                 <t>
                     JSON Schema benefits from being defined in JSON (as this makes implementations of JSON Schema tools
