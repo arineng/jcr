@@ -630,13 +630,14 @@
             </section>
             <section title="Rules">
                 <t>
-                    Rules have two main components, an optional rule name assignment and a type or member specification.
+                    Rules have two main components, an optional rule name assignment and a rule specification.
+                    A rule specification can be a type specification or a member specification.
                 </t>
                 <t>
-                    Type specifications define arrays, objects, etc... of JSON and may reference other rules
+                    Type specifications define arrays, objects, etc... of JSON or may reference other rules
                     using rule names. Most type specifications can be defined with repetitions for specifying
                     the frequency of the type being defined. In addition to the type specifications describing
-                    JSON types, there is an additional group specification for grouping types.
+                    JSON types, there is an additional group specification for grouping specifications.
                 </t>
                 <t>
                     Member specifications define members of JSON objects, and are composed of a member name specification
@@ -651,7 +652,10 @@
                     Type specifications, depending on their type, can contain zero or more other
                     specifications or rule names. For example, an object specification might contain multiple
                     member specifications or rule names that resolve to member specifications or a mixture
-                    of member specifications and rule names. For the purposes of this document, specifications
+                    of member specifications and rule names.
+                </t>
+                <t>
+                    For the purposes of this document, specifications
                     and rule names composing other specifications are called subordinate components.
                 </t>
             </section>
