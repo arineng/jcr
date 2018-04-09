@@ -252,7 +252,7 @@
                 It would be theoretically possible to express the valid set of a protocol’s JSON messages using ABNF.
                 However, ABNF is difficult to get right at the best of times, and defining an ABNF that simultaneously
                 interwove the constraints of JSON and the constraints of the protocol into a single ABNF definition
-                would be a task few could, or would, want to achieve. Even if such were possible, much of what was
+                would be a task few could, or would want to, achieve. Even if such were possible, much of what was
                 intended to describe the protocol, would be obscured by the aspects describing the JSON
                 constraints. Such an approach is likely to end up being only comprehendible by a machine, and be
                 impenetrable to humans. As such, arguably, such a definition would not satisfy it primary target
@@ -280,7 +280,7 @@
             <section title="Format Translation">
                 <t>
                     Format translation is an algorithmic approach to specifying protocol messages in multiple formats
-                    by using one format as the base specification and an algorithm for translating that formatting
+                    by using one format as the base specification and an algorithm for translating that format
                     into another. One example would be the translation of XML into JSON using the BadgerFish
                     algorithm and software.
                 </t>
@@ -288,7 +288,7 @@
                     This approach often creates difficult protocol messages in the destination format (i.e. JSON in
                     the case of XML to JSON) which are hard to implement towards or debug. Additionally, while it be
                     fashionable to have multiple formats, most software implementations of protocols work best with
-                    one format and often not well with others if at all.
+                    one format and often not well with others, if at all.
                 </t>
                 <t>
                     vCard and jCard are good examples of this. The original format and data model for vCard
@@ -302,7 +302,7 @@
                     Abstraction languages are nothing new to the schema and data definition language space, with ASN.1
                     being a classic example of specifying a data model in a higher-level syntax and defined algorithms
                     for multiple data formats. ASN.1 supports many data formats, such as BER and DER and XER (XML Encoding Rules).
-                    Yang is a more modern and popular abstraction languages.
+                    Yang is a more modern and popular abstraction language.
                 </t>
                 <t>
                     These languages have their place but suffer the same issues as format translators as they
@@ -315,12 +315,12 @@
                     With respect to JSON, CDDL is an abstraction language as it's data model is a superset of the
                     data model of JSON. In other words, it is possible to specify protocol messages in CDDL that are
                     not applicable to JSON. And because CDDL targets CBOR specifically, it does not benefit from being
-                    a superset of JSON, as is the case of JCR, or specified in JSON, as is the case of JSON Schema.
+                    JSON-like, as is the case of JCR, or specified in JSON, as is the case of JSON Schema.
                 </t>
             </section>
             <section title="JSON Schema vs JCR">
                 <t>
-                    JSON Schema, like JCR, is a data definition language designed specifically for JSON. And while JCR
+                    JSON Schema, like JCR, is a data definition language designed specifically for JSON. While JCR
                     is more tightly scoped to defining JSON protocol messages and content, JSON Schema is more
                     broadly scoped in its goals. From a high-level view point, it could be said that JSON Schema is
                     like XML Schema whereas JCR is more like Compact RelaxNG.
