@@ -446,6 +446,11 @@
                 </t>
         </section>
         <section title="JCR Examples">
+            <t>
+                Being a superset of JSON syntax, those familar with JSON will likely have an intuitive understanding
+                of many aspects of JCR.  This section offers some JCR examples to give such readers a feel for JCR
+                before going into the detail.
+            </t>
             <section title="A First Example: Specifying Content" anchor="a_first_example">
                 <t>
                     The following JSON data describes a JSON object with two members, "line-count" and
