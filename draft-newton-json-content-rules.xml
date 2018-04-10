@@ -1332,20 +1332,6 @@ $age = 0..
                 <artwork xml:space="preserve" align="center">&group_example_for_validation.jcr;</artwork>
             </figure>
         </section>
-            <section title="Ordered and Unordered Groups in Arrays">
-                <t>
-                    <xref target="unordered_array_specifications"></xref> specifies that arrays can be evaluated
-                    by the order of the items in the array or can be evaluated without order.
-                    <xref target="group_specifications"></xref> specifies that arrays may have group rules
-                    as subordinate components.
-                </t>
-                <t>
-                    The evaluation of a group specification inside an array specification inherits the ordering property
-                    of the array specification. If the array specification is unordered, then the items of the group specification
-                    are also considered to be unordered. And if the array specification is ordered, then the items
-                    of the group specification are also considered to be ordered.
-                </t>
-            </section>
             <section title="Sequence and Choice Combinations in Array, Object, and Group Specifications">
                 <t>
                     Combinations of subordinate components in array, object, and group specifications can be specified as either
