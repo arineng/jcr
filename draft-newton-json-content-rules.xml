@@ -1463,7 +1463,7 @@
                     </postamble>
                 </figure>
                 <t>
-                    In the general case, validating an ordered array has similarities with matching a regular expression or
+                    Validating an ordered array, in the general case, has similarities with matching a regular expression or
                     an ABNF grammar.  A regular expression specifies a pattern of tokens that happen
                     to be textual characters, whereas an ordered array specification specifies a pattern
                     of tokens that happen to be JSON values.  For example, the following JCR specifiction:
