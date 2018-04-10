@@ -1692,13 +1692,16 @@ $age = 0..
             </section>
             <section title="Group Rules as Macros">
                 <t>
-                    The syntax for group specifications accommodates one ore more subordinate components and
+                    The syntax for group specifications accommodates one or more subordinate components and
                     a repetition expression for each. Other than grouping multiple rules, a
                     group specification can be used as a macro definition for a single rule.
                 </t>
                 <figure anchor="macro.jcr">
                     <artwork xml:space="preserve" align="center">&macro.jcr;</artwork>
-                </figure> 
+                </figure>
+                <t>
+                    This differs from a member specification because it includes a repetition specification.
+                </t>
             </section>
             <section title="Object Mixins">
                 <t>
