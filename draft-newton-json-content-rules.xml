@@ -110,6 +110,8 @@
     'figs/array_unordered_eval.jcr'>
   <!ENTITY group_example.jcr PUBLIC ''
     'figs/group_example.jcr'>
+  <!ENTITY group_example_for_validation.jcr PUBLIC ''
+    'figs/group_example_for_validation.jcr'>
   <!ENTITY and_or_example.jcr PUBLIC ''
     'figs/and_or_example.jcr'>
   <!ENTITY mixed_and_or_bad.jcr PUBLIC ''
@@ -1305,12 +1307,12 @@ $age = 0..
             <t>
                 Unlike the other type specifications, group specifications have no direct tie with JSON syntax.
                 Group specifications simply group together their subordinate components. Group specifications
-                enclose one or more subordinate components with the parenthesis characters.
+                enclose one or more subordinate components with the parenthesis characters ('(') &amp; (')').
             </t>
             <t>
                 Group specifications and any nesting of group specifications, must conform
                 to the allowable set of type specifications of the type specifications in which
-                they are contained. For example, a group specification
+                they are referenced. For example, a group specification referenced
                 inside of an array specification may not contain a member specification since member specifications are not
                 allowed as direct subordinates of array specifications (arrays contain values, not object members in JSON). 
                 Likewise, a group specification referenced inside an object
@@ -1321,11 +1323,14 @@ $age = 0..
             </t>
             <figure anchor="group_example.jcr">
                 <artwork xml:space="preserve" align="center">&group_example.jcr;</artwork>
-            </figure>    
+            </figure>
             <t>
-                Like the subordinate components of array and object specifications, the subordinate components of
-                a group specification are evaluated in the order they appear.
+                For validation purposes, references to group specifications are replaced with the referenced content.
+                For example, the $the_bradys rule in <xref target="group_example.jcr"/> is validated as if it were:
             </t>
+            <figure anchor="group_example_for_validation.jcr">
+                <artwork xml:space="preserve" align="center">&group_example_for_validation.jcr;</artwork>
+            </figure>
         </section>
             <section title="Ordered and Unordered Groups in Arrays">
                 <t>
