@@ -988,13 +988,13 @@
         <section title="Member Specifications">
             <t>
                 Member specifications define members of JSON objects. Unlike other type specifications,
-                member specifications cannot be root rules and must be part of an object specification
-                or preceded by a rule name assignment.
+                member specifications cannot be root rules and must be part of an object specification,
+                a group specification, or preceded by a rule name assignment.
             </t>
             <t>
                 Member specifications consist of a member name specification followed by a colon character (':')
                 followed by either a subordinate component, which is either a
-                rule name or a primitive, object, array, or group specification. Member name specifications
+                rule name or a type specification. Member name specifications
                 can be given either as a quoted string using double quotes or as a regular expression
                 using forward slash ('/') characters. Regular expressions are not implicitly anchored
                 and therefore must have explicit anchors if needed.
@@ -1003,7 +1003,8 @@
                 <artwork xml:space="preserve" align="center">&member_specifications.jcr;</artwork>
             </figure>
             <t>
-                Member specification validation is described in <xref target="object-specifications"></xref>.
+                Member specification validation takes place as part of object validation, which
+                is described in <xref target="object-specifications"></xref>.
             </t>
         </section>
         <section title="Object Specifications" anchor="object-specifications">
