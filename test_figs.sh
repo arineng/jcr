@@ -77,5 +77,7 @@ assert_raises "jcr --test-jcr -r figs/primitives_boolean.jcr" 0
 assert_raises "jcr --test-jcr -r figs/annotations-range-exclusive.jcr" 0
 assert_raises "jcr --test-jcr -r figs/subordinate_dependents_equiv.jcr" 0
 
+assert_raises "jcr --test-jcr -r figs/root_annotations.jcr" 0
+
 assert_end figs
 
