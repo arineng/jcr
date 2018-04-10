@@ -1182,7 +1182,7 @@
             </figure>
             <t>
                 Unlike object specifications, order is implied in array specifications by default.
-                That is, the first subordinate component will match the first element of the array, 
+                That is, the first subordinate component will match the first element of the array,
                 the second subordinate component will match the second element of the array, and so on.
             </t>
             <t>
