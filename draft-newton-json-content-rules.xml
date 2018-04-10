@@ -1052,33 +1052,33 @@
             <figure anchor="object_example2.json">
                 <artwork align="center" xml:space="preserve">&object_example2.json;</artwork>
             </figure>
+            <t>
+                Because subordinate components of an object specification are evaluated in the order
+                in which they are specified (i.e. left to right, top to bottom) and object members
+                can only match one subordinate component of an object specification, the rule o1 below
+                will not match against the JSON in <xref target="object_order_eval.json"></xref> but
+                the rule o2 below will match it.
+            </t>
             <figure anchor="object_order_eval.jcr">
-                <preamble>
-                    Because subordinate components of an object specification are evaluated in the order
-                    in which they are specified (i.e. left to right, top to bottom) and object members
-                    can only match one subordinate component of an object specification, the rule o1 below
-                    will not match against the JSON in <xref target="object_order_eval.json"></xref> but
-                    the rule o2 below will match it.
-                </preamble>
                 <artwork align="center" xml:space="preserve">&object_order_eval.jcr;</artwork>
-                <postamble>
-                    The first subordinate of rule o1 specifies that an object can have zero or more members
-                    (that is the meaning of "*", see <xref target="repetition"></xref>) where the member
-                    name is the letter 'p' followed by a number (e.g. "p0", "p1", "p2"), and the second
-                    rule specifies a member with the exact member name of "p1". Rule o2
-                    has the exact same member specifications but in the opposite order. 
-                    <xref target="object_order_eval.json"></xref> does not match rule o1 because all of the
-                    members match the first subordinate rule leaving none to match the second subordinate rule.
-                    However, rule o2 does match because the first subordinate rule matches only one member
-                    of the JSON object allowing the second subordinate rule to match the other member of
-                    the JSON object.
-                </postamble>
             </figure>
+            <t>
+                This is because the first subordinate of rule o1 specifies that an object can have zero or more members
+                (that is the meaning of "*", see <xref target="repetition"></xref>) where the member
+                name is the letter 'p' followed by a number (e.g. "p0", "p1", "p2"), and the second
+                rule specifies a member with the exact member name of "p1". Rule o2
+                has the exact same member specifications but in the opposite order. 
+                <xref target="object_order_eval.json"></xref> does not match rule o1 because all of the
+                members match the first subordinate rule leaving none to match the second subordinate rule.
+                However, rule o2 does match because the first subordinate rule matches only one member
+                of the JSON object allowing the second subordinate rule to match the other member of
+                the JSON object.
+            </t>
             <figure anchor="object_order_eval.json">
                 <artwork align="center" xml:space="preserve">&object_order_eval.json;</artwork>
             </figure>
             <t>
-                As stated above, members of objects which do not match a rule are ignored.
+                As stated above, members of instance objects which do not match a member name specification are ignored.
                 The reason for this validation model is due to the nature of the typical
                 access model to JSON objects in many programming languages, where members
                 of the object are obtained by referencing the member name. Therefore
