@@ -985,18 +985,6 @@
                 <figure anchor="mixed_and_or_good.jcr">
                     <artwork xml:space="preserve" align="center">&mixed_and_or_good.jcr;</artwork>
                 </figure>
-                <t>
-                    <list style="none">
-                        <t>
-                            NOTE: A future specification will clarify the choice ('|') operation as inclusive or,
-                            exclusive or ("xor") or otherwise. At present readers should assume the choice
-                            ('|') operator is an inclusive or. However, for objects and unordered arrays
-                            that is not ideal, nor is xor. We are in the process of defining an algorithm
-                            to "rewrite" choices of rules for use with inclusive or which is more suitable
-                            for the data model of JSON.
-                        </t>
-                    </list>
-                </t>
             </section>
             <section title="Type Specifications">
                 <t>
@@ -1304,6 +1292,19 @@
                         {{{Do we need this clause? Time will tell}}} If the outer-most group yields a true result, each instance member associated with a member
                         name specification MUST be checked to confirm
                         it has contributed positively to the validation result.  If not, the instance is deemed invalid.
+                    </t>
+                </list>
+            </t>
+            <t>
+                <list style="none">
+                    <t>
+                        NOTE: A future specification will clarify the choice ('|') operation as Inclusive OR ("IOR"),
+                        Exclusive OR ("XOR") or "Augmented OR" ("AOR") (as described above). Previously the choice
+                        ('|') operator was an Inclusive OR. However, for objects arrays
+                        that is not ideal, nor is XOR. We are in the process of defining an algorithm
+                        to "rewrite" choices of rules for use with inclusive or which is more suitable
+                        for the data model of JSON.  The above is a first attempt, but subject to change.
+                        Future versions my revert to either pure inclusive OR or exclusive OR.
                     </t>
                 </list>
             </t>
