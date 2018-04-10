@@ -1204,7 +1204,7 @@
                     </t>
                 </section>
             </section>
-            <section title="Type Choices">
+            <section title="Type Choices" anchor="type_choices">
                 <t>
                     A type specification can be a type choice.  A type choice begins with an opening parenthesis ('(')
                     and ends with a closing parenthesis (')').  Its subordinate components are type specifications or rule name references
@@ -1584,6 +1584,7 @@ $age = 0..
                 allowed as direct subordinates of array specifications (arrays contain values, not object members in JSON). 
                 Likewise, a group specification referenced inside an object
                 specification must only contain member specifications (JSON objects may only contain object members).
+                A group specification may also represent a type choice (See <xref target="type_choices"/>).
             </t>
             <t>
                 As with object and array specifications, group subordinate components MAY have repetitions as

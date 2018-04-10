@@ -1367,7 +1367,8 @@ base64url
 <p class="figure">Figure 43</p>
 <p id="rfc.section.6.11.5.p.7">For a JSON instance value to be valid against a semantic string specification, once escape sequences are converted to UTF-8, it MUST satisfy all the constraints specified by the relevant standard(s) for the semantic type.  </p>
 <h1 id="rfc.section.6.12">
-<a href="#rfc.section.6.12">6.12.</a> Type Choices</h1>
+<a href="#rfc.section.6.12">6.12.</a> <a href="#type_choices" id="type_choices">Type Choices</a>
+</h1>
 <p id="rfc.section.6.12.p.1">A type specification can be a type choice.  A type choice begins with an opening parenthesis ('(') and ends with a closing parenthesis (')').  Its subordinate components are type specifications or rule name references combined using the choice combiner as described in <a href="#combiners" class="xref">Section 6.9</a>.  </p>
 <div id="rfc.figure.44"></div>
 <div id="type_choice.jcr"></div>
@@ -1591,7 +1592,7 @@ $a2 = @{unordered} [ string, integer ]
 <a href="#rfc.section.6.17">6.17.</a> <a href="#group_specifications" id="group_specifications">Group Specifications</a>
 </h1>
 <p id="rfc.section.6.17.p.1">Unlike the other type specifications, group specifications have no direct tie with JSON syntax.  Group specifications simply group together their subordinate components. Group specifications enclose one or more subordinate components with the parenthesis characters ('(') &amp; (')').  </p>
-<p id="rfc.section.6.17.p.2">Group specifications and any nesting of group specifications, must conform to the allowable set of type specifications of the type specifications in which they are referenced. For example, a group specification referenced inside of an array specification may not contain a member specification since member specifications are not allowed as direct subordinates of array specifications (arrays contain values, not object members in JSON).  Likewise, a group specification referenced inside an object specification must only contain member specifications (JSON objects may only contain object members).  </p>
+<p id="rfc.section.6.17.p.2">Group specifications and any nesting of group specifications, must conform to the allowable set of type specifications of the type specifications in which they are referenced. For example, a group specification referenced inside of an array specification may not contain a member specification since member specifications are not allowed as direct subordinates of array specifications (arrays contain values, not object members in JSON).  Likewise, a group specification referenced inside an object specification must only contain member specifications (JSON objects may only contain object members).  A group specification may also represent a type choice (See <a href="#type_choices" class="xref">Section 6.12</a>).  </p>
 <p id="rfc.section.6.17.p.3">As with object and array specifications, group subordinate components MAY have repetitions as described in <a href="#repetition" class="xref">Section 6.8</a> and MAY be combined into sequences and/or choices as described in <a href="#combiners" class="xref">Section 6.9</a>.  </p>
 <p id="rfc.section.6.17.p.4">The following is an example of a group specification: </p>
 <div id="rfc.figure.65"></div>

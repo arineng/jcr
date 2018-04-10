@@ -2104,7 +2104,8 @@ Internet-Draft             JSON Content Rules                 April 2018
    contain values, not object members in JSON).  Likewise, a group
    specification referenced inside an object specification must only
    contain member specifications (JSON objects may only contain object
-   members).
+   members).  A group specification may also represent a type choice
+   (See Section 6.12).
 
    As with object and array specifications, group subordinate components
    MAY have repetitions as described in Section 6.8 and MAY be combined
@@ -2120,8 +2121,7 @@ Internet-Draft             JSON Content Rules                 April 2018
 
                                  Figure 65
 
-   Group specifications are not validated against JSON instances by
-   themselves.  During validation of objects, arrays or type choices,
+
 
 
 
@@ -2130,6 +2130,8 @@ Newton & Cordell        Expires October 12, 2018               [Page 38]
 Internet-Draft             JSON Content Rules                 April 2018
 
 
+   Group specifications are not validated against JSON instances by
+   themselves.  During validation of objects, arrays or type choices,
    references to group specifications are replaced with their referenced
    content.  For example, the $the_bradys rule in Figure 65 is validated
    as if it were:
@@ -2175,8 +2177,6 @@ Internet-Draft             JSON Content Rules                 April 2018
                                  Figure 68
 
    The JSON below matches the above rule.
-
-
 
 
 
