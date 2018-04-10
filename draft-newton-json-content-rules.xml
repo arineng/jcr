@@ -887,6 +887,15 @@
                 <t>
                     Other annotations may be defined for other purposes in future.
                 </t>
+                <section title="@{not} - Negating Evaluation" anchor="not_annotation">
+                    <t>
+                        The evaluation of a rule can be changed with the @{not} annotation. With this annotation,
+                        a rule that would otherwise match does not, and a rule that would not have matched does.
+                    </t>
+                    <figure anchor="not_annotation.jcr">
+                        <artwork xml:space="preserve" align="center">&not_annotation.jcr;</artwork>
+                    </figure>
+                </section>
             </section>
             <section title="Combining Subordinate Components - Sequences and Choices">
                 <t>
@@ -1555,15 +1564,6 @@ $age = 0..
                 <artwork xml:space="preserve" align="center">&group_example_for_validation.jcr;</artwork>
             </figure>
         </section>
-            <section title="Negating Evaluation" anchor="not_annotation">
-                <t>
-                    The evaluation of a rule can be changed with the @{not} annotation. With this annotation,
-                    a rule that would otherwise match does not, and a rule that would not have matched does.
-                    <figure anchor="not_annotation.jcr">
-                        <artwork xml:space="preserve" align="center">&not_annotation.jcr;</artwork>
-                    </figure>         
-                </t>
-            </section>
             <section title="Starting Points and Root Rules" anchor="starting-points">
                 <t>
                     Evaluation of a JSON instance or document against a ruleset begins with the evaluation of
