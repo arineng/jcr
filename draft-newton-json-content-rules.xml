@@ -755,7 +755,7 @@
                 </t>
                 <t>
                     The "@{root}" annotation may either appear before a rule name assignment or before
-                    a type definition. It is ignored if present before referenced rule name inside of a
+                    a type definition. It is an error if present before referenced rule name inside of a
                     type specification.
                 </t>
             </section>
