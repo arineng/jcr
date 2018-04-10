@@ -1157,57 +1157,52 @@
                 square brace character ('[') and at the end with a right square brace character (']').
             </t>
             <t>
-                Evaluation of the subordinate components of array specifications is as follows:
-                <list style="symbols">
-                    <t>
-                        The order of array items is implied unless the @{unordered} annotation is present.
-                    </t>
-                    <t>
-                        Subordinate components of the array specification are evaluated in
-                        the order they appear.
-                    </t>
-                    <t>
-                        Each item of the array being evaluated can only match one
-                        subordinate component of the array specification. 
-                    </t>
-                    <t>
-                        If any items of the array are not matched, then the array does not match
-                        the array specification.
-                    </t>
-                </list>
-                These rules are further explained in the examples below.
+                Arrays can be specified as either ordered or unordered.  Arrays are ordered by default.
             </t>
-            <figure anchor="array_example.jcr">
-                <artwork align="center" xml:space="preserve">&array_example.jcr;</artwork>
-            </figure>
-            <t>
-                Unlike object specifications, order is implied in array specifications by default.
-                That is, the first subordinate component will match the first element of the array,
-                the second subordinate component will match the second element of the array, and so on.
-            </t>
-            <t>
-                Take for example the following ruleset:
-            </t>
-            <figure anchor="array_order_eval.jcr">
-                <artwork align="center" xml:space="preserve">&array_order_eval.jcr;</artwork>
-            </figure>
-            <t>
-                It defines two rules, a1 and a2. The array in the following JSON will not match a1, but
-                will match a2.
-            </t>
-            <figure anchor="array_order_eval.json">
-                <artwork align="center" xml:space="preserve">&array_order_eval.json;</artwork>
-            </figure>
-            <t>
-                If an array has more elements than can be matched from the array specification,
-                the array does not match the array specification. Or stated differently, an array with unmatched
-                elements does not validate. Using the example array rule a2 from above, the following
-                array does not match because the last element of the array does not match any subordinate
-                component:
-            </t>
-            <figure anchor="array_order_eval2.json">
-                <artwork align="center" xml:space="preserve">&array_order_eval2.json;</artwork>
-            </figure>
+            <section title="Ordered Array Specifications">
+                <t>
+                    Unlike object specifications, order is implied in array specifications by default.
+                </t>
+                <t>
+                    Evaluation of the subordinate components of ordered array specifications is as follows:
+                    <list style="symbols">
+                        <t>
+                            Subordinate components of the array specification are evaluated in
+                            the order they appear.
+                        </t>
+                        <t>
+                            Each item of the array being evaluated can only match one
+                            subordinate component of the array specification. 
+                        </t>
+                        <t>
+                            If any items of the array are not matched, then the array does not match
+                            the array specification.
+                        </t>
+                    </list>
+                </t>
+                <t>
+                    Take for example the following ruleset:
+                </t>
+                <figure anchor="array_order_eval.jcr">
+                    <artwork align="center" xml:space="preserve">&array_order_eval.jcr;</artwork>
+                </figure>
+                <t>
+                    It defines two rules, a1 and a2. The array in the following JSON will not match a1, but
+                    will match a2.
+                </t>
+                <figure anchor="array_order_eval.json">
+                    <artwork align="center" xml:space="preserve">&array_order_eval.json;</artwork>
+                </figure>
+                <t>
+                    If an array has more elements than can be matched from the array specification,
+                    the array does not match the array specification. Or stated differently, an array with unmatched
+                    elements does not validate. Using the example array rule a2 from above, the following
+                    array does not match because the last element of the array does not match any subordinate
+                    component:
+                </t>
+                <figure anchor="array_order_eval2.json">
+                    <artwork align="center" xml:space="preserve">&array_order_eval2.json;</artwork>
+                </figure>
                 <t>
                     To allow an array to contain
                     any value after guaranteeing that it contains the necessary items,
@@ -1221,7 +1216,7 @@
                         against the a3 rule in this example.
                     </postamble>
                 </figure>
-            
+            </section>
             <section title="Unordered Array Specifications" anchor="unordered_array_specifications">
                 <t>
                     Array specifications can be made to behave in a similar fashion to object specifications
