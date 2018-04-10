@@ -894,7 +894,7 @@
                 </section>
                 <section title="Plain Strings">
                     <t>
-                        Generically, a string may be specified using the word 'string'. String literals
+                        Generically, a string may be specified using the keyword 'string'. String literals
                         may be specified using a double quote character followed by the literal content
                         followed by another double quote. Regular expressions can be specified by
                         enclosing a regular expression within the forward slash ('/') character.
@@ -936,35 +936,35 @@
                     </t>
                     <t>
                         A string can be specified as a <xref target="RFC3986">URI</xref> using the
-                        word 'uri', but also may be more narrowly scoped to a URI of a specific scheme.
-                        Specific URI schemes are specified with the word 'uri' followed by two period characters
+                        keyword 'uri', but also may be more narrowly scoped to a URI of a specific scheme.
+                        Specific URI schemes are specified with the keyword 'uri' followed by two period characters
                         ('..') followed by the URI scheme.
                     </t>
                     <figure anchor="primitive_uris.jcr">
                         <artwork align="center" xml:space="preserve">&primitives_uris.jcr;</artwork>
                     </figure>
                     <t>
-                        IP addresses may be specified with either the word 'ipv4' for
-                        <xref target="RFC1166">IPv4 addresses</xref> or the word 'ipv6' for
+                        IP addresses may be specified with either the keyword 'ipv4' for
+                        <xref target="RFC1166">IPv4 addresses</xref> or the keyword 'ipv6' for
                         <xref target="RFC5952">IPv6 addresses</xref>. Fully qualified A-label and
-                        U-label domain names may be specified with the words 'fqdn' and 'idn'.
+                        U-label domain names may be specified with the keywords 'fqdn' and 'idn'.
                     </t>
                     <t>
                         Dates and time can be specified as formats found in <xref target="RFC3339">RFC 3339</xref>.
-                        The word 'date' corresponds to the full-date ABNF rule, the word 'time' corresponds to the
-                        full-time ABNF rule, and the word 'datetime' corresponds to the 'date-time' ABNF rule.
+                        The keyword 'date' corresponds to the full-date ABNF rule, the keyword 'time' corresponds to the
+                        full-time ABNF rule, and the keyword 'datetime' corresponds to the 'date-time' ABNF rule.
                     </t>
                     <t>
                         Email addresses formatted according to <xref target="RFC5322">RFC 5322</xref> may
-                        be specified using the 'email' word, and E.123 phone numbers may be specified using the
-                        word 'phone'.
+                        be specified using the 'email' keyword, and E.123 phone numbers may be specified using the
+                        keyword 'phone'.
                     </t>
                     <figure anchor="primitive_misc.jcr">
                         <artwork align="center" xml:space="preserve">&primitives_misc.jcr;</artwork>
                     </figure>
                     <t>
                         Binary data can be specified in string form using the encodings specified in
-                        <xref target="RFC4648">RFC 4648</xref>. The word 'hex' corresponds to base16, while
+                        <xref target="RFC4648">RFC 4648</xref>. The keyword 'hex' corresponds to base16, while
                         'base32', 'base32hex', 'base64', and 'base64url' correspond with their
                         RFC 4648 counterparts accordingly.
                     </t>
