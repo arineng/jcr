@@ -1194,8 +1194,8 @@
                     <artwork align="center" xml:space="preserve">&array_order_eval.json;</artwork>
                 </figure>
                 <t>
-                    If an array has more elements than can be matched from the array specification,
-                    the array does not match the array specification. Or stated differently, an array with unmatched
+                    If an array instance has more elements than can be matched from the array specification,
+                    the array instance does not validate against the array specification. Or stated differently, an array with unmatched
                     elements does not validate. Using the example array rule a2 from above, the following
                     array does not match because the last element of the array does not match any subordinate
                     component:
