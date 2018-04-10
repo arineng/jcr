@@ -773,7 +773,7 @@
             </section>
             <section title="Primitive Specifications">
                 <t>
-                    Primitive type specifications define content for JSON numbers, booleans, strings, and null.
+                    Primitive specifications define content for JSON numbers, booleans, strings, and null.
                 </t>
                 <section title="Null">
                     <t>
