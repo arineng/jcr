@@ -1331,8 +1331,10 @@
             </figure>
             <t>
                 Because subordinate components of an object specification are evaluated in the order
-                in which they are specified (i.e. left to right, top to bottom) and object members
-                can only match one subordinate component of an object specification, the rule o1 below
+                in which they are specified (i.e. left to right, top to bottom)
+                <cref anchor="AOR2" source="PJC">Deleted text after 'and' as it's not the case if we go with AOR
+                (an instance needs to be associated with all sub-comps with the same name specification): and object members
+                can only match one subordinate component of an object specification,</cref> the rule o1 below
                 will not match against the JSON in <xref target="object_order_eval.json"></xref> but
                 the rule o2 below will match it.
             </t>
