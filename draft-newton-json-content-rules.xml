@@ -86,6 +86,10 @@
     'figs/primitives_misc.jcr'>
   <!ENTITY primitives_binary.jcr PUBLIC ''
     'figs/primitives_binary.jcr'>
+  <!ENTITY type_choice.jcr PUBLIC ''
+    'figs/type_choice.jcr'>
+  <!ENTITY type_choice2.jcr PUBLIC ''
+    'figs/type_choice2.jcr'>
   <!ENTITY member_specifications.jcr PUBLIC ''
     'figs/member_specifications.jcr'>
   <!ENTITY object_example.jcr PUBLIC ''
@@ -1200,7 +1204,26 @@
                     </t>
                 </section>
             </section>
-
+            <section title="Type Choices">
+                <t>
+                    A type specification can be a type choice.  A type choice begins with an opening parenthesis ('(')
+                    and ends with a closing parenthesis (')').  Its subordinate components are type specifications or rule name references
+                    combined using the choice combiner as described in <xref target="combiners"/>.
+                </t>
+                <figure anchor="type_choice.jcr">
+                    <artwork align="center" xml:space="preserve">&type_choice.jcr;</artwork>
+                </figure>
+                <t>
+                    Type choices can also be used for enumerations.  
+                </t>
+                <figure anchor="type_choice2.jcr">
+                    <artwork align="center" xml:space="preserve">&type_choice2.jcr;</artwork>
+                </figure>
+                <t>
+                    To validate against a type choice, an instance value MUST validate against one (or more)
+                    of the subordinate component type specifications.
+                </t>
+            </section>            
             <section title="Any Type">
                 <t>
                     The 'any' type specifies that a JSON value instance can be any primitive
@@ -1574,7 +1597,9 @@ $age = 0..
                 <artwork xml:space="preserve" align="center">&group_example.jcr;</artwork>
             </figure>
             <t>
-                For validation purposes, references to group specifications are replaced with the referenced content.
+                Group specifications are not validated against JSON instances by themselves.
+                During validation of objects, arrays or type choices, references to group specifications are
+                replaced with their referenced content.
                 For example, the $the_bradys rule in <xref target="group_example.jcr"/> is validated as if it were:
             </t>
             <figure anchor="group_example_for_validation.jcr">
