@@ -908,6 +908,47 @@
                     <artwork xml:space="preserve" align="center">&root_annotations.jcr;</artwork>
                 </figure>
             </section>
+            <section title="Combining Subordinate Components - Sequences and Choices">
+                <t>
+                    Combinations of subordinate components in array, object, and group specifications can be specified as either
+                    a sequence ("and") or a choice ("or"). A sequence is a subordinate component followed by the comma character
+                    (',') followed by another subordinate component.
+                    A choice is a subordinate component followed by a pipe character ('|') followed by another subordinate component.
+                </t>
+                <figure anchor="and_or_example.jcr">
+                    <artwork align="center" xml:space="preserve">&and_or_example.jcr;</artwork>
+                </figure>
+                <t>
+                    The exact meaning of a sequence or choice depends on whether it is in an object, array or group, and
+                    they are further discussed in the relevant sections.
+                </t>
+                <t>
+                    Sequence and choice combinations cannot be mixed, and group specifications must be used to
+                    explicitly declare precedence between a sequence and a choice. Therefore, the following
+                    is illegal:
+                </t>
+                <figure anchor="mixed_and_or_bad.jcr">
+                    <artwork xml:space="preserve" align="center">&mixed_and_or_bad.jcr;</artwork>
+                </figure>
+                <t>
+                    The example above should be expressed as:
+                </t>
+                <figure anchor="mixed_and_or_good.jcr">
+                    <artwork xml:space="preserve" align="center">&mixed_and_or_good.jcr;</artwork>
+                </figure>
+                <t>
+                    <list style="none">
+                        <t>
+                            NOTE: A future specification will clarify the choice ('|') operation as inclusive or,
+                            exclusive or ("xor") or otherwise. At present readers should assume the choice
+                            ('|') operator is an inclusive or. However, for objects and unordered arrays
+                            that is not ideal, nor is xor. We are in the process of defining an algorithm
+                            to "rewrite" choices of rules for use with inclusive or which is more suitable
+                            for the data model of JSON.
+                        </t>
+                    </list>
+                </t>
+            </section>
             <section title="Type Specifications">
                 <t>
                     Type specifications consist of primitive specifications, objects specifications, array
@@ -1474,43 +1515,6 @@ $age = 0..
                 <artwork xml:space="preserve" align="center">&group_example_for_validation.jcr;</artwork>
             </figure>
         </section>
-            <section title="Sequence and Choice Combinations in Array, Object, and Group Specifications">
-                <t>
-                    Combinations of subordinate components in array, object, and group specifications can be specified as either
-                    a sequence ("and") or a choice ("or"). A sequence is a subordinate component followed by the comma character
-                    (',') followed by another subordinate component.
-                    A choice is a subordinate component followed by a pipe character ('|') followed by another subordinate component.
-                </t>
-                <figure anchor="and_or_example.jcr">
-                    <artwork align="center" xml:space="preserve">&and_or_example.jcr;</artwork>
-                </figure>
-                <t>
-                    Sequence and choice combinations cannot be mixed, and group specifications must be used to
-                    explicitly declare precedence between a sequence and a choice. Therefore, the following
-                    is illegal:
-                </t>
-                <figure anchor="mixed_and_or_bad.jcr">
-                    <artwork xml:space="preserve" align="center">&mixed_and_or_bad.jcr;</artwork>
-                </figure>
-                <t>
-                    The example above should be expressed as:
-                </t>
-                <figure anchor="mixed_and_or_good.jcr">
-                    <artwork xml:space="preserve" align="center">&mixed_and_or_good.jcr;</artwork>
-                </figure>
-                <t>
-                    <list style="none">
-                        <t>
-                            NOTE: A future specification will clarify the choice ('|') operation as inclusive or,
-                            exclusive or ("xor") or otherwise. At present readers should assume the choice
-                            ('|') operator is an inclusive or. However, for objects and unordered arrays
-                            that is not ideal, nor is xor. We are in the process of defining an algorithm
-                            to "rewrite" choices of rules for use with inclusive or which is more suitable
-                            for the data model of JSON.
-                        </t>
-                    </list>
-                </t>
-            </section>
             <section title="Repetition in Array, Object, and Group Specifications" anchor="repetition">
                 <t>
                     Evaluation of subordinate components in array, object, and group specifications may be succeeded by
