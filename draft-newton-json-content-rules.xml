@@ -605,15 +605,13 @@
                     UTF-8 are outside the scope of this document.
                 </t>
             </section>
-            <section title="Lines and Comments">
-                <t>
-                    There is no statement terminator and therefore no need for a line continuation syntax.
-                    Rules may be defined across line boundaries.
-                    Blank lines are allowed.
-                </t>
+            <section title="Comments">
                 <t>
                     Comments are the same as comments in <xref target="RFC4234">ABNF</xref>. They start with a semi-colon (';') and
                     continue to the end of the line.
+                </t>
+                <t>
+                    Blank lines are allowed.  These can be used, for example, to further aid readability.
                 </t>
             </section>
             <section title="Names and Identifiers" anchor="names-and-identifiers">
@@ -637,6 +635,12 @@
             <section title="Rules">
                 <t>
                     Rules have two main components, an optional rule name assignment and a rule specification.
+                </t>
+                <t>
+                    Rules have no statement terminator and therefore no need for a line continuation syntax.
+                    Rules may be defined across line boundaries.
+                </t>
+                <t>
                     A rule specification can be a type specification or a member specification.
                 </t>
                 <t>
