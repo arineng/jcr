@@ -1150,7 +1150,8 @@ $dice_throws = ( 1..6 +%2 )
 </pre>
 <p class="figure">Figure 27</p>
 <h1 id="rfc.section.6.9">
-<a href="#rfc.section.6.9">6.9.</a> Combining Subordinate Components - Sequences and Choices</h1>
+<a href="#rfc.section.6.9">6.9.</a> <a href="#combiners" id="combiners">Combining Subordinate Components - Sequences and Choices</a>
+</h1>
 <p id="rfc.section.6.9.p.1">Combinations of subordinate components in array, object, and group specifications can be specified as either a sequence ("and") or a choice ("or"). A sequence is a subordinate component followed by the comma character (',') followed by another subordinate component.  A choice is a subordinate component followed by a pipe character ('|') followed by another subordinate component.  </p>
 <div id="rfc.figure.28"></div>
 <div id="and_or_example.jcr"></div>
@@ -1383,7 +1384,8 @@ $iface_mappings = /^eth[0-9]$/ : ipv4
 <a href="#rfc.section.6.14">6.14.</a> <a href="#object-specifications" id="object-specifications">Object Specifications</a>
 </h1>
 <p id="rfc.section.6.14.p.1">Object specifications define JSON objects and are composed of zero or more subordinate components, each of which can be either a rule name, member specification, or group specification. The subordinate components are enclosed at the start with a left curly brace character ('{') and at the end with a right curly brace character ('}').  </p>
-<p id="rfc.section.6.14.p.2">Evaluation of the subordinate components of object specifications is as follows: <a id="AOR" class="info">[AOR]<span class="info">PJC: This is a first attempt at this to see what it might look like. We can always go back if AOR doesn't work out.</span></a> </p>
+<p id="rfc.section.6.14.p.2">Subordinate components MAY have repetitions as described in <a href="#repetition" class="xref">Section 6.8</a> and MAY be combined into sequences and/or choices as described in <a href="#combiners" class="xref">Section 6.9</a>.  </p>
+<p id="rfc.section.6.14.p.3">Evaluation of the subordinate components of object specifications is as follows: <a id="AOR" class="info">[AOR]<span class="info">PJC: This is a first attempt at this to see what it might look like. We can always go back if AOR doesn't work out.</span></a> </p>
 
 <ul>
 <li>Each optional grouping is treated as a choice between itself and the empty group.  </li>
@@ -1406,7 +1408,7 @@ $iface_mappings = /^eth[0-9]$/ : ipv4
 <ul class="empty"><li>NOTE: A future specification will clarify the choice ('|') operation as Inclusive OR ("IOR"), Exclusive OR ("XOR") or "Augmented OR" ("AOR") (as described above). Previously the choice ('|') operator was an Inclusive OR. However, for objects arrays that is not ideal, nor is XOR. We are in the process of defining an algorithm to "rewrite" choices of rules for use with inclusive or which is more suitable for the data model of JSON.  The above is a first attempt, but subject to change.  Future versions my revert to either pure inclusive OR or exclusive OR.  </li></ul>
 
 <p> </p>
-<p id="rfc.section.6.14.p.4">The following examples illustrate matching of JSON objects to JCR object specifications.  </p>
+<p id="rfc.section.6.14.p.5">The following examples illustrate matching of JSON objects to JCR object specifications.  </p>
 <div id="rfc.figure.45"></div>
 <div id="object_example.jcr"></div>
 <p>As order is not implied for the members of objects under evaluation, the following rule will match the JSON in <a href="#object_example1.json" class="xref">Figure 46</a> and <a href="#object_example2.json" class="xref">Figure 47</a>.  </p>
@@ -1423,7 +1425,7 @@ $iface_mappings = /^eth[0-9]$/ : ipv4
 <pre>{ "statusCode" : 200, "locationUri" : "http://example.com" }
 </pre>
 <p class="figure">Figure 47</p>
-<p id="rfc.section.6.14.p.5">Because subordinate components of an object specification are evaluated in the order in which they are specified (i.e. left to right, top to bottom) and object members can only match one subordinate component of an object specification, the rule o1 below will not match against the JSON in <a href="#object_order_eval.json" class="xref">Figure 49</a> but the rule o2 below will match it.  </p>
+<p id="rfc.section.6.14.p.6">Because subordinate components of an object specification are evaluated in the order in which they are specified (i.e. left to right, top to bottom) and object members can only match one subordinate component of an object specification, the rule o1 below will not match against the JSON in <a href="#object_order_eval.json" class="xref">Figure 49</a> but the rule o2 below will match it.  </p>
 <div id="rfc.figure.48"></div>
 <div id="object_order_eval.jcr"></div>
 <pre>; zero or more members that match "p0", "p1", etc
@@ -1435,14 +1437,14 @@ $o1 = { /^p\d+$/ : integer *, "p1" : integer }
 $o2 = { "p1" : integer, /^p\d+$/ : integer * }
 </pre>
 <p class="figure">Figure 48</p>
-<p id="rfc.section.6.14.p.6">This is because the first subordinate of rule o1 specifies that an object can have zero or more members (that is the meaning of "*", see <a href="#repetition" class="xref">Section 6.8</a>) where the member name is the letter 'p' followed by a number (e.g. "p0", "p1", "p2"), and the second rule specifies a member with the exact member name of "p1". Rule o2 has the exact same member specifications but in the opposite order.  <a href="#object_order_eval.json" class="xref">Figure 49</a> does not match rule o1 because all of the members match the first subordinate rule leaving none to match the second subordinate rule.  However, rule o2 does match because the first subordinate rule matches only one member of the JSON object allowing the second subordinate rule to match the other member of the JSON object.  </p>
+<p id="rfc.section.6.14.p.7">This is because the first subordinate of rule o1 specifies that an object can have zero or more members (that is the meaning of "*", see <a href="#repetition" class="xref">Section 6.8</a>) where the member name is the letter 'p' followed by a number (e.g. "p0", "p1", "p2"), and the second rule specifies a member with the exact member name of "p1". Rule o2 has the exact same member specifications but in the opposite order.  <a href="#object_order_eval.json" class="xref">Figure 49</a> does not match rule o1 because all of the members match the first subordinate rule leaving none to match the second subordinate rule.  However, rule o2 does match because the first subordinate rule matches only one member of the JSON object allowing the second subordinate rule to match the other member of the JSON object.  </p>
 <div id="rfc.figure.49"></div>
 <div id="object_order_eval.json"></div>
 <pre>{ "p0" : 1, "p1" : 2 }
 </pre>
 <p class="figure">Figure 49</p>
-<p id="rfc.section.6.14.p.7">As stated above, members of instance objects which do not match a member name specification are ignored.  The reason for this validation model is due to the nature of the typical access model to JSON objects in many programming languages, where members of the object are obtained by referencing the member name. Therefore extra members may exist without harm.  </p>
-<p id="rfc.section.6.14.p.8">However, some specifications may need to restrict the members of a JSON object to a known set. To construct a rule specifying that no extra members are expected, the @{not} annotation (see <a href="#not_annotation" class="xref">Section 6.7.1</a>) may be used with a "match-all" regular expression as the last subordinate component of the object specification.  </p>
+<p id="rfc.section.6.14.p.8">As stated above, members of instance objects which do not match a member name specification are ignored.  The reason for this validation model is due to the nature of the typical access model to JSON objects in many programming languages, where members of the object are obtained by referencing the member name. Therefore extra members may exist without harm.  </p>
+<p id="rfc.section.6.14.p.9">However, some specifications may need to restrict the members of a JSON object to a known set. To construct a rule specifying that no extra members are expected, the @{not} annotation (see <a href="#not_annotation" class="xref">Section 6.7.1</a>) may be used with a "match-all" regular expression as the last subordinate component of the object specification.  </p>
 <div id="rfc.figure.50"></div>
 <div id="restrict_objects.jcr"></div>
 <p>The following rule will match the JSON object in <a href="#restrict_objects1.json" class="xref">Figure 51</a> but will not match the JSON object in <a href="#restrict_objects2.json" class="xref">Figure 52</a>.  </p>
@@ -1459,11 +1461,12 @@ $o2 = { "p1" : integer, /^p\d+$/ : integer * }
 <pre>{ "foo" : 1, "bar" : 2, "baz" : 3 }
 </pre>
 <p class="figure">Figure 52</p>
-<p id="rfc.section.6.14.p.9">This works because subordinate components are evaluated in the order they appear in the object rule, and the last component accepts any member with any type but fails to validate if one or more of those components are found due to the @{not} annotation.  </p>
+<p id="rfc.section.6.14.p.10">This works because subordinate components are evaluated in the order they appear in the object rule, and the last component accepts any member with any type but fails to validate if one or more of those components are found due to the @{not} annotation.  </p>
 <h1 id="rfc.section.6.15">
 <a href="#rfc.section.6.15">6.15.</a> Array Specifications</h1>
 <p id="rfc.section.6.15.p.1">Array specifications define JSON arrays and are composed of zero or more subordinate components, each of which can either be a rule name or a primitive, array, object or group specification. The subordinate components are enclosed at the start with a left square brace character ('[') and at the end with a right square brace character (']').  </p>
-<p id="rfc.section.6.15.p.2">Arrays can be specified as either ordered or unordered.  Arrays are ordered by default.  </p>
+<p id="rfc.section.6.15.p.2">As with object specifications, array subordinate components MAY have repetitions as described in <a href="#repetition" class="xref">Section 6.8</a> and MAY be combined into sequences and/or choices as described in <a href="#combiners" class="xref">Section 6.9</a>.  </p>
+<p id="rfc.section.6.15.p.3">Arrays can be specified as either ordered or unordered.  Arrays are ordered by default.  </p>
 <h1 id="rfc.section.6.15.1">
 <a href="#rfc.section.6.15.1">6.15.1.</a> Ordered Array Specifications</h1>
 <p id="rfc.section.6.15.1.p.1">Unlike object specifications, order is implied in array specifications by default.  </p>
@@ -1570,7 +1573,8 @@ $a2 = @{unordered} [ string, integer ]
 </h1>
 <p id="rfc.section.6.16.p.1">Unlike the other type specifications, group specifications have no direct tie with JSON syntax.  Group specifications simply group together their subordinate components. Group specifications enclose one or more subordinate components with the parenthesis characters ('(') &amp; (')').  </p>
 <p id="rfc.section.6.16.p.2">Group specifications and any nesting of group specifications, must conform to the allowable set of type specifications of the type specifications in which they are referenced. For example, a group specification referenced inside of an array specification may not contain a member specification since member specifications are not allowed as direct subordinates of array specifications (arrays contain values, not object members in JSON).  Likewise, a group specification referenced inside an object specification must only contain member specifications (JSON objects may only contain object members).  </p>
-<p id="rfc.section.6.16.p.3">The following is an example of a group specification: </p>
+<p id="rfc.section.6.16.p.3">As with object and array specifications, group subordinate components MAY have repetitions as described in <a href="#repetition" class="xref">Section 6.8</a> and MAY be combined into sequences and/or choices as described in <a href="#combiners" class="xref">Section 6.9</a>.  </p>
+<p id="rfc.section.6.16.p.4">The following is an example of a group specification: </p>
 <div id="rfc.figure.63"></div>
 <div id="group_example.jcr"></div>
 <pre>$the_bradys = [ $parents, $children ]
@@ -1580,7 +1584,7 @@ $children = ( "Greg", "Marsha", "Bobby", "Jan" )
 $parents = ( "Mike", "Carol" )
 </pre>
 <p class="figure">Figure 63</p>
-<p id="rfc.section.6.16.p.4">For validation purposes, references to group specifications are replaced with the referenced content.  For example, the $the_bradys rule in <a href="#group_example.jcr" class="xref">Figure 63</a> is validated as if it were: </p>
+<p id="rfc.section.6.16.p.5">For validation purposes, references to group specifications are replaced with the referenced content.  For example, the $the_bradys rule in <a href="#group_example.jcr" class="xref">Figure 63</a> is validated as if it were: </p>
 <div id="rfc.figure.64"></div>
 <div id="group_example_for_validation.jcr"></div>
 <pre>$the_bradys = [ "Mike", "Carol", "Greg", "Marsha", "Bobby", "Jan" ]

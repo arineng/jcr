@@ -957,7 +957,7 @@
                     <artwork xml:space="preserve" align="center">&repetition_step.jcr;</artwork>
                 </figure>
             </section>
-            <section title="Combining Subordinate Components - Sequences and Choices">
+            <section title="Combining Subordinate Components - Sequences and Choices" anchor="combiners">
                 <t>
                     Combinations of subordinate components in array, object, and group specifications can be specified as either
                     a sequence ("and") or a choice ("or"). A sequence is a subordinate component followed by the comma character
@@ -1239,6 +1239,10 @@
                 brace character ('}').
             </t>
             <t>
+                Subordinate components MAY have repetitions as described in <xref target="repetition"/>
+                and MAY be combined into sequences and/or choices as described in <xref target="combiners"/>.
+            </t>
+            <t>
                 Evaluation of the subordinate components of object specifications is as follows:
                 <cref anchor="AOR" source="PJC">This is a first attempt at this to see what it might look like. We can always go back if AOR doesn't work out.</cref>
                 <list style="symbols">
@@ -1390,6 +1394,11 @@
                 components, each of which can either be a rule name or a primitive, array, object or
                 group specification. The subordinate components are enclosed at the start with a left
                 square brace character ('[') and at the end with a right square brace character (']').
+            </t>
+            <t>
+                As with object specifications, array subordinate components MAY have repetitions as
+                described in <xref target="repetition"/> and MAY be combined into sequences and/or
+                choices as described in <xref target="combiners"/>.
             </t>
             <t>
                 Arrays can be specified as either ordered or unordered.  Arrays are ordered by default.
@@ -1550,6 +1559,11 @@ $age = 0..
                 allowed as direct subordinates of array specifications (arrays contain values, not object members in JSON). 
                 Likewise, a group specification referenced inside an object
                 specification must only contain member specifications (JSON objects may only contain object members).
+            </t>
+            <t>
+                As with object and array specifications, group subordinate components MAY have repetitions as
+                described in <xref target="repetition"/> and MAY be combined into sequences and/or
+                choices as described in <xref target="combiners"/>.
             </t>
             <t>
                 The following is an example of a group specification:
