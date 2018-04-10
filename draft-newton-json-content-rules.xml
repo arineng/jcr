@@ -62,6 +62,8 @@
     'figs/annotation_example.jcr'>
   <!ENTITY primitives_overview.jcr PUBLIC ''
     'figs/primitives_overview.jcr'>
+  <!ENTITY root_annotations.jcr PUBLIC ''
+    'figs/root_annotations.jcr'>
   <!ENTITY primitives_null.jcr PUBLIC ''
     'figs/primitives_null.jcr'>
   <!ENTITY primitives_boolean.jcr PUBLIC ''
@@ -758,6 +760,9 @@
                     a type definition. It is an error if present before referenced rule name inside of a
                     type specification.
                 </t>
+                <figure anchor="root_annotations.jcr">
+                    <artwork xml:space="preserve" align="center">&root_annotations.jcr;</artwork>
+                </figure>
             </section>
             <section title="Type Specifications">
                 <t>
