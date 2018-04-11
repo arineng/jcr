@@ -1251,32 +1251,6 @@
                     </t>
                 </section>
             </section>
-            <section title="Type Choices" anchor="type_choices">
-                <t>
-                    A type specification can be a type choice.  A type choice begins with an opening parenthesis ('(')
-                    and ends with a closing parenthesis (')').  Its subordinate components are type specifications or rule name references
-                    combined using the choice combiner as described in <xref target="combiners"/>.
-                </t>
-                <figure anchor="type_choice.jcr">
-                    <artwork align="center" xml:space="preserve">&type_choice.jcr;</artwork>
-                </figure>
-                <t>
-                    Type choices can also be used for enumerations.  
-                </t>
-                <figure anchor="type_choice2.jcr">
-                    <artwork align="center" xml:space="preserve">&type_choice2.jcr;</artwork>
-                </figure>
-                <t>
-                    To validate against a type choice, an instance value MUST validate against one (or more)
-                    of the subordinate component type specifications.
-                </t>
-            </section>            
-            <section title="Any Type">
-                <t>
-                    The 'any' type specifies that a JSON value instance can be any primitive
-                    type, array type, or object type.
-                </t>
-            </section>            
         <section title="Member Specifications">
             <t>
                 Member specifications define members of JSON objects. Unlike other type specifications,
@@ -1617,6 +1591,32 @@ $age = 0..
                 </t>
             </section>
         </section>
+        <section title="Type Choices" anchor="type_choices">
+            <t>
+                A type specification can be a type choice.  A type choice begins with an opening parenthesis ('(')
+                and ends with a closing parenthesis (')').  Its subordinate components are type specifications or rule name references
+                combined using the choice combiner as described in <xref target="combiners"/>.
+            </t>
+            <figure anchor="type_choice.jcr">
+                <artwork align="center" xml:space="preserve">&type_choice.jcr;</artwork>
+            </figure>
+            <t>
+                Type choices can also be used for enumerations.  
+            </t>
+            <figure anchor="type_choice2.jcr">
+                <artwork align="center" xml:space="preserve">&type_choice2.jcr;</artwork>
+            </figure>
+            <t>
+                To validate against a type choice, an instance value MUST validate against one (or more)
+                of the subordinate component type specifications.
+            </t>
+        </section>            
+        <section title="Any Type">
+            <t>
+                The 'any' type specifies that a JSON value instance can be any primitive
+                type, array type, or object type.
+            </t>
+        </section>            
         <section title="Group Specifications" anchor="group_specifications">
             <t>
                 Unlike the other type specifications, group specifications have no direct tie with JSON syntax.
