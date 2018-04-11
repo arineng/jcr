@@ -383,6 +383,7 @@
 <link href="#rfc.section.4" rel="Chapter" title="4 JCR Examples">
 <link href="#rfc.section.4.1" rel="Chapter" title="4.1 A First Example: Specifying Content">
 <link href="#rfc.section.4.2" rel="Chapter" title="4.2 A Second Example: Testing Content">
+<link href="#rfc.section.4.3" rel="Chapter" title="4.3 A Third Example: Combining Rulesets">
 <link href="#rfc.section.5" rel="Chapter" title="5 Overview of the Language">
 <link href="#rfc.section.6" rel="Chapter" title="6 Language Components">
 <link href="#rfc.section.6.1" rel="Chapter" title="6.1 Character Encoding">
@@ -405,13 +406,13 @@
 <link href="#rfc.section.6.11.3" rel="Chapter" title="6.11.3 Numbers">
 <link href="#rfc.section.6.11.4" rel="Chapter" title="6.11.4 Plain Strings">
 <link href="#rfc.section.6.11.5" rel="Chapter" title="6.11.5 Strings with Additional Semantics">
-<link href="#rfc.section.6.12" rel="Chapter" title="6.12 Type Choices">
-<link href="#rfc.section.6.13" rel="Chapter" title="6.13 Any Type">
-<link href="#rfc.section.6.14" rel="Chapter" title="6.14 Member Specifications">
-<link href="#rfc.section.6.15" rel="Chapter" title="6.15 Object Specifications">
-<link href="#rfc.section.6.16" rel="Chapter" title="6.16 Array Specifications">
-<link href="#rfc.section.6.16.1" rel="Chapter" title="6.16.1 Ordered Array Specifications">
-<link href="#rfc.section.6.16.2" rel="Chapter" title="6.16.2 Unordered Array Specifications">
+<link href="#rfc.section.6.12" rel="Chapter" title="6.12 Member Specifications">
+<link href="#rfc.section.6.13" rel="Chapter" title="6.13 Object Specifications">
+<link href="#rfc.section.6.14" rel="Chapter" title="6.14 Array Specifications">
+<link href="#rfc.section.6.14.1" rel="Chapter" title="6.14.1 Ordered Array Specifications">
+<link href="#rfc.section.6.14.2" rel="Chapter" title="6.14.2 Unordered Array Specifications">
+<link href="#rfc.section.6.15" rel="Chapter" title="6.15 Type Choices">
+<link href="#rfc.section.6.16" rel="Chapter" title="6.16 Any Type">
 <link href="#rfc.section.6.17" rel="Chapter" title="6.17 Group Specifications">
 <link href="#rfc.section.6.18" rel="Chapter" title="6.18 Starting Points and Root Rules">
 <link href="#rfc.section.7" rel="Chapter" title="7 Tips and Tricks">
@@ -428,10 +429,11 @@
 <link href="#rfc.section.9.2" rel="Chapter" title="9.2 Codalogic JCR Parser">
 <link href="#rfc.section.9.3" rel="Chapter" title="9.3 JCR Java">
 <link href="#rfc.section.10" rel="Chapter" title="10 ABNF Syntax">
-<link href="#rfc.section.11" rel="Chapter" title="11 Acknowledgements">
-<link href="#rfc.references" rel="Chapter" title="12 References">
-<link href="#rfc.references.1" rel="Chapter" title="12.1 Normative References">
-<link href="#rfc.references.2" rel="Chapter" title="12.2 Infomative References">
+<link href="#rfc.section.11" rel="Chapter" title="11 Security Considerations">
+<link href="#rfc.section.12" rel="Chapter" title="12 Acknowledgements">
+<link href="#rfc.references" rel="Chapter" title="13 References">
+<link href="#rfc.references.1" rel="Chapter" title="13.1 Normative References">
+<link href="#rfc.references.2" rel="Chapter" title="13.2 Infomative References">
 <link href="#rfc.appendix.A" rel="Chapter" title="A Experimental Features">
 <link href="#rfc.appendix.A.1" rel="Chapter" title="A.1 Augmented OR of Objects">
 <link href="#rfc.appendix.A.2" rel="Chapter" title="A.2 New Data Types">
@@ -449,7 +451,7 @@
 
   <meta name="dct.creator" content="Newton, A. and P. Cordell" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-newton-json-content-rules-10" />
-  <meta name="dct.issued" scheme="ISO8601" content="2018-10" />
+  <meta name="dct.issued" scheme="ISO8601" content="2018-11" />
   <meta name="dct.abstract" content="This document describes a language for specifying and testing the expected content of JSON structures found in JSON-using protocols, software, and processes.  " />
   <meta name="description" content="This document describes a language for specifying and testing the expected content of JSON structures found in JSON-using protocols, software, and processes.  " />
 
@@ -473,12 +475,12 @@
 <td class="right">P. Cordell</td>
 </tr>
 <tr>
-<td class="left">Expires: October 12, 2018</td>
+<td class="left">Expires: October 13, 2018</td>
 <td class="right">Codalogic</td>
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">April 10, 2018</td>
+<td class="right">April 11, 2018</td>
 </tr>
 
     	
@@ -494,7 +496,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on October 12, 2018.</p>
+<p>This Internet-Draft will expire on October 13, 2018.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2018 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -521,6 +523,8 @@
 <ul><li>4.1.   <a href="#rfc.section.4.1">A First Example: Specifying Content</a>
 </li>
 <li>4.2.   <a href="#rfc.section.4.2">A Second Example: Testing Content</a>
+</li>
+<li>4.3.   <a href="#rfc.section.4.3">A Third Example: Combining Rulesets</a>
 </li>
 </ul><li>5.   <a href="#rfc.section.5">Overview of the Language</a>
 </li>
@@ -566,21 +570,21 @@
 </li>
 <li>6.11.5.   <a href="#rfc.section.6.11.5">Strings with Additional Semantics</a>
 </li>
-</ul><li>6.12.   <a href="#rfc.section.6.12">Type Choices</a>
+</ul><li>6.12.   <a href="#rfc.section.6.12">Member Specifications</a>
 </li>
-<li>6.13.   <a href="#rfc.section.6.13">Any Type</a>
+<li>6.13.   <a href="#rfc.section.6.13">Object Specifications</a>
 </li>
-<li>6.14.   <a href="#rfc.section.6.14">Member Specifications</a>
+<li>6.14.   <a href="#rfc.section.6.14">Array Specifications</a>
 </li>
-<li>6.15.   <a href="#rfc.section.6.15">Object Specifications</a>
+<ul><li>6.14.1.   <a href="#rfc.section.6.14.1">Ordered Array Specifications</a>
 </li>
-<li>6.16.   <a href="#rfc.section.6.16">Array Specifications</a>
+<li>6.14.2.   <a href="#rfc.section.6.14.2">Unordered Array Specifications</a>
 </li>
-<ul><li>6.16.1.   <a href="#rfc.section.6.16.1">Ordered Array Specifications</a>
+</ul><li>6.15.   <a href="#rfc.section.6.15">Type Choices</a>
 </li>
-<li>6.16.2.   <a href="#rfc.section.6.16.2">Unordered Array Specifications</a>
+<li>6.16.   <a href="#rfc.section.6.16">Any Type</a>
 </li>
-</ul><li>6.17.   <a href="#rfc.section.6.17">Group Specifications</a>
+<li>6.17.   <a href="#rfc.section.6.17">Group Specifications</a>
 </li>
 <li>6.18.   <a href="#rfc.section.6.18">Starting Points and Root Rules</a>
 </li>
@@ -612,13 +616,15 @@
 </li>
 </ul><li>10.   <a href="#rfc.section.10">ABNF Syntax</a>
 </li>
-<li>11.   <a href="#rfc.section.11">Acknowledgements</a>
+<li>11.   <a href="#rfc.section.11">Security Considerations</a>
 </li>
-<li>12.   <a href="#rfc.references">References</a>
+<li>12.   <a href="#rfc.section.12">Acknowledgements</a>
 </li>
-<ul><li>12.1.   <a href="#rfc.references.1">Normative References</a>
+<li>13.   <a href="#rfc.references">References</a>
 </li>
-<li>12.2.   <a href="#rfc.references.2">Infomative References</a>
+<ul><li>13.1.   <a href="#rfc.references.1">Normative References</a>
+</li>
+<li>13.2.   <a href="#rfc.references.2">Infomative References</a>
 </li>
 </ul><li>Appendix A.   <a href="#rfc.appendix.A">Experimental Features</a>
 </li>
@@ -721,7 +727,7 @@
 <p class="figure">Figure 2</p>
 <p id="rfc.section.2.3.p.3">The above examples demonstrate that the JCR is more concise and conveys the same information but in fewer lines in a syntax familiar with a JSON-aware software implementor.  </p>
 <p id="rfc.section.2.3.p.4">From a high-level view point, it could be said that JSON Schema is like XML Schema whereas JCR is more like Compact RelaxNG.  </p>
-<p id="rfc.section.2.3.p.5">Additionally, JCR syntax is a superset of JSON syntax, whereby specification authors may use example JSON protocol messages as a starting point for defining JCR rules (as is described in <a href="#a_first_example" class="xref">Section 4.1</a>). Consequently, the effort required to turn JSON examples into JCR specifications is minimimal compared to that required to create an equivalent JSON Schema.  This, combined with the brevity of describing rules and the ability to name rules, allows specification authors to interleave their prose with JCR rules in their specifications, facilitating describing semantics in close proximity to syntax.  </p>
+<p id="rfc.section.2.3.p.5">Additionally, JCR syntax is a superset of JSON syntax, whereby specification authors may use example JSON protocol messages as a starting point for defining JCR rules (as is described in <a href="#a_first_example" class="xref">Section 4.1</a>). Consequently, the effort required to turn JSON examples into JCR specifications is minimal compared to that required to create an equivalent JSON Schema.  This, combined with the brevity of describing rules and the ability to name rules, allows specification authors to interleave their prose with JCR rules in their specifications, facilitating describing semantics in close proximity to syntax.  </p>
 <h1 id="rfc.section.3">
 <a href="#rfc.section.3">3.</a> Uses</h1>
 <p id="rfc.section.3.p.1">JCR's primary focus is to help specification authors concisely and clearly describe complex JSON data structures.  </p>
@@ -734,7 +740,7 @@
 <p id="rfc.section.3.p.8">Being a simple, defined language, JCR can also be used on an ad-hoc basis by developers as part of the design process, such as during brainstorming and whiteboarding sessions, without risking confusion over notation that may occur if an un-documented notation is used.  </p>
 <h1 id="rfc.section.4">
 <a href="#rfc.section.4">4.</a> JCR Examples</h1>
-<p id="rfc.section.4.p.1">Being a superset of JSON syntax, those familar with JSON will likely have an intuitive understanding of many aspects of JCR.  This section offers some JCR examples to give such readers a feel for JCR before going into the detail.  </p>
+<p id="rfc.section.4.p.1">Being a superset of JSON syntax, those familiar with JSON will likely have an intuitive understanding of many aspects of JCR.  This section offers some JCR examples to give such readers a feel for JCR before going into the detail.  </p>
 <h1 id="rfc.section.4.1">
 <a href="#rfc.section.4.1">4.1.</a> <a href="#a_first_example" id="a_first_example">A First Example: Specifying Content</a>
 </h1>
@@ -803,6 +809,37 @@ $wc = "word-count" : 16714
 <p class="figure">Figure 9</p>
 <p id="rfc.section.4.2.p.5">This example shows how a protocol specification can describe a JSON object in general and a test environment can override the rules for testing specific cases.  </p>
 <p id="rfc.section.4.2.p.6">All figures used in this specification are available <a href="https://github.com/arineng/jcr/tree/master/figs">here</a>.  </p>
+<h1 id="rfc.section.4.3">
+<a href="#rfc.section.4.3">4.3.</a> A Third Example: Combining Rulesets</h1>
+<p id="rfc.section.4.3.p.1">In addition to defining rules, which relate to individual JSON values, JCR also has directives, which have a more ruleset-wide effect.  </p>
+<p id="rfc.section.4.3.p.2">Currently defined directives include jcr-version, ruleset-id and import.  jcr-version specifies the version of JCR used by a ruleset, and allows future versions of JCR.  ruleset-id and import support combining rules from multiple rulesets.  </p>
+<p id="rfc.section.4.3.p.3">Extending the previous example, it might be decided that the unsigned integer type associated with the $lc and $wc is so useful that it should be extracted into a ruleset of common utility types so that it can be used in other rulesets.  Such a ruleset may look like: </p>
+<div id="rfc.figure.10"></div>
+<div id="thrid_example2.jcr"></div>
+<pre>#jcr-version 1.0
+#ruleset-id com.example.common-types
+
+$count = 0..
+</pre>
+<p class="figure">Figure 10</p>
+<p id="rfc.section.4.3.p.4">As this may be a long-lived ruleset, the jcr-version directive make it clear that JCR version 1.0 is being used.  The ruleset is given the identity 'com.example.common-types' using the ruleset-id directive.  The rule for the type is assigned the rule name 'count'.  </p>
+<p id="rfc.section.4.3.p.5">A ruleset that makes use of the count type, may look as follows: </p>
+<div id="rfc.figure.11"></div>
+<div id="thrid_example1.jcr"></div>
+<pre>#import com.example.common-types as ct
+
+{
+  $fn,
+  $lc,
+  $wc
+}
+
+$fn = "file-name"  : string
+$lc = "line-count" : $ct.count
+$wc = "word-count" : $ct.count
+</pre>
+<p class="figure">Figure 11</p>
+<p id="rfc.section.4.3.p.6">To make use of the count type, it is first necessary to import the 'com.example.common-types' ruleset, using the import directive.  As part of the import, the 'com.example.common-types' ruleset is given an alias, 'ct', with which to refer to it.  It is then possible to use the imported count type as '$ct.count'.  </p>
 <h1 id="rfc.section.5">
 <a href="#rfc.section.5">5.</a> Overview of the Language</h1>
 <p id="rfc.section.5.p.1">JCR is composed of rules (as the name suggests). A collection of rules that is processed together is a ruleset. Rulesets may also contain comments, blank lines, and directives that apply to the processing of a ruleset.  </p>
@@ -815,7 +852,7 @@ $wc = "word-count" : 16714
 <p id="rfc.section.5.p.8">Any rule without a rule name is considered a root rule. Such a rule MUST be a type specification. Unless otherwise specified, all the root rules of a ruleset are evaluated against a JSON instance or document.  </p>
 <p id="rfc.section.5.p.9">Rule specifications may be augmented with annotations to specify additional constraints and properties.  For example, arrays can be augmented with an 'unordered' annotation to indicate that the order of its members isn't significant.  </p>
 <p id="rfc.section.5.p.10">The syntax for each form of type specification varies depending on the type.  For example: </p>
-<div id="rfc.figure.10"></div>
+<div id="rfc.figure.12"></div>
 <div id="primitive_overview.jcr"></div>
 <pre>; primitive types can be string
 ; or number literals
@@ -859,9 +896,9 @@ $mem3 = /^dev[0-9]$/ : 0..4096
 ( [ integer, integer], $rule1 ) 
 $rule1 = [ string, string ]
 </pre>
-<p class="figure">Figure 10</p>
-<p id="rfc.section.5.p.11">Putting it all together, the JSON in <a href="#rfc4627-example-1" class="xref">Figure 11</a> is described by the JCR in <a href="#rfc4627-example-1-compact-rules" class="xref">Figure 12</a>.  </p>
-<div id="rfc.figure.11"></div>
+<p class="figure">Figure 12</p>
+<p id="rfc.section.5.p.11">Putting it all together, the JSON in <a href="#rfc4627-example-1" class="xref">Figure 13</a> is described by the JCR in <a href="#rfc4627-example-1-compact-rules" class="xref">Figure 14</a>.  </p>
+<div id="rfc.figure.13"></div>
 <div id="rfc4627-example-1"></div>
 <pre>{
   "Image": {
@@ -877,8 +914,8 @@ $rule1 = [ string, string ]
   }
 }      
 </pre>
-<p class="figure">Figure 11: Example JSON shamelessly lifted from RFC 8259</p>
-<div id="rfc.figure.12"></div>
+<p class="figure">Figure 13: Example JSON shamelessly lifted from RFC 8259</p>
+<div id="rfc.figure.14"></div>
 <div id="rfc4627-example-1-compact-rules"></div>
 <pre>; the root of the JSON instance is an object
 ; this root rule describes that object
@@ -915,7 +952,8 @@ $width  = "Width" : 0..1280
 $height = "Height" : 0..1024
 
 </pre>
-<p class="figure">Figure 12: JCR for JSON example from RFC 8259</p>
+<p class="figure">Figure 14: JCR for JSON example from RFC 8259</p>
+<p id="rfc.section.5.p.12">In addition to defining rules, JCR also has directives.  These have a more ruleset-wide effect.  Simple uses of JCR will likely not use directives.  </p>
 <h1 id="rfc.section.6">
 <a href="#rfc.section.6">6.</a> Language Components</h1>
 <p id="rfc.section.6.p.1">This section describes each component of the JCR language in detail.  </p>
@@ -938,13 +976,13 @@ $height = "Height" : 0..1024
 <p id="rfc.section.6.4.p.1">Directives modify the processing of a ruleset.  If present, they typically appear at the start of a ruleset, before any rules are defined, but they can be placed in other parts of the ruleset if necessary.  Simpler rulesets need not include any directives.  </p>
 <p id="rfc.section.6.4.p.2">There are two forms of the directive, the single line directive and the multi-line directive.  </p>
 <p id="rfc.section.6.4.p.3">Single line directives appear on their own line in a ruleset, begin with a hash character ('#') and are terminated by the end of the line.  They take the following form: </p>
-<div id="rfc.figure.13"></div>
+<div id="rfc.figure.15"></div>
 <div id="single_line_directive_example.jcr"></div>
 <pre># directive_name parameter_1 parameter_2 ...
 </pre>
-<p class="figure">Figure 13</p>
+<p class="figure">Figure 15</p>
 <p id="rfc.section.6.4.p.4">Multi-line directives also appear on their own lines, but may span multiple lines.  They begin with the character sequence "#{" and end with "}". The take the following form: </p>
-<div id="rfc.figure.14"></div>
+<div id="rfc.figure.16"></div>
 <div id="multi_line_directive_example.jcr"></div>
 <pre>#{ directive_name
     parameter_1 paramter_2
@@ -952,40 +990,40 @@ $height = "Height" : 0..1024
     ...
 }
 </pre>
-<p class="figure">Figure 14</p>
+<p class="figure">Figure 16</p>
 <p id="rfc.section.6.4.p.5">This specification defines the directives "jcr-version", "ruleset-id", and "import", but other directives may be defined in future.  </p>
 <h1 id="rfc.section.6.4.1">
 <a href="#rfc.section.6.4.1">6.4.1.</a> jcr-version</h1>
 <p id="rfc.section.6.4.1.p.1">This directive declares that the ruleset complies with a specific version of this standard. The version is expressed as a major integer followed by a period followed by a minor integer.  </p>
-<div id="rfc.figure.15"></div>
+<div id="rfc.figure.17"></div>
 <div id="jcr_version_current.jcr"></div>
 <pre># jcr-version 0.7
 </pre>
-<p class="figure">Figure 15</p>
+<p class="figure">Figure 17</p>
 <p id="rfc.section.6.4.1.p.2">The major.minor number signifying compliance with this document is "0.9". Upon publication of this specification as an IETF proposed standard, it will be "1.0".  <a id="CREF1" class="info">[CREF1]<span class="info">NOTE: This will be removed in the final version.  </span></a> </p>
-<div id="rfc.figure.16"></div>
+<div id="rfc.figure.18"></div>
 <div id="jcr_version_final.jcr"></div>
 <pre>
 # jcr-version 1.0
                     </pre>
-<p class="figure">Figure 16</p>
+<p class="figure">Figure 18</p>
 <p id="rfc.section.6.4.1.p.3">This directive may have optional extension identifiers following the version number.  Each extension identifiers is preceded by the plus ('+') character and separated by white space.  An extension identifier has the form of an identifier as described in <a href="#names-and-identifiers" class="xref">Section 6.3</a>.  The structure of extension identifiers is specific to the extension, but it is recommended that they are terminated by a version number.  </p>
-<div id="rfc.figure.17"></div>
+<div id="rfc.figure.19"></div>
 <div id="jcr_version_extensions.jcr"></div>
 <pre>
 # jcr-version 1.0 +co-constraints-1.2 +jcr-doc-1.0
                     </pre>
-<p class="figure">Figure 17</p>
+<p class="figure">Figure 19</p>
 <p id="rfc.section.6.4.1.p.4">A maximum of one jcr-version directive is permitted in a ruleset.  Ruleset authors are advised to place this directive as the first line of a ruleset.  </p>
 <h1 id="rfc.section.6.4.2">
 <a href="#rfc.section.6.4.2">6.4.2.</a> <a href="#ruleset-id" id="ruleset-id">ruleset-id</a>
 </h1>
 <p id="rfc.section.6.4.2.p.1">This directive identifies a ruleset to rule processors. It takes the form: </p>
-<div id="rfc.figure.18"></div>
+<div id="rfc.figure.20"></div>
 <div id="ruleset_id.jcr"></div>
 <pre># ruleset-id ruleset-identifier
 </pre>
-<p class="figure">Figure 18</p>
+<p class="figure">Figure 20</p>
 <p id="rfc.section.6.4.2.p.2">The ruleset identifier has the form of an identifier as described in <a href="#names-and-identifiers" class="xref">Section 6.3</a>.  The identifier can be a URL (e.g. http://example.com/foo), an inverted domain name (e.g. com.example.foo) or have any other internal structure that a ruleset author deems appropriate.  To a JCR processor the identifier is treated as an opaque, case-sensitive string.  An identifier that is URI based should not be taken to imply that the ruleset is accessible over the Internet at that address (although it is not prevented from being accessible in such a way).  </p>
 <p id="rfc.section.6.4.2.p.3">A maximum of one ruleset-id directive is permitted in a ruleset.  If present, it is suggested that it be the second line of a ruleset, following the jcr-version directive, or the first line if no jcr-version directive is present.  </p>
 <h1 id="rfc.section.6.4.3">
@@ -993,13 +1031,13 @@ $height = "Height" : 0..1024
 </h1>
 <p id="rfc.section.6.4.3.p.1">The import directive specifies that another ruleset is to have its rules evaluated in addition to the ruleset where the directive appears.  </p>
 <p id="rfc.section.6.4.3.p.2">The following is an example: </p>
-<div id="rfc.figure.19"></div>
+<div id="rfc.figure.21"></div>
 <div id="import_directive.jcr"></div>
 <pre>
 # import http://example.com/rfc9999 as rfc9999
 # import http://example.com/rfc9997
                         </pre>
-<p class="figure">Figure 19</p>
+<p class="figure">Figure 21</p>
 <p id="rfc.section.6.4.3.p.3">The identifier after the import keyword is a ruleset identifier.  As such, it is an identifier as described in <a href="#names-and-identifiers" class="xref">Section 6.3</a>.  The ruleset that is imported is identified by having the specified ruleset identifier assigned in its #ruleset-id directive (See <a href="#ruleset-id" class="xref">Section 6.4.2</a>).  How a JCR processor locates the imported ruleset is out of scope for this document.  </p>
 <p id="rfc.section.6.4.3.p.4">The string after the as keyword acts as an alias for the identifier. An alias has the form of a name as described in <a href="#names-and-identifiers" class="xref">Section 6.3</a>.  Including the as keyword followed by an alias is optional.  </p>
 <p id="rfc.section.6.4.3.p.5">The rule names of the ruleset being imported may be referenced by prepending the alias followed by a period character ('.') followed by the local rule name (i.e. "alias.name"). To continue the example above, if the ruleset identified as http://example.com/rfc9999 were to have a rule named 'encoding', rules in the ruleset importing it can refer to that rule as 'rfc9999.encoding'.  </p>
@@ -1020,7 +1058,7 @@ $height = "Height" : 0..1024
 <p id="rfc.section.6.6.p.2">Rule names are signified with the dollar character ('$'), which is not part of the rule name itself.  Rule names have two components, an optional ruleset identifier alias and a local rule name.  If a ruleset identifier alias is present, it is separated from the local rule name by a dot character ('.').  Both ruleset identifier aliases and local rule names are types of name (see <a href="#names-and-identifiers" class="xref">Section 6.3</a>).  </p>
 <p id="rfc.section.6.6.p.3">When a rule name is used in the rule specification assignment context, only the local rule name part can be present.  In this context, the local rule name must be unique within a ruleset (that is, no two rule name assignments may use the same local rule name in the same ruleset).  </p>
 <p id="rfc.section.6.6.p.4">In rule name assignments, the rule name is separated from the rule specification using the '=' character.  </p>
-<div id="rfc.figure.20"></div>
+<div id="rfc.figure.22"></div>
 <div id="assignment_example.jcr"></div>
 <pre>;rule name assignments for primitive types
 $fuz         = "fuz"
@@ -1029,43 +1067,43 @@ $some_string = string
 ;rule name assignment for an array
 $bar = [ integer, integer, integer ]
 </pre>
-<p class="figure">Figure 20</p>
+<p class="figure">Figure 22</p>
 <p id="rfc.section.6.6.p.5">In the rule specification referencing context, a rule name, prefixed by the dollar character ('$'), is used in place of a rule specification.  </p>
-<div id="rfc.figure.21"></div>
+<div id="rfc.figure.23"></div>
 <div id="assignment_example_2.jcr"></div>
 <pre>;rule name referencing in an object
 { "bar" : $bar, "foo" : $foo }
 </pre>
-<p class="figure">Figure 21</p>
+<p class="figure">Figure 23</p>
 <p id="rfc.section.6.6.p.6">Ruleset identifier aliases may be included in a rule name that is used as a reference.  They enable referencing rules from another ruleset.  Simple use cases of JCR will most likely not use ruleset identifiers.  </p>
-<div id="rfc.figure.22"></div>
+<div id="rfc.figure.24"></div>
 <div id="rule_name_ruleset_id.jcr"></div>
-<p>In Figure <a href="#rule_name_ruleset_id.jcr" class="xref">Figure 22</a> below, "http://ietf.org/rfcYYYY.JCR" and "http://ietf.org/rfcXXXX.JCR" are ruleset identifiers and "rfcXXXX" is a ruleset identifier alias.  See Section <a href="#import" class="xref">Section 6.4.3</a> for details on defining and using ruleset identifier aliases.  </p>
+<p>In Figure <a href="#rule_name_ruleset_id.jcr" class="xref">Figure 24</a> below, "http://ietf.org/rfcYYYY.JCR" and "http://ietf.org/rfcXXXX.JCR" are ruleset identifiers and "rfcXXXX" is a ruleset identifier alias.  See Section <a href="#import" class="xref">Section 6.4.3</a> for details on defining and using ruleset identifier aliases.  </p>
 <pre># ruleset-id http://ietf.org/rfcYYYY.JCR
 # import http://ietf.org/rfcXXXX.JCR as rfcXXXX
 $my_encodings  = ( "mythic" | "magic" )
 $all_encodings = ( $rfcXXXX.encodings | $my_encodings )
 </pre>
-<p class="figure">Figure 22</p>
+<p class="figure">Figure 24</p>
 <p id="rfc.section.6.6.p.7">The order of rule name references in a ruleset relative to their referenced rule name assignment is not significant.  Rule name references can be either before or after their referenced rule name assignment.  </p>
 <h1 id="rfc.section.6.7">
 <a href="#rfc.section.6.7">6.7.</a> Annotations</h1>
 <p id="rfc.section.6.7.p.1">Annotations may appear before a rule name assignment, before a type or member specification, or before a rule name contained within a type specification. In each place, there may be zero or more annotations.  Each annotation begins with the character sequence "@{" and ends with "}". The following is an example of a type specification with the not annotation: </p>
-<div id="rfc.figure.23"></div>
+<div id="rfc.figure.25"></div>
 <div id="annotation_example.jcr"></div>
 <pre>@{not} [ "fruits", "vegetables" ]
 </pre>
-<p class="figure">Figure 23</p>
+<p class="figure">Figure 25</p>
 <p id="rfc.section.6.7.p.2">The @{not} annotation is described in <a href="#not_annotation" class="xref">Section 6.7.1</a>.  </p>
 <p id="rfc.section.6.7.p.3">The @{root} annotation is described in <a href="#starting-points" class="xref">Section 6.18</a>.  </p>
-<p id="rfc.section.6.7.p.4">The @{unordered} annotation is described in <a href="#unordered_array_specifications" class="xref">Section 6.16.2</a>.  </p>
+<p id="rfc.section.6.7.p.4">The @{unordered} annotation is described in <a href="#unordered_array_specifications" class="xref">Section 6.14.2</a>.  </p>
 <p id="rfc.section.6.7.p.5">The @{min-exclusive} and @{max-exclusive} annotations are described in <a href="#numbers" class="xref">Section 6.11.3</a>.  </p>
 <p id="rfc.section.6.7.p.6">Other annotations may be defined for other purposes in future.  </p>
 <h1 id="rfc.section.6.7.1">
 <a href="#rfc.section.6.7.1">6.7.1.</a> <a href="#not_annotation" id="not_annotation">@{not} - Negating Evaluation</a>
 </h1>
 <p id="rfc.section.6.7.1.p.1">The evaluation of a rule can be changed with the @{not} annotation. With this annotation, a rule that would otherwise match does not, and a rule that would not have matched does.  </p>
-<div id="rfc.figure.24"></div>
+<div id="rfc.figure.26"></div>
 <div id="not_annotation.jcr"></div>
 <pre>; match anything that isn't the integer 2
 $not_two = [ @{not} 2 ]
@@ -1073,7 +1111,7 @@ $not_two = [ @{not} 2 ]
 ; error if one of the status values is "fail"
 $status = @{not} @{unordered} [ "fail", string * ] 
 </pre>
-<p class="figure">Figure 24</p>
+<p class="figure">Figure 26</p>
 <h1 id="rfc.section.6.8">
 <a href="#rfc.section.6.8">6.8.</a> <a href="#repetition" id="repetition">Repetition</a>
 </h1>
@@ -1081,7 +1119,7 @@ $status = @{not} @{unordered} [ "fail", string * ]
 <p id="rfc.section.6.8.p.2">Repetition expressions are specified using a Kleene symbol ('?', '+', or '*') or with the '*' symbol succeeded by specific minimum and/or maximum values, each being non-negative integers. Repetition expressions may also be appended with a step expression, which consists of the '%' symbol followed by a positive integer.  </p>
 <p id="rfc.section.6.8.p.3">When no repetition expression is present, both the minimum and maximum are 1.  </p>
 <p id="rfc.section.6.8.p.4">A minimum and maximum can be expressed by giving the minimum followed by two period characters ('..') followed by the maximum, with either the minimum or maximum being optional. When the minimum is not explicitly specified, it is assumed to be zero. When the maximum is not explicitly specified, it is assumed to be positive infinity.  </p>
-<div id="rfc.figure.25"></div>
+<div id="rfc.figure.27"></div>
 <div id="repetition_min_max.jcr"></div>
 <pre>; exactly 2 octets
 $word = [ $octet *2 ]
@@ -1098,9 +1136,9 @@ $mac_addr = hex
 ; four or more bytes
 [ $octet *4.. ]
 </pre>
-<p class="figure">Figure 25</p>
+<p class="figure">Figure 27</p>
 <p id="rfc.section.6.8.p.5">The allowable Kleene operators are the question mark character ('?') which specifies zero or one (i.e. optional), the plus character ('+') which specifies one or more, and the asterisk character ('*') which specifies zero or more.  </p>
-<div id="rfc.figure.26"></div>
+<div id="rfc.figure.28"></div>
 <div id="repetition_kleene.jcr"></div>
 <pre>; age is optional
 { "name" : string, "age" : integer ? }
@@ -1111,7 +1149,7 @@ $error_set = ( string * )
 ; 1 or more integer values
 [ integer + ]
 </pre>
-<p class="figure">Figure 26</p>
+<p class="figure">Figure 28</p>
 <p id="rfc.section.6.8.p.6">A repetition step expression may follow a minimum to maximum expression or the zero or more Kleene operator or the one or more Kleene operator.  </p>
 
 <ul>
@@ -1120,7 +1158,7 @@ $error_set = ( string * )
 </ul>
 
 <p> </p>
-<div id="rfc.figure.27"></div>
+<div id="rfc.figure.29"></div>
 <div id="repetition_step.jcr"></div>
 <p>The following is an example for repetition steps in repetition expressions.</p>
 <pre>; there must be at least 2 name servers
@@ -1151,12 +1189,12 @@ $error_set = ( string *%4 )
 ; e.g. 2, 4, 6 etc
 $dice_throws = ( 1..6 +%2 )
 </pre>
-<p class="figure">Figure 27</p>
+<p class="figure">Figure 29</p>
 <h1 id="rfc.section.6.9">
 <a href="#rfc.section.6.9">6.9.</a> <a href="#combiners" id="combiners">Combining Subordinate Components - Sequences and Choices</a>
 </h1>
 <p id="rfc.section.6.9.p.1">Combinations of subordinate components in array, object, and group specifications can be specified as either a sequence ("and") or a choice ("or"). A sequence is a subordinate component followed by the comma character (',') followed by another subordinate component.  A choice is a subordinate component followed by a pipe character ('|') followed by another subordinate component.  </p>
-<div id="rfc.figure.28"></div>
+<div id="rfc.figure.30"></div>
 <div id="and_or_example.jcr"></div>
 <pre>; sequence ("and")
 [ "this" , "that" ]
@@ -1164,20 +1202,20 @@ $dice_throws = ( 1..6 +%2 )
 ; choice ("or")
 [ "this" | "that" ]
 </pre>
-<p class="figure">Figure 28</p>
+<p class="figure">Figure 30</p>
 <p id="rfc.section.6.9.p.2">The exact meaning of a sequence or choice depends on whether it is in an object, array or group, and they are further discussed in the relevant sections.  </p>
 <p id="rfc.section.6.9.p.3">Sequence and choice combinations cannot be mixed, and group specifications must be used to explicitly declare precedence between a sequence and a choice. Therefore, the following is illegal: </p>
-<div id="rfc.figure.29"></div>
+<div id="rfc.figure.31"></div>
 <div id="mixed_and_or_bad.jcr"></div>
 <pre>[ "this", "that" | "the_other" ]
 </pre>
-<p class="figure">Figure 29</p>
+<p class="figure">Figure 31</p>
 <p id="rfc.section.6.9.p.4">The example above should be expressed as: </p>
-<div id="rfc.figure.30"></div>
+<div id="rfc.figure.32"></div>
 <div id="mixed_and_or_good.jcr"></div>
 <pre>[ "this", ( "that" | "the_other" ) ]
 </pre>
-<p class="figure">Figure 30</p>
+<p class="figure">Figure 32</p>
 <h1 id="rfc.section.6.10">
 <a href="#rfc.section.6.10">6.10.</a> Type Specifications</h1>
 <p id="rfc.section.6.10.p.1">Type specifications consist of primitive specifications, objects specifications, array specifications and group specifications.  Each of these are described in the sections below.  </p>
@@ -1187,47 +1225,47 @@ $dice_throws = ( 1..6 +%2 )
 <h1 id="rfc.section.6.11.1">
 <a href="#rfc.section.6.11.1">6.11.1.</a> Null</h1>
 <p id="rfc.section.6.11.1.p.1">The rule for a null type specification is the simplest and takes the following form: </p>
-<div id="rfc.figure.31"></div>
+<div id="rfc.figure.33"></div>
 <div id="primitive_null.jcr"></div>
 <pre>null
 </pre>
-<p class="figure">Figure 31</p>
+<p class="figure">Figure 33</p>
 <p id="rfc.section.6.11.1.p.2">A JSON instance value specified to be null must have the null value to be valid.  </p>
 <h1 id="rfc.section.6.11.2">
 <a href="#rfc.section.6.11.2">6.11.2.</a> Booleans</h1>
 <p id="rfc.section.6.11.2.p.1">The rules for booleans take the following forms: </p>
-<div id="rfc.figure.32"></div>
+<div id="rfc.figure.34"></div>
 <div id="primitive_boolean.jcr"></div>
 <pre>true
 false
 boolean
 </pre>
-<p class="figure">Figure 32</p>
+<p class="figure">Figure 34</p>
 <p id="rfc.section.6.11.2.p.2">A JSON instance value specified to be true must have the true value to be valid.  If specified to be false, it must have the false value.  If specified to be boolean, it must have either the true or false values.  </p>
 <p id="rfc.section.6.11.2.p.3">No casting or type coercion of non-Boolean types to Boolean types is permitted.  </p>
 <h1 id="rfc.section.6.11.3">
 <a href="#rfc.section.6.11.3">6.11.3.</a> <a href="#numbers" id="numbers">Numbers</a>
 </h1>
 <p id="rfc.section.6.11.3.p.1">Rules for numbers can specify a JSON instance value to be either an integer or floating point number: </p>
-<div id="rfc.figure.33"></div>
+<div id="rfc.figure.35"></div>
 <div id="primitive_integer_and_float.jcr"></div>
 <pre>integer
 float
 double
 </pre>
-<p class="figure">Figure 33</p>
+<p class="figure">Figure 35</p>
 <p id="rfc.section.6.11.3.p.2">The keyword 'float' represents a single precision IEEE-754 floating point number represented in decimal format. The keyword 'double' represents a double precision IEEE-754 floating point number represented in decimal format.  </p>
 <p id="rfc.section.6.11.3.p.3">Numbers may also be specified as an absolute value or a range of possible values, where a range may be specified using a minimum, maximum, or both.  </p>
 <p id="rfc.section.6.11.3.p.4">To specify an absolute value, the value itself is specified.  Note that floating point types MUST include a fractional or exponent part, even if the fractional part is zero.  </p>
-<div id="rfc.figure.34"></div>
+<div id="rfc.figure.36"></div>
 <div id="absolute_numbers"></div>
 <pre>
 10   ; Specifies the absolute integer value 10
 10.0 ; Specifies the absolute floating point value 10
                         </pre>
-<p class="figure">Figure 34</p>
+<p class="figure">Figure 36</p>
 <p id="rfc.section.6.11.3.p.5">To specify a range, the range token, consisting of two consecutive dot characters ('..'), is used.  The minimum in the range, if present, is placed before the range token, and the maximum, if present, is placed after the range token (with no intervening spaces).  If the minimum is absent, that specifies no lower bound.  If the maximum is absent, it specifies no upper bound.  </p>
-<div id="rfc.figure.35"></div>
+<div id="rfc.figure.37"></div>
 <div id="range_numbers"></div>
 <pre>
   10..100
@@ -1237,15 +1275,15 @@ double
     ..100.5
 10.5..
                         </pre>
-<p class="figure">Figure 35</p>
+<p class="figure">Figure 37</p>
 <p id="rfc.section.6.11.3.p.6">When specifying a minimum and a maximum, both must either be an integer or a floating point number.  Thus to specify a floating point number between zero and ten a definition of the following form is used: </p>
-<div id="rfc.figure.36"></div>
+<div id="rfc.figure.38"></div>
 <div id="primitive_float_range.jcr"></div>
 <pre>0.0..10.0
 </pre>
-<p class="figure">Figure 36</p>
+<p class="figure">Figure 38</p>
 <p id="rfc.section.6.11.3.p.7">When a range is used to define a number, by default the minimum and maximum values are included in the range.  The @{min-exclusive} annotation can be specified to exclude the minimum from the range and the @{max-exclusive} annotation can be specified to exclude the maximum from the range.  </p>
-<div id="rfc.figure.37"></div>
+<div id="rfc.figure.39"></div>
 <div id="annotations-range-exclusive.jcr"></div>
 <pre>$greater-than-or-equal-to-10 = 10.0..
 $greater-than-10 = @{min-exclusive} 10.0..
@@ -1255,9 +1293,9 @@ $less-than-100 = @{max-exclusive} ..100.0
 
 $gt-10-lt-100 = @{min-exclusive} @{max-exclusive} 10.0..100.0
 </pre>
-<p class="figure">Figure 37</p>
+<p class="figure">Figure 39</p>
 <p id="rfc.section.6.11.3.p.8">The size of integers may also be specified using bit lengths. The type name is constructed with a prefix followed by a number. The prefix 'int' specifies a signed integer and the prefix 'uint' specifies an unsigned integer. The number that follows is a positive integer that specifies the number of bits in the integer.  </p>
-<div id="rfc.figure.38"></div>
+<div id="rfc.figure.40"></div>
 <div id="primitive_bit_integers.jcr"></div>
 <pre>; 0..255
 uint8
@@ -1274,21 +1312,21 @@ int64
 ; 0..18446744073709551615
 uint64
 </pre>
-<p class="figure">Figure 38</p>
+<p class="figure">Figure 40</p>
 <p id="rfc.section.6.11.3.p.9">When specifying numbers, ruleset authors are recommended to bear in mind the commentary on numbers in <a href="#RFC7493" class="xref">[RFC7493]</a>.  </p>
 <p id="rfc.section.6.11.3.p.10">A JSON instance value specified to be a number MUST be represented in the instance as a JSON number.  Strings containing character sequences representing numbers MUST NOT be treated as numbers.  </p>
 <p id="rfc.section.6.11.3.p.11">If a range is specified for a number, the JSON instance value MUST be within the specified range.  </p>
 <p id="rfc.section.6.11.3.p.12">A JSON instance value specified to be an integer MUST NOT include a fractional part (as specified by the frac rule in the ABNF) or an exponential part (as specified by exp in the ABNF).  The following are invalid representations of integer instance values: </p>
-<div id="rfc.figure.39"></div>
+<div id="rfc.figure.41"></div>
 <div id="illegal_integers.jcr"></div>
 <pre>50.0    ; Invalid integer
 5e1     ; Invalid integer
 "50"    ; Invalid integer</pre>
-<p class="figure">Figure 39</p>
+<p class="figure">Figure 41</p>
 <h1 id="rfc.section.6.11.4">
 <a href="#rfc.section.6.11.4">6.11.4.</a> Plain Strings</h1>
 <p id="rfc.section.6.11.4.p.1">Generically, a string may be specified using the keyword 'string'. String literals may be specified using a double quote character followed by the literal content followed by another double quote. Regular expressions can be specified by enclosing a regular expression within the forward slash ('/') character.  </p>
-<div id="rfc.figure.40"></div>
+<div id="rfc.figure.42"></div>
 <div id="primitive_strings.jcr"></div>
 <pre>; any string
 string
@@ -1299,17 +1337,17 @@ string
 ; a regular expression
 /^she sells .*/
 </pre>
-<p class="figure">Figure 40</p>
+<p class="figure">Figure 42</p>
 <p id="rfc.section.6.11.4.p.2">Regular expressions are not implicitly anchored and therefore must be explicitly anchored if necessary.  </p>
 <p id="rfc.section.6.11.4.p.3">Regular expressions SHOULD use the ECMA 262 dialect used by JavaScript.  This is mostly a sub-set of the common regular expression dialects, and any regular expression thus defined should be usable in any mainstream regular expression engine.  </p>
 <p id="rfc.section.6.11.4.p.4">To be valid against a string specification, the JSON instance value MUST be a string.  </p>
 <p id="rfc.section.6.11.4.p.5">To validate a literal string specification, escape sequences in both the JCR string specification and the JSON instance value are converted to UTF-8.  The two strings are then compared as opaque sequences of bytes, and MUST be identical for the JSON instance value to be considered valid.  They are thus treated as case-sensitive. No whitespace processing or Unicode normalization is performed.  For the literal string specification "JCR Rules", both JSON instance values of "JCR Rules", and "\u004ACR Rules" are valid; while the JSON instance values "jcr rules", "  JCR Rules  ", or "JCR  &#160; Rules" are invalid.  </p>
-<p id="rfc.section.6.11.4.p.6">To be valid against a regex string sprecification, a JSON instance value, after converting escape sequences to UTF-8, MUST satisfy the specified regular expression.  </p>
+<p id="rfc.section.6.11.4.p.6">To be valid against a regex string specification, a JSON instance value, after converting escape sequences to UTF-8, MUST satisfy the specified regular expression.  </p>
 <h1 id="rfc.section.6.11.5">
 <a href="#rfc.section.6.11.5">6.11.5.</a> Strings with Additional Semantics</h1>
 <p id="rfc.section.6.11.5.p.1">JCR provides a large number of data types beyond those defined by JSON.  They are encoded in JSON instances using JSON strings.  </p>
 <p id="rfc.section.6.11.5.p.2">A string can be specified as a <a href="#RFC3986" class="xref">URI</a> using the keyword 'uri', but also may be more narrowly scoped to a URI of a specific scheme.  Specific URI schemes are specified with the keyword 'uri' followed by two period characters ('..') followed by the URI scheme.  </p>
-<div id="rfc.figure.41"></div>
+<div id="rfc.figure.43"></div>
 <div id="primitive_uris.jcr"></div>
 <pre>; any URI
 uri
@@ -1317,11 +1355,11 @@ uri
 ;a URI narrowed for an HTTPS uri
 uri..https
 </pre>
-<p class="figure">Figure 41</p>
+<p class="figure">Figure 43</p>
 <p id="rfc.section.6.11.5.p.3">IP addresses may be specified with either the keyword 'ipv4' for <a href="#RFC1166" class="xref">IPv4 addresses</a> or the keyword 'ipv6' for <a href="#RFC5952" class="xref">IPv6 addresses</a>. Fully qualified A-label and U-label domain names may be specified with the keywords 'fqdn' and 'idn'.  </p>
 <p id="rfc.section.6.11.5.p.4">Dates and time can be specified as formats found in <a href="#RFC3339" class="xref">RFC 3339</a>.  The keyword 'date' corresponds to the full-date ABNF rule, the keyword 'time' corresponds to the full-time ABNF rule, and the keyword 'datetime' corresponds to the 'date-time' ABNF rule.  </p>
 <p id="rfc.section.6.11.5.p.5">Email addresses formatted according to <a href="#RFC5322" class="xref">RFC 5322</a> may be specified using the 'email' keyword, and E.123 phone numbers may be specified using the keyword 'phone'.  </p>
-<div id="rfc.figure.42"></div>
+<div id="rfc.figure.44"></div>
 <div id="primitive_misc.jcr"></div>
 <pre>;IP addresses
 ipv4
@@ -1345,9 +1383,9 @@ email
 ; phone number
 phone
 </pre>
-<p class="figure">Figure 42</p>
+<p class="figure">Figure 44</p>
 <p id="rfc.section.6.11.5.p.6">Binary data can be specified in string form using the encodings specified in <a href="#RFC4648" class="xref">RFC 4648</a>. The keyword 'hex' corresponds to base16, while 'base32', 'base32hex', 'base64', and 'base64url' correspond with their RFC 4648 counterparts accordingly.  </p>
-<div id="rfc.figure.43"></div>
+<div id="rfc.figure.45"></div>
 <div id="primitive_binary.jcr"></div>
 <pre>; RFC 4648 base16
 hex
@@ -1364,32 +1402,12 @@ base64
 ; RFC 4648 base64url
 base64url
 </pre>
-<p class="figure">Figure 43</p>
+<p class="figure">Figure 45</p>
 <p id="rfc.section.6.11.5.p.7">For a JSON instance value to be valid against a semantic string specification, once escape sequences are converted to UTF-8, it MUST satisfy all the constraints specified by the relevant standard(s) for the semantic type.  </p>
 <h1 id="rfc.section.6.12">
-<a href="#rfc.section.6.12">6.12.</a> <a href="#type_choices" id="type_choices">Type Choices</a>
-</h1>
-<p id="rfc.section.6.12.p.1">A type specification can be a type choice.  A type choice begins with an opening parenthesis ('(') and ends with a closing parenthesis (')').  Its subordinate components are type specifications or rule name references combined using the choice combiner as described in <a href="#combiners" class="xref">Section 6.9</a>.  </p>
-<div id="rfc.figure.44"></div>
-<div id="type_choice.jcr"></div>
-<pre>{ "age" : (0.. | "unknown") }
-</pre>
-<p class="figure">Figure 44</p>
-<p id="rfc.section.6.12.p.2">Type choices can also be used for enumerations.  </p>
-<div id="rfc.figure.45"></div>
-<div id="type_choice2.jcr"></div>
-<pre>{ "status" : ("open" | "closed" | "unknown" | string) }
-; string included to allow for future extension
-</pre>
-<p class="figure">Figure 45</p>
-<p id="rfc.section.6.12.p.3">To validate against a type choice, an instance value MUST validate against one (or more) of the subordinate component type specifications.  </p>
-<h1 id="rfc.section.6.13">
-<a href="#rfc.section.6.13">6.13.</a> Any Type</h1>
-<p id="rfc.section.6.13.p.1">The 'any' type specifies that a JSON value instance can be any primitive type, array type, or object type.  </p>
-<h1 id="rfc.section.6.14">
-<a href="#rfc.section.6.14">6.14.</a> Member Specifications</h1>
-<p id="rfc.section.6.14.p.1">Member specifications define members of JSON objects. Unlike other type specifications, member specifications cannot be root rules and must be part of an object specification, a group specification, or preceded by a rule name assignment.  </p>
-<p id="rfc.section.6.14.p.2">Member specifications consist of a member name specification followed by a colon character (':') followed by either a subordinate component, which is either a rule name or a type specification. Member name specifications can be given either as a quoted string using double quotes or as a regular expression using forward slash ('/') characters. Regular expressions are not implicitly anchored and therefore must have explicit anchors if needed.  </p>
+<a href="#rfc.section.6.12">6.12.</a> Member Specifications</h1>
+<p id="rfc.section.6.12.p.1">Member specifications define members of JSON objects. Unlike other type specifications, member specifications cannot be root rules and must be part of an object specification, a group specification, or preceded by a rule name assignment.  </p>
+<p id="rfc.section.6.12.p.2">Member specifications consist of a member name specification followed by a colon character (':') followed by either a subordinate component, which is either a rule name or a type specification. Member name specifications can be given either as a quoted string using double quotes or as a regular expression using forward slash ('/') characters. Regular expressions are not implicitly anchored and therefore must have explicit anchors if needed.  </p>
 <div id="rfc.figure.46"></div>
 <div id="member_specifications.jcr"></div>
 <pre>;member name will exactly match "locationURI"
@@ -1399,13 +1417,13 @@ $location_uri = "locationURI" : uri
 $iface_mappings = /^eth[0-9]$/ : ipv4
 </pre>
 <p class="figure">Figure 46</p>
-<p id="rfc.section.6.14.p.3">Member specification validation takes place as part of object validation, which is described in <a href="#object-specifications" class="xref">Section 6.15</a>.  </p>
-<h1 id="rfc.section.6.15">
-<a href="#rfc.section.6.15">6.15.</a> <a href="#object-specifications" id="object-specifications">Object Specifications</a>
+<p id="rfc.section.6.12.p.3">Member specification validation takes place as part of object validation, which is described in <a href="#object-specifications" class="xref">Section 6.13</a>.  </p>
+<h1 id="rfc.section.6.13">
+<a href="#rfc.section.6.13">6.13.</a> <a href="#object-specifications" id="object-specifications">Object Specifications</a>
 </h1>
-<p id="rfc.section.6.15.p.1">Object specifications define JSON objects and are composed of zero or more subordinate components, each of which can be either a rule name, member specification, or group specification. The subordinate components are enclosed at the start with a left curly brace character ('{') and at the end with a right curly brace character ('}').  </p>
-<p id="rfc.section.6.15.p.2">Subordinate components MAY have repetitions as described in <a href="#repetition" class="xref">Section 6.8</a> and MAY be combined into sequences and/or choices as described in <a href="#combiners" class="xref">Section 6.9</a>.  </p>
-<p id="rfc.section.6.15.p.3">The following examples illustrate matching of JSON objects to JCR object specifications.  </p>
+<p id="rfc.section.6.13.p.1">Object specifications define JSON objects and are composed of zero or more subordinate components, each of which can be either a rule name, member specification, or group specification. The subordinate components are enclosed at the start with a left curly brace character ('{') and at the end with a right curly brace character ('}').  </p>
+<p id="rfc.section.6.13.p.2">Subordinate components MAY have repetitions as described in <a href="#repetition" class="xref">Section 6.8</a> and MAY be combined into sequences and/or choices as described in <a href="#combiners" class="xref">Section 6.9</a>.  </p>
+<p id="rfc.section.6.13.p.3">The following examples illustrate matching of JSON objects to JCR object specifications.  </p>
 <div id="rfc.figure.47"></div>
 <div id="object_example.jcr"></div>
 <p>As order is not implied for the members of objects under evaluation, the following rule will match the JSON in <a href="#object_example1.json" class="xref">Figure 48</a> and <a href="#object_example2.json" class="xref">Figure 49</a>.  </p>
@@ -1422,7 +1440,7 @@ $iface_mappings = /^eth[0-9]$/ : ipv4
 <pre>{ "statusCode" : 200, "locationUri" : "http://example.com" }
 </pre>
 <p class="figure">Figure 49</p>
-<p id="rfc.section.6.15.p.4">Because subordinate components of an object specification are evaluated in the order in which they are specified (i.e. left to right, top to bottom) <a id="AOR2" class="info">[AOR2]<span class="info">PJC: Deleted text after 'and' as it's not the case if we go with AOR (an instance needs to be associated with all sub-comps with the same name specification): and object members can only match one subordinate component of an object specification,</span></a> the rule o1 below will not match against the JSON in <a href="#object_order_eval.json" class="xref">Figure 51</a> but the rule o2 below will match it.  </p>
+<p id="rfc.section.6.13.p.4">Because subordinate components of an object specification are evaluated in the order in which they are specified (i.e. left to right, top to bottom) <a id="AOR2" class="info">[AOR2]<span class="info">PJC: Deleted text after 'and' as it's not the case if we go with AOR (an instance needs to be associated with all sub-comps with the same name specification): and object members can only match one subordinate component of an object specification,</span></a> the rule o1 below will not match against the JSON in <a href="#object_order_eval.json" class="xref">Figure 51</a> but the rule o2 below will match it.  </p>
 <div id="rfc.figure.50"></div>
 <div id="object_order_eval.jcr"></div>
 <pre>; zero or more members that match "p0", "p1", etc
@@ -1434,14 +1452,14 @@ $o1 = { /^p\d+$/ : integer *, "p1" : integer }
 $o2 = { "p1" : integer, /^p\d+$/ : integer * }
 </pre>
 <p class="figure">Figure 50</p>
-<p id="rfc.section.6.15.p.5">This is because the first subordinate of rule o1 specifies that an object can have zero or more members (that is the meaning of "*", see <a href="#repetition" class="xref">Section 6.8</a>) where the member name is the letter 'p' followed by a number (e.g. "p0", "p1", "p2"), and the second rule specifies a member with the exact member name of "p1". Rule o2 has the exact same member specifications but in the opposite order.  <a href="#object_order_eval.json" class="xref">Figure 51</a> does not match rule o1 because all of the members match the first subordinate rule leaving none to match the second subordinate rule.  However, rule o2 does match because the first subordinate rule matches only one member of the JSON object allowing the second subordinate rule to match the other member of the JSON object.  </p>
+<p id="rfc.section.6.13.p.5">This is because the first subordinate of rule o1 specifies that an object can have zero or more members (that is the meaning of "*", see <a href="#repetition" class="xref">Section 6.8</a>) where the member name is the letter 'p' followed by a number (e.g. "p0", "p1", "p2"), and the second rule specifies a member with the exact member name of "p1". Rule o2 has the exact same member specifications but in the opposite order.  <a href="#object_order_eval.json" class="xref">Figure 51</a> does not match rule o1 because all of the members match the first subordinate rule leaving none to match the second subordinate rule.  However, rule o2 does match because the first subordinate rule matches only one member of the JSON object allowing the second subordinate rule to match the other member of the JSON object.  </p>
 <div id="rfc.figure.51"></div>
 <div id="object_order_eval.json"></div>
 <pre>{ "p0" : 1, "p1" : 2 }
 </pre>
 <p class="figure">Figure 51</p>
-<p id="rfc.section.6.15.p.6">As stated above, members of instance objects which do not match a member name specification are ignored.  The reason for this validation model is due to the nature of the typical access model to JSON objects in many programming languages, where members of the object are obtained by referencing the member name. Therefore extra members may exist without harm.  </p>
-<p id="rfc.section.6.15.p.7">However, some specifications may need to restrict the members of a JSON object to a known set. To construct a rule specifying that no extra members are expected, the @{not} annotation (see <a href="#not_annotation" class="xref">Section 6.7.1</a>) may be used with a "match-all" regular expression as the last subordinate component of the object specification.  </p>
+<p id="rfc.section.6.13.p.6">As stated above, members of instance objects which do not match a member name specification are ignored.  The reason for this validation model is due to the nature of the typical access model to JSON objects in many programming languages, where members of the object are obtained by referencing the member name. Therefore extra members may exist without harm.  </p>
+<p id="rfc.section.6.13.p.7">However, some specifications may need to restrict the members of a JSON object to a known set. To construct a rule specifying that no extra members are expected, the @{not} annotation (see <a href="#not_annotation" class="xref">Section 6.7.1</a>) may be used with a "match-all" regular expression as the last subordinate component of the object specification.  </p>
 <div id="rfc.figure.52"></div>
 <div id="restrict_objects.jcr"></div>
 <p>The following rule will match the JSON object in <a href="#restrict_objects1.json" class="xref">Figure 53</a> but will not match the JSON object in <a href="#restrict_objects2.json" class="xref">Figure 54</a>.  </p>
@@ -1458,8 +1476,8 @@ $o2 = { "p1" : integer, /^p\d+$/ : integer * }
 <pre>{ "foo" : 1, "bar" : 2, "baz" : 3 }
 </pre>
 <p class="figure">Figure 54</p>
-<p id="rfc.section.6.15.p.8">This works because subordinate components are evaluated in the order they appear in the object rule, and the last component accepts any member with any type but fails to validate if one or more of those components are found due to the @{not} annotation.  </p>
-<p id="rfc.section.6.15.p.9">Validation of object instances against object specifications takes place as follows: <a id="AOR" class="info">[AOR]<span class="info">PJC: This is a first attempt at this to see what it might look like. We can always go back if AOR doesn't work out.</span></a> </p>
+<p id="rfc.section.6.13.p.8">This works because subordinate components are evaluated in the order they appear in the object rule, and the last component accepts any member with any type but fails to validate if one or more of those components are found due to the @{not} annotation.  </p>
+<p id="rfc.section.6.13.p.9">Validation of object instances against object specifications takes place as follows: <a id="AOR" class="info">[AOR]<span class="info">PJC: This is a first attempt at this to see what it might look like. We can always go back if AOR doesn't work out.</span></a> </p>
 
 <ul>
 <li>Each optional grouping is treated as a choice between itself and the empty group.  </li>
@@ -1482,15 +1500,15 @@ $o2 = { "p1" : integer, /^p\d+$/ : integer * }
 <ul class="empty"><li>NOTE: A future specification will clarify the choice ('|') operation as Inclusive OR ("IOR"), Exclusive OR ("XOR") or "Augmented OR" ("AOR") (as described above). Previously the choice ('|') operator was an Inclusive OR. However, for objects arrays that is not ideal, nor is XOR. We are in the process of defining an algorithm to "rewrite" choices of rules for use with inclusive or which is more suitable for the data model of JSON.  The above is a first attempt, but subject to change.  Future versions my revert to either pure inclusive OR or exclusive OR.  </li></ul>
 
 <p> </p>
-<h1 id="rfc.section.6.16">
-<a href="#rfc.section.6.16">6.16.</a> Array Specifications</h1>
-<p id="rfc.section.6.16.p.1">Array specifications define JSON arrays and are composed of zero or more subordinate components, each of which can either be a rule name or a primitive, array, object or group specification. The subordinate components are enclosed at the start with a left square brace character ('[') and at the end with a right square brace character (']').  </p>
-<p id="rfc.section.6.16.p.2">As with object specifications, array subordinate components MAY have repetitions as described in <a href="#repetition" class="xref">Section 6.8</a> and MAY be combined into sequences and/or choices as described in <a href="#combiners" class="xref">Section 6.9</a>.  </p>
-<p id="rfc.section.6.16.p.3">Arrays can be specified as either ordered or unordered.  Arrays are ordered by default.  </p>
-<h1 id="rfc.section.6.16.1">
-<a href="#rfc.section.6.16.1">6.16.1.</a> Ordered Array Specifications</h1>
-<p id="rfc.section.6.16.1.p.1">Unlike object specifications, order is implied in array specifications by default.  </p>
-<p id="rfc.section.6.16.1.p.2">Evaluation of the subordinate components of ordered array specifications is as follows: </p>
+<h1 id="rfc.section.6.14">
+<a href="#rfc.section.6.14">6.14.</a> Array Specifications</h1>
+<p id="rfc.section.6.14.p.1">Array specifications define JSON arrays and are composed of zero or more subordinate components, each of which can either be a rule name or a primitive, array, object or group specification. The subordinate components are enclosed at the start with a left square brace character ('[') and at the end with a right square brace character (']').  </p>
+<p id="rfc.section.6.14.p.2">As with object specifications, array subordinate components MAY have repetitions as described in <a href="#repetition" class="xref">Section 6.8</a> and MAY be combined into sequences and/or choices as described in <a href="#combiners" class="xref">Section 6.9</a>.  </p>
+<p id="rfc.section.6.14.p.3">Arrays can be specified as either ordered or unordered.  Arrays are ordered by default.  </p>
+<h1 id="rfc.section.6.14.1">
+<a href="#rfc.section.6.14.1">6.14.1.</a> Ordered Array Specifications</h1>
+<p id="rfc.section.6.14.1.p.1">Unlike object specifications, order is implied in array specifications by default.  </p>
+<p id="rfc.section.6.14.1.p.2">Evaluation of the subordinate components of ordered array specifications is as follows: </p>
 
 <ul>
 <li>Subordinate components of the array specification are evaluated in the order they appear.  </li>
@@ -1499,7 +1517,7 @@ $o2 = { "p1" : integer, /^p\d+$/ : integer * }
 </ul>
 
 <p> </p>
-<p id="rfc.section.6.16.1.p.3">Take for example the following ruleset: </p>
+<p id="rfc.section.6.14.1.p.3">Take for example the following ruleset: </p>
 <div id="rfc.figure.55"></div>
 <div id="array_order_eval.jcr"></div>
 <pre>; the first element of the array is to be a string
@@ -1511,19 +1529,19 @@ $a1 = [ string, integer ]
 $a2 = [ integer, string ]
 </pre>
 <p class="figure">Figure 55</p>
-<p id="rfc.section.6.16.1.p.4">It defines two rules, a1 and a2. The array in the following JSON will not match a1, but will match a2.  </p>
+<p id="rfc.section.6.14.1.p.4">It defines two rules, a1 and a2. The array in the following JSON will not match a1, but will match a2.  </p>
 <div id="rfc.figure.56"></div>
 <div id="array_order_eval.json"></div>
 <pre>[ 24, "Bob Smurd" ]
 </pre>
 <p class="figure">Figure 56</p>
-<p id="rfc.section.6.16.1.p.5">If an array instance has more elements than can be matched from the array specification, the array instance does not validate against the array specification. Or stated differently, an array with unmatched elements does not validate. Using the example array rule a2 from above, the following array does not match because the last element of the array does not match any subordinate component: </p>
+<p id="rfc.section.6.14.1.p.5">If an array instance has more elements than can be matched from the array specification, the array instance does not validate against the array specification. Or stated differently, an array with unmatched elements does not validate. Using the example array rule a2 from above, the following array does not match because the last element of the array does not match any subordinate component: </p>
 <div id="rfc.figure.57"></div>
 <div id="array_order_eval2.json"></div>
 <pre>[ 24, "Bob Smurd", "http://example.com/bob_smurd" ]
 </pre>
 <p class="figure">Figure 57</p>
-<p id="rfc.section.6.16.1.p.6">To allow an array to contain any value after guaranteeing that it contains the necessary items, the last subordinate component of the array specification should accept any item: </p>
+<p id="rfc.section.6.14.1.p.6">To allow an array to contain any value after guaranteeing that it contains the necessary items, the last subordinate component of the array specification should accept any item: </p>
 <div id="rfc.figure.58"></div>
 <div id="unrestricted_arrays.jcr"></div>
 <pre>; the first element of the array is to be an integer
@@ -1533,7 +1551,7 @@ $a3 = [ integer, string, any * ]
 </pre>
 <p>The JSON array in <a href="#array_order_eval2.json" class="xref">Figure 57</a> will validate against the a3 rule in this example.  </p>
 <p class="figure">Figure 58</p>
-<p id="rfc.section.6.16.1.p.7">Validating an ordered array, in the general case, has similarities with matching a regular expression or an ABNF grammar.  A regular expression specifies a pattern of tokens that happen to be textual characters, whereas an ordered array specification specifies a pattern of tokens that happen to be JSON values.  For example, the following JCR specifiction: </p>
+<p id="rfc.section.6.14.1.p.7">Validating an ordered array, in the general case, has similarities with matching a regular expression or an ABNF grammar.  A regular expression specifies a pattern of tokens that happen to be textual characters, whereas an ordered array specification specifies a pattern of tokens that happen to be JSON values.  For example, the following JCR specification: </p>
 <div id="rfc.figure.59"></div>
 <div id="order_array_with_optional_field.jcr"></div>
 <pre>
@@ -1544,22 +1562,22 @@ $last_name = string
 $age = 0..
                     </pre>
 <p class="figure">Figure 59</p>
-<p id="rfc.section.6.16.1.p.8">should accept the JSON instance: </p>
+<p id="rfc.section.6.14.1.p.8">should accept the JSON instance: </p>
 <div id="rfc.figure.60"></div>
 <div id="order_array_with_optional_field.json"></div>
 <pre>
 [ "George", "Washington", 67 ]
                     </pre>
 <p class="figure">Figure 60</p>
-<p id="rfc.section.6.16.1.p.9">When validating the above instance, a validator will initially associate "George" with $first_name, and "Washington" with $middle_name.  It will then attempt to validate 67 against $last_name, which will fail.  At this point, recognising that $middle_name is optional, the validator must back-track and associate "Washington" with $last_name.  From there it can validate 67 with $age and yield that the instance is valid.  </p>
-<p id="rfc.section.6.16.1.p.10">Similarly, the following JCR: </p>
+<p id="rfc.section.6.14.1.p.9">When validating the above instance, a validator will initially associate "George" with $first_name, and "Washington" with $middle_name.  It will then attempt to validate 67 against $last_name, which will fail.  At this point, recognizing that $middle_name is optional, the validator must back-track and associate "Washington" with $last_name.  From there it can validate 67 with $age and yield that the instance is valid.  </p>
+<p id="rfc.section.6.14.1.p.10">Similarly, the following JCR: </p>
 <div id="rfc.figure.61"></div>
 <div id="complex_order_array.jcr"></div>
 <pre>
 [ string, ( string | integer ) ?, string ]
                     </pre>
 <p class="figure">Figure 61</p>
-<p id="rfc.section.6.16.1.p.11">should accept each of the following JSON instances: </p>
+<p id="rfc.section.6.14.1.p.11">should accept each of the following JSON instances: </p>
 <div id="rfc.figure.62"></div>
 <div id="complex_order_array.json"></div>
 <pre>
@@ -1568,34 +1586,54 @@ $age = 0..
 [ "A", "C" ]
                     </pre>
 <p class="figure">Figure 62</p>
-<h1 id="rfc.section.6.16.2">
-<a href="#rfc.section.6.16.2">6.16.2.</a> <a href="#unordered_array_specifications" id="unordered_array_specifications">Unordered Array Specifications</a>
+<h1 id="rfc.section.6.14.2">
+<a href="#rfc.section.6.14.2">6.14.2.</a> <a href="#unordered_array_specifications" id="unordered_array_specifications">Unordered Array Specifications</a>
 </h1>
-<p id="rfc.section.6.16.2.p.1">Array specifications can be made to behave in a similar fashion to object specifications with regard to the order of matching with the @{unordered} annotation.  </p>
-<p id="rfc.section.6.16.2.p.2">In the ruleset below, a1 and a2 have the same subordinate components given in the same order. a2 is annotated with the @{unordered} annotation.  </p>
+<p id="rfc.section.6.14.2.p.1">Array specifications can be made to behave in a similar fashion to object specifications with regard to the order of matching with the @{unordered} annotation.  </p>
+<p id="rfc.section.6.14.2.p.2">In the ruleset below, a1 and a2 have the same subordinate components given in the same order. a2 is annotated with the @{unordered} annotation.  </p>
 <div id="rfc.figure.63"></div>
 <div id="array_unordered_eval.jcr"></div>
 <pre>$a1 =              [ string, integer ]
 $a2 = @{unordered} [ string, integer ]
 </pre>
 <p class="figure">Figure 63</p>
-<p id="rfc.section.6.16.2.p.3">The JSON array below does not match a1 but does match a2.  </p>
+<p id="rfc.section.6.14.2.p.3">The JSON array below does not match a1 but does match a2.  </p>
 <div id="rfc.figure.64"></div>
 <div id="array_order_eval.json_2"></div>
 <pre>[ 24, "Bob Smurd" ]
 </pre>
 <p class="figure">Figure 64</p>
-<p id="rfc.section.6.16.2.p.4">The @{unordered} annotation can only be applied to an array as a whole.  It can not be applied to groups within an array.  </p>
-<p id="rfc.section.6.16.2.p.5">Like ordered array specifications, the subordinate components in an unordered array specification are evaluated in the order they are specified. The difference is that they need not match an element of the array in the same position as given in the array specification.  </p>
-<p id="rfc.section.6.16.2.p.6">Finally, like ordered array specifications, unordered array specifications also require that all elements of the array be matched by a subordinate component. If the array has more elements than can be matched, the array does not match the array specification.  </p>
+<p id="rfc.section.6.14.2.p.4">The @{unordered} annotation can only be applied to an array as a whole.  It can not be applied to groups within an array.  </p>
+<p id="rfc.section.6.14.2.p.5">Like ordered array specifications, the subordinate components in an unordered array specification are evaluated in the order they are specified. The difference is that they need not match an element of the array in the same position as given in the array specification.  </p>
+<p id="rfc.section.6.14.2.p.6">Finally, like ordered array specifications, unordered array specifications also require that all elements of the array be matched by a subordinate component. If the array has more elements than can be matched, the array does not match the array specification.  </p>
+<h1 id="rfc.section.6.15">
+<a href="#rfc.section.6.15">6.15.</a> <a href="#type_choices" id="type_choices">Type Choices</a>
+</h1>
+<p id="rfc.section.6.15.p.1">A type specification can be a type choice.  A type choice begins with an opening parenthesis ('(') and ends with a closing parenthesis (')').  Its subordinate components are type specifications or rule name references combined using the choice combiner as described in <a href="#combiners" class="xref">Section 6.9</a>.  </p>
+<div id="rfc.figure.65"></div>
+<div id="type_choice.jcr"></div>
+<pre>{ "age" : (0.. | "unknown") }
+</pre>
+<p class="figure">Figure 65</p>
+<p id="rfc.section.6.15.p.2">Type choices can also be used for enumerations.  </p>
+<div id="rfc.figure.66"></div>
+<div id="type_choice2.jcr"></div>
+<pre>{ "status" : ("open" | "closed" | "unknown" | string) }
+; string included to allow for future extension
+</pre>
+<p class="figure">Figure 66</p>
+<p id="rfc.section.6.15.p.3">To validate against a type choice, an instance value MUST validate against one (or more) of the subordinate component type specifications.  </p>
+<h1 id="rfc.section.6.16">
+<a href="#rfc.section.6.16">6.16.</a> Any Type</h1>
+<p id="rfc.section.6.16.p.1">The 'any' type specifies that a JSON value instance can be any primitive type, array type, or object type.  </p>
 <h1 id="rfc.section.6.17">
 <a href="#rfc.section.6.17">6.17.</a> <a href="#group_specifications" id="group_specifications">Group Specifications</a>
 </h1>
 <p id="rfc.section.6.17.p.1">Unlike the other type specifications, group specifications have no direct tie with JSON syntax.  Group specifications simply group together their subordinate components. Group specifications enclose one or more subordinate components with the parenthesis characters ('(') &amp; (')').  </p>
-<p id="rfc.section.6.17.p.2">Group specifications and any nesting of group specifications, must conform to the allowable set of type specifications of the type specifications in which they are referenced. For example, a group specification referenced inside of an array specification may not contain a member specification since member specifications are not allowed as direct subordinates of array specifications (arrays contain values, not object members in JSON).  Likewise, a group specification referenced inside an object specification must only contain member specifications (JSON objects may only contain object members).  A group specification may also represent a type choice (See <a href="#type_choices" class="xref">Section 6.12</a>).  </p>
+<p id="rfc.section.6.17.p.2">Group specifications and any nesting of group specifications, must conform to the allowable set of type specifications of the type specifications in which they are referenced. For example, a group specification referenced inside of an array specification may not contain a member specification since member specifications are not allowed as direct subordinates of array specifications (arrays contain values, not object members in JSON).  Likewise, a group specification referenced inside an object specification must only contain member specifications (JSON objects may only contain object members).  A group specification may also represent a type choice (See <a href="#type_choices" class="xref">Section 6.15</a>).  </p>
 <p id="rfc.section.6.17.p.3">As with object and array specifications, group subordinate components MAY have repetitions as described in <a href="#repetition" class="xref">Section 6.8</a> and MAY be combined into sequences and/or choices as described in <a href="#combiners" class="xref">Section 6.9</a>.  </p>
 <p id="rfc.section.6.17.p.4">The following is an example of a group specification: </p>
-<div id="rfc.figure.65"></div>
+<div id="rfc.figure.67"></div>
 <div id="group_example.jcr"></div>
 <pre>$the_bradys = [ $parents, $children ]
 
@@ -1603,66 +1641,66 @@ $children = ( "Greg", "Marsha", "Bobby", "Jan" )
 
 $parents = ( "Mike", "Carol" )
 </pre>
-<p class="figure">Figure 65</p>
-<p id="rfc.section.6.17.p.5">Group specifications are not validated against JSON instances by themselves.  During validation of objects, arrays or type choices, references to group specifications are replaced with their referenced content.  For example, the $the_bradys rule in <a href="#group_example.jcr" class="xref">Figure 65</a> is validated as if it were: </p>
-<div id="rfc.figure.66"></div>
+<p class="figure">Figure 67</p>
+<p id="rfc.section.6.17.p.5">Group specifications are not validated against JSON instances by themselves.  During validation of objects, arrays or type choices, references to group specifications are replaced with their referenced content.  For example, the $the_bradys rule in <a href="#group_example.jcr" class="xref">Figure 67</a> is validated as if it were: </p>
+<div id="rfc.figure.68"></div>
 <div id="group_example_for_validation.jcr"></div>
 <pre>$the_bradys = [ "Mike", "Carol", "Greg", "Marsha", "Bobby", "Jan" ]
 </pre>
-<p class="figure">Figure 66</p>
+<p class="figure">Figure 68</p>
 <h1 id="rfc.section.6.18">
 <a href="#rfc.section.6.18">6.18.</a> <a href="#starting-points" id="starting-points">Starting Points and Root Rules</a>
 </h1>
 <p id="rfc.section.6.18.p.1">Evaluation of a JSON instance or document against a ruleset begins with the evaluation of a root rule or set of root rules. If no root rule (or rules) is specified locally at runtime, the set of root rules specified in the ruleset are evaluated. The order of evaluation is undefined.  </p>
 <p id="rfc.section.6.18.p.2">The set of root rules specified in a ruleset is composed of all rules without a rule name assignment and all rules annotated with the "@{root}" annotation.  </p>
 <p id="rfc.section.6.18.p.3">The "@{root}" annotation may either appear before a rule name assignment or before a type definition. It is an error if present before referenced rule name inside of a type specification.  </p>
-<div id="rfc.figure.67"></div>
+<div id="rfc.figure.69"></div>
 <div id="root_annotations.jcr"></div>
 <pre>@{root} $request = { "cmd" : string }
 $response = @{root} { "reply" : string }
 @{root} { "status" : string }
 { "error" : string }   ; An implicit root
 </pre>
-<p class="figure">Figure 67</p>
+<p class="figure">Figure 69</p>
 <h1 id="rfc.section.7">
 <a href="#rfc.section.7">7.</a> Tips and Tricks</h1>
 <h1 id="rfc.section.7.1">
 <a href="#rfc.section.7.1">7.1.</a> Any Member with Any Value</h1>
 <p id="rfc.section.7.1.p.1">Because member names may be specified with regular expressions, it is possible to construct a member rule that matches any member name.  As an example, the following defines an object with a member with any name that has a value that is a string: </p>
-<div id="rfc.figure.68"></div>
+<div id="rfc.figure.70"></div>
 <div id="any_member.jcr"></div>
 <pre>{ // : string }
 </pre>
-<p class="figure">Figure 68</p>
+<p class="figure">Figure 70</p>
 <p id="rfc.section.7.1.p.2">The JSON below matches the above rule.  </p>
-<div id="rfc.figure.69"></div>
+<div id="rfc.figure.71"></div>
 <div id="any_member1.json"></div>
 <pre>{ "foo" : "bar" }
 </pre>
-<p class="figure">Figure 69</p>
+<p class="figure">Figure 71</p>
 <p id="rfc.section.7.1.p.3">Likewise, the JSON below also matches the same rule.  </p>
-<div id="rfc.figure.70"></div>
+<div id="rfc.figure.72"></div>
 <div id="any_member2.json"></div>
 <pre>{ "fuzz" : "bazz" }
 </pre>
-<p class="figure">Figure 70</p>
+<p class="figure">Figure 72</p>
 <p id="rfc.section.7.1.p.4">Constructing an object with a member of any name with any type would therefore take the form: </p>
-<div id="rfc.figure.71"></div>
+<div id="rfc.figure.73"></div>
 <div id="any_member_any_type.jcr"></div>
 <pre>{ // : any }
 </pre>
-<p class="figure">Figure 71</p>
+<p class="figure">Figure 73</p>
 <p id="rfc.section.7.1.p.5">The above rule matches not only the two JSON objects above, but the JSON object below.  </p>
-<div id="rfc.figure.72"></div>
+<div id="rfc.figure.74"></div>
 <div id="any_member_any_type2.json"></div>
 <pre>{ "fuzz" : 1234 }
 </pre>
-<p class="figure">Figure 72</p>
+<p class="figure">Figure 74</p>
 <h1 id="rfc.section.7.2">
 <a href="#rfc.section.7.2">7.2.</a> Lists of Values</h1>
 <p id="rfc.section.7.2.p.1">Group specifications may be used to create enumerated lists of primitive data types, because primitive specifications may contain a group specification, which may have multiple primitive specifications.  Because a primitive specification must resolve to a single data type, the group specification must only contain choice combinations.  </p>
 <p id="rfc.section.7.2.p.2">Consider the following examples: </p>
-<div id="rfc.figure.73"></div>
+<div id="rfc.figure.75"></div>
 <div id="lists_of_values.jcr"></div>
 <pre>; either an IPv4 or IPv6 address
 $address = ( ipv4 | ipv6 )
@@ -1670,17 +1708,17 @@ $address = ( ipv4 | ipv6 )
 ; allowable fruits
 $fruits = ( "apple" | "banana" | "pear" )
 </pre>
-<p class="figure">Figure 73</p>
+<p class="figure">Figure 75</p>
 <h1 id="rfc.section.7.3">
 <a href="#rfc.section.7.3">7.3.</a> Groups in Arrays</h1>
 <p id="rfc.section.7.3.p.1">Groups may be a subordinate component of array specifications: </p>
-<div id="rfc.figure.74"></div>
+<div id="rfc.figure.76"></div>
 <div id="groups_in_arrays.jcr"></div>
 <pre>[ ( ipv4 | ipv6 ), integer ]
 </pre>
-<p class="figure">Figure 74</p>
+<p class="figure">Figure 76</p>
 <p id="rfc.section.7.3.p.2">Unlike primitive specifications, subordinate group specifications in array specifications may have sequence combinations and contain any type specification.  </p>
-<div id="rfc.figure.75"></div>
+<div id="rfc.figure.77"></div>
 <div id="groups_in_arrays2.jcr"></div>
 <pre>; a group in an array
 [ ( $first_name, $middle_name ?, $last_name ), $age ]
@@ -1694,11 +1732,11 @@ $middle_name = string
 $last_name = string
 $age = 0..
 </pre>
-<p class="figure">Figure 75</p>
+<p class="figure">Figure 77</p>
 <h1 id="rfc.section.7.4">
 <a href="#rfc.section.7.4">7.4.</a> Groups in Objects</h1>
 <p id="rfc.section.7.4.p.1">Groups may be a subordinate component of object specifications: Subordinate group specifications in object specifications may have sequence combinations but must only contain member specifications.  </p>
-<div id="rfc.figure.76"></div>
+<div id="rfc.figure.78"></div>
 <div id="groups_in_objects.jcr"></div>
 <pre>; a group in an object
 { ( $title, $date, $author ), $paragraph + }
@@ -1712,51 +1750,51 @@ $date = "date" : date
 $author = "author" : [ string * ]
 $paragraph = /p[0-9]*/ : string
 </pre>
-<p class="figure">Figure 76</p>
+<p class="figure">Figure 78</p>
 <p></p>
 
 <ul class="empty"><li>NOTE: A future specification will clarify the choice ('|') operation as inclusive or, exclusive or ("xor") or otherwise. At present readers should assume the choice ('|') operator is an inclusive or. We are in the process of defining an algorithm to "rewrite" choices of rules for use with inclusive or which is more suitable for the data model of JSON. Such a change will impact the guidance given below.  </li></ul>
 
 <p> </p>
 <p id="rfc.section.7.4.p.3">When using groups to use both sequences and choices of member specifications, consideration must be given to the processing of object specifications where by unmatched member specifications are ignored (see <a href="#member_specifications.jcr" class="xref">Figure 46</a>).  </p>
-<div id="rfc.figure.77"></div>
-<div id="groups_in_objects_ignored1.jcr"></div>
-<p>A casual reading of this rule might lead a reader to believe that the JSON object in <a href="#groups_in_objects_ignored.json" class="xref">Figure 78</a> would not match, however it does because the extra member (either "foo" or "baz") is not matched but is ignored.  </p>
-<pre>{ "bar":string, ( "foo":integer | "baz":string ) }
-</pre>
-<p class="figure">Figure 77</p>
-<div id="rfc.figure.78"></div>
-<div id="groups_in_objects_ignored.json"></div>
-<pre>{ "bar":"thing", "foo":2, "baz": "thingy" }
-</pre>
-<p class="figure">Figure 78</p>
-<p id="rfc.section.7.4.p.4">The rule in <a href="#groups_in_objects_ignored1.jcr" class="xref">Figure 77</a> must be modified to either match all extra rules, as in <a href="#groups_in_objects_ignored2.jcr" class="xref">Figure 79</a>, or the logic of the rules must be rewritten to explicitly negate the presence of the unwanted members, as in <a href="#groups_in_objects_ignored3.jcr" class="xref">Figure 80</a>.  </p>
 <div id="rfc.figure.79"></div>
-<div id="groups_in_objects_ignored2.jcr"></div>
-<pre>{ "bar":string, ( "foo":integer | "baz":string ), @{not} //:any + }
+<div id="groups_in_objects_ignored1.jcr"></div>
+<p>A casual reading of this rule might lead a reader to believe that the JSON object in <a href="#groups_in_objects_ignored.json" class="xref">Figure 80</a> would not match, however it does because the extra member (either "foo" or "baz") is not matched but is ignored.  </p>
+<pre>{ "bar":string, ( "foo":integer | "baz":string ) }
 </pre>
 <p class="figure">Figure 79</p>
 <div id="rfc.figure.80"></div>
+<div id="groups_in_objects_ignored.json"></div>
+<pre>{ "bar":"thing", "foo":2, "baz": "thingy" }
+</pre>
+<p class="figure">Figure 80</p>
+<p id="rfc.section.7.4.p.4">The rule in <a href="#groups_in_objects_ignored1.jcr" class="xref">Figure 79</a> must be modified to either match all extra rules, as in <a href="#groups_in_objects_ignored2.jcr" class="xref">Figure 81</a>, or the logic of the rules must be rewritten to explicitly negate the presence of the unwanted members, as in <a href="#groups_in_objects_ignored3.jcr" class="xref">Figure 82</a>.  </p>
+<div id="rfc.figure.81"></div>
+<div id="groups_in_objects_ignored2.jcr"></div>
+<pre>{ "bar":string, ( "foo":integer | "baz":string ), @{not} //:any + }
+</pre>
+<p class="figure">Figure 81</p>
+<div id="rfc.figure.82"></div>
 <div id="groups_in_objects_ignored3.jcr"></div>
 <pre>{ "bar":string, 
   ( ( "foo":integer , @{not} "baz":any ) |
     ( "baz":string , @{not} "foo":any )
 ) }
 </pre>
-<p class="figure">Figure 80</p>
+<p class="figure">Figure 82</p>
 <h1 id="rfc.section.7.5">
 <a href="#rfc.section.7.5">7.5.</a> Group Rules as Macros</h1>
 <p id="rfc.section.7.5.p.1">The syntax for group specifications accommodates one or more subordinate components and a repetition expression for each. Other than grouping multiple rules, a group specification can be used as a macro definition for a single rule.  </p>
-<div id="rfc.figure.81"></div>
+<div id="rfc.figure.83"></div>
 <div id="macro.jcr"></div>
 <pre>$paragraphs = ( /p[0-9]*/ : string + )
 </pre>
-<p class="figure">Figure 81</p>
+<p class="figure">Figure 83</p>
 <p id="rfc.section.7.5.p.2">This differs from a member specification because it includes a repetition specification.  </p>
 <h1 id="rfc.section.7.6">
 <a href="#rfc.section.7.6">7.6.</a> Object Mixins</h1>
 <p id="rfc.section.7.6.p.1">Group rules can be used to create object mixins, a pattern for writing data models similar in style to object derivation in some programming languages.  In the example in below, both obj1 and obj2 have a members "foo" and "fob" with obj1 having the additional member "bar" and obj2 having the additional member "baz".  </p>
-<div id="rfc.figure.82"></div>
+<div id="rfc.figure.84"></div>
 <div id="object_mixin.jcr"></div>
 <pre>$mixin_group = ( "foo" : integer, "fob" : uri )
 
@@ -1764,12 +1802,12 @@ $obj1 = { $mixin_group, "bar" : string }
 
 $obj2 = { $mixin_group, "baz" : string }
 </pre>
-<p class="figure">Figure 82</p>
+<p class="figure">Figure 84</p>
 <h1 id="rfc.section.7.7">
 <a href="#rfc.section.7.7">7.7.</a> Subordinate Dependencies</h1>
 <p id="rfc.section.7.7.p.1">In object and array specifications, there may be situations in which it is necessary to condition the existence of a subordinate component on the existence of a sibling subordinate component. In other words, example_two should only be evaluated if example_one evaluates positively. Or put another way, a member of an object or an item of an array may be present only on the condition that another member or item is present.  </p>
 <p id="rfc.section.7.7.p.2">In the following example, the referrer_uri member can only be present if the location_uri member is present.  </p>
-<div id="rfc.figure.83"></div>
+<div id="rfc.figure.85"></div>
 <div id="subordinate_dependents.jcr"></div>
 <pre>; $referrer_uri can only be present if
 ; $location_uri is present
@@ -1778,25 +1816,25 @@ $obj2 = { $mixin_group, "baz" : string }
 $location_uri = "locationURI" : uri
 $referrer_uri = "referrerURI" : uri
 </pre>
-<p class="figure">Figure 83</p>
+<p class="figure">Figure 85</p>
 <p id="rfc.section.7.7.p.3">For validation, the above optional group is equivalent to: </p>
-<div id="rfc.figure.84"></div>
+<div id="rfc.figure.86"></div>
 <div id="subordinate_dependents_equiv.jcr"></div>
 <pre>{ ( $location_uri, $referrer_uri? ) | () }
 </pre>
-<p class="figure">Figure 84</p>
+<p class="figure">Figure 86</p>
 <h1 id="rfc.section.8">
 <a href="#rfc.section.8">8.</a> Legacy Features</h1>
 <p id="rfc.section.8.p.1">JCR has evolved since its initial conception.  Often this has been as a result of 'in-the-field' experience.  As JCR has evolved, certain features have been discarded from the main specification, but should still be supported by implementations in order not to break environments where JCR is already deployed.  This section lists these deprecated features.  </p>
 <p id="rfc.section.8.p.2">For legacy support, rule name assignments to primitive type specifications may optionally use the character sequence '=:', or the token sequence '= type', instead of a single '=' character.  </p>
-<div id="rfc.figure.85"></div>
+<div id="rfc.figure.87"></div>
 <div id="assignment_legacy_example.jcr"></div>
 <pre>;rule name assignments for primitive types
 ;using the =: and = type syntax
 $foo          =: "foo"
 $other_string = type string
 </pre>
-<p class="figure">Figure 85</p>
+<p class="figure">Figure 87</p>
 <h1 id="rfc.section.9">
 <a href="#rfc.section.9">9.</a> <a href="#implementation_status" id="implementation_status">Implementation Status</a>
 </h1>
@@ -1822,7 +1860,7 @@ $other_string = type string
 <p id="rfc.section.9.3.p.3">Source code is available on BitBucket at <span>&lt;</span><a href="https://bitbucket.org/anewton_1998/jcr_java">https://bitbucket.org/anewton_1998/jcr_java</a><span>&gt;</span>.  </p>
 <h1 id="rfc.section.10">
 <a href="#rfc.section.10">10.</a> ABNF Syntax</h1>
-<div id="rfc.figure.86"></div>
+<div id="rfc.figure.88"></div>
 <div id="abnf"></div>
 <p>The following ABNF describes the syntax for JSON Content Rules.  A text file containing these ABNF rules can be downloaded from <a href="#JCR_ABNF" class="xref">[JCR_ABNF]</a>.  </p>
 <pre>jcr              = *( sp-cmt / directive / root-rule / rule )
@@ -2091,14 +2129,18 @@ LF               = %x0A         ; linefeed
 SP               = %x20         ; space
 WSP              = SP / HTAB    ; white space
 </pre>
-<p class="figure">Figure 86: ABNF for JSON Content Rules</p>
+<p class="figure">Figure 88: ABNF for JSON Content Rules</p>
 <h1 id="rfc.section.11">
-<a href="#rfc.section.11">11.</a> Acknowledgements</h1>
-<p id="rfc.section.11.p.1">John Cowan, Andrew Biggs, Paul Kyzivat and Paul Jones provided feedback and suggestions which led to many changes in the syntax.  </p>
+<a href="#rfc.section.11">11.</a> Security Considerations</h1>
+<p id="rfc.section.11.p.1">The usage scenarios of JCR parallel that of ABNF.  As such, when used in protocol specification, software development and test contexts, JCR should not present any security issues.  </p>
+<p id="rfc.section.11.p.2">If JCR is used for validation in production environments, implementors are advised not to download rulesets on-the-fly, as this offers an additional attack vector for hackers, which could allow invalid JSON to be accepted as valid.  </p>
+<h1 id="rfc.section.12">
+<a href="#rfc.section.12">12.</a> Acknowledgements</h1>
+<p id="rfc.section.12.p.1">John Cowan, Andrew Biggs, Paul Kyzivat and Paul Jones provided feedback and suggestions which led to many changes in the syntax.  </p>
 <h1 id="rfc.references">
-<a href="#rfc.references">12.</a> References</h1>
+<a href="#rfc.references">13.</a> References</h1>
 <h1 id="rfc.references.1">
-<a href="#rfc.references.1">12.1.</a> Normative References</h1>
+<a href="#rfc.references.1">13.1.</a> Normative References</h1>
 <table><tbody>
 <tr>
 <td class="reference"><b id="JCR_ABNF">[JCR_ABNF]</b></td>
@@ -2152,7 +2194,7 @@ WSP              = SP / HTAB    ; white space
 </tr>
 </tbody></table>
 <h1 id="rfc.references.2">
-<a href="#rfc.references.2">12.2.</a> Infomative References</h1>
+<a href="#rfc.references.2">13.2.</a> Infomative References</h1>
 <table><tbody>
 <tr>
 <td class="reference"><b id="I-D.cordell-jcr-co-constraints">[I-D.cordell-jcr-co-constraints]</b></td>
@@ -2176,14 +2218,14 @@ WSP              = SP / HTAB    ; white space
 <h1 id="rfc.appendix.A.1">
 <a href="#rfc.appendix.A.1">A.1.</a> Augmented OR of Objects</h1>
 <p id="rfc.section.A.1.p.1">Augmented OR of objects is an algorithm for better writing of OR, where the current approach uses simple inclusive OR. The design goal behind augmented OR is to give the writer and the reader a "that's what I meant" solution.  </p>
-<div id="rfc.figure.87"></div>
+<div id="rfc.figure.89"></div>
 <div id="augmented_or_jcr"></div>
 <p>For example, take the following rule for an object where two members are given as a choice.  </p>
 <pre>
 { "foo":string | "bar":integer }
                     </pre>
-<p class="figure">Figure 87</p>
-<p id="rfc.section.A.1.p.2">The interpretation of <a href="#augmented_or_jcr" class="xref">Figure 87</a> is that the object may either contain a member named "foo" that is a string or a member named "bar" that is an integer. To some, that raises a number of questions: </p>
+<p class="figure">Figure 89</p>
+<p id="rfc.section.A.1.p.2">The interpretation of <a href="#augmented_or_jcr" class="xref">Figure 89</a> is that the object may either contain a member named "foo" that is a string or a member named "bar" that is an integer. To some, that raises a number of questions: </p>
 
 <ul class="empty">
 <li>May the object contain both "foo" and "bar"?</li>
@@ -2191,7 +2233,7 @@ WSP              = SP / HTAB    ; white space
 </ul>
 
 <p> </p>
-<div id="rfc.figure.88"></div>
+<div id="rfc.figure.90"></div>
 <div id="ior_rewritten_jcr"></div>
 <p>With normal inclusive OR, it might be necessary to write more complicated rules to disambiguate the desired contents of the object, as this rule demonstrates.  </p>
 <pre>
@@ -2200,8 +2242,8 @@ WSP              = SP / HTAB    ; white space
   ( "bar":integer, @{not} "foo":any )
 }
                     </pre>
-<p class="figure">Figure 88</p>
-<p id="rfc.section.A.1.p.3">The augmented OR algorithm for objects would allow <a href="#augmented_or_jcr" class="xref">Figure 87</a> to mean the equivalent as the <a href="#ior_rewritten_jcr" class="xref">Figure 88</a> using inclusive OR.  </p>
+<p class="figure">Figure 90</p>
+<p id="rfc.section.A.1.p.3">The augmented OR algorithm for objects would allow <a href="#augmented_or_jcr" class="xref">Figure 89</a> to mean the equivalent as the <a href="#ior_rewritten_jcr" class="xref">Figure 90</a> using inclusive OR.  </p>
 <h1 id="rfc.appendix.A.2">
 <a href="#rfc.appendix.A.2">A.2.</a> New Data Types</h1>
 <p id="rfc.section.A.2.p.1">JCR is intentionally designed with a rich set of data types to eas the burden of reading and writing rules.  </p>
@@ -2233,36 +2275,36 @@ WSP              = SP / HTAB    ; white space
 <h1 id="rfc.appendix.C.1">
 <a href="#rfc.appendix.C.1">C.1.</a> Locally Overriding Rules</h1>
 <p id="rfc.section.C.1.p.1">As mentioned in the introduction, one tool for testing would be the ability to locally override named rules. As an example, consider the following rule which defines an array of strings.  </p>
-<div id="rfc.figure.89"></div>
+<div id="rfc.figure.91"></div>
 <div id="override1.jcr"></div>
 <pre>$statuses = [ string * ]
 </pre>
-<p class="figure">Figure 89</p>
+<p class="figure">Figure 91</p>
 <p id="rfc.section.C.1.p.2">Consider the specification where this rule is found does not define the values but references an extensible list of possible values updated independently of the specification, such as in an IANA registry.  </p>
 <p id="rfc.section.C.1.p.3">If a software developer desired to test a specific situation in which the array must at least contain the status "accepted", the rules from the specification could be used and the statuses rule could be explicitly overridden locally as: </p>
-<div id="rfc.figure.90"></div>
-<div id="override2.jcr"></div>
-<p>This rule will evaluate positively with the JSON in <a href="#override1.json" class="xref">Figure 91</a> </p>
-<pre>$statuses = @{unordered} [ "accepted", string * ]
-</pre>
-<p class="figure">Figure 90</p>
-<div id="rfc.figure.91"></div>
-<div id="override1.json"></div>
-<pre>[ "submitted", "validated", "accepted" ]
-</pre>
-<p class="figure">Figure 91</p>
-<p id="rfc.section.C.1.p.4">Alternatively, the developer may need to ensure that the status "denied" should not be present in the array: </p>
 <div id="rfc.figure.92"></div>
-<div id="override3.jcr"></div>
-<p>This rule will fail to evaluate the JSON in <a href="#override2.json" class="xref">Figure 93</a> thus signaling a problem.  </p>
-<pre>$statuses = @{unordered} @{not} [ "denied" + , string * ]
+<div id="override2.jcr"></div>
+<p>This rule will evaluate positively with the JSON in <a href="#override1.json" class="xref">Figure 93</a> </p>
+<pre>$statuses = @{unordered} [ "accepted", string * ]
 </pre>
 <p class="figure">Figure 92</p>
 <div id="rfc.figure.93"></div>
+<div id="override1.json"></div>
+<pre>[ "submitted", "validated", "accepted" ]
+</pre>
+<p class="figure">Figure 93</p>
+<p id="rfc.section.C.1.p.4">Alternatively, the developer may need to ensure that the status "denied" should not be present in the array: </p>
+<div id="rfc.figure.94"></div>
+<div id="override3.jcr"></div>
+<p>This rule will fail to evaluate the JSON in <a href="#override2.json" class="xref">Figure 95</a> thus signaling a problem.  </p>
+<pre>$statuses = @{unordered} @{not} [ "denied" + , string * ]
+</pre>
+<p class="figure">Figure 94</p>
+<div id="rfc.figure.95"></div>
 <div id="override2.json"></div>
 <pre>[ "submitted", "validated", "denied" ]
 </pre>
-<p class="figure">Figure 93</p>
+<p class="figure">Figure 95</p>
 <h1 id="rfc.appendix.C.2">
 <a href="#rfc.appendix.C.2">C.2.</a> Rule Callbacks</h1>
 <p id="rfc.section.C.2.p.1">In many testing scenarios, the evaluation of rules may become more complex than that which can be expressed in JCR, sometimes involving variables and interdependencies which can only be expressed in a programming language.  </p>

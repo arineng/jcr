@@ -409,7 +409,7 @@
                     Additionally, JCR syntax is a superset of JSON syntax, whereby specification authors may use example
                     JSON protocol messages as a starting point for defining JCR rules (as is described in
                     <xref target="a_first_example"></xref>). Consequently, the effort required to turn JSON examples into
-                    JCR specifications is minimimal compared to that required to create an equivalent JSON Schema.
+                    JCR specifications is minimal compared to that required to create an equivalent JSON Schema.
                     This, combined with the brevity of describing rules
                     and the ability to name rules, allows specification authors to interleave their prose
                     with JCR rules in their specifications, facilitating describing semantics in close proximity
@@ -462,7 +462,7 @@
         </section>
         <section title="JCR Examples">
             <t>
-                Being a superset of JSON syntax, those familar with JSON will likely have an intuitive understanding
+                Being a superset of JSON syntax, those familiar with JSON will likely have an intuitive understanding
                 of many aspects of JCR.  This section offers some JCR examples to give such readers a feel for JCR
                 before going into the detail.
             </t>
@@ -554,7 +554,7 @@
                     <artwork xml:space="preserve" align="center">&third_example2.jcr;</artwork>
                 </figure>
                 <t>
-                    As this may be a long lived ruleset, the jcr-version directive make it clear
+                    As this may be a long-lived ruleset, the jcr-version directive make it clear
                     that JCR version 1.0 is being used.  The ruleset is given the
                     identity 'com.example.common-types' using the ruleset-id directive.  The rule
                     for the type is assigned the rule name 'count'.
@@ -1198,7 +1198,7 @@
                         "jcr rules", "  JCR Rules  ", or "JCR  &nbsp; Rules" are invalid.
                     </t>
                     <t>
-                        To be valid against a regex string sprecification, a JSON instance value, after converting
+                        To be valid against a regex string specification, a JSON instance value, after converting
                         escape sequences to UTF-8, MUST satisfy the specified regular expression.
                     </t>
                 </section>
@@ -1510,7 +1510,7 @@
                     Validating an ordered array, in the general case, has similarities with matching a regular expression or
                     an ABNF grammar.  A regular expression specifies a pattern of tokens that happen
                     to be textual characters, whereas an ordered array specification specifies a pattern
-                    of tokens that happen to be JSON values.  For example, the following JCR specifiction:
+                    of tokens that happen to be JSON values.  For example, the following JCR specification:
                 </t>
                 <figure anchor="order_array_with_optional_field.jcr">
                     <artwork xml:space="preserve" align="center">
@@ -1532,7 +1532,7 @@ $age = 0..
                 <t>
                     When validating the above instance, a validator will initially associate "George"
                     with $first_name, and "Washington" with $middle_name.  It will then attempt to
-                    validate 67 against $last_name, which will fail.  At this point, recognising that
+                    validate 67 against $last_name, which will fail.  At this point, recognizing that
                     $middle_name is optional, the validator must back-track and associate "Washington"
                     with $last_name.  From there it can validate 67 with $age and yield that the
                     instance is valid.
@@ -1939,8 +1939,8 @@ $age = 0..
         </section>
         <section title="Security Considerations">
             <t>
-                The usage scenarios of JCR parallel that of ABNF,  As such, when used in
-                protocol specification, software development and test contexts JCR should not present any
+                The usage scenarios of JCR parallel that of ABNF.  As such, when used in
+                protocol specification, software development and test contexts, JCR should not present any
                 security issues.
             </t>
             <t>
