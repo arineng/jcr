@@ -1936,6 +1936,18 @@ $age = 0..
                 </preamble>
                 <artwork xml:space="preserve">&ABNF;</artwork>
             </figure>
+        </section>
+        <section title="Security Considerations">
+            <t>
+                The usage scenarios of JCR parallel that of ABNF,  As such, when used in
+                protocol specification, software development and test contexts JCR should not present any
+                security issues.
+            </t>
+            <t>
+                If JCR is used for validation in production environments, implementors are advised
+                not to download rulesets on-the-fly, as this offers an additional attack vector
+                for hackers, which could allow invalid JSON to be accepted as valid.
+            </t>
         </section>        
         <section title="Acknowledgements">
             <t>
