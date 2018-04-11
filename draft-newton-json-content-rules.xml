@@ -635,6 +635,10 @@
             <figure anchor="rfc4627-example-1-compact-rules" title="JCR for JSON example from RFC 8259">
                 <artwork xml:space="preserve" align="center">&rfc4627_example2.jcr;</artwork>
             </figure>
+            <t>
+                In addition to defining rules, JCR also has directives.  These have a more ruleset-wide
+                effect.  Simple uses of JCR will likely not use directives.
+            </t>
         </section> 
         <section title="Language Components">
             <t>
