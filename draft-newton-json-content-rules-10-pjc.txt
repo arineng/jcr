@@ -61,10 +61,11 @@ Internet-Draft             JSON Content Rules                 April 2018
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+     1.1.  Requirements Language . . . . . . . . . . . . . . . . . .   3
    2.  Motivation  . . . . . . . . . . . . . . . . . . . . . . . . .   3
-     2.1.  Format Translation  . . . . . . . . . . . . . . . . . . .   4
+     2.1.  Format Translation  . . . . . . . . . . . . . . . . . . .   5
      2.2.  Abstraction Languages . . . . . . . . . . . . . . . . . .   5
-     2.3.  JSON Schema vs JCR  . . . . . . . . . . . . . . . . . . .   5
+     2.3.  JSON Schema vs JCR  . . . . . . . . . . . . . . . . . . .   6
    3.  Uses  . . . . . . . . . . . . . . . . . . . . . . . . . . . .   7
    4.  JCR Examples  . . . . . . . . . . . . . . . . . . . . . . . .   8
      4.1.  A First Example: Specifying Content . . . . . . . . . . .   8
@@ -105,7 +106,6 @@ Table of Contents
      7.1.  Any Member with Any Value . . . . . . . . . . . . . . . .  40
      7.2.  Lists of Values . . . . . . . . . . . . . . . . . . . . .  41
      7.3.  Groups in Arrays  . . . . . . . . . . . . . . . . . . . .  41
-     7.4.  Groups in Objects . . . . . . . . . . . . . . . . . . . .  42
 
 
 
@@ -114,6 +114,7 @@ Newton & Cordell        Expires October 13, 2018                [Page 2]
 Internet-Draft             JSON Content Rules                 April 2018
 
 
+     7.4.  Groups in Objects . . . . . . . . . . . . . . . . . . . .  42
      7.5.  Group Rules as Macros . . . . . . . . . . . . . . . . . .  43
      7.6.  Object Mixins . . . . . . . . . . . . . . . . . . . . . .  43
      7.7.  Subordinate Dependencies  . . . . . . . . . . . . . . . .  44
@@ -128,13 +129,13 @@ Internet-Draft             JSON Content Rules                 April 2018
    13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  52
      13.1.  Normative References . . . . . . . . . . . . . . . . . .  52
      13.2.  Infomative References  . . . . . . . . . . . . . . . . .  53
-     13.3.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  53
+     13.3.  URIs . . . . . . . . . . . . . . . . . . . . . . . . . .  54
    Appendix A.  Experimental Features  . . . . . . . . . . . . . . .  54
      A.1.  Augmented OR of Objects . . . . . . . . . . . . . . . . .  54
-     A.2.  New Data Types  . . . . . . . . . . . . . . . . . . . . .  54
+     A.2.  New Data Types  . . . . . . . . . . . . . . . . . . . . .  55
      A.3.  New Annotations . . . . . . . . . . . . . . . . . . . . .  55
    Appendix B.  Co-Constraints . . . . . . . . . . . . . . . . . . .  55
-   Appendix C.  Testing Against JSON Content Rules . . . . . . . . .  55
+   Appendix C.  Testing Against JSON Content Rules . . . . . . . . .  56
      C.1.  Locally Overriding Rules  . . . . . . . . . . . . . . . .  56
      C.2.  Rule Callbacks  . . . . . . . . . . . . . . . . . . . . .  57
    Appendix D.  Changes from -09 and -10 . . . . . . . . . . . . . .  57
@@ -148,6 +149,12 @@ Internet-Draft             JSON Content Rules                 April 2018
    is not JSON but is "JSON-like", possessing the conciseness and
    utility that has made JSON popular.
 
+1.1.  Requirements Language
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in RFC 2119 [RFC2119].
+
 2.  Motivation
 
    As a growing number of protocols use JSON, there is an increasing
@@ -155,13 +162,6 @@ Internet-Draft             JSON Content Rules                 April 2018
 
    In the past, protocols often used constrained grammar strings.  Such
    strings could be defined by example, but it was found better to use
-   Backus-Naur Form (BNF), or variants such as ABNF.  The benefit of
-   using ABNF over examples is that the full variation of what is
-   allowed in a protocol can be expressed in a single location.  This
-   leads to easier implementation and better interoperability.
-
-   As protocols migrate to being defined in JSON, the same need to
-   define the valid set of JSON messages arises.  It is conceivable to
 
 
 
@@ -170,6 +170,13 @@ Newton & Cordell        Expires October 13, 2018                [Page 3]
 Internet-Draft             JSON Content Rules                 April 2018
 
 
+   Backus-Naur Form (BNF), or variants such as ABNF.  The benefit of
+   using ABNF over examples is that the full variation of what is
+   allowed in a protocol can be expressed in a single location.  This
+   leads to easier implementation and better interoperability.
+
+   As protocols migrate to being defined in JSON, the same need to
+   define the valid set of JSON messages arises.  It is conceivable to
    define the JSON-based message set by way of examples.  But as with
    constrained grammar strings, this can be cumbersome, incomplete and
    easily misinterpreted, leading to the problems of implementation and
@@ -209,13 +216,6 @@ Internet-Draft             JSON Content Rules                 April 2018
    as Yang and CDDL, and at least one other JSON specific language: JSON
    Schema.
 
-2.1.  Format Translation
-
-   Format translation is an algorithmic approach to specifying protocol
-   messages in multiple formats by using one format as the base
-   specification and an algorithm for translating that format into
-   another.  One example would be the translation of XML into JSON using
-   the BadgerFish algorithm and software.
 
 
 
@@ -225,6 +225,14 @@ Newton & Cordell        Expires October 13, 2018                [Page 4]
 
 Internet-Draft             JSON Content Rules                 April 2018
 
+
+2.1.  Format Translation
+
+   Format translation is an algorithmic approach to specifying protocol
+   messages in multiple formats by using one format as the base
+   specification and an algorithm for translating that format into
+   another.  One example would be the translation of XML into JSON using
+   the BadgerFish algorithm and software.
 
    This approach often creates difficult protocol messages in the
    destination format (i.e.  JSON in the case of XML to JSON) which are
@@ -264,6 +272,16 @@ Internet-Draft             JSON Content Rules                 April 2018
    benefit from being JSON-like, as is the case of JCR, or specified in
    JSON, as is the case of JSON Schema.
 
+
+
+
+
+
+Newton & Cordell        Expires October 13, 2018                [Page 5]
+
+Internet-Draft             JSON Content Rules                 April 2018
+
+
 2.3.  JSON Schema vs JCR
 
    JSON Schema, like JCR, is a data definition language designed
@@ -274,14 +292,6 @@ Internet-Draft             JSON Content Rules                 April 2018
 
    JSON Schema benefits from being defined in JSON (as this makes
    implementations of JSON Schema tools easier), but this benefit
-
-
-
-Newton & Cordell        Expires October 13, 2018                [Page 5]
-
-Internet-Draft             JSON Content Rules                 April 2018
-
-
    impacts readability of specifications defining content using it.  To
    demonstrate, the following examples define JSON using the classic
    example of a catalog object.
@@ -319,16 +329,6 @@ Internet-Draft             JSON Content Rules                 April 2018
         }
 
                                  Figure 1
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2897,14 +2897,14 @@ Internet-Draft             JSON Content Rules                 April 2018
               numbers", RFC 1166, DOI 10.17487/RFC1166, July 1990,
               <https://www.rfc-editor.org/info/rfc1166>.
 
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
    [RFC3339]  Klyne, G. and C. Newman, "Date and Time on the Internet:
               Timestamps", RFC 3339, DOI 10.17487/RFC3339, July 2002,
               <https://www.rfc-editor.org/info/rfc3339>.
-
-   [RFC3629]  Yergeau, F., "UTF-8, a transformation format of ISO
-              10646", STD 63, RFC 3629, DOI 10.17487/RFC3629, November
-              2003, <https://www.rfc-editor.org/info/rfc3629>.
-
 
 
 
@@ -2913,6 +2913,10 @@ Newton & Cordell        Expires October 13, 2018               [Page 52]
 
 Internet-Draft             JSON Content Rules                 April 2018
 
+
+   [RFC3629]  Yergeau, F., "UTF-8, a transformation format of ISO
+              10646", STD 63, RFC 3629, DOI 10.17487/RFC3629, November
+              2003, <https://www.rfc-editor.org/info/rfc3629>.
 
    [RFC3986]  Berners-Lee, T., Fielding, R., and L. Masinter, "Uniform
               Resource Identifier (URI): Generic Syntax", STD 66,
@@ -2957,10 +2961,6 @@ Internet-Draft             JSON Content Rules                 April 2018
               RFC 7942, DOI 10.17487/RFC7942, July 2016,
               <https://www.rfc-editor.org/info/rfc7942>.
 
-13.3.  URIs
-
-   [1] https://github.com/arineng/jcr/tree/master/figs
-
 
 
 
@@ -2969,6 +2969,10 @@ Newton & Cordell        Expires October 13, 2018               [Page 53]
 
 Internet-Draft             JSON Content Rules                 April 2018
 
+
+13.3.  URIs
+
+   [1] https://github.com/arineng/jcr/tree/master/figs
 
 Appendix A.  Experimental Features
 
@@ -3012,12 +3016,8 @@ A.1.  Augmented OR of Objects
    The augmented OR algorithm for objects would allow Figure 89 to mean
    the equivalent as the Figure 90 using inclusive OR.
 
-A.2.  New Data Types
 
-   JCR is intentionally designed with a rich set of data types to eas
-   the burden of reading and writing rules.
 
-   The following are a list of new data types under consideration:
 
 
 
@@ -3025,6 +3025,13 @@ Newton & Cordell        Expires October 13, 2018               [Page 54]
 
 Internet-Draft             JSON Content Rules                 April 2018
 
+
+A.2.  New Data Types
+
+   JCR is intentionally designed with a rich set of data types to eas
+   the burden of reading and writing rules.
+
+   The following are a list of new data types under consideration:
 
       JCR currently has 'ipaddr', 'ipv4', and 'ipv6' data types, but
       often groups of IP addresses are specified using CIDR notation.
@@ -3063,13 +3070,6 @@ Appendix B.  Co-Constraints
    (constraining parts of JSON message based on another part of a JSON
    message).
 
-Appendix C.  Testing Against JSON Content Rules
-
-   One aspect of JCR that differentiates it from other format schema
-   languages are the mechanisms helpful to developers for taking a
-   formal specification, such as that found in an RFC, and evolving it
-   into unit tests, which are essential to producing quality protocol
-   implementations.
 
 
 
@@ -3081,6 +3081,14 @@ Newton & Cordell        Expires October 13, 2018               [Page 55]
 
 Internet-Draft             JSON Content Rules                 April 2018
 
+
+Appendix C.  Testing Against JSON Content Rules
+
+   One aspect of JCR that differentiates it from other format schema
+   languages are the mechanisms helpful to developers for taking a
+   formal specification, such as that found in an RFC, and evolving it
+   into unit tests, which are essential to producing quality protocol
+   implementations.
 
 C.1.  Locally Overriding Rules
 
@@ -3122,14 +3130,6 @@ C.1.  Locally Overriding Rules
 
                                  Figure 94
 
-                  [ "submitted", "validated", "denied" ]
-
-                                 Figure 95
-
-
-
-
-
 
 
 
@@ -3137,6 +3137,10 @@ Newton & Cordell        Expires October 13, 2018               [Page 56]
 
 Internet-Draft             JSON Content Rules                 April 2018
 
+
+                  [ "submitted", "validated", "denied" ]
+
+                                 Figure 95
 
 C.2.  Rule Callbacks
 
@@ -3178,10 +3182,6 @@ Authors' Addresses
 
    Email: pete.cordell@codalogic.com
    URI:   http://www.codalogic.com
-
-
-
-
 
 
 
