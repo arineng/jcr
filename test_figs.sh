@@ -81,6 +81,7 @@ assert_raises "jcr --test-jcr -r figs/root_annotations.jcr" 0
 assert_raises "jcr --test-jcr -r figs/group_example_for_validation.jcr" 0
 assert_raises "jcr --test-jcr -r figs/type_choice.jcr" 0
 assert_raises "jcr --test-jcr -r figs/type_choice2.jcr" 0
+assert_raises "jcr --test-jcr -r figs/thrid_example2.jcr" 0
 
 assert_end figs
 

@@ -1,0 +1,11 @@
+#import com.example.common-types as ct
+
+{
+  $fn,
+  $lc,
+  $wc
+}
+
+$fn = "file-name"  : string
+$lc = "line-count" : $ct.count
+$wc = "word-count" : $ct.count
