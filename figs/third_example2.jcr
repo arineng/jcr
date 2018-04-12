@@ -1,0 +1,4 @@
+#jcr-version 1.0
+#ruleset-id com.example.common-types
+
+$count = 0..

@@ -1,4 +1,4 @@
 { "bar":string, 
-  ( ( "foo":integer , @{not} "baz":string ) | 
-    ( "baz":string , @{not} "foo":integer ) 
+  ( ( "foo":integer , @{not} "baz":any ) |
+    ( "baz":string , @{not} "foo":any )
 ) }

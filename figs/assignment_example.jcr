@@ -2,8 +2,5 @@
 $fuz         = "fuz"
 $some_string = string
 
-;rule name assignments for arrays
+;rule name assignment for an array
 $bar = [ integer, integer, integer ]
-
-;rule name assignement for objects
-$bob = { "bar" : $bar, "foo" : $foo }

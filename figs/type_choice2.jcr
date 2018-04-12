@@ -1,0 +1,2 @@
+{ "status" : ("open" | "closed" | "unknown" | string) }
+; string included to allow for future extension

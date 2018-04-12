@@ -1,0 +1,4 @@
+@{root} $request = { "cmd" : string }
+$response = @{root} { "reply" : string }
+@{root} { "status" : string }
+{ "error" : string }   ; An implicit root

@@ -1,0 +1,2 @@
+;rule name referencing in an object
+{ "bar" : $bar, "foo" : $foo }

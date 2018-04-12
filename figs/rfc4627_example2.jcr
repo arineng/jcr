@@ -1,7 +1,6 @@
 ; the root of the JSON instance is an object
 ; this root rule describes that object
 { 
-
   ; the object specification contains 
   ; one member specification
   "Image" : {
@@ -26,7 +25,6 @@
     ; "IDs" member that is an array of 
     ; one ore more integers
     "IDs" : [ integer * ] 
-
   }
 }
     

@@ -10,7 +10,7 @@ string
 integer
 
 ; primitive type rules may be named 
-$my_int =: 12
+$my_int = 12
 
 ; member specifications consist of a member name 
 ; followed by a colon and then followed by another 
